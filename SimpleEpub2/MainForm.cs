@@ -670,7 +670,7 @@ namespace SimpleEpub2
 			else
 			{
 				pg2.overlay_cover.Hide();
-				//pg2.cover_picturebox.BackgroundImage = null;
+				pg2.cover_picturebox.BackgroundImage = null;
 				processCover(files[0]);
 
 				isPicCover = true;
@@ -694,7 +694,7 @@ namespace SimpleEpub2
 			}
 
 			pg2.overlay_cover.Hide();
-			//pg2.cover_picturebox.BackgroundImage = null;
+			pg2.cover_picturebox.BackgroundImage = null;
 		}
 
 		private void cover_picturebox_MouseClick(object sender, MouseEventArgs e)
