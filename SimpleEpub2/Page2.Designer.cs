@@ -44,7 +44,11 @@
 			this.Space1 = new DevComponents.DotNetBar.RadialMenuItem();
 			this.Item3 = new DevComponents.DotNetBar.RadialMenuItem();
 			this.Space2 = new DevComponents.DotNetBar.RadialMenuItem();
-			this.radialMenu2 = new DevComponents.DotNetBar.RadialMenu();
+			this.radialMenu3 = new DevComponents.DotNetBar.RadialMenu();
+			this.Item6 = new DevComponents.DotNetBar.RadialMenuItem();
+			this.Space6 = new DevComponents.DotNetBar.RadialMenuItem();
+			this.Item7 = new DevComponents.DotNetBar.RadialMenuItem();
+			this.Space7 = new DevComponents.DotNetBar.RadialMenuItem();
 			this.Item4 = new DevComponents.DotNetBar.RadialMenuItem();
 			this.Space4 = new DevComponents.DotNetBar.RadialMenuItem();
 			this.Item5 = new DevComponents.DotNetBar.RadialMenuItem();
@@ -52,6 +56,7 @@
 			this.radialMenu1 = new DevComponents.DotNetBar.RadialMenu();
 			this.Item2 = new DevComponents.DotNetBar.RadialMenuItem();
 			this.Space3 = new DevComponents.DotNetBar.RadialMenuItem();
+			this.radialMenu2 = new DevComponents.DotNetBar.RadialMenu();
 			((System.ComponentModel.ISupportInitialize)(this.cover_picturebox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.TOC_list)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.overlay_cover)).BeginInit();
@@ -203,23 +208,43 @@
 			// 
 			this.Space2.Name = "Space2";
 			// 
-			// radialMenu2
+			// radialMenu3
 			// 
-			this.radialMenu2.Diameter = 200;
-			this.radialMenu2.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.Item4,
-            this.Space4,
-            this.Item5,
-            this.Space5});
-			this.radialMenu2.Location = new System.Drawing.Point(889, 38);
-			this.radialMenu2.Name = "radialMenu2";
-			this.radialMenu2.Size = new System.Drawing.Size(28, 28);
-			this.radialMenu2.Symbol = "";
-			this.radialMenu2.SymbolSize = 13F;
-			this.radialMenu2.TabIndex = 23;
-			this.radialMenu2.TabStop = false;
-			this.radialMenu2.Text = "radialMenu";
-			this.radialMenu2.Visible = false;
+			this.radialMenu3.Diameter = 200;
+			this.radialMenu3.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.Item6,
+            this.Space6,
+            this.Item7,
+            this.Space7});
+			this.radialMenu3.Location = new System.Drawing.Point(33, 3);
+			this.radialMenu3.Name = "radialMenu3";
+			this.radialMenu3.Size = new System.Drawing.Size(28, 28);
+			this.radialMenu3.Symbol = "";
+			this.radialMenu3.SymbolSize = 13F;
+			this.radialMenu3.TabIndex = 23;
+			this.radialMenu3.TabStop = false;
+			this.radialMenu3.Text = "radialMenu";
+			this.radialMenu3.Visible = false;
+			// 
+			// Item6
+			// 
+			this.Item6.Name = "Item6";
+			this.Item6.Symbol = "";
+			this.Item6.Text = "使用自动生成封面";
+			// 
+			// Space6
+			// 
+			this.Space6.Name = "Space6";
+			// 
+			// Item7
+			// 
+			this.Item7.Name = "Item7";
+			this.Item7.Symbol = "";
+			this.Item7.Text = "选择封面图片";
+			// 
+			// Space7
+			// 
+			this.Space7.Name = "Space7";
 			// 
 			// Item4
 			// 
@@ -271,6 +296,24 @@
 			// 
 			this.Space3.Name = "Space3";
 			// 
+			// radialMenu2
+			// 
+			this.radialMenu2.Diameter = 200;
+			this.radialMenu2.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.Item4,
+            this.Space4,
+            this.Item5,
+            this.Space5});
+			this.radialMenu2.Location = new System.Drawing.Point(889, 38);
+			this.radialMenu2.Name = "radialMenu2";
+			this.radialMenu2.Size = new System.Drawing.Size(28, 28);
+			this.radialMenu2.Symbol = "";
+			this.radialMenu2.SymbolSize = 13F;
+			this.radialMenu2.TabIndex = 25;
+			this.radialMenu2.TabStop = false;
+			this.radialMenu2.Text = "radialMenu";
+			this.radialMenu2.Visible = false;
+			// 
 			// Page2
 			// 
 			this.AllowDrop = true;
@@ -278,8 +321,9 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.BackColor = System.Drawing.Color.White;
-			this.Controls.Add(this.radialMenu1);
 			this.Controls.Add(this.radialMenu2);
+			this.Controls.Add(this.radialMenu1);
+			this.Controls.Add(this.radialMenu3);
 			this.Controls.Add(this.overlay_TOC_buttons);
 			this.Controls.Add(this.TOC_import);
 			this.Controls.Add(this.TOC_export);
@@ -321,7 +365,7 @@
 		private DevComponents.DotNetBar.RadialMenuItem Item3;
         private DevComponents.DotNetBar.RadialMenuItem Space1;
 		private DevComponents.DotNetBar.RadialMenuItem Space2;
-		protected internal DevComponents.DotNetBar.RadialMenu radialMenu2;
+		protected internal DevComponents.DotNetBar.RadialMenu radialMenu3;
 		protected internal DevComponents.DotNetBar.RadialMenu radialMenu1;
 		private DevComponents.DotNetBar.RadialMenuItem Item2;
 		private DevComponents.DotNetBar.RadialMenuItem Space3;
@@ -329,6 +373,11 @@
 		private DevComponents.DotNetBar.RadialMenuItem Item4;
 		private DevComponents.DotNetBar.RadialMenuItem Space5;
 		private DevComponents.DotNetBar.RadialMenuItem Item5;
+		protected internal DevComponents.DotNetBar.RadialMenu radialMenu2;
+		private DevComponents.DotNetBar.RadialMenuItem Item6;
+		private DevComponents.DotNetBar.RadialMenuItem Space6;
+		private DevComponents.DotNetBar.RadialMenuItem Item7;
+		private DevComponents.DotNetBar.RadialMenuItem Space7;
 
 
 	}

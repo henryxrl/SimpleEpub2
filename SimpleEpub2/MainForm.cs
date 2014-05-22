@@ -58,6 +58,8 @@ namespace SimpleEpub2
 		private String CoverPath;
 		private String CoverPathSlim;
 		private Bitmap[] covers = { null, null };
+		private Boolean reCovers = false;
+		private Boolean isPicCover = false;
 		private String origCover;
 		private Boolean coverChanged = true;
 		private String DocName;
@@ -215,6 +217,8 @@ namespace SimpleEpub2
 			pageSliderPage1.Controls.Add(pg1);
 			pg1.txt_picturebox.DragDrop += txt_picturebox_DragDrop;
 			pg1.txt_picturebox.DoubleClick += txt_picturebox_DoubleClick;
+			pg1.cover_bookname_textbox.TextChanged += cover_bookname_textbox_TextChanged;
+			pg1.cover_author_textbox.TextChanged += cover_author_textbox_TextChanged;
 			pg1.preProcessMode();
 			ResumeLayout(false);
 		}
@@ -228,12 +232,14 @@ namespace SimpleEpub2
 			pageSliderPage2.Controls.Add(pg2);
 			pg2.cover_picturebox.DragDrop += cover_picturebox_DragDrop;
 			pg2.cover_picturebox.DoubleClick += cover_picturebox_DoubleClick;
+			pg2.cover_picturebox.MouseClick += cover_picturebox_MouseClick;
 			pg2.TOC_export.Click += TOC_export_Click;
 			pg2.TOC_import.Click += TOC_import_Click;
 			pg2.TOC_clear.Click += TOC_clear_Click;
 			pg2.TOC_list.DragDrop += TOC_list_DragDrop;
 			pg2.radialMenu1.ItemClick += TOCRadialMenu1ItemClick;
 			pg2.radialMenu2.ItemClick += TOCRadialMenu2ItemClick;
+			pg2.radialMenu3.ItemClick += TOCRadialMenu3ItemClick;
 			ResumeLayout(false);
 		}
 
@@ -351,6 +357,12 @@ namespace SimpleEpub2
 					setPage2();
 				}
 				pageSlider1.SelectedPageIndex = cqIDX;
+				if (reCovers && !isPicCover)
+				{
+					generateTempCovers();
+					pg2.cover_picturebox.Image = covers[0];
+					reCovers = false;
+				}
 			}
 			else //if (cqIDX == 2)
 			{
@@ -487,6 +499,30 @@ namespace SimpleEpub2
 			}
 		}
 
+		private void cover_bookname_textbox_TextChanged(object sender, EventArgs e)
+		{
+			if (bookAndAuthor.Count >= 1)
+			{
+				bookAndAuthor[0] = pg1.cover_bookname_textbox.Text;
+			}
+			if (bookAndAuthor.Count == 2 && CoverPath != null && CoverPathSlim != null && bookAndAuthor[0] != null && bookAndAuthor[1] != null)
+			{
+				reCovers = true;
+			}
+		}
+
+		private void cover_author_textbox_TextChanged(object sender, EventArgs e)
+		{
+			if (bookAndAuthor.Count == 2)
+			{
+				bookAndAuthor[1] = pg1.cover_author_textbox.Text;
+			}
+			if (bookAndAuthor.Count == 2 && CoverPath != null && CoverPathSlim != null && bookAndAuthor[0] != null && bookAndAuthor[1] != null)
+			{
+				reCovers = true;
+			}
+		}
+
 		#endregion
 
 
@@ -540,7 +576,8 @@ namespace SimpleEpub2
 			else
 			{
 				pg1.overlay_cover.Hide();
-				next_button.Enabled = false;
+				if (CoverPath == null || CoverPathSlim == null)
+					next_button.Enabled = false;
 			}
 			coverChanged = true;
 		}
@@ -604,59 +641,7 @@ namespace SimpleEpub2
 			CoverPath = tempPath + "\\cover.jpg";
 			CoverPathSlim = tempPath + "\\cover~slim.jpg";
 
-			if (File.Exists(CoverPath))
-			{
-				try
-				{
-					File.Delete(CoverPath);
-				}
-				catch
-				{
-					if (File.Exists(CoverPath))
-						MessageBoxEx.Show("Deletion failed");
-				}
-			}
-			if (File.Exists(CoverPathSlim))
-			{
-				try
-				{
-					File.Delete(CoverPathSlim);
-				}
-				catch
-				{
-					if (File.Exists(CoverPathSlim))
-						MessageBoxEx.Show("Deletion failed");
-				}
-			}
-
-			using (Image cover = DrawText(1536, 2048, stsObj.verticalText, stsObj.bookNameFont, stsObj.authorNameFont))
-			{
-				try
-				{
-					covers[0] = new Bitmap(cover);
-
-					//cover.Save(CoverPath, System.Drawing.Imaging.ImageFormat.Jpeg);
-					SaveJpeg(CoverPath, cover, 100);
-				}
-				catch
-				{
-					MessageBoxEx.Show("coverpath: " + CoverPath);
-				}
-			}
-			using (Image coverSlim = DrawText(1080, 1920, stsObj.verticalText, stsObj.bookNameFont, stsObj.authorNameFont))
-			{
-				try
-				{
-					covers[1] = new Bitmap(coverSlim);
-
-					//coverSlim.Save(CoverPathSlim, System.Drawing.Imaging.ImageFormat.Jpeg);
-					SaveJpeg(CoverPathSlim, coverSlim, 100);
-				}
-				catch
-				{
-					MessageBoxEx.Show("coverpathslim: " + CoverPathSlim);
-				}
-			}
+			generateTempCovers();
 
 			processTXTWorker.ReportProgress(80);
 
@@ -685,8 +670,10 @@ namespace SimpleEpub2
 			else
 			{
 				pg2.overlay_cover.Hide();
-				pg2.cover_picturebox.BackgroundImage = null;
+				//pg2.cover_picturebox.BackgroundImage = null;
 				processCover(files[0]);
+
+				isPicCover = true;
 			}
 		}
 
@@ -697,15 +684,52 @@ namespace SimpleEpub2
 			pg2.overlay_cover.Show();
 
 			pg2.openFileDialog.Title = "请选择封面图片";
-			pg2.openFileDialog.Filter = "Image Files|*.jpg|*.jpeg|*.bmp|*.png";
+			pg2.openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.bmp;*.png";
 			if (pg2.openFileDialog.ShowDialog() == DialogResult.OK)
 			{
 				//MessageBoxEx.Show(pg2.openFileDialog.FileName);
 				processCover(pg2.openFileDialog.FileName);
+
+				isPicCover = true;
 			}
 
 			pg2.overlay_cover.Hide();
-			pg2.cover_picturebox.BackgroundImage = null;
+			//pg2.cover_picturebox.BackgroundImage = null;
+		}
+
+		private void cover_picturebox_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Right)
+			{
+				pg2.overlay_cover.Show();
+
+				pg2.radialMenu3.MenuLocation = new Point(Control.MousePosition.X - pg2.radialMenu3.Diameter / 2, Control.MousePosition.Y - pg2.radialMenu3.Diameter / 2);
+				pg2.radialMenu3.IsOpen = true;
+			}
+		}
+
+		private void TOCRadialMenu3ItemClick(object sender, EventArgs e)
+		{
+			RadialMenuItem item = sender as RadialMenuItem;
+			if (item != null && !String.IsNullOrEmpty(item.Text))
+			{
+				switch (item.Text)
+				{
+					case "使用自动生成封面":
+						generateTempCovers();
+						pg2.cover_picturebox.Image = covers[0];
+						reCovers = false;
+						isPicCover = false;
+						pg2.overlay_cover.Hide();
+						break;
+					case "选择封面图片":
+						cover_picturebox_DoubleClick(sender, e);
+						break;
+					default:
+						MessageBoxEx.Show(item.Text);
+						break;
+				}
+			}
 		}
 
 		private void processCover(String file)
@@ -1858,6 +1882,67 @@ namespace SimpleEpub2
 
 		#region Page1 Helper Functions
 
+		private void generateTempCovers()
+		{
+			if (File.Exists(CoverPath))
+			{
+				try
+				{
+					File.Delete(CoverPath);
+				}
+				catch
+				{
+					if (File.Exists(CoverPath))
+						MessageBoxEx.Show("Deletion failed");
+				}
+			}
+			if (File.Exists(CoverPathSlim))
+			{
+				try
+				{
+					File.Delete(CoverPathSlim);
+				}
+				catch
+				{
+					if (File.Exists(CoverPathSlim))
+						MessageBoxEx.Show("Deletion failed");
+				}
+			}
+
+			covers[0] = null;
+			covers[1] = null;
+			using (Image cover = DrawText(1536, 2048, stsObj.verticalText, stsObj.bookNameFont, stsObj.authorNameFont))
+			{
+				try
+				{
+					covers[0] = new Bitmap(cover);
+					//covers.Add(new Bitmap(cover));
+
+					//cover.Save(CoverPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+					SaveJpeg(CoverPath, cover, 100);
+				}
+				catch
+				{
+					MessageBoxEx.Show("coverpath: " + CoverPath);
+				}
+			}
+			using (Image coverSlim = DrawText(1080, 1920, stsObj.verticalText, stsObj.bookNameFont, stsObj.authorNameFont))
+			{
+				try
+				{
+					covers[1] = new Bitmap(coverSlim);
+					//covers.Add(new Bitmap(coverSlim));
+
+					//coverSlim.Save(CoverPathSlim, System.Drawing.Imaging.ImageFormat.Jpeg);
+					SaveJpeg(CoverPathSlim, coverSlim, 100);
+				}
+				catch
+				{
+					MessageBoxEx.Show("coverpathslim: " + CoverPathSlim);
+				}
+			}
+		}
+
 		private void clearTOC()
 		{
 			if (pg2 == null)
@@ -2293,7 +2378,7 @@ namespace SimpleEpub2
 		{
 			pg2.overlay_TOC_buttons.Hide();
 			pg2.radialMenu1.IsOpen = false;
-			pg2.radialMenu2.IsOpen = false;
+			pg2.radialMenu3.IsOpen = false;
 		}
 
 		#endregion

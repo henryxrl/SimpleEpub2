@@ -66,6 +66,7 @@ namespace SimpleEpub2
 			cover_picturebox.BackgroundImage = drawBackGroundImage();
 
 			overlay_TOC_buttons.Click += overlay_TOC_buttons_Click;
+			overlay_cover.Click += overlay_cover_Click;
 
 			openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 			openFileDialog.Multiselect = false;
@@ -80,6 +81,11 @@ namespace SimpleEpub2
 			radialMenu2.SubMenuEdgeWidth = 8;
 			radialMenu2.CenterButtonDiameter = 45;
 			//radialMenu2.ItemClick += RadialMenu2ItemClick;
+
+			radialMenu3.Symbol = "";
+			radialMenu3.SubMenuEdgeWidth = 8;
+			radialMenu3.CenterButtonDiameter = 45;
+			//radialMenu3.ItemClick += RadialMenu2ItemClick;
 
 			// Set cell font colors
 			setCellFontColor(System.Drawing.Color.Black, themeColor);
@@ -226,6 +232,16 @@ namespace SimpleEpub2
 
 			radialMenu1.IsOpen = false;
 			radialMenu2.IsOpen = false;
+		}
+
+		private void overlay_cover_Click(object sender, EventArgs e)
+		{
+			overlay_cover.Hide();
+			/*TOC_import.Hide();
+			TOC_export.Hide();
+			TOC_clear.Hide();*/
+
+			radialMenu3.IsOpen = false;
 		}
 
 		/*private void TOC_import_Click(object sender, EventArgs e)
