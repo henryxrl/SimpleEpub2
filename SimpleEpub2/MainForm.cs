@@ -468,6 +468,20 @@ namespace SimpleEpub2
 		{
 			if (sts.IsOpen == false)
 			{
+				// Redraw?
+				Boolean redraw = false;
+				if (cqIDX == 1)
+				{
+					if (sts.pg2.settings2_3_booknamefont.SelectedItem.ToString().CompareTo(stsObj.bookNameFont) != 0 || sts.pg2.settings2_3_authornamefont.SelectedItem.ToString().CompareTo(stsObj.authorNameFont) != 0 || sts.pg1.settings1_3_vertical.Value != stsObj.verticalText)
+					{
+						if (!isPicCover)
+						{
+							redraw = true;
+						}
+					}
+				}
+
+				// Save settigngs
 				try
 				{
 					stsObj.loadFromSettings(sts);
@@ -479,6 +493,16 @@ namespace SimpleEpub2
 					stsObj = null;
 					stsObj = new SettingsObject();
 					stsObj.writeToSettings(sts);
+					redraw = false;
+					reCovers = false;
+				}
+
+				// Redraw cover if necessary
+				if (redraw)
+				{
+					generateTempCovers();
+					pg2.cover_picturebox.Image = covers[0];
+					reCovers = false;
 				}
 			}
 			else
@@ -1882,67 +1906,6 @@ namespace SimpleEpub2
 
 		#region Page1 Helper Functions
 
-		private void generateTempCovers()
-		{
-			if (File.Exists(CoverPath))
-			{
-				try
-				{
-					File.Delete(CoverPath);
-				}
-				catch
-				{
-					if (File.Exists(CoverPath))
-						MessageBoxEx.Show("Deletion failed");
-				}
-			}
-			if (File.Exists(CoverPathSlim))
-			{
-				try
-				{
-					File.Delete(CoverPathSlim);
-				}
-				catch
-				{
-					if (File.Exists(CoverPathSlim))
-						MessageBoxEx.Show("Deletion failed");
-				}
-			}
-
-			covers[0] = null;
-			covers[1] = null;
-			using (Image cover = DrawText(1536, 2048, stsObj.verticalText, stsObj.bookNameFont, stsObj.authorNameFont))
-			{
-				try
-				{
-					covers[0] = new Bitmap(cover);
-					//covers.Add(new Bitmap(cover));
-
-					//cover.Save(CoverPath, System.Drawing.Imaging.ImageFormat.Jpeg);
-					SaveJpeg(CoverPath, cover, 100);
-				}
-				catch
-				{
-					MessageBoxEx.Show("coverpath: " + CoverPath);
-				}
-			}
-			using (Image coverSlim = DrawText(1080, 1920, stsObj.verticalText, stsObj.bookNameFont, stsObj.authorNameFont))
-			{
-				try
-				{
-					covers[1] = new Bitmap(coverSlim);
-					//covers.Add(new Bitmap(coverSlim));
-
-					//coverSlim.Save(CoverPathSlim, System.Drawing.Imaging.ImageFormat.Jpeg);
-					SaveJpeg(CoverPathSlim, coverSlim, 100);
-				}
-				catch
-				{
-					MessageBoxEx.Show("coverpathslim: " + CoverPathSlim);
-				}
-			}
-		}
-
 		private void clearTOC()
 		{
 			if (pg2 == null)
@@ -2089,6 +2052,67 @@ namespace SimpleEpub2
 		#endregion
 
 		#region Page2 Helper Functions
+
+		private void generateTempCovers()
+		{
+			if (File.Exists(CoverPath))
+			{
+				try
+				{
+					File.Delete(CoverPath);
+				}
+				catch
+				{
+					if (File.Exists(CoverPath))
+						MessageBoxEx.Show("Deletion failed");
+				}
+			}
+			if (File.Exists(CoverPathSlim))
+			{
+				try
+				{
+					File.Delete(CoverPathSlim);
+				}
+				catch
+				{
+					if (File.Exists(CoverPathSlim))
+						MessageBoxEx.Show("Deletion failed");
+				}
+			}
+
+			covers[0] = null;
+			covers[1] = null;
+			using (Image cover = DrawText(1536, 2048, stsObj.verticalText, stsObj.bookNameFont, stsObj.authorNameFont))
+			{
+				try
+				{
+					covers[0] = new Bitmap(cover);
+					//covers.Add(new Bitmap(cover));
+
+					//cover.Save(CoverPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+					SaveJpeg(CoverPath, cover, 100);
+				}
+				catch
+				{
+					MessageBoxEx.Show("coverpath: " + CoverPath);
+				}
+			}
+			using (Image coverSlim = DrawText(1080, 1920, stsObj.verticalText, stsObj.bookNameFont, stsObj.authorNameFont))
+			{
+				try
+				{
+					covers[1] = new Bitmap(coverSlim);
+					//covers.Add(new Bitmap(coverSlim));
+
+					//coverSlim.Save(CoverPathSlim, System.Drawing.Imaging.ImageFormat.Jpeg);
+					SaveJpeg(CoverPathSlim, coverSlim, 100);
+				}
+				catch
+				{
+					MessageBoxEx.Show("coverpathslim: " + CoverPathSlim);
+				}
+			}
+		}
 
 		private void generateCoverFromFilePath()
 		{
