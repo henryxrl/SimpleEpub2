@@ -46,7 +46,7 @@ namespace SimpleEpub2
 		private static String resourcesPath = Path.Combine(Path.GetTempPath(), "SimpleEpub2") + "\\Resources";
 
 
-		private static String regex = "^([\\s\t　]*([【])?(正文[\\s\t　]*)?[第序终【][\\s\t　]*([——-——一二两三四五六七八九十○零百千壹贰叁肆伍陆柒捌玖拾佰仟0-9０-９\\s\t　/\\、、]*)[\\s\t　]*[章节節回集卷部】][\\s\t　]*.{0,40}?$)|^([\\s\t　]*(正文[\\s\t　]*)?[\\s\t　]*(内容简介|内容介绍|小说简介|小说介绍|书籍简介|书籍介绍|作品简介|作品介绍|作者简介|作者介绍|序|序言|序章|前言|楔子|终章|尾声|后记|完本感言|出版后记|谢辞)[\\s\t　]*.{0,40}?$)";
+		private static String regex = "^([\\s\t　]*([【])?(正文[\\s\t　]*)?[第序终終【][\\s\t　]*([——-——一二两三四五六七八九十○零百千壹贰叁肆伍陆柒捌玖拾佰仟0-9０-９\\s\t　/\\、、]*)[\\s\t　]*[章节節回集卷部】][\\s\t　]*.{0,40}?$)|^([\\s\t　]*(正文[\\s\t　]*)?[\\s\t　]*(内容简介|內容簡介|内容介绍|內容介紹|内容梗概|小说简介|小說簡介|小说介绍|小說介紹|书籍简介|書籍簡介|书籍介绍|書籍介紹|作品简介|作品簡介|作品介绍|作品介紹|作者简介|作者簡介|作者介绍|作者介紹|序|序言|序章|前言|楔子|终章|終章|尾声|尾聲|后记|後記|完本感言|出版后记|出版後記|谢辞|謝辭)[\\s\t　]*.{0,40}?$)";
 
 		private List<String> bookAndAuthor;
 		private List<Tuple<Int32, String>> TOC = new List<Tuple<Int32, String>>();
@@ -2131,7 +2131,7 @@ namespace SimpleEpub2
 					Match title = Regex.Match(line, regex);
 
 					// First chapter title found!
-					if (title.Success && !line.Contains("简介") && !line.Contains("介绍"))
+					if (title.Success && !line.Contains("简介") && !line.Contains("簡介") && !line.Contains("介绍") && !line.Contains("介紹") && !line.Contains("梗概"))
 					{
 						break;
 					}
@@ -2146,7 +2146,7 @@ namespace SimpleEpub2
 				for (Int32 i = 0; i < firstTitleLineNumber; i++)
 				{
 					line = sr.ReadLine();
-					if (line != null && (line.Contains("简介") || line.Contains("簡介")))
+					if (line != null && (line.Contains("简介") || line.Contains("簡介") || line.Contains("介绍") || line.Contains("介紹") || line.Contains("梗概")))
 					{
 						for (Int32 j = introLineNumber + 1; j < firstTitleLineNumber; j++)
 						{
