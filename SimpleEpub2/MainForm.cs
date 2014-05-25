@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
@@ -14,7 +15,6 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Media;
 using VB = Microsoft.VisualBasic;
-using System.Linq;
 
 namespace SimpleEpub2
 {
@@ -1215,8 +1215,6 @@ namespace SimpleEpub2
 			mimetype = "application/epub+zip";
 			container = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<container version=\"1.0\" xmlns=\"urn:oasis:names:tc:opendocument:xmlns:container\">\n\t<rootfiles>\n\t\t<rootfile full-path=\"OEBPS/content.opf\" media-type=\"application/oebps-package+xml\" />\n\t</rootfiles>\n</container>";
 			epubWorker.ReportProgress(80);
-			if (hasFootNote)
-				Extract("SimpleEpub2", resourcesPath, "Resources", "note.png");
 
 			/*** ZIP ***/
 			DocName = "《" + bookAndAuthor[0] + "》作者：" + bookAndAuthor[1];
@@ -1256,6 +1254,7 @@ namespace SimpleEpub2
 				if (hasFootNote)
 				{
 					// Use the note.png from resourses
+					//Extract("SimpleEpub2", resourcesPath, "Resources", "note.png");
 					//zip.AddFile(resourcesPath + "\\note.png", "OEBPS\\Images\\");
 					
 					// Use auto-generated note.png
@@ -1343,6 +1342,12 @@ namespace SimpleEpub2
 					TXTlineNumber += 2;
 				}
 
+
+				Boolean titleHasFootNote = false;
+				Queue<Tuple<String, Int32>> footNoteQueuePre = new Queue<Tuple<String, Int32>>();
+				Queue<Tuple<Int32, String>> footNoteQueuePost = new Queue<Tuple<Int32, String>>();
+				Int32 chapterFootNoteCount = 0;
+
 				// Read from the first line to the first chapter title defined!
 				if (TLN_size != 0 && titleLineNumbers[0] > TXTlineNumber)
 				{
@@ -1377,33 +1382,47 @@ namespace SimpleEpub2
 								nextLine = ToSBC(nextLine);
 							}
 							if (embedFontSubset && URIB != null) addStringToUInt16CollectionB(nextLine);
-							if (firstTime)
+
+
+
+							// ① - ⑳: FootNote content!
+							if (Regex.IsMatch(nextLine[0].ToString(), "[\u2460-\u2473]"))
 							{
-								html.Append(HTMLHead(nextLine, "", 1) + "\n");
-								firstTime = false;
+								hasFootNote = true;
+
+								linkFootNote(nextLine, footNoteQueuePre, footNoteQueuePost);
 							}
 							else
-								html.Append("<p>" + nextLine + "</p>\n");
+							{
+								storeFootNoteLocation(ref nextLine, footNoteQueuePre, ref chapterFootNoteCount, 1, ref titleHasFootNote);
+
+								if (firstTime)
+								{
+									html.Append(HTMLHead(nextLine, "", 1) + "\n");
+									firstTime = false;
+								}
+								else
+									html.Append("<p>" + nextLine + "</p>\n");
+							}
+
 						}
 						TXTlineNumber++;
 					}
 					//extraLinesInBeginning = false;
+
+					appendFootNotes(footNoteQueuePost, html);
+
 					html.Append("</div>\n</body>\n</html>\n");
 					if (extraLinesNotEmpty)
 						txtHtmlList.Add(html.ToString());
 					chapterNumber++;
 				}
 
-
-				Boolean titleHasFootNote = false;
-				Queue<Tuple<String, Int32>> footNoteQueuePre = new Queue<Tuple<String, Int32>>();
-				Queue<Tuple<Int32, String>> footNoteQueuePost = new Queue<Tuple<Int32, String>>();
 				while (true)
 				{
 					StringBuilder html = new StringBuilder();
 
-					//Boolean hasFootNote = false;
-					Int32 chapterFootNoteCount = 0;
+					chapterFootNoteCount = 0;
 					if (!titleHasFootNote)
 						footNoteQueuePre.Clear();
 					footNoteQueuePost.Clear();
@@ -1453,20 +1472,7 @@ namespace SimpleEpub2
 								}
 								if (embedFontSubset && URIT != null) addStringToUInt16CollectionT(nextLine);
 
-								// ① - ⑳: FootNote position!
-								MatchCollection footnotesPos = Regex.Matches(nextLine, "[\u2460-\u2473]");
-								if (footnotesPos.Count > 0)
-								{
-									titleHasFootNote = true;
-									chapterFootNoteCount = 0;
-									hasFootNote = true;
-									foreach (Match footnote in footnotesPos)
-									{
-										nextLine = nextLine.Replace(footnote.Value, "<a class=\"duokan-footnote\" href=\"#note" + chapterFootNoteCount + "\"><img src=\"../Images/note.png\" width=\"10\" height=\"10\"/></a>");
-										footNoteQueuePre.Enqueue(new Tuple<String, Int32>(footnote.Value, chapterFootNoteCount));
-										chapterFootNoteCount++;
-									}
-								}
+								storeFootNoteLocation(ref nextLine, footNoteQueuePre, ref chapterFootNoteCount, 0, ref titleHasFootNote);
 
 								if (sameChapter)
 								{
@@ -1492,42 +1498,11 @@ namespace SimpleEpub2
 								{
 									hasFootNote = true;
 
-									try
-									{
-										if (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) == 0)
-											footNoteQueuePost.Enqueue(new Tuple<Int32, String>(footNoteQueuePre.Dequeue().Item2, nextLine.Substring(1)));
-										else if (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) < 0)
-										{
-											while (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) < 0)
-											{
-												footNoteQueuePre.Dequeue();
-											}
-										}
-										else	// if (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) > 0)
-										{
-											// do nothing
-										}
-
-									}
-									catch { }
+									linkFootNote(nextLine, footNoteQueuePre, footNoteQueuePost);
 								}
 								else
 								{
-									// ① - ⑳: FootNote position!
-									MatchCollection footnotesPos = Regex.Matches(nextLine, "[\u2460-\u2473]");
-									if (footnotesPos.Count > 0)
-									{
-										hasFootNote = true;
-										foreach (Match footnote in footnotesPos)
-										{
-											// the following code replace ALL occurances, which is INCORRECT
-											//nextLine = nextLine.Replace(footnote.Value, "<a class=\"duokan-footnote\" href=\"#note" + chapterFootNoteCount + "\"><img src=\"../Images/note.png\" width=\"10\" height=\"10\"/></a>");
-
-											nextLine = ReplaceFirst(nextLine, footnote.Value, "<a class=\"duokan-footnote\" href=\"#note" + chapterFootNoteCount + "\"><img src=\"../Images/note.png\" width=\"10\" height=\"10\"/></a>");
-											footNoteQueuePre.Enqueue(new Tuple<String, Int32>(footnote.Value, chapterFootNoteCount));
-											chapterFootNoteCount++;
-										}
-									}
+									storeFootNoteLocation(ref nextLine, footNoteQueuePre, ref chapterFootNoteCount, 1, ref titleHasFootNote);
 
 									html.Append("<p>" + nextLine + "</p>\n");
 								}
@@ -1538,18 +1513,7 @@ namespace SimpleEpub2
 
 					if (nextLine != null)
 					{
-						if (hasFootNote)
-						{
-							html.Append("\n<ol class=\"duokan-footnote-content\">\n");
-
-							while (footNoteQueuePost.Count > 0)
-							{
-								html.Append("<li class=\"duokan-footnote-item\" id=\"note" + footNoteQueuePost.Peek().Item1 + "\">" + footNoteQueuePost.Peek().Item2 + "</li>\n");
-								footNoteQueuePost.Dequeue();
-							}
-
-							html.Append("</ol>\n");
-						}
+						appendFootNotes(footNoteQueuePost, html);
 
 						html.Append("</div>\n</body>\n</html>\n");
 						txtHtmlList.Add(html.ToString());
@@ -1557,18 +1521,7 @@ namespace SimpleEpub2
 					}
 					else
 					{
-						if (hasFootNote)
-						{
-							html.Append("\n<ol class=\"duokan-footnote-content\">\n");
-
-							while (footNoteQueuePost.Count > 0)
-							{
-								html.Append("<li class=\"duokan-footnote-item\" id=\"note" + footNoteQueuePost.Peek().Item1 + "\">" + footNoteQueuePost.Peek().Item2 + "</li>\n");
-								footNoteQueuePost.Dequeue();
-							}
-
-							html.Append("</ol>\n");
-						}
+						appendFootNotes(footNoteQueuePost, html);
 
 						html.Append("</div>\n</body>\n</html>\n");
 						txtHtmlList.Add(html.ToString());
@@ -1578,6 +1531,68 @@ namespace SimpleEpub2
 			}
 
 			return true;
+		}
+
+		private void storeFootNoteLocation(ref String nextLine, Queue<Tuple<String, Int32>> footNoteQueuePre, ref Int32 chapterFootNoteCount, Int32 flag, ref Boolean titleHasFootNote)
+		{
+			// ① - ⑳: FootNote position!
+			MatchCollection footnotesPos = Regex.Matches(nextLine, "[\u2460-\u2473]");
+			if (footnotesPos.Count > 0)
+			{
+				if (flag == 0)
+				{
+					titleHasFootNote = true;
+					chapterFootNoteCount = 0;
+				}
+				hasFootNote = true;
+				foreach (Match footnote in footnotesPos)
+				{
+					// the following code replace ALL occurances, which is INCORRECT
+					//nextLine = nextLine.Replace(footnote.Value, "<a class=\"duokan-footnote\" href=\"#note" + chapterFootNoteCount + "\"><img src=\"../Images/note.png\" width=\"10\" height=\"10\"/></a>");
+
+					nextLine = ReplaceFirst(nextLine, footnote.Value, "<a class=\"duokan-footnote\" href=\"#note" + chapterFootNoteCount + "\"><img src=\"../Images/note.png\" width=\"10\" height=\"10\"/></a>");
+					footNoteQueuePre.Enqueue(new Tuple<String, Int32>(footnote.Value, chapterFootNoteCount));
+					chapterFootNoteCount++;
+				}
+			}
+		}
+
+		private static void linkFootNote(String nextLine, Queue<Tuple<String, Int32>> footNoteQueuePre, Queue<Tuple<Int32, String>> footNoteQueuePost)
+		{
+			try
+			{
+				if (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) == 0)
+					footNoteQueuePost.Enqueue(new Tuple<Int32, String>(footNoteQueuePre.Dequeue().Item2, nextLine.Substring(1)));
+				else if (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) < 0)
+				{
+					while (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) < 0)
+					{
+						footNoteQueuePre.Dequeue();
+					}
+				}
+				else	// if (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) > 0)
+				{
+					// do nothing
+				}
+
+			}
+			catch { }
+		}
+
+		private void appendFootNotes(Queue<Tuple<Int32, String>> footNoteQueuePost, StringBuilder html)
+		{
+			if (hasFootNote)
+			{
+				html.Append("\n<ol class=\"duokan-footnote-content\">\n");
+
+				while (footNoteQueuePost.Count > 0)
+				{
+					html.Append("<li class=\"duokan-footnote-item\" id=\"note" + footNoteQueuePost.Peek().Item1 + "\">" + footNoteQueuePost.Peek().Item2 + "</li>\n");
+					footNoteQueuePost.Dequeue();
+				}
+
+				html.Append("</ol>\n");
+			}
 		}
 
 		private void generateCSS(Boolean vertical, Single marginL, Single marginR, Single marginT, Single marginB, Single lineHeight, Boolean addParagraphSpacing, String titleFont, System.Drawing.Color titleColorC, String bodyFont, System.Drawing.Color bodyColorC, System.Drawing.Color pageColor, Boolean embedFontSubset)
@@ -2244,7 +2259,7 @@ namespace SimpleEpub2
 				}
 			}
 
-			using (Image note = DrawNotePic(200, 200, "注", stsObj.bodyFont))
+			using (Image note = DrawNotePic(64, 64, "注", stsObj.bodyFont))
 			{
 				try
 				{
@@ -2297,8 +2312,12 @@ namespace SimpleEpub2
 
 			//paint the background
 			drawing.Clear(System.Drawing.Color.FromArgb(50, 70, 110));
-			drawing.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-			drawing.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+			drawing.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+			drawing.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+			drawing.InterpolationMode = InterpolationMode.HighQualityBicubic;
+			drawing.PixelOffsetMode = PixelOffsetMode.HighQuality;
+			drawing.CompositingQuality = CompositingQuality.HighQuality;
+			drawing.CompositingMode = CompositingMode.SourceOver;
 
 			System.Drawing.Brush whiteBrush = new SolidBrush(System.Drawing.Color.White);
 			System.Drawing.Brush orangeBrush = new SolidBrush(System.Drawing.Color.FromArgb(228, 89, 23));
@@ -2389,42 +2408,42 @@ namespace SimpleEpub2
 			//paint the background
 			drawing.Clear(System.Drawing.Color.Transparent);
 			drawing.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-			drawing.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+			drawing.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
 
-			Rectangle bound = new Rectangle(0, 0, width, height);
+			Rectangle bound = new Rectangle(0, 0, width-1, height-1);
 
 			System.Drawing.Brush brownBrush = new SolidBrush(System.Drawing.Color.FromArgb(165, 70, 15));
-			drawing.FillEllipse(brownBrush, bound);
+			drawing.FillEllipse(brownBrush, bound);			
 
+			// Draw word overlay
+			Bitmap overLay = new Bitmap(width, height);
+			Graphics drawingOverLay = Graphics.FromImage(overLay);
+			drawingOverLay.Clear(System.Drawing.Color.Black);
+			drawingOverLay.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+			drawingOverLay.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+			drawingOverLay.InterpolationMode = InterpolationMode.HighQualityBicubic;
+			drawingOverLay.PixelOffsetMode = PixelOffsetMode.HighQuality;
+			drawingOverLay.CompositingQuality = CompositingQuality.HighQuality;
+			drawingOverLay.CompositingMode = CompositingMode.SourceOver;
+			
 			System.Drawing.Brush transparentBrush = new SolidBrush(System.Drawing.Color.White);
 			StringFormat noteDrawFormat = new StringFormat();
 			noteDrawFormat.Alignment = StringAlignment.Center;
-			noteDrawFormat.LineAlignment = StringAlignment.Center;
-			noteDrawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-			
+			/*noteDrawFormat.LineAlignment = StringAlignment.Center;
+			noteDrawFormat.FormatFlags = StringFormatFlags.DirectionVertical;*/
+
 			Font noteFont = new Font(bodyfont, 1, FontStyle.Regular);
-			/*drawing.DrawString(word, scaleFont(drawing, word, noteFont, bound, noteDrawFormat), transparentBrush, bound, noteDrawFormat);
-			img.MakeTransparent(System.Drawing.Color.FromArgb(255, 183, 106, 62));*/
-			
-
 			/*TextFormatFlags flags = TextFormatFlags.NoPadding;
+			TextRenderer.DrawText(drawingOverLay, word, noteFont, new Point(0, 0), System.Drawing.Color.White, flags);*/
+			//TextRenderer.DrawText(drawingOverLay, word, noteFont, new Point(0, 0), System.Drawing.Color.FromArgb(165, 70, 15), System.Drawing.Color.White, TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter);
+			drawingOverLay.DrawString(word, scaleFont(drawing, word, noteFont, bound, noteDrawFormat), transparentBrush, bound, noteDrawFormat);
 
-			TextRenderer.DrawText(drawing, word, noteFont, new Point(0, 0), System.Drawing.Color.White, flags);*/
-			Bitmap test = new Bitmap(width, height);
-			Graphics testdrawing = Graphics.FromImage(test);
-			testdrawing.Clear(System.Drawing.Color.Transparent);
-			testdrawing.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-			testdrawing.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+			//drawingOverLay.Save();
 
-			//TextRenderer.DrawText(drawing, word, noteFont, new Point(0, 0), System.Drawing.Color.FromArgb(165, 70, 15), System.Drawing.Color.White, TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter);
-			testdrawing.DrawString(word, scaleFont(drawing, word, noteFont, bound, noteDrawFormat), transparentBrush, bound, noteDrawFormat);
-			testdrawing.Save();
+			ApplyAlphaMask(img, overLay);
 
-			ApplyAlphaMask(img, test);
-
-			test.Dispose();
-			testdrawing.Dispose();
-
+			overLay.Dispose();
+			drawingOverLay.Dispose();
 
 			brownBrush.Dispose();
 			noteFont.Dispose();
@@ -2436,10 +2455,10 @@ namespace SimpleEpub2
 			return img;
 		}
 
-		public static void ApplyAlphaMask(Bitmap bmp, Bitmap alphaMaskImage)
+		private static void ApplyAlphaMask(Bitmap bmp, Bitmap alphaMaskImage)
 		{
-			int width = bmp.Width;
-			int height = bmp.Height;
+			Int32 width = bmp.Width;
+			Int32 height = bmp.Height;
 
 			BitmapData dataAlphaMask = alphaMaskImage.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 			try
@@ -2449,26 +2468,26 @@ namespace SimpleEpub2
 				{
 					unsafe //using pointer requires the unsafe keyword
 					{
-						byte* pData0Mask = (byte*)dataAlphaMask.Scan0;
-						byte* pData0 = (byte*)data.Scan0;
+						Byte* pData0Mask = (Byte*)dataAlphaMask.Scan0;
+						Byte* pData0 = (Byte*)data.Scan0;
 
-						for (int x = 0; x < width; x++)
+						for (Int32 x = 0; x < width; x++)
 						{
-							for (int y = 0; y < height; y++)
+							for (Int32 y = 0; y < height; y++)
 							{
-								byte* pData = pData0 + (y * data.Stride) + (x * 4);
-								byte* pDataMask = pData0Mask + (y * dataAlphaMask.Stride) + (x * 4);
+								Byte* pData = pData0 + (y * data.Stride) + (x * 4);
+								Byte* pDataMask = pData0Mask + (y * dataAlphaMask.Stride) + (x * 4);
 
-								byte maskBlue = pDataMask[0];
-								byte maskGreen = pDataMask[1];
-								byte maskRed = pDataMask[2];
+								Byte maskBlue = pDataMask[0];
+								Byte maskGreen = pDataMask[1];
+								Byte maskRed = pDataMask[2];
 
 								//the closer the color is to black the more opaque it will be.
-								byte alpha = (byte)(255 - (maskRed + maskBlue + maskGreen) / 3);
+								Byte alpha = (Byte)(255 - (maskRed + maskBlue + maskGreen) / 3);
 
 								//respect the original alpha value
-								byte originalAlpha = pData[3];
-								pData[3] = (byte)(((float)(alpha * originalAlpha)) / 255f);
+								Byte originalAlpha = pData[3];
+								pData[3] = (Byte)(((Single)(alpha * originalAlpha)) / 255f);
 							}
 						}
 					}

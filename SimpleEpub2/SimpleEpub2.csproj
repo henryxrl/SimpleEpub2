@@ -34,7 +34,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -68,10 +68,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Resources\DevComponents.DotNetBar2.dll</HintPath>
       <Private>True</Private>
+      <IlMerge>True</IlMerge>
     </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>Resources\Ionic.Zip.dll</HintPath>
       <Private>True</Private>
+      <IlMerge>True</IlMerge>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
@@ -148,6 +150,7 @@
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -170,6 +173,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
@@ -195,7 +199,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Resources\help.pdf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -203,6 +206,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\About.png" />
     <None Include="Resources\DevComponents.DotNetBar2.dll" />
+    <EmbeddedResource Include="Resources\help.pdf" />
     <None Include="Resources\SimpleEpub2.ico" />
     <None Include="Resources\Ionic.Zip.dll" />
   </ItemGroup>
@@ -223,18 +227,8 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\note.png" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Ilmerge.CSharp.targets" />
+  <!-- <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" /> -->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
