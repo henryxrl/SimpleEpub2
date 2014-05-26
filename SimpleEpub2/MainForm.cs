@@ -1283,6 +1283,7 @@ namespace SimpleEpub2
 			}
 
 			epubWorker.ReportProgress(100);
+
 		}
 
 		private Boolean generateHTML(Boolean coverFirstPage, Int32 translation, Boolean vertical, Boolean replace, Boolean embedFontSubset)

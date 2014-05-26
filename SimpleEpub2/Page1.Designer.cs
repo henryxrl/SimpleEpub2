@@ -219,7 +219,6 @@
 			this.Controls.Add(this.line1);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.highlighter.SetHighlightOnFocus(this, true);
 			this.Margin = new System.Windows.Forms.Padding(0);
 			this.Name = "Page1";
 			this.Size = new System.Drawing.Size(918, 600);
