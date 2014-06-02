@@ -2057,61 +2057,116 @@ namespace SimpleEpub2
 			List<String> result = new List<String>();
 
 			filename = filename.Trim();
-			// 1. get info from file name
-			Int32 pos = filename.IndexOf("作者：");
-			if (pos == -1)
-				pos = filename.IndexOf("作者:");
-			if (pos != -1)
+
+			//Match m = Regex.Match(filename, "^[a-zA-Z0-9?><;,{}[\\]\\-_+=!@#$%\\^&*|'\\s]*$");
+			//Match m = Regex.Match(filename, "^[\\p{L}\\p{P}\\s\\p{N}]*$");	Doesn't work since \p{L} includes Eastern characters as well!
+			Match m = Regex.Match(filename, "^[a-zA-ZÀ-ÿ\\p{P}\\s\\p{N}]*$");
+			if (m.Success)		// is English book name
 			{
-				String bookname = filename.Substring(0, pos);
-				char[] charsToTrim = { '《', '》' };
-				bookname = bookname.Trim(charsToTrim);
-				bookname = bookname.Replace("书名：", "");
-				bookname = bookname.Replace("书名:", "");
-				bookname = bookname.Trim();
-				String author = filename.Substring(filename.IndexOf("作者：") + 3, filename.Length - filename.IndexOf("作者：") - 3);
-				author = author.Trim();
-
-				result.Add(bookname);
-				result.Add(author);
-
-				return result;
-			}
-			else
-			{
-				FSLinesScanned = 2;
-
-				// No complete book name and author info
-				notifyIcon1.BalloonTipIcon = ToolTipIcon.Warning;
-				showBalloonTip("文件名中无完整书名和作者信息！", "完整信息范例：“《书名》作者：作者名”`n（文件名中一定要有“作者”二字，书名号可以省略）`n`n开始检测文件第一、二行……`n其中第一行为书名，第二行为作者名。！");
-
-				// Treat first line as book name and second line as author
-				using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding("GB2312")))
+				//Match m1 = Regex.Match(filename, "^[a-zA-Z0-9?><;,{}[\\]\\-_+=!@#$%\\^&*|'\\s]*(\\s(?i)by\\s)[a-zA-Z0-9?><;,{}[\\]\\-_+=!@#$%\\^&*|'\\s]*$");
+				// 1. get info from file name
+				Int32 pos = filename.ToLower().IndexOf(" by ");
+				if (pos != -1)
 				{
-					String bookname = sr.ReadLine();
-					if (bookname == null) bookname = filename;
-					else
-					{
-						char[] charsToTrim = { '《', '》' };
-						bookname = bookname.Trim(charsToTrim);
-						bookname = bookname.Replace("书名：", "");
-						bookname = bookname.Replace("书名:", "");
-						bookname = bookname.Trim();
-					}
-
-					String author = sr.ReadLine();
-					if (author == null) author = "东皇";
-					else
-					{
-						author = author.Replace("作者：", "");
-						author = author.Replace("作者:", "");
-						author = author.Trim();
-					}
+					String bookname = filename.Substring(0, pos);
+					bookname = bookname.Trim();
+					String author = filename.Substring(filename.ToLower().IndexOf(" by ") + 4, filename.Length - filename.ToLower().IndexOf(" by ") - 4);
+					author = author.Trim();
 
 					result.Add(bookname);
 					result.Add(author);
+
+					return result;
 				}
-				return result;
+				else
+				{
+					FSLinesScanned = 2;
+
+					// No complete book name and author info
+					notifyIcon1.BalloonTipIcon = ToolTipIcon.Warning;
+					showBalloonTip("文件名中无完整英文书名和作者信息！", "完整信息范例：“BookName By Author”\n（文件名中一定要有“By”这个词，大小写不限）\n\n开始检测文件第一、二行……\n其中第一行为书名，第二行为作者名！");
+
+					// Treat first line as book name and second line as author
+					using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding("GB2312")))
+					{
+						String bookname = sr.ReadLine();
+						if (bookname == null) bookname = filename;
+						else
+						{
+							bookname = bookname.Trim();
+						}
+
+						String author = sr.ReadLine();
+						if (author == null) author = "SimpleEpub2";
+						else
+						{
+							author = author.Trim();
+						}
+
+						result.Add(bookname);
+						result.Add(author);
+					}
+					return result;
+				}
+			}
+			else
+			{
+				// 1. get info from file name
+				Int32 pos = filename.IndexOf("作者：");
+				if (pos == -1)
+					pos = filename.IndexOf("作者:");
+				if (pos != -1)
+				{
+					String bookname = filename.Substring(0, pos);
+					char[] charsToTrim = { '《', '》' };
+					bookname = bookname.Trim(charsToTrim);
+					bookname = bookname.Replace("书名：", "");
+					bookname = bookname.Replace("书名:", "");
+					bookname = bookname.Trim();
+					String author = filename.Substring(filename.IndexOf("作者：") + 3, filename.Length - filename.IndexOf("作者：") - 3);
+					author = author.Trim();
+
+					result.Add(bookname);
+					result.Add(author);
+
+					return result;
+				}
+				else
+				{
+					FSLinesScanned = 2;
+
+					// No complete book name and author info
+					notifyIcon1.BalloonTipIcon = ToolTipIcon.Warning;
+					showBalloonTip("文件名中无完整书名和作者信息！", "完整信息范例：“《书名》作者：作者名”\n（文件名中一定要有“作者”二字，书名号可以省略）\n\n开始检测文件第一、二行……\n其中第一行为书名，第二行为作者名！");
+
+					// Treat first line as book name and second line as author
+					using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding("GB2312")))
+					{
+						String bookname = sr.ReadLine();
+						if (bookname == null) bookname = filename;
+						else
+						{
+							char[] charsToTrim = { '《', '》' };
+							bookname = bookname.Trim(charsToTrim);
+							bookname = bookname.Replace("书名：", "");
+							bookname = bookname.Replace("书名:", "");
+							bookname = bookname.Trim();
+						}
+
+						String author = sr.ReadLine();
+						if (author == null) author = "SimpleEpub2";
+						else
+						{
+							author = author.Replace("作者：", "");
+							author = author.Replace("作者:", "");
+							author = author.Trim();
+						}
+
+						result.Add(bookname);
+						result.Add(author);
+					}
+					return result;
+				}
 			}
 		}
 
