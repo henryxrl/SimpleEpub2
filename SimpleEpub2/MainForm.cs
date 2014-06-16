@@ -48,7 +48,7 @@ namespace SimpleEpub2
 
 		private static String regex = "^([\\s\t　]*([【])?(正文[\\s\t　]*)?[第序终終【][\\s\t　]*([——-——一二两三四五六七八九十○零百千壹贰叁肆伍陆柒捌玖拾佰仟0-9０-９\\s\t　/\\、、]*)[\\s\t　]*[章节節回集卷部】][\\s\t　]*.{0,40}?$)|^([\\s\t　]*(内容简介|內容簡介|内容介绍|內容介紹|内容梗概|小说简介|小說簡介|小说介绍|小說介紹|书籍简介|書籍簡介|书籍介绍|書籍介紹|作品简介|作品簡介|作品介绍|作品介紹|作者简介|作者簡介|作者介绍|作者介紹|序|序言|序章|前言|楔子|终章|終章|尾声|尾聲|后记|後記|完本感言|出版后记|出版後記|谢辞|謝辭)[\\s\t　]*.{0,40}?$)|^([\\s\t　]*((?i)chapter)[\\s\t　]*.{0,40}?$)|^([\\s\t　]*((?i)appendix)[\\s\t　]*.{0,40}?$)";
 
-		private List<String> bookAndAuthor;
+		private List<String> bookAndAuthor = new List<String>();
 		private List<Tuple<Int32, String>> TOC = new List<Tuple<Int32, String>>();
 		private Int32 FSLinesScanned = 0;
 		private Boolean extraLinesInBeginning = false;
@@ -292,6 +292,9 @@ namespace SimpleEpub2
 			sts.SlideSide = DevComponents.DotNetBar.Controls.eSlideSide.Top;
 			sts.Parent = this;
 			sts.IsOpenChanged += sts_IsOpenChanged;
+			sts.pg1.settings1_3_vertical.ValueChanged += settings1_3_vertical_ValueChanged;
+			sts.pg2.settings2_3_booknamefont.TextChanged += settings2_3_booknamefont_TextChanged;
+			sts.pg2.settings2_3_authornamefont.TextChanged += settings2_3_authornamefont_TextChanged;
 			ResumeLayout(false);
 		}
 
@@ -528,21 +531,44 @@ namespace SimpleEpub2
 
 		private void cover_bookname_textbox_TextChanged(object sender, EventArgs e)
 		{
-			if (bookAndAuthor.Count >= 1)
-			{
-				bookAndAuthor[0] = pg1.cover_bookname_textbox.Text;
-			}
-			if (bookAndAuthor.Count == 2 && CoverPath != null && CoverPathSlim != null && bookAndAuthor[0] != null && bookAndAuthor[1] != null)
-			{
-				reCovers = true;
-			}
+			eventToRedrawCover(0);
 		}
 
 		private void cover_author_textbox_TextChanged(object sender, EventArgs e)
 		{
-			if (bookAndAuthor.Count == 2)
+			eventToRedrawCover(1);
+		}
+
+		private void settings1_3_vertical_ValueChanged(object sender, EventArgs e)
+		{
+			eventToRedrawCover(1);
+		}
+
+		private void settings2_3_booknamefont_TextChanged(object sender, EventArgs e)
+		{
+			eventToRedrawCover(1);
+		}
+
+		private void settings2_3_authornamefont_TextChanged(object sender, EventArgs e)
+		{
+			eventToRedrawCover(1);
+		}
+
+		private void eventToRedrawCover(Int32 flag)
+		{
+			if (flag == 0)
 			{
-				bookAndAuthor[1] = pg1.cover_author_textbox.Text;
+				if (bookAndAuthor.Count >= 1)
+				{
+					bookAndAuthor[0] = pg1.cover_bookname_textbox.Text;
+				}
+			}
+			else if (flag == 1)
+			{
+				if (bookAndAuthor.Count == 2)
+				{
+					bookAndAuthor[1] = pg1.cover_author_textbox.Text;
+				}
 			}
 			if (bookAndAuthor.Count == 2 && CoverPath != null && CoverPathSlim != null && bookAndAuthor[0] != null && bookAndAuthor[1] != null)
 			{
@@ -2563,6 +2589,10 @@ namespace SimpleEpub2
 		{
 			Single width = g.MeasureString(s, f, new SizeF(r.Width, r.Height), fm).Width;
 			Single height = g.MeasureString(s, f, new SizeF(r.Width, r.Height), fm).Height;
+
+			/*Single width = TextRenderer.MeasureText(s, f).Width;
+			Single height = TextRenderer.MeasureText(s, f).Height;*/
+
 			Single fontSize = (Convert.ToSingle((Math.Max(r.Width, r.Height) * 1.1) / Math.Min(width, height)) * f.Size);
 			//MessageBoxEx.Show("width: " + g.MeasureString(s, f).Width + "\nheight: " + g.MeasureString(s, f).Height + "\nsize: " + fontSize.ToString());
 			return new Font(f.FontFamily, fontSize, f.Style);
