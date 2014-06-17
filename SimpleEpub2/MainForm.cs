@@ -2116,14 +2116,14 @@ namespace SimpleEpub2
 					using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding("GB2312")))
 					{
 						String bookname = sr.ReadLine();
-						if (bookname == null) bookname = filename;
+						if (bookname == null || bookname.Trim() == "") bookname = filename;
 						else
 						{
 							bookname = bookname.Trim();
 						}
 
 						String author = sr.ReadLine();
-						if (author == null) author = "SimpleEpub2";
+						if (author == null || author.Trim() == "") author = "SimpleEpub2";
 						else
 						{
 							author = author.Trim();
@@ -2169,7 +2169,7 @@ namespace SimpleEpub2
 					using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding("GB2312")))
 					{
 						String bookname = sr.ReadLine();
-						if (bookname == null) bookname = filename;
+						if (bookname == null || bookname.Trim() == "") bookname = filename;
 						else
 						{
 							char[] charsToTrim = { '《', '》' };
@@ -2180,7 +2180,7 @@ namespace SimpleEpub2
 						}
 
 						String author = sr.ReadLine();
-						if (author == null) author = "SimpleEpub2";
+						if (author == null || author.Trim() == "") author = "SimpleEpub2";
 						else
 						{
 							author = author.Replace("作者：", "");
