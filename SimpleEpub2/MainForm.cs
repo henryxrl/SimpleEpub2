@@ -83,6 +83,7 @@ namespace SimpleEpub2
 		private Uri URIB;
 		private Int64 wordcount;
 		private Int64 wordcountnr;
+		private Boolean noNeedEmbed = false;
 
 		private Boolean hasFootNote = false;
 
@@ -678,7 +679,7 @@ namespace SimpleEpub2
 					// Chapter title (with its line number) found!
 					if (title.Success)
 					{
-						Regex rgx = new Regex("[\u2460-\u2473]");
+						Regex rgx = new Regex("[\u2460-\u2473\u3251-\u325F\u32B1-\u32BF]");
 						String chapterTitle = rgx.Replace(title.ToString().Trim(), "");
 						TOC.Add(new Tuple<Int32, String>(lineNumber, chapterTitle));
 
@@ -1416,7 +1417,7 @@ namespace SimpleEpub2
 
 
 							// ① - ⑳: FootNote content!
-							if (Regex.IsMatch(nextLine[0].ToString(), "[\u2460-\u2473]"))
+							if (Regex.IsMatch(nextLine[0].ToString(), "[\u2460-\u2473\u3251-\u325F\u32B1-\u32BF]"))
 							{
 								hasFootNote = true;
 
@@ -1524,7 +1525,7 @@ namespace SimpleEpub2
 								if (embedFontSubset && URIB != null) addStringToUInt16CollectionB(nextLine);
 
 								// ① - ⑳: FootNote content!
-								if (Regex.IsMatch(nextLine[0].ToString(), "[\u2460-\u2473]"))
+								if (Regex.IsMatch(nextLine[0].ToString(), "[\u2460-\u2473\u3251-\u325F\u32B1-\u32BF]"))
 								{
 									hasFootNote = true;
 
@@ -1566,7 +1567,7 @@ namespace SimpleEpub2
 		private void storeFootNoteLocation(ref String nextLine, Queue<Tuple<String, Int32>> footNoteQueuePre, ref Int32 chapterFootNoteCount, Int32 flag, ref Boolean titleHasFootNote)
 		{
 			// ① - ⑳: FootNote position!
-			MatchCollection footnotesPos = Regex.Matches(nextLine, "[\u2460-\u2473]");
+			MatchCollection footnotesPos = Regex.Matches(nextLine, "[\u2460-\u2473\u3251-\u325F\u32B1-\u32BF]");
 			if (footnotesPos.Count > 0)
 			{
 				if (flag == 0)
@@ -1640,8 +1641,11 @@ namespace SimpleEpub2
 			if (embedFontSubset && titleFontPath.CompareTo("") != 0 && URIT != null)
 			{
 				CreateFontSubSetT();
-				String font1Name = embedFontPaths[0].Substring(embedFontPaths[0].LastIndexOf("\\") + 1);
-				font1.Append(",\n\turl(../Fonts/" + font1Name + ")");
+				if (embedFontPaths.Count > 0)
+				{
+					String font1Name = embedFontPaths[0].Substring(embedFontPaths[0].LastIndexOf("\\") + 1);
+					font1.Append(",\n\turl(../Fonts/" + font1Name + ")");
+				}
 			}
 			font1.Append(";\n}\n");
 
@@ -1650,8 +1654,12 @@ namespace SimpleEpub2
 			if (embedFontSubset && bodyFontPath.CompareTo("") != 0 && URIB != null)
 			{
 				CreateFontSubSetB();
-				String font2Name = embedFontPaths[1].Substring(embedFontPaths[1].LastIndexOf("\\") + 1);
-				font2.Append(",\n\turl(../Fonts/" + font2Name + ")");
+				if (embedFontPaths.Count > 0)
+				{
+					Int32 idx = (URIT == null || embedFontPaths.Count == 1) ? 0 : 1;
+					String font2Name = embedFontPaths[idx].Substring(embedFontPaths[idx].LastIndexOf("\\") + 1);
+					font2.Append(",\n\turl(../Fonts/" + font2Name + ")");
+				}
 			}
 			font2.Append(";\n}\n");
 
@@ -3012,7 +3020,8 @@ namespace SimpleEpub2
 				Int32 wordCount = IndexT.Count;
 				if (wordCount <= 0)
 				{
-					MessageBoxEx.Show("不需要内嵌字体！");
+					MessageBoxEx.Show("不需要内嵌标题字体！");
+					noNeedEmbed = true;
 					return;
 				}
 				else if (wordCount > 65535)
@@ -3041,7 +3050,8 @@ namespace SimpleEpub2
 				wordcountnr = IndexB.Count;
 				if (wordcountnr <= 0)
 				{
-					MessageBoxEx.Show("不需要内嵌字体！");
+					MessageBoxEx.Show("不需要内嵌正文字体！");
+					noNeedEmbed = true;
 					return;
 				}
 				else if (wordcountnr > 65535)
@@ -3173,6 +3183,7 @@ namespace SimpleEpub2
 			URIB = null;
 			wordcount = 0;
 			wordcountnr = 0;
+			noNeedEmbed = false;
 			mimetype = null;
 			container = null;
 			css.Clear();
@@ -3286,7 +3297,7 @@ namespace SimpleEpub2
 				pg3.location_label.Text = "位置：" + zipPath;
 				pg3.time_label.Text = "耗时：" + getProcessTime().ToString() + " 秒";
 				pg3.ProcessedMode();
-				if (!stsObj.embedFontSubset || URIB == null || URIB == null)
+				if (!stsObj.embedFontSubset || URIT == null || URIB == null || noNeedEmbed)
 				{
 					pg3.stepItem3.Enabled = false;
 					pg3.stepItem3.Visible = false;
