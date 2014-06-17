@@ -40,9 +40,10 @@ namespace SimpleEpub2
 
 		#endregion
 
-		public SettingsObject()
+		public SettingsObject(String path)
 		{
-			iniPath = Path.Combine(Path.GetTempPath(), "SimpleEpub2") + "\\Resources\\settings.ini";
+			//iniPath = Path.Combine(Path.GetTempPath(), "SimpleEpub2") + "\\Resources\\settings.ini";
+			iniPath = path;
 			ini = new IniFile(iniPath);
 
 			coverFirstPage = false;

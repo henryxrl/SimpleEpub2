@@ -42,8 +42,11 @@ namespace SimpleEpub2
 		private System.Drawing.Color themeColor = System.Drawing.Color.FromArgb(255, 90, 35, 120);
 
 
-		private static String tempPath = Path.Combine(Path.GetTempPath(), "SimpleEpub2");
-		private static String resourcesPath = Path.Combine(Path.GetTempPath(), "SimpleEpub2") + "\\Resources";
+		/*private static String tempPath = Path.Combine(Path.GetTempPath(), "SimpleEpub2");
+		private static String resourcesPath = Path.Combine(Path.GetTempPath(), "SimpleEpub2") + "\\Resources";*/
+		private static String tempPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleEpub2");
+		private static String resourcesPath = tempPath + "\\Resources";
+		private static String settingsPath = resourcesPath + "\\settings.ini";
 
 
 		private static String regex = "^([\\s\t　]*([【])?(正文[\\s\t　]*)?[第序终終【][\\s\t　]*([——-——一二两三四五六七八九十○零百千壹贰叁肆伍陆柒捌玖拾佰仟0-9０-９\\s\t　/\\、、]*)[\\s\t　]*[章节節回集卷部】][\\s\t　]*.{0,40}?$)|^([\\s\t　]*(内容简介|內容簡介|内容介绍|內容介紹|内容梗概|小说简介|小說簡介|小说介绍|小說介紹|书籍简介|書籍簡介|书籍介绍|書籍介紹|作品简介|作品簡介|作品介绍|作品介紹|作者简介|作者簡介|作者介绍|作者介紹|序|序言|序章|前言|楔子|终章|終章|尾声|尾聲|后记|後記|完本感言|出版后记|出版後記|谢辞|謝辭)[\\s\t　]*.{0,40}?$)|^([\\s\t　]*((?i)chapter)[\\s\t　]*.{0,40}?$)|^([\\s\t　]*((?i)appendix)[\\s\t　]*.{0,40}?$)";
@@ -167,7 +170,7 @@ namespace SimpleEpub2
 			#endregion
 
 			#region Settings Preparation
-			stsObj = new SettingsObject();
+			stsObj = new SettingsObject(settingsPath);
 
 			// Create SettingsObject and load settings to form
 			if (!File.Exists(stsObj.iniPath))
@@ -184,7 +187,7 @@ namespace SimpleEpub2
 				{
 					MessageBoxEx.Show("加载设置文件出错，即将导入默认设置！");
 					stsObj = null;
-					stsObj = new SettingsObject();
+					stsObj = new SettingsObject(settingsPath);
 					stsObj.writeToIni();
 				}
 			}
@@ -497,7 +500,7 @@ namespace SimpleEpub2
 				{
 					MessageBoxEx.Show("加载设置文件出错，即将导入默认设置！");
 					stsObj = null;
-					stsObj = new SettingsObject();
+					stsObj = new SettingsObject(settingsPath);
 					stsObj.writeToSettings(sts);
 					redraw = false;
 					reCovers = false;
@@ -524,7 +527,7 @@ namespace SimpleEpub2
 			if (dialogResult == DialogResult.Yes)
 			{
 				stsObj = null;
-				stsObj = new SettingsObject();
+				stsObj = new SettingsObject(settingsPath);
 				stsObj.writeToSettings(sts);
 			}
 		}
