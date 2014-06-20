@@ -140,7 +140,7 @@ namespace SimpleEpub2
 
 		#endregion
 
-
+		
 		#region Form Preset
 		public MainForm()
 		{
@@ -233,7 +233,7 @@ namespace SimpleEpub2
 			sts.pg4.settings4_3_reset_button.Click += sts_pg4_settings4_3_reset_button_Click;
 
 			if (sts.pg4.settings4_4_chkupd.Value)
-				updater.DoUpdate();
+				updater.DoUpdate(true);
 
 			#endregion
 		}
@@ -351,7 +351,7 @@ namespace SimpleEpub2
 
 		private void settings4_4_chkupd_button_Click(object sender, EventArgs e)
 		{
-			updater.DoUpdate();
+			updater.DoUpdate(false);
 		}
 
 		private void newbook_button_Click(object sender, EventArgs e)

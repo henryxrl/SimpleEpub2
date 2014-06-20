@@ -98,7 +98,7 @@ namespace SimpleEpub2.AutoUpdater
 			else
 			{
 				// Show the "Hashing" label and set the progressbar to marquee
-				this.lblProgress.Text = "Verifying Download...";
+				this.lblProgress.Text = "验证更新……";
 				this.progressBar.Style = ProgressBarStyle.Marquee;
 
 				// Start the hashing

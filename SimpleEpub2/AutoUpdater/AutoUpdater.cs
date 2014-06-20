@@ -22,6 +22,8 @@ namespace SimpleEpub2.AutoUpdater
 		/// </summary>
 		private BackgroundWorker bgWorker;
 
+		private Boolean autoCheck;
+
 		/// <summary>
 		/// Creates a new AutoUpdater object
 		/// </summary>
@@ -42,8 +44,10 @@ namespace SimpleEpub2.AutoUpdater
 		/// Checks for an update for the program passed.
 		/// If there is an update, a dialog asking to download will appear
 		/// </summary>
-		public void DoUpdate()
+		public void DoUpdate(Boolean auto)
 		{
+			autoCheck = auto;
+
 			if (!this.bgWorker.IsBusy)
 				this.bgWorker.RunWorkerAsync(this.applicationInfo);
 		}
@@ -80,7 +84,10 @@ namespace SimpleEpub2.AutoUpdater
 						this.DownloadUpdate(update); // Do the update
 				}
 				else
-					MessageBoxEx.Show("已经是最新版本！");
+				{
+					if (!autoCheck)
+						MessageBoxEx.Show("已经是最新版本！");
+				}
 			}
 			else
 				MessageBoxEx.Show("没有找到更新信息！");
