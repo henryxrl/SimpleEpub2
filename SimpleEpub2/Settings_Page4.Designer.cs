@@ -35,6 +35,8 @@
 			this.settings4_1_filelocation_button = new DevComponents.DotNetBar.ButtonX();
 			this.settings4_1_filelocation = new System.Windows.Forms.TextBox();
 			this.settings4_1_filelocation_label = new System.Windows.Forms.Label();
+			this.button1 = new DevComponents.DotNetBar.ButtonX();
+			this.label1 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// settings4_1_filelocation_dialog
@@ -110,6 +112,26 @@
 			this.settings4_1_filelocation_label.TabIndex = 57;
 			this.settings4_1_filelocation_label.Text = "生成文件位置：";
 			// 
+			// button1
+			// 
+			this.button1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.button1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.button1.Location = new System.Drawing.Point(374, 364);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(75, 23);
+			this.button1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.button1.TabIndex = 63;
+			this.button1.Text = "检查更新";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(296, 364);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(43, 17);
+			this.label1.TabIndex = 64;
+			this.label1.Text = "label1";
+			// 
 			// Settings_Page4
 			// 
 			this.AllowDrop = true;
@@ -117,6 +139,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.button1);
 			this.Controls.Add(this.settings4_3_reset_button);
 			this.Controls.Add(this.settings4_2_deletetempfiles_label);
 			this.Controls.Add(this.settings4_2_deletetempfiles);
@@ -142,6 +166,8 @@
 		protected internal System.Windows.Forms.TextBox settings4_1_filelocation;
 		private System.Windows.Forms.Label settings4_1_filelocation_label;
 		protected internal DevComponents.DotNetBar.ButtonX settings4_3_reset_button;
+		protected internal DevComponents.DotNetBar.ButtonX button1;
+		protected internal System.Windows.Forms.Label label1;
 
 
 

@@ -16,7 +16,6 @@ namespace SimpleEpub2
 			SlideOutButtonVisible = false;
 
 			settings4_1_filelocation_button.Click += settings4_1_filelocation_button_Click;
-
 		}
 
 		private void settings4_1_filelocation_button_Click(object sender, EventArgs e)

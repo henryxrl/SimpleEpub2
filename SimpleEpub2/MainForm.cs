@@ -18,7 +18,7 @@ using VB = Microsoft.VisualBasic;
 
 namespace SimpleEpub2
 {
-	public partial class MainForm : DevComponents.DotNetBar.Metro.MetroForm
+	public partial class MainForm : DevComponents.DotNetBar.Metro.MetroForm, AutoUpdater.AutoUpdatable
 	{
 		// 无法将DotNetBar2.dll设为嵌入资源并通过Assembly调用
 		// 将其生成操作设为无以减小程序体积
@@ -28,6 +28,40 @@ namespace SimpleEpub2
 		
 
 		#region Variables
+		private AutoUpdater.AutoUpdater updater;
+
+		#region AutoUpdate
+		public string ApplicationName
+		{
+			get { return "SimpleEpub2"; }
+		}
+
+		public string ApplicationID
+		{
+			get { return "SimpleEpub2"; }
+		}
+
+		public Assembly ApplicationAssembly
+		{
+			get { return Assembly.GetExecutingAssembly(); }
+		}
+
+		public Icon ApplicationIcon
+		{
+			get { return this.Icon; }
+		}
+
+		public Uri UpdateXmlLocation
+		{
+			get { return new Uri("https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2_Update.xml"); }
+		}
+
+		public Form Context
+		{
+			get { return this; }
+		}
+		#endregion
+
 		private Page1 pg1 = null;
 		private Page2 pg2 = null;
 		private Page3 pg3 = null;
@@ -130,6 +164,8 @@ namespace SimpleEpub2
 
 			#region Set Form
 			InitializeComponent();
+
+			updater = new AutoUpdater.AutoUpdater(this);
 
 			//this.FormClosing += MainForm_FormClosing;
 
@@ -299,6 +335,8 @@ namespace SimpleEpub2
 			sts.pg1.settings1_3_vertical.ValueChanged += settings1_3_vertical_ValueChanged;
 			sts.pg2.settings2_3_booknamefont.TextChanged += settings2_3_booknamefont_TextChanged;
 			sts.pg2.settings2_3_authornamefont.TextChanged += settings2_3_authornamefont_TextChanged;
+			sts.pg4.label1.Text = this.ApplicationAssembly.GetName().Version.ToString();
+			sts.pg4.button1.Click += button1_Click;
 			ResumeLayout(false);
 		}
 
@@ -308,6 +346,11 @@ namespace SimpleEpub2
 
 
 		#region Event Handlers
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			updater.DoUpdate();
+		}
 
 		private void newbook_button_Click(object sender, EventArgs e)
 		{

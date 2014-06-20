@@ -79,10 +79,34 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoUpdater\AutoUpdatable.cs" />
+    <Compile Include="AutoUpdater\AutoUpdateAcceptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoUpdater\AutoUpdateAcceptForm.Designer.cs">
+      <DependentUpon>AutoUpdateAcceptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutoUpdater\AutoUpdateDownloadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoUpdater\AutoUpdateDownloadForm.Designer.cs">
+      <DependentUpon>AutoUpdateDownloadForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutoUpdater\AutoUpdateInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoUpdater\AutoUpdateInfoForm.Designer.cs">
+      <DependentUpon>AutoUpdateInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutoUpdater\AutoUpdater.cs" />
+    <Compile Include="AutoUpdater\AutoUpdateXml.cs" />
+    <Compile Include="AutoUpdater\Hash.cs" />
     <Compile Include="FontNameFile.cs" />
     <Compile Include="Ini.cs" />
     <Compile Include="MainForm.cs">
@@ -149,6 +173,15 @@
     <Compile Include="Settings_Page3.Designer.cs">
       <DependentUpon>Settings_Page3.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AutoUpdater\AutoUpdateAcceptForm.resx">
+      <DependentUpon>AutoUpdateAcceptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoUpdater\AutoUpdateDownloadForm.resx">
+      <DependentUpon>AutoUpdateDownloadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoUpdater\AutoUpdateInfoForm.resx">
+      <DependentUpon>AutoUpdateInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>

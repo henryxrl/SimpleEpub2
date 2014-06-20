@@ -1,0 +1,11 @@
+<?xml version="1.0"?> 
+<sharpUpdate> 
+    <update appID="SimpleEpub2"> 
+        <version>2.6.20.1</version> 
+        <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url> 
+        <fileName>SimpleEpub2.exe</fileName> 
+        <md5>B533AB25746FCCE6E6CD9FBADE4F7F71</md5>
+        <description>NEW FEATURE: 06/20/2014:\n1. Added auto update system.</description> 
+        <launchArgs></launchArgs> 
+    </update> 
+</sharpUpdate>
