@@ -98,42 +98,36 @@
     <Compile Include="AutoUpdater\AutoUpdateDownloadForm.Designer.cs">
       <DependentUpon>AutoUpdateDownloadForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AutoUpdater\AutoUpdateInfoForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoUpdater\AutoUpdateInfoForm.Designer.cs">
-      <DependentUpon>AutoUpdateInfoForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="AutoUpdater\AutoUpdater.cs" />
     <Compile Include="AutoUpdater\AutoUpdateXml.cs" />
     <Compile Include="AutoUpdater\Hash.cs" />
-    <Compile Include="FontNameFile.cs" />
-    <Compile Include="Ini.cs" />
+    <Compile Include="Tools\FontNameFile.cs" />
+    <Compile Include="Tools\INI.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="navMap.cs" />
+    <Compile Include="Tools\NavMap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Page2.cs">
+    <Compile Include="MainForm_Pages\Page2.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Page2.Designer.cs">
+    <Compile Include="MainForm_Pages\Page2.Designer.cs">
       <DependentUpon>Page2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Page1.cs">
+    <Compile Include="MainForm_Pages\Page1.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Page1.Designer.cs">
+    <Compile Include="MainForm_Pages\Page1.Designer.cs">
       <DependentUpon>Page1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Page3.cs">
+    <Compile Include="MainForm_Pages\Page3.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Page3.Designer.cs">
+    <Compile Include="MainForm_Pages\Page3.Designer.cs">
       <DependentUpon>Page3.cs</DependentUpon>
     </Compile>
     <Compile Include="About.cs">
@@ -148,29 +142,29 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsObject.cs" />
-    <Compile Include="Settings_Page1.cs">
+    <Compile Include="Tools\SettingsObject.cs" />
+    <Compile Include="Settings_Pages\Settings_Page1.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Settings_Page1.Designer.cs">
+    <Compile Include="Settings_Pages\Settings_Page1.Designer.cs">
       <DependentUpon>Settings_Page1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings_Page2.cs">
+    <Compile Include="Settings_Pages\Settings_Page2.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Settings_Page2.Designer.cs">
+    <Compile Include="Settings_Pages\Settings_Page2.Designer.cs">
       <DependentUpon>Settings_Page2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings_Page4.cs">
+    <Compile Include="Settings_Pages\Settings_Page4.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Settings_Page4.Designer.cs">
+    <Compile Include="Settings_Pages\Settings_Page4.Designer.cs">
       <DependentUpon>Settings_Page4.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings_Page3.cs">
+    <Compile Include="Settings_Pages\Settings_Page3.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Settings_Page3.Designer.cs">
+    <Compile Include="Settings_Pages\Settings_Page3.Designer.cs">
       <DependentUpon>Settings_Page3.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AutoUpdater\AutoUpdateAcceptForm.resx">
@@ -178,9 +172,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AutoUpdater\AutoUpdateDownloadForm.resx">
       <DependentUpon>AutoUpdateDownloadForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoUpdater\AutoUpdateInfoForm.resx">
-      <DependentUpon>AutoUpdateInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -196,13 +187,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Page2.resx">
+    <EmbeddedResource Include="MainForm_Pages\Page2.resx">
       <DependentUpon>Page2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Page1.resx">
+    <EmbeddedResource Include="MainForm_Pages\Page1.resx">
       <DependentUpon>Page1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Page3.resx">
+    <EmbeddedResource Include="MainForm_Pages\Page3.resx">
       <DependentUpon>Page3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="About.resx">
@@ -212,16 +203,16 @@
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings_Page1.resx">
+    <EmbeddedResource Include="Settings_Pages\Settings_Page1.resx">
       <DependentUpon>Settings_Page1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings_Page2.resx">
+    <EmbeddedResource Include="Settings_Pages\Settings_Page2.resx">
       <DependentUpon>Settings_Page2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings_Page4.resx">
+    <EmbeddedResource Include="Settings_Pages\Settings_Page4.resx">
       <DependentUpon>Settings_Page4.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings_Page3.resx">
+    <EmbeddedResource Include="Settings_Pages\Settings_Page3.resx">
       <DependentUpon>Settings_Page3.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -261,6 +252,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Ilmerge.CSharp.targets" />
   <!-- <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" /> -->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

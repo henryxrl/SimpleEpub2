@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevComponents.DotNetBar;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -79,10 +80,10 @@ namespace SimpleEpub2.AutoUpdater
 						this.DownloadUpdate(update); // Do the update
 				}
 				else
-					MessageBox.Show("You have the latest version already!");
+					MessageBoxEx.Show("已经是最新版本！");
 			}
 			else
-				MessageBox.Show("No update information found!");
+				MessageBoxEx.Show("没有找到更新信息！");
 		}
 
 		/// <summary>
@@ -97,8 +98,8 @@ namespace SimpleEpub2.AutoUpdater
 			// Download update
 			if (result == DialogResult.OK)
 			{
-				string currentPath = this.applicationInfo.ApplicationAssembly.Location;
-				string newPath = Path.GetDirectoryName(currentPath) + "\\" + update.FileName;
+				String currentPath = this.applicationInfo.ApplicationAssembly.Location;
+				String newPath = Path.GetDirectoryName(currentPath) + "\\" + update.FileName;
 
 				// "Install" it
 				UpdateApplication(form.TempFilePath, currentPath, newPath, update.LaunchArgs);
@@ -107,11 +108,11 @@ namespace SimpleEpub2.AutoUpdater
 			}
 			else if (result == DialogResult.Abort)
 			{
-				MessageBox.Show("The update download was cancelled.\nThis program has not been modified.", "Update Download Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBoxEx.Show("更新过程被中断！\n无法完成更新！", "更新中断", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 			else
 			{
-				MessageBox.Show("There was a problem downloading the update.\nPlease try again later.", "Update Download Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBoxEx.Show("更新出错！\n请稍后再试一次！", "更新出错", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 		}
 
@@ -122,9 +123,9 @@ namespace SimpleEpub2.AutoUpdater
 		/// <param name="currentPath">The path of the current application</param>
 		/// <param name="newPath">The new path for the new file</param>
 		/// <param name="launchArgs">The launch arguments</param>
-		private void UpdateApplication(string tempFilePath, string currentPath, string newPath, string launchArgs)
+		private void UpdateApplication(String tempFilePath, String currentPath, String newPath, String launchArgs)
 		{
-			string argument = "/C choice /C Y /N /D Y /T 4 & Del /F /Q \"{0}\" & choice /C Y /N /D Y /T 2 & Move /Y \"{1}\" \"{2}\" & Start \"\" /D \"{3}\" \"{4}\" {5}";
+			String argument = "/C choice /C Y /N /D Y /T 4 & Del /F /Q \"{0}\" & choice /C Y /N /D Y /T 2 & Move /Y \"{1}\" \"{2}\" & Start \"\" /D \"{3}\" \"{4}\" {5}";
 
 			ProcessStartInfo Info = new ProcessStartInfo();
 			Info.Arguments = String.Format(argument, currentPath, tempFilePath, newPath, Path.GetDirectoryName(newPath), Path.GetFileName(newPath), launchArgs);

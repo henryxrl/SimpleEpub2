@@ -43,12 +43,14 @@ namespace SimpleEpub2.AutoUpdater
 		/// <summary>
 		/// Creates a new AutoUpdateDownloadForm
 		/// </summary>
-		internal AutoUpdateDownloadForm(Uri location, string md5, Icon programIcon)
+		internal AutoUpdateDownloadForm(Uri location, String md5, Icon programIcon)
 		{
 			InitializeComponent();
 
 			if (programIcon != null)
 				this.Icon = programIcon;
+
+			this.Text = "SimpleEpub2 - 下载更新";
 
 			// Set the temp file name and create new 0-byte file
 			tempFile = Path.GetTempFileName();
@@ -76,7 +78,8 @@ namespace SimpleEpub2.AutoUpdater
 		private void webClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
 			// Update progressbar on download
-			this.lblProgress.Text = String.Format("Downloaded {0} of {1}", FormatBytes(e.BytesReceived, 1, true), FormatBytes(e.TotalBytesToReceive, 1, true));
+			this.lblPercentage.Text = String.Format("已完成： {0}", FormatPercentage(e.BytesReceived, e.TotalBytesToReceive, 0));
+			this.lblProgress.Text = String.Format("已下载： {0} / {1}", FormatBytes(e.BytesReceived, 1, true), FormatBytes(e.TotalBytesToReceive, 1, true));
 			this.progressBar.Value = e.ProgressPercentage;
 		}
 
@@ -99,8 +102,16 @@ namespace SimpleEpub2.AutoUpdater
 				this.progressBar.Style = ProgressBarStyle.Marquee;
 
 				// Start the hashing
-				bgWorker.RunWorkerAsync(new string[] { this.tempFile, this.md5 });
+				bgWorker.RunWorkerAsync(new String[] { this.tempFile, this.md5 });
 			}
+		}
+
+		private String FormatPercentage(Int64 bytes1, Int64 bytes2, Int32 decimalPlaces)
+		{
+			Double newBytes1 = bytes1;
+			Double newBytes2 = bytes2;
+
+			return (newBytes1 / newBytes2).ToString("P" + decimalPlaces);
 		}
 
 		/// <summary>
@@ -110,11 +121,11 @@ namespace SimpleEpub2.AutoUpdater
 		/// <param name="decimalPlaces">How many decimal places to show</param>
 		/// <param name="showByteType">Add the byte type on the end of the string</param>
 		/// <returns>The bytes formatted as specified</returns>
-		private string FormatBytes(long bytes, int decimalPlaces, bool showByteType)
+		private String FormatBytes(Int64 bytes, Int32 decimalPlaces, Boolean showByteType)
 		{
-			double newBytes = bytes;
-			string formatString = "{0";
-			string byteType = "B";
+			Double newBytes = bytes;
+			String formatString = "{0";
+			String byteType = "B";
 
 			// Check if best size in KB
 			if (newBytes > 1024 && newBytes < 1048576)
@@ -140,7 +151,7 @@ namespace SimpleEpub2.AutoUpdater
 				formatString += ":0.";
 
 			// Add decimals
-			for (int i = 0; i < decimalPlaces; i++)
+			for (Int32 i = 0; i < decimalPlaces; i++)
 				formatString += "0";
 
 			// Close placeholder
@@ -155,8 +166,8 @@ namespace SimpleEpub2.AutoUpdater
 
 		private void bgWorker_DoWork(object sender, DoWorkEventArgs e)
 		{
-			string file = ((string[])e.Argument)[0];
-			string updateMD5 = ((string[])e.Argument)[1];
+			String file = ((String[])e.Argument)[0];
+			String updateMD5 = ((String[])e.Argument)[1];
 
 			// Hash the file and compare to the hash in the update xml
 			if (Hash.HashFile(file, HashType.MD5).ToUpper() != updateMD5.ToUpper())

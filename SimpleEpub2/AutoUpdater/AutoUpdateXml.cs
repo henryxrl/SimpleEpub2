@@ -11,10 +11,10 @@ namespace SimpleEpub2.AutoUpdater
 	{
 		private Version version;
 		private Uri uri;
-		private string fileName;
-		private string md5;
-		private string description;
-		private string launchArgs;
+		private String fileName;
+		private String md5;
+		private String description;
+		private String launchArgs;
 
 		/// <summary>
 		/// The update version #
@@ -36,7 +36,7 @@ namespace SimpleEpub2.AutoUpdater
 		/// The file name of the binary
 		/// for use on local computer
 		/// </summary>
-		internal string FileName
+		internal String FileName
 		{
 			get { return this.fileName; }
 		}
@@ -44,7 +44,7 @@ namespace SimpleEpub2.AutoUpdater
 		/// <summary>
 		/// The MD5 of the update's binary
 		/// </summary>
-		internal string MD5
+		internal String MD5
 		{
 			get { return this.md5; }
 		}
@@ -52,7 +52,7 @@ namespace SimpleEpub2.AutoUpdater
 		/// <summary>
 		/// The update's description
 		/// </summary>
-		internal string Description
+		internal String Description
 		{
 			get { return this.description; }
 		}
@@ -60,7 +60,7 @@ namespace SimpleEpub2.AutoUpdater
 		/// <summary>
 		/// The arguments to pass to the updated application on startup
 		/// </summary>
-		internal string LaunchArgs
+		internal String LaunchArgs
 		{
 			get { return this.launchArgs; }
 		}
@@ -68,7 +68,7 @@ namespace SimpleEpub2.AutoUpdater
 		/// <summary>
 		/// Creates a new AutoUpdateXml object
 		/// </summary>
-		internal AutoUpdateXml(Version version, Uri uri, string fileName, string md5, string description, string launchArgs)
+		internal AutoUpdateXml(Version version, Uri uri, String fileName, String md5, String description, String launchArgs)
 		{
 			this.version = version;
 			this.uri = uri;
@@ -83,7 +83,7 @@ namespace SimpleEpub2.AutoUpdater
 		/// </summary>
 		/// <param name="version">Application's current version</param>
 		/// <returns>If the update's version # is newer</returns>
-		internal bool IsNewerThan(Version version)
+		internal Boolean IsNewerThan(Version version)
 		{
 			return this.version > version;
 		}
@@ -93,7 +93,7 @@ namespace SimpleEpub2.AutoUpdater
 		/// </summary>
 		/// <param name="location">The Uri of the update.xml</param>
 		/// <returns>If the file exists</returns>
-		internal static bool ExistsOnServer(Uri location)
+		internal static Boolean ExistsOnServer(Uri location)
 		{
 			try
 			{
@@ -114,10 +114,10 @@ namespace SimpleEpub2.AutoUpdater
 		/// <param name="location">Uri of update.xml on server</param>
 		/// <param name="appID">The application's ID</param>
 		/// <returns>The AutoUpdateXml object with the data, or null of any errors</returns>
-		internal static AutoUpdateXml Parse(Uri location, string appID)
+		internal static AutoUpdateXml Parse(Uri location, String appID)
 		{
 			Version version = null;
-			string url = "", fileName = "", md5 = "", description = "", launchArgs = "";
+			String url = "", fileName = "", md5 = "", description = "", launchArgs = "";
 
 			try
 			{

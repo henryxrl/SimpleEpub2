@@ -13,12 +13,12 @@ namespace SimpleEpub2.AutoUpdater
 		/// <summary>
 		/// The name of your application as you want it displayed on the update form
 		/// </summary>
-		string ApplicationName { get; }
+		String ApplicationName { get; }
 		/// <summary>
 		/// An identifier string to use to identify your application in the update.xml
 		/// Should be the same as your appId in the update.xml
 		/// </summary>
-		string ApplicationID { get; }
+		String ApplicationID { get; }
 		/// <summary>
 		/// The current assembly
 		/// </summary>

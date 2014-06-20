@@ -19,11 +19,6 @@ namespace SimpleEpub2.AutoUpdater
 		private AutoUpdateXml updateInfo;
 
 		/// <summary>
-		/// The update info display form
-		/// </summary>
-		private AutoUpdateInfoForm updateInfoForm;
-
-		/// <summary>
 		/// Creates a new AutoUpdateAcceptForm
 		/// </summary>
 		/// <param name="applicationInfo"></param>
@@ -35,17 +30,22 @@ namespace SimpleEpub2.AutoUpdater
 			this.applicationInfo = applicationInfo;
 			this.updateInfo = updateInfo;
 
-			this.Text = this.applicationInfo.ApplicationName + " - Update Available";
+			this.Text = this.applicationInfo.ApplicationName + " - 检测到更新";
+
+			this.lblUpdateAvail.Text = "SimpleEpub2 有新版本发布！\n请问是否更新？";
 
 			// Assigns the icon if it isn't null
 			if (this.applicationInfo.ApplicationIcon != null)
 				this.Icon = this.applicationInfo.ApplicationIcon;
 
 			// Adds the current version # to the form
-			this.lblCurVersion.Text = String.Format("Current Version: {0}", applicationInfo.ApplicationAssembly.GetName().Version);
+			this.lblCurVersion.Text = applicationInfo.ApplicationAssembly.GetName().Version.ToString();
 
 			// Adds the update version # to the form
-			this.lblNewVersion.Text = String.Format("New Version: {0}", this.updateInfo.Version.ToString());
+			this.lblNewVersion.Text = this.updateInfo.Version.ToString();
+
+			// Fill in update info
+			this.txtDescription.Text = updateInfo.Description;
 		}
 
 		private void btnYes_Click(object sender, EventArgs e)
@@ -60,13 +60,11 @@ namespace SimpleEpub2.AutoUpdater
 			this.Close();
 		}
 
-		private void btnDetails_Click(object sender, EventArgs e)
+		private void txtDescription_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (this.updateInfoForm == null)
-				this.updateInfoForm = new AutoUpdateInfoForm(this.applicationInfo, this.updateInfo);
-
-			// Shows the details form
-			this.updateInfoForm.ShowDialog(this);
+			// Only allow Cntrl - C to copy text
+			if (!(e.Control && e.KeyCode == Keys.C))
+				e.SuppressKeyPress = true;
 		}
 	}
 }

@@ -232,6 +232,9 @@ namespace SimpleEpub2
 
 			sts.pg4.settings4_3_reset_button.Click += sts_pg4_settings4_3_reset_button_Click;
 
+			if (sts.pg4.settings4_4_chkupd.Value)
+				updater.DoUpdate();
+
 			#endregion
 		}
 
@@ -335,8 +338,7 @@ namespace SimpleEpub2
 			sts.pg1.settings1_3_vertical.ValueChanged += settings1_3_vertical_ValueChanged;
 			sts.pg2.settings2_3_booknamefont.TextChanged += settings2_3_booknamefont_TextChanged;
 			sts.pg2.settings2_3_authornamefont.TextChanged += settings2_3_authornamefont_TextChanged;
-			sts.pg4.label1.Text = this.ApplicationAssembly.GetName().Version.ToString();
-			sts.pg4.button1.Click += button1_Click;
+			sts.pg4.settings4_4_chkupd_button.Click += settings4_4_chkupd_button_Click;
 			ResumeLayout(false);
 		}
 
@@ -347,7 +349,7 @@ namespace SimpleEpub2
 
 		#region Event Handlers
 
-		private void button1_Click(object sender, EventArgs e)
+		private void settings4_4_chkupd_button_Click(object sender, EventArgs e)
 		{
 			updater.DoUpdate();
 		}
@@ -1976,7 +1978,7 @@ namespace SimpleEpub2
 			/*** navMap ***/
 			Int32 maxCount = 0;
 
-			List<Tuple<Int32, navPoint>> TOCTree = new List<Tuple<Int32, navPoint>>();
+			List<Tuple<Int32, NavPoint>> TOCTree = new List<Tuple<Int32, NavPoint>>();
 
 			Boolean addFirstChapter = true;
 			Int32 j = 1;
@@ -1991,7 +1993,7 @@ namespace SimpleEpub2
 
 				if (!coverNoTOC)
 				{
-					TOCTree.Add(new Tuple<Int32, navPoint>(0, new navPoint("coverpage", 1, title, "Text/coverpage.html", null, null)));
+					TOCTree.Add(new Tuple<Int32, NavPoint>(0, new NavPoint("coverpage", 1, title, "Text/coverpage.html", null, null)));
 				}
 
 				addFirstChapter = false;
@@ -2006,9 +2008,9 @@ namespace SimpleEpub2
 				if (extraLinesNotEmpty)
 				{
 					if (!coverNoTOC)
-						TOCTree.Add(new Tuple<Int32, navPoint>(0, new navPoint("chapter" + j, (j + 1), title, "Text/chapter" + j + ".html", null, null)));
+						TOCTree.Add(new Tuple<Int32, NavPoint>(0, new NavPoint("chapter" + j, (j + 1), title, "Text/chapter" + j + ".html", null, null)));
 					else
-						TOCTree.Add(new Tuple<Int32, navPoint>(0, new navPoint("chapter" + j, j, title, "Text/chapter" + j + ".html", null, null)));
+						TOCTree.Add(new Tuple<Int32, NavPoint>(0, new NavPoint("chapter" + j, j, title, "Text/chapter" + j + ".html", null, null)));
 					j++;
 				}
 				extraLinesInBeginning = false;
@@ -2018,9 +2020,9 @@ namespace SimpleEpub2
 			if (pg2.TOC_list.Rows[0].Cells[0].Value == null)
 			{
 				if (!coverNoTOC)
-					TOCTree.Add(new Tuple<Int32, navPoint>(0, new navPoint("chapter" + j, (j + 1), bookAndAuthor[0], "Text/chapter" + j + ".html", null, null)));
+					TOCTree.Add(new Tuple<Int32, NavPoint>(0, new NavPoint("chapter" + j, (j + 1), bookAndAuthor[0], "Text/chapter" + j + ".html", null, null)));
 				else
-					TOCTree.Add(new Tuple<Int32, navPoint>(0, new navPoint("chapter" + j, j, bookAndAuthor[0], "Text/chapter" + j + ".html", null, null)));
+					TOCTree.Add(new Tuple<Int32, NavPoint>(0, new NavPoint("chapter" + j, j, bookAndAuthor[0], "Text/chapter" + j + ".html", null, null)));
 			}
 			else
 			{
@@ -2052,9 +2054,9 @@ namespace SimpleEpub2
 						{
 							tempTitleProcessed = translate(tempTitleProcessed, translation);
 							if (!coverNoTOC)
-								TOCTree.Add(new Tuple<Int32, navPoint>(occurCount, new navPoint("chapter" + j, (j + 1), tempTitleProcessed, "Text/chapter" + j + ".html", null, null)));
+								TOCTree.Add(new Tuple<Int32, NavPoint>(occurCount, new NavPoint("chapter" + j, (j + 1), tempTitleProcessed, "Text/chapter" + j + ".html", null, null)));
 							else
-								TOCTree.Add(new Tuple<Int32, navPoint>(occurCount, new navPoint("chapter" + j, j, tempTitleProcessed, "Text/chapter" + j + ".html", null, null)));
+								TOCTree.Add(new Tuple<Int32, NavPoint>(occurCount, new NavPoint("chapter" + j, j, tempTitleProcessed, "Text/chapter" + j + ".html", null, null)));
 							j++;
 						}
 						else
@@ -2075,9 +2077,9 @@ namespace SimpleEpub2
 							temp = temp.Trim();
 
 							if (!coverNoTOC)
-								TOCTree.Add(new Tuple<Int32, navPoint>(occurCount, new navPoint("picture" + picIDX, (j + 1), temp, "Text/picture" + picIDX + ".html", null, null)));
+								TOCTree.Add(new Tuple<Int32, NavPoint>(occurCount, new NavPoint("picture" + picIDX, (j + 1), temp, "Text/picture" + picIDX + ".html", null, null)));
 							else
-								TOCTree.Add(new Tuple<Int32, navPoint>(occurCount, new navPoint("picture" + picIDX, j, temp, "Text/picture" + picIDX + ".html", null, null)));
+								TOCTree.Add(new Tuple<Int32, NavPoint>(occurCount, new NavPoint("picture" + picIDX, j, temp, "Text/picture" + picIDX + ".html", null, null)));
 							picIDX++;
 							j++;
 
@@ -2088,9 +2090,9 @@ namespace SimpleEpub2
 							temp = temp.Trim();
 
 							if (!coverNoTOC)
-								TOCTree.Add(new Tuple<Int32, navPoint>(occurCount, new navPoint("picture" + picIDX, (j + 1), temp, "Text/picture" + picIDX + ".html", null, null)));
+								TOCTree.Add(new Tuple<Int32, NavPoint>(occurCount, new NavPoint("picture" + picIDX, (j + 1), temp, "Text/picture" + picIDX + ".html", null, null)));
 							else
-								TOCTree.Add(new Tuple<Int32, navPoint>(occurCount, new navPoint("picture" + picIDX, j, temp, "Text/picture" + picIDX + ".html", null, null)));
+								TOCTree.Add(new Tuple<Int32, NavPoint>(occurCount, new NavPoint("picture" + picIDX, j, temp, "Text/picture" + picIDX + ".html", null, null)));
 							picIDX++;
 							j++;
 
@@ -2099,7 +2101,7 @@ namespace SimpleEpub2
 				}
 			}
 
-			navMap nm = new navMap(TOCTree, maxCount);
+			NavMap nm = new NavMap(TOCTree, maxCount);
 
 
 			ncx.Append(head);

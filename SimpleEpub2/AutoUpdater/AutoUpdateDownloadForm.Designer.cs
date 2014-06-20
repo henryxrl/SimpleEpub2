@@ -31,20 +31,21 @@
 			this.lblProgress = new System.Windows.Forms.Label();
 			this.progressBar = new System.Windows.Forms.ProgressBar();
 			this.lblDownloading = new System.Windows.Forms.Label();
+			this.lblPercentage = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// lblProgress
 			// 
-			this.lblProgress.Font = new System.Drawing.Font("Segoe UI", 8F);
-			this.lblProgress.Location = new System.Drawing.Point(34, 143);
+			this.lblProgress.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblProgress.Location = new System.Drawing.Point(214, 125);
 			this.lblProgress.Name = "lblProgress";
-			this.lblProgress.Size = new System.Drawing.Size(344, 13);
+			this.lblProgress.Size = new System.Drawing.Size(164, 22);
 			this.lblProgress.TabIndex = 8;
-			this.lblProgress.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// progressBar
 			// 
-			this.progressBar.Location = new System.Drawing.Point(34, 117);
+			this.progressBar.Location = new System.Drawing.Point(34, 85);
 			this.progressBar.Name = "progressBar";
 			this.progressBar.Size = new System.Drawing.Size(344, 23);
 			this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
@@ -52,19 +53,29 @@
 			// 
 			// lblDownloading
 			// 
-			this.lblDownloading.AutoSize = true;
-			this.lblDownloading.Font = new System.Drawing.Font("Segoe UI", 24F);
-			this.lblDownloading.Location = new System.Drawing.Point(35, 41);
+			this.lblDownloading.Font = new System.Drawing.Font("Microsoft YaHei UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.lblDownloading.Location = new System.Drawing.Point(35, 21);
 			this.lblDownloading.Name = "lblDownloading";
 			this.lblDownloading.Size = new System.Drawing.Size(343, 45);
 			this.lblDownloading.TabIndex = 6;
-			this.lblDownloading.Text = "Downloading Update...";
+			this.lblDownloading.Text = "正在下载更新……";
+			this.lblDownloading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// lblPercentage
+			// 
+			this.lblPercentage.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblPercentage.Location = new System.Drawing.Point(31, 125);
+			this.lblPercentage.Name = "lblPercentage";
+			this.lblPercentage.Size = new System.Drawing.Size(164, 22);
+			this.lblPercentage.TabIndex = 9;
+			this.lblPercentage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// AutoUpdateDownloadForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(413, 196);
+			this.ClientSize = new System.Drawing.Size(413, 176);
+			this.Controls.Add(this.lblPercentage);
 			this.Controls.Add(this.lblProgress);
 			this.Controls.Add(this.progressBar);
 			this.Controls.Add(this.lblDownloading);
@@ -76,10 +87,8 @@
 			this.MinimizeBox = false;
 			this.Name = "AutoUpdateDownloadForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Downloading Update";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AutoUpdateDownloadForm_FormClosed);
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
@@ -88,5 +97,6 @@
 		private System.Windows.Forms.Label lblProgress;
 		private System.Windows.Forms.ProgressBar progressBar;
 		private System.Windows.Forms.Label lblDownloading;
+		private System.Windows.Forms.Label lblPercentage;
 	}
 }

@@ -1,11 +1,14 @@
 <?xml version="1.0"?> 
 <sharpUpdate> 
     <update appID="SimpleEpub2"> 
-        <version>2.6.20.1</version> 
+        <version>2.6.20.2</version> 
         <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url> 
         <fileName>SimpleEpub2.exe</fileName> 
-        <md5>B533AB25746FCCE6E6CD9FBADE4F7F71</md5>
-        <description>NEW FEATURE: 06/20/2014:\n1. Added auto update system.</description> 
+        <md5>8FD95B22FC47971103A799A3AFA9A923</md5>
+        <description>06/20/2014更新：
+        1. 新增自动更新系统。每次程序启动时默认检测更新（可以在设置中关闭，可以手动更新），并根据用户选择更新
+        2. 大规模整理源代码，代码更加清楚、易懂
+        3. 一些Public类换成了Internal类，更加安全</description> 
         <launchArgs></launchArgs> 
     </update> 
 </sharpUpdate>

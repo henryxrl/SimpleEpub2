@@ -60,13 +60,12 @@ D:\Users\Henry\Documents\Visual Studio 2012\Projects\SimpleEpub2\SimpleEpub2\obj
 D:\Users\Henry\Documents\Visual Studio 2012\Projects\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.pdb
 D:\Users\Henry\Documents\Visual Studio 2012\Projects\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.csprojResolveAssemblyReference.cache
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\bin\Debug\SimpleEpub2.exe.config
-D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.exe
-D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.pdb
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\bin\Debug\SimpleEpub2.exe.manifest
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\bin\Debug\SimpleEpub2.application
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\bin\Debug\SimpleEpub2.exe
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\bin\Debug\SimpleEpub2.pdb
-D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.csprojResolveAssemblyReference.cache
+D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.AutoUpdater.AutoUpdateAcceptForm.resources
+D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.AutoUpdater.AutoUpdateDownloadForm.resources
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.MainForm.resources
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.Properties.Resources.resources
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.Page2.resources
@@ -81,6 +80,6 @@ D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.Settings_Pa
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.csproj.GenerateResource.Cache
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.exe.manifest
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.application
-D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.AutoUpdater.AutoUpdateAcceptForm.resources
-D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.AutoUpdater.AutoUpdateDownloadForm.resources
-D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.AutoUpdater.AutoUpdateInfoForm.resources
+D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.exe
+D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.pdb
+D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.csprojResolveAssemblyReference.cache
