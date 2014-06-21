@@ -83,3 +83,5 @@ D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.application
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.exe
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.pdb
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.csprojResolveAssemblyReference.cache
+D:\Users\Henry\Documents\Visual Studio 2012\Projects\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.AutoUpdater.AutoUpdateAcceptForm.resources
+D:\Users\Henry\Documents\Visual Studio 2012\Projects\SimpleEpub2\SimpleEpub2\obj\Debug\SimpleEpub2.AutoUpdater.AutoUpdateDownloadForm.resources

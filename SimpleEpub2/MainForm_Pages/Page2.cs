@@ -135,7 +135,7 @@ namespace SimpleEpub2
 
 			openFileDialog.Title = "请选择封面图片";
 			openFileDialog.Filter = "Image Files|*.jpg";
-			if (openFileDialog.ShowDialog() == DialogResult.OK)
+			if (openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
 				MessageBoxEx.Show(openFileDialog.FileName);
 			}
@@ -248,7 +248,7 @@ namespace SimpleEpub2
 		{
 			openFileDialog.Title = "请选择目录文件";
 			openFileDialog.Filter = "Text Files|*.txt";
-			if (openFileDialog.ShowDialog() == DialogResult.OK)
+			if (openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
 				MessageBoxEx.Show(openFileDialog.FileName);
 			}

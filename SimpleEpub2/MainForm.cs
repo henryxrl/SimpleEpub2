@@ -1,5 +1,6 @@
 ﻿using DevComponents.DotNetBar;
 using Ionic.Zip;
+using SimpleEpub2.Tools;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -222,7 +223,7 @@ namespace SimpleEpub2
 				}
 				catch
 				{
-					MessageBoxEx.Show("加载设置文件出错，即将导入默认设置！");
+					MessageBoxEx.Show(this, "加载设置文件出错，即将导入默认设置！");
 					stsObj = null;
 					stsObj = new SettingsObject(settingsPath);
 					stsObj.writeToIni();
@@ -495,7 +496,7 @@ namespace SimpleEpub2
 						Application.Exit();
 						break;
 					default:
-						MessageBoxEx.Show(item.Text);
+						MessageBoxEx.Show(this, item.Text);
 						break;
 				}
 			}
@@ -544,7 +545,7 @@ namespace SimpleEpub2
 				}
 				catch
 				{
-					MessageBoxEx.Show("加载设置文件出错，即将导入默认设置！");
+					MessageBoxEx.Show(this, "加载设置文件出错，即将导入默认设置！");
 					stsObj = null;
 					stsObj = new SettingsObject(settingsPath);
 					stsObj.writeToSettings(sts);
@@ -569,7 +570,7 @@ namespace SimpleEpub2
 
 		private void sts_pg4_settings4_3_reset_button_Click(object sender, EventArgs e)
 		{
-			DialogResult dialogResult = MessageBoxEx.Show("是否要还原默认设置？", "确认", MessageBoxButtons.YesNo);
+			DialogResult dialogResult = MessageBoxEx.Show(this, "是否要还原默认设置？", "确认", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
 				stsObj = null;
@@ -637,13 +638,13 @@ namespace SimpleEpub2
 			String[] files = (String[])e.Data.GetData(DataFormats.FileDrop);
 			if (files.Length != 1)
 			{
-				MessageBoxEx.Show("只能拖入一个文件！");
+				MessageBoxEx.Show(this, "只能拖入一个文件！");
 				pg1.overlay_cover.Hide();
 				return;
 			}
 			if (!files[0].ToLower().EndsWith(".txt"))
 			{
-				MessageBoxEx.Show("只能拖入TXT文件！");
+				MessageBoxEx.Show(this, "只能拖入TXT文件！");
 				pg1.overlay_cover.Hide();
 			}
 			else
@@ -665,7 +666,7 @@ namespace SimpleEpub2
 
 			pg1.openFileDialog.Title = "请选择TXT文件";
 			pg1.openFileDialog.Filter = "Text Files|*.txt";
-			if (pg1.openFileDialog.ShowDialog() == DialogResult.OK)
+			if (pg1.openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
 				pg1.overlay_cover.Hide();
 				next_button.Enabled = false;
@@ -745,10 +746,9 @@ namespace SimpleEpub2
 			CoverPath = tempPath + "\\cover.jpg";
 			CoverPathSlim = tempPath + "\\cover~slim.jpg";
 
-			generateTempCovers();
+			//generateTempCovers();
 
 			processTXTWorker.ReportProgress(80);
-
 		}
 
 		#endregion
@@ -762,13 +762,13 @@ namespace SimpleEpub2
 			String[] files = (String[])e.Data.GetData(DataFormats.FileDrop);
 			if (files.Length != 1)
 			{
-				MessageBoxEx.Show("只能拖入一个文件！");
+				MessageBoxEx.Show(this, "只能拖入一个文件！");
 				pg2.overlay_cover.Hide();
 				return;
 			}
 			if (!files[0].ToLower().EndsWith(".jpg") && !files[0].ToLower().EndsWith(".jpeg") && !files[0].ToLower().EndsWith(".png") && !files[0].ToLower().EndsWith(".bmp"))
 			{
-				MessageBoxEx.Show("只能拖入图片文件！");
+				MessageBoxEx.Show(this, "只能拖入图片文件！");
 				pg2.overlay_cover.Hide();
 			}
 			else
@@ -789,9 +789,9 @@ namespace SimpleEpub2
 
 			pg2.openFileDialog.Title = "请选择封面图片";
 			pg2.openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.bmp;*.png";
-			if (pg2.openFileDialog.ShowDialog() == DialogResult.OK)
+			if (pg2.openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
-				//MessageBoxEx.Show(pg2.openFileDialog.FileName);
+				//MessageBoxEx.Show(this, pg2.openFileDialog.FileName);
 				processCover(pg2.openFileDialog.FileName);
 
 				isPicCover = true;
@@ -830,7 +830,7 @@ namespace SimpleEpub2
 						cover_picturebox_DoubleClick(sender, e);
 						break;
 					default:
-						MessageBoxEx.Show(item.Text);
+						MessageBoxEx.Show(this, item.Text);
 						break;
 				}
 			}
@@ -854,7 +854,7 @@ namespace SimpleEpub2
 				catch
 				{
 					if (File.Exists(CoverPath))
-						MessageBoxEx.Show("Deletion failed");
+						MessageBoxEx.Show(this, "删除原封面文件失败！");
 				}
 			}
 			if (File.Exists(CoverPathSlim))
@@ -866,7 +866,7 @@ namespace SimpleEpub2
 				catch
 				{
 					if (File.Exists(CoverPathSlim))
-						MessageBoxEx.Show("Deletion failed");
+						MessageBoxEx.Show(this, "删除原封面文件失败！");
 				}
 			}
 
@@ -892,7 +892,7 @@ namespace SimpleEpub2
 						TOC_clear_Click(sender, e);
 						break;
 					default:
-						MessageBoxEx.Show(item.Text);
+						MessageBoxEx.Show(this, item.Text);
 						break;
 				}
 			}
@@ -902,9 +902,9 @@ namespace SimpleEpub2
 		{
 			pg2.openFileDialog.Title = "请选择目录文件";
 			pg2.openFileDialog.Filter = "Text Files|*.txt";
-			if (pg2.openFileDialog.ShowDialog() == DialogResult.OK)
+			if (pg2.openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
-				//MessageBoxEx.Show(pg2.openFileDialog.FileName);
+				//MessageBoxEx.Show(this, pg2.openFileDialog.FileName);
 				importTOC(pg2.openFileDialog.FileName);
 			}
 
@@ -918,19 +918,19 @@ namespace SimpleEpub2
 			String[] files = (String[])e.Data.GetData(DataFormats.FileDrop);
 			if (files.Length != 1)
 			{
-				MessageBoxEx.Show("只能拖入一个文件！");
+				MessageBoxEx.Show(this, "只能拖入一个文件！");
 				pg2.overlay_TOC.Hide();
 				return;
 			}
 			if (!files[0].ToLower().EndsWith(".txt"))
 			{
-				MessageBoxEx.Show("只能拖入TXT文件！");
+				MessageBoxEx.Show(this, "只能拖入TXT文件！");
 				pg2.overlay_TOC.Hide();
 			}
 			else
 			{
 				pg2.overlay_TOC.Hide();
-				//MessageBoxEx.Show("读取目录");
+				//MessageBoxEx.Show(this, "读取目录");
 
 				importTOC(files[0]);
 			}
@@ -980,7 +980,7 @@ namespace SimpleEpub2
 
 			if (broken)
 			{
-				MessageBoxEx.Show("无效的目录文件！");
+				MessageBoxEx.Show(this, "无效的目录文件！");
 				clearOverLay();
 				return;
 			}
@@ -990,7 +990,7 @@ namespace SimpleEpub2
 
 		private void TOC_export_Click(object sender, EventArgs e)
 		{
-			//MessageBoxEx.Show("导出目录");
+			//MessageBoxEx.Show(this, "导出目录");
 			exportTOC();
 
 			pg2.overlay_TOC_buttons.Hide();
@@ -1020,14 +1020,14 @@ namespace SimpleEpub2
 			}
 			else
 			{
-				MessageBoxEx.Show("目录是空的，无法导出！");
+				MessageBoxEx.Show(this, "目录是空的，无法导出！");
 				clearOverLay();
 			}
 		}
 
 		private void TOC_clear_Click(object sender, EventArgs e)
 		{
-			//MessageBoxEx.Show("清空目录");
+			//MessageBoxEx.Show(this, "清空目录");
 			clear_TOC();
 
 			pg2.overlay_TOC_buttons.Hide();
@@ -1039,7 +1039,7 @@ namespace SimpleEpub2
 		{
 			if (pg2.TOC_list.Rows[0].Cells[0].Value != null && pg2.TOC_list.Rows[0].Cells[1].Value != null)
 			{
-				DialogResult dialogResult = MessageBoxEx.Show("建议你按导出目录菜单以保存列表框中的数据\n你确定要清空列表框中的数据？", "确认", MessageBoxButtons.YesNo);
+				DialogResult dialogResult = MessageBoxEx.Show(this, "建议你按导出目录菜单以保存列表框中的数据\n你确定要清空列表框中的数据？", "确认", MessageBoxButtons.YesNo);
 				if (dialogResult == DialogResult.Yes)
 				{
 					pg2.TOC_list.Rows.Clear();
@@ -1050,7 +1050,7 @@ namespace SimpleEpub2
 			}
 			else
 			{
-				MessageBoxEx.Show("目录是空的，无法清空！");
+				MessageBoxEx.Show(this, "目录是空的，无法清空！");
 				clearOverLay();
 			}
 		}
@@ -1069,7 +1069,7 @@ namespace SimpleEpub2
 						TOC_button2_Click(sender, e);
 						break;
 					default:
-						MessageBoxEx.Show(item.Text);
+						MessageBoxEx.Show(this, item.Text);
 						break;
 				}
 			}
@@ -1086,7 +1086,7 @@ namespace SimpleEpub2
 				{
 					if (pg2.TOC_list.SelectedRows[i].Cells[0].Value == null || pg2.TOC_list.SelectedRows[i].Cells[1].Value == null)
 					{
-						MessageBoxEx.Show("操作无效！");
+						MessageBoxEx.Show(this, "操作无效！");
 						selectedValid = false;
 						break;
 					}
@@ -1103,7 +1103,7 @@ namespace SimpleEpub2
 						}
 						else
 						{
-							MessageBoxEx.Show("操作无效！");
+							MessageBoxEx.Show(this, "操作无效！");
 							clearOverLay();
 							return;
 						}
@@ -1118,7 +1118,7 @@ namespace SimpleEpub2
 			}
 			else
 			{
-				MessageBoxEx.Show("操作无效！");
+				MessageBoxEx.Show(this, "操作无效！");
 				clearOverLay();
 				return;
 			}
@@ -1135,7 +1135,7 @@ namespace SimpleEpub2
 				{
 					if (pg2.TOC_list.SelectedRows[i].Cells[0].Value == null || pg2.TOC_list.SelectedRows[i].Cells[1].Value == null)
 					{
-						MessageBoxEx.Show("操作无效！");
+						MessageBoxEx.Show(this, "操作无效！");
 						selectedValid = false;
 						break;
 					}
@@ -1144,7 +1144,7 @@ namespace SimpleEpub2
 				{
 					if (String.Compare(pg2.TOC_list.SelectedRows[0].Cells[0].Value.ToString(), pg2.TOC_list.Rows[0].Cells[0].Value.ToString()) == 0 && String.Compare(pg2.TOC_list.SelectedRows[0].Cells[1].Value.ToString(), pg2.TOC_list.Rows[0].Cells[1].Value.ToString()) == 0)
 					{
-						MessageBoxEx.Show("操作无效！");
+						MessageBoxEx.Show(this, "操作无效！");
 						clearOverLay();
 						return;
 					}
@@ -1152,7 +1152,7 @@ namespace SimpleEpub2
 					{
 						if (pg2.TOC_list.SelectedRows[i].Cells[0].Value.ToString().StartsWith(" ***  ***  *** "))
 						{
-							MessageBoxEx.Show("操作无效！");
+							MessageBoxEx.Show(this, "操作无效！");
 							clearOverLay();
 							return;
 						}
@@ -1173,7 +1173,7 @@ namespace SimpleEpub2
 			}
 			else
 			{
-				MessageBoxEx.Show("操作无效！");
+				MessageBoxEx.Show(this, "操作无效！");
 				clearOverLay();
 				return;
 			}
@@ -2331,7 +2331,7 @@ namespace SimpleEpub2
 				catch
 				{
 					if (File.Exists(CoverPath))
-						MessageBoxEx.Show("Deletion failed");
+						MessageBoxEx.Show(this, "删除原封面文件失败！");
 				}
 			}
 			if (File.Exists(CoverPathSlim))
@@ -2343,7 +2343,7 @@ namespace SimpleEpub2
 				catch
 				{
 					if (File.Exists(CoverPathSlim))
-						MessageBoxEx.Show("Deletion failed");
+						MessageBoxEx.Show(this, "删除原封面文件失败！");
 				}
 			}
 
@@ -3281,7 +3281,7 @@ namespace SimpleEpub2
 			}
 			else if (e.ProgressPercentage == 80)
 			{
-				pg2.cover_picturebox.Image = covers[0];
+				//pg2.cover_picturebox.Image = covers[0];
 
 				for (Int32 i = 0; i < TOC.Count; i++)
 				{
@@ -3302,6 +3302,8 @@ namespace SimpleEpub2
 				row.Cells[1].Value = TOC[i].Item1;
 				pg2.TOC_list.Rows.Add(row);
 			}*/
+			generateTempCovers();
+			pg2.cover_picturebox.Image = covers[0];
 		}
 
 		private void epubWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)

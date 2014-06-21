@@ -148,7 +148,7 @@ namespace SimpleEpub2
 
 			openFileDialog.Title = "请选择TXT文件";
 			openFileDialog.Filter = "Text Files|*.txt";
-			if (openFileDialog.ShowDialog() == DialogResult.OK)
+			if (openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
 				MessageBoxEx.Show(openFileDialog.FileName);
 			}

@@ -44,3 +44,5 @@ D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Release\SimpleEpub2.Settings_
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Release\SimpleEpub2.csproj.GenerateResource.Cache
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Release\SimpleEpub2.exe.manifest
 D:\Users\Henry\Desktop\SimpleEpub2\SimpleEpub2\obj\Release\SimpleEpub2.application
+D:\Users\Henry\Documents\Visual Studio 2012\Projects\SimpleEpub2\SimpleEpub2\obj\Release\SimpleEpub2.AutoUpdater.AutoUpdateAcceptForm.resources
+D:\Users\Henry\Documents\Visual Studio 2012\Projects\SimpleEpub2\SimpleEpub2\obj\Release\SimpleEpub2.AutoUpdater.AutoUpdateDownloadForm.resources

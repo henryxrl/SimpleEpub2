@@ -20,7 +20,7 @@ namespace SimpleEpub2
 
 		private void settings4_1_filelocation_button_Click(object sender, EventArgs e)
 		{
-			if (settings4_1_filelocation_dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (settings4_1_filelocation_dialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
 			{
 				settings4_1_filelocation.Text = settings4_1_filelocation_dialog.SelectedPath;
 			}

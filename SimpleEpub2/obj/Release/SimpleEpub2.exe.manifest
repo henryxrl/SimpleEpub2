@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Resources\SimpleEpub2.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="SimpleEpub2" version="2.6.20.3" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="SimpleEpub2" version="2.6.20.5" language="neutral" processorArchitecture="msil" />
     <commandLine file="SimpleEpub2.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SimpleEpub2.exe" size="1705984">
-      <assemblyIdentity name="SimpleEpub2" version="2.6.20.3" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SimpleEpub2.exe" size="1707008">
+      <assemblyIdentity name="SimpleEpub2" version="2.6.20.5" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>etiNND1KFRZX0CYf3v4c/jjjZqadFYuVAgtfSYSxJQ0=</dsig:DigestValue>
+        <dsig:DigestValue>wJNhQ2qfX8vpKeBxCNxrLa02hGUHDegh/SM3wCpdgLA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

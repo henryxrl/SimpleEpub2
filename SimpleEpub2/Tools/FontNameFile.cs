@@ -15,7 +15,7 @@ namespace SimpleEpub2
 				if (NextFile.Exists)
 				{
 					String result = getFontName(NextFile.FullName);
-					//MessageBox.Show(fontname + "\n" + NextFile.FullName + "\n" + result);
+					//MessageBoxEx.Show(fontname + "\n" + NextFile.FullName + "\n" + result);
 					if (fontname == result) return NextFile.FullName;
 				}
 			}
@@ -25,7 +25,7 @@ namespace SimpleEpub2
 		private static String getFontName(String fontfilename)
 		{
 			String ext = fontfilename.Substring(fontfilename.LastIndexOf(".") + 1).ToUpper();
-			//MessageBox.Show(fontfilename + "\n" + ext);
+			//MessageBoxEx.Show(fontfilename + "\n" + ext);
 			if (ext.CompareTo("TTF") == 0)
 			{
 				PrivateFontCollection pfc = new PrivateFontCollection();
