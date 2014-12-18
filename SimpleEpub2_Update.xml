@@ -1,13 +1,14 @@
 <?xml version="1.0"?> 
 <sharpUpdate> 
     <update appID="SimpleEpub2"> 
-        <version>2.6.20.5</version> 
+        <version>2.12.18.3</version> 
         <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url> 
         <fileName>SimpleEpub2.exe</fileName> 
-        <md5>6BA1D8C9CFDCC3BE476337CE7B22F619</md5>
-        <description>06/21/2014更新：
-        1. 优化对话框显示方式
-        2. 优化一些生成逻辑</description> 
+        <md5>6687D7CBD61CD0F0A7CCB438A21BC69D</md5>
+        <description>12/18/2014更新：
+        1. 优化书籍简介抓取逻辑
+        2. 优化章节标题抓取逻辑
+        3. 精简代码</description> 
         <launchArgs></launchArgs> 
     </update> 
 </sharpUpdate>

@@ -181,13 +181,13 @@
 		protected internal System.Windows.Forms.FolderBrowserDialog settings4_1_filelocation_dialog;
 		private System.Windows.Forms.Label settings4_2_deletetempfiles_label;
 		protected internal DevComponents.DotNetBar.Controls.SwitchButton settings4_2_deletetempfiles;
-		private DevComponents.DotNetBar.ButtonX settings4_1_filelocation_button;
 		protected internal System.Windows.Forms.TextBox settings4_1_filelocation;
 		private System.Windows.Forms.Label settings4_1_filelocation_label;
 		protected internal DevComponents.DotNetBar.ButtonX settings4_3_reset_button;
 		protected internal DevComponents.DotNetBar.ButtonX settings4_4_chkupd_button;
 		protected internal DevComponents.DotNetBar.Controls.SwitchButton settings4_4_chkupd;
 		private System.Windows.Forms.Label settings4_4_chkupd_label;
+		protected internal DevComponents.DotNetBar.ButtonX settings4_1_filelocation_button;
 
 
 

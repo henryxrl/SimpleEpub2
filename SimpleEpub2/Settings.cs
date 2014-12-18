@@ -49,24 +49,28 @@ namespace SimpleEpub2
 			pg1 = new Settings_Page1(themeColor);
 			pg1.IsOpen = true;
 			pg1.SetBounds(-12, 0, 742, 595);
+			pg1.Parent = this;
 			pageSliderPage1.Controls.Add(pg1);
 
 			// Page 2
 			pg2 = new Settings_Page2(themeColor);
 			pg2.IsOpen = true;
 			pg2.SetBounds(-12, 0, 742, 595);
+			pg2.Parent = this;
 			pageSliderPage2.Controls.Add(pg2);
 
 			// Page 3
 			pg3 = new Settings_Page3(themeColor);
 			pg3.IsOpen = true;
 			pg3.SetBounds(-12, 0, 742, 595);
+			pg3.Parent = this;
 			pageSliderPage3.Controls.Add(pg3);
 
 			// Page 4
 			pg4 = new Settings_Page4(themeColor);
 			pg4.IsOpen = true;
 			pg4.SetBounds(-12, 0, 742, 595);
+			pg4.Parent = this;
 			pageSliderPage4.Controls.Add(pg4);
 
 			ResumeLayout(false);

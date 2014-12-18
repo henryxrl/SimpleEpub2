@@ -84,7 +84,8 @@ namespace SimpleEpub2
 		private static String settingsPath = resourcesPath + "\\settings.ini";
 
 
-		private static String regex = "^([\\s\t　]*([【])?(正文[\\s\t　]*)?[第序终終【][\\s\t　]*([——-——一二两三四五六七八九十○零百千壹贰叁肆伍陆柒捌玖拾佰仟0-9０-９\\s\t　/\\、、]*)[\\s\t　]*[章节節回集卷部】][\\s\t　]*.{0,40}?$)|^([\\s\t　]*(内容简介|內容簡介|内容介绍|內容介紹|内容梗概|小说简介|小說簡介|小说介绍|小說介紹|书籍简介|書籍簡介|书籍介绍|書籍介紹|作品简介|作品簡介|作品介绍|作品介紹|作者简介|作者簡介|作者介绍|作者介紹|序|序言|序章|前言|楔子|终章|終章|尾声|尾聲|后记|後記|完本感言|出版后记|出版後記|谢辞|謝辭)[\\s\t　]*.{0,40}?$)|^([\\s\t　]*((?i)chapter)[\\s\t　]*.{0,40}?$)|^([\\s\t　]*((?i)appendix)[\\s\t　]*.{0,40}?$)";
+		private static String regex = "^(\\s*([【])?(正文\\s*)?[第序终終【]\\s*([——-——一二两三四五六七八九十○零百千壹贰叁肆伍陆柒捌玖拾佰仟0-9０-９\\s/\\、、]*)\\s*[章节節回集卷部】]\\s*.{0,30}?$)|^(\\s*(内容简介|內容簡介|内容介绍|內容介紹|内容梗概|内容大意|小说简介|小說簡介|小说介绍|小說介紹|小说大意|小說大意|书籍简介|書籍簡介|书籍介绍|書籍介紹|书籍大意|書籍大意|作品简介|作品簡介|作品介绍|作品介紹|作品大意|作者简介|作者簡介|作者介绍|作者介紹|序|序言|序章|前言|楔子|终章|終章|尾声|尾聲|后记|後記|完本感言|出版后记|出版後記|谢辞|謝辭)\\s*.{0,40}?$)|^(\\s*((?i)chapter)\\s*.{0,40}?$)|^(\\s*((?i)appendix)\\s*.{0,40}?$)";
+		private static String emptyLineRegex = "^\\s*$";
 
 		private List<String> bookAndAuthor = new List<String>();
 		private List<Tuple<Int32, String>> TOC = new List<Tuple<Int32, String>>();
@@ -231,8 +232,6 @@ namespace SimpleEpub2
 			}
 			stsObj.writeToSettings(sts);
 
-			sts.pg4.settings4_3_reset_button.Click += sts_pg4_settings4_3_reset_button_Click;
-
 			if (sts.pg4.settings4_4_chkupd.Value)
 				updater.DoUpdate(true);
 
@@ -261,6 +260,7 @@ namespace SimpleEpub2
 			pg1 = new Page1(themeColor);
 			pg1.IsOpen = true;
 			pg1.SetBounds(4, 8, 918, 600);
+			pg1.Parent = this;
 			pageSliderPage1.Controls.Add(pg1);
 			pg1.txt_picturebox.DragDrop += txt_picturebox_DragDrop;
 			pg1.txt_picturebox.DoubleClick += txt_picturebox_DoubleClick;
@@ -276,6 +276,7 @@ namespace SimpleEpub2
 			pg2 = new Page2(themeColor);
 			pg2.IsOpen = true;
 			pg2.SetBounds(3, 8, 920, 600);
+			pg2.Parent = this;
 			pageSliderPage2.Controls.Add(pg2);
 			pg2.cover_picturebox.DragDrop += cover_picturebox_DragDrop;
 			pg2.cover_picturebox.DoubleClick += cover_picturebox_DoubleClick;
@@ -296,6 +297,7 @@ namespace SimpleEpub2
 			pg3 = new Page3(themeColor);
 			pg3.IsOpen = true;
 			pg3.SetBounds(3, 3, 940, 605);
+			pg3.Parent = this;
 			pageSliderPage3.Controls.Add(pg3);
 			pg3.newbook_button.Click += newbook_button_Click;
 			ResumeLayout(false);
@@ -336,10 +338,11 @@ namespace SimpleEpub2
 			sts.SlideSide = DevComponents.DotNetBar.Controls.eSlideSide.Top;
 			sts.Parent = this;
 			sts.IsOpenChanged += sts_IsOpenChanged;
-			sts.pg1.settings1_3_vertical.ValueChanged += settings1_3_vertical_ValueChanged;
-			sts.pg2.settings2_3_booknamefont.TextChanged += settings2_3_booknamefont_TextChanged;
-			sts.pg2.settings2_3_authornamefont.TextChanged += settings2_3_authornamefont_TextChanged;
-			sts.pg4.settings4_4_chkupd_button.Click += settings4_4_chkupd_button_Click;
+			sts.pg1.settings1_3_vertical.ValueChanged += sts_pg1_settings1_3_vertical_ValueChanged;
+			sts.pg2.settings2_3_booknamefont.TextChanged += sts_pg2_settings2_3_booknamefont_TextChanged;
+			sts.pg2.settings2_3_authornamefont.TextChanged += sts_pg2_settings2_3_authornamefont_TextChanged;
+			sts.pg4.settings4_4_chkupd_button.Click += sts_pg4_settings4_4_chkupd_button_Click;
+			sts.pg4.settings4_3_reset_button.Click += sts_pg4_settings4_3_reset_button_Click;
 			ResumeLayout(false);
 		}
 
@@ -349,11 +352,6 @@ namespace SimpleEpub2
 
 
 		#region Event Handlers
-
-		private void settings4_4_chkupd_button_Click(object sender, EventArgs e)
-		{
-			updater.DoUpdate(false);
-		}
 
 		private void newbook_button_Click(object sender, EventArgs e)
 		{
@@ -568,6 +566,11 @@ namespace SimpleEpub2
 			}
 		}
 
+		private void sts_pg4_settings4_4_chkupd_button_Click(object sender, EventArgs e)
+		{
+			updater.DoUpdate(false);
+		}
+
 		private void sts_pg4_settings4_3_reset_button_Click(object sender, EventArgs e)
 		{
 			DialogResult dialogResult = MessageBoxEx.Show(this, "是否要还原默认设置？", "确认", MessageBoxButtons.YesNo);
@@ -589,17 +592,17 @@ namespace SimpleEpub2
 			eventToRedrawCover(1);
 		}
 
-		private void settings1_3_vertical_ValueChanged(object sender, EventArgs e)
+		private void sts_pg1_settings1_3_vertical_ValueChanged(object sender, EventArgs e)
 		{
 			eventToRedrawCover(1);
 		}
 
-		private void settings2_3_booknamefont_TextChanged(object sender, EventArgs e)
+		private void sts_pg2_settings2_3_booknamefont_TextChanged(object sender, EventArgs e)
 		{
 			eventToRedrawCover(1);
 		}
 
-		private void settings2_3_authornamefont_TextChanged(object sender, EventArgs e)
+		private void sts_pg2_settings2_3_authornamefont_TextChanged(object sender, EventArgs e)
 		{
 			eventToRedrawCover(1);
 		}
@@ -1439,8 +1442,8 @@ namespace SimpleEpub2
 							continue;
 						}
 
-						Match emptyLine = Regex.Match(nextLine, "^\\s*$");
-						if (!emptyLine.Success)		// Remove empty lines
+						// Remove empty lines
+						if (!Regex.IsMatch(nextLine, emptyLineRegex))
 						{
 							extraLinesNotEmpty = true;
 
@@ -1521,8 +1524,8 @@ namespace SimpleEpub2
 					}
 					while ((nextLine = sr.ReadLine()) != null)
 					{
-						Match emptyLine = Regex.Match(nextLine, "^\\s*$");
-						if (!emptyLine.Success)		// Remove empty lines
+						// Remove empty lines
+						if (!Regex.IsMatch(nextLine, emptyLineRegex))
 						{
 							nextLine = nextLine.Trim();
 							nextLine = translate(nextLine, translation);		// 简繁转换
@@ -2261,41 +2264,42 @@ namespace SimpleEpub2
 			using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding("GB2312")))
 			{
 				String line = "";
+				Boolean titleFirstLine = false;
 
 				// Find first title line number
 				Int32 firstTitleLineNumber = 1;
 				while ((line = sr.ReadLine()) != null)
 				{
 					Match title = Regex.Match(line, regex);
-
+					
 					// First chapter title found!
-					if (title.Success && !line.Contains("简介") && !line.Contains("簡介") && !line.Contains("介绍") && !line.Contains("介紹") && !line.Contains("梗概"))
+					if (title.Success)
 					{
-						break;
+						if (firstTitleLineNumber == 1) titleFirstLine = true;
+						else break;
 					}
 					firstTitleLineNumber++;
 				}
+				// exclude the title itself
+				firstTitleLineNumber -= 1;
 
 				sr.DiscardBufferedData();
 				sr.BaseStream.Seek(0, SeekOrigin.Begin);
 				sr.BaseStream.Position = 0;
 
-				Int32 introLineNumber = 1;
-				for (Int32 i = 0; i < firstTitleLineNumber; i++)
+				Int32 startLineNumber = (titleFirstLine ? 1 : 0);
+				line = (titleFirstLine ? sr.ReadLine() : "");
+				for (Int32 i = startLineNumber; i < firstTitleLineNumber; i++)
 				{
 					line = sr.ReadLine();
-					if (line != null && (line.Contains("简介") || line.Contains("簡介") || line.Contains("介绍") || line.Contains("介紹") || line.Contains("梗概")))
+					// Remove empty lines
+					if (!Regex.IsMatch(line, emptyLineRegex))
 					{
-						for (Int32 j = introLineNumber + 1; j < firstTitleLineNumber; j++)
-						{
-							line = sr.ReadLine();
-							result.Append(line.Trim() + "\n");
-						}
+						result.Append(line.Trim() + "\n");
 					}
-					introLineNumber++;
 				}
 			}
-			
+
 			return result.ToString().Trim();
 		}
 
