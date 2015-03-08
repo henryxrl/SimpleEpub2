@@ -28,151 +28,151 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.settings4_1_filelocation_dialog = new System.Windows.Forms.FolderBrowserDialog();
-			this.settings4_3_reset_button = new DevComponents.DotNetBar.ButtonX();
-			this.settings4_2_deletetempfiles_label = new System.Windows.Forms.Label();
-			this.settings4_2_deletetempfiles = new DevComponents.DotNetBar.Controls.SwitchButton();
-			this.settings4_1_filelocation_button = new DevComponents.DotNetBar.ButtonX();
-			this.settings4_1_filelocation = new System.Windows.Forms.TextBox();
-			this.settings4_1_filelocation_label = new System.Windows.Forms.Label();
-			this.settings4_4_chkupd_button = new DevComponents.DotNetBar.ButtonX();
-			this.settings4_4_chkupd = new DevComponents.DotNetBar.Controls.SwitchButton();
-			this.settings4_4_chkupd_label = new System.Windows.Forms.Label();
-			this.SuspendLayout();
-			// 
-			// settings4_1_filelocation_dialog
-			// 
-			this.settings4_1_filelocation_dialog.Description = "选择文件生成目录：";
-			// 
-			// settings4_3_reset_button
-			// 
-			this.settings4_3_reset_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.settings4_3_reset_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.settings4_3_reset_button.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.settings4_3_reset_button.Location = new System.Drawing.Point(265, 470);
-			this.settings4_3_reset_button.Name = "settings4_3_reset_button";
-			this.settings4_3_reset_button.Size = new System.Drawing.Size(212, 80);
-			this.settings4_3_reset_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.settings4_3_reset_button.TabIndex = 62;
-			this.settings4_3_reset_button.Text = "还原为默认设置";
-			// 
-			// settings4_2_deletetempfiles_label
-			// 
-			this.settings4_2_deletetempfiles_label.AutoSize = true;
-			this.settings4_2_deletetempfiles_label.BackColor = System.Drawing.Color.White;
-			this.settings4_2_deletetempfiles_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.settings4_2_deletetempfiles_label.Location = new System.Drawing.Point(150, 220);
-			this.settings4_2_deletetempfiles_label.Name = "settings4_2_deletetempfiles_label";
-			this.settings4_2_deletetempfiles_label.Size = new System.Drawing.Size(189, 19);
-			this.settings4_2_deletetempfiles_label.TabIndex = 61;
-			this.settings4_2_deletetempfiles_label.Text = "删除转换过程中的临时文件";
-			// 
-			// settings4_2_deletetempfiles
-			// 
-			// 
-			// 
-			// 
-			this.settings4_2_deletetempfiles.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.settings4_2_deletetempfiles.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.settings4_2_deletetempfiles.Location = new System.Drawing.Point(65, 220);
-			this.settings4_2_deletetempfiles.Name = "settings4_2_deletetempfiles";
-			this.settings4_2_deletetempfiles.Size = new System.Drawing.Size(66, 22);
-			this.settings4_2_deletetempfiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.settings4_2_deletetempfiles.SwitchFont = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.settings4_2_deletetempfiles.TabIndex = 60;
-			// 
-			// settings4_1_filelocation_button
-			// 
-			this.settings4_1_filelocation_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.settings4_1_filelocation_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.settings4_1_filelocation_button.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.settings4_1_filelocation_button.Location = new System.Drawing.Point(610, 117);
-			this.settings4_1_filelocation_button.Name = "settings4_1_filelocation_button";
-			this.settings4_1_filelocation_button.Size = new System.Drawing.Size(70, 27);
-			this.settings4_1_filelocation_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.settings4_1_filelocation_button.TabIndex = 59;
-			this.settings4_1_filelocation_button.Text = "选择";
-			// 
-			// settings4_1_filelocation
-			// 
-			this.settings4_1_filelocation.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.settings4_1_filelocation.Location = new System.Drawing.Point(181, 117);
-			this.settings4_1_filelocation.Name = "settings4_1_filelocation";
-			this.settings4_1_filelocation.Size = new System.Drawing.Size(410, 27);
-			this.settings4_1_filelocation.TabIndex = 58;
-			// 
-			// settings4_1_filelocation_label
-			// 
-			this.settings4_1_filelocation_label.AutoSize = true;
-			this.settings4_1_filelocation_label.BackColor = System.Drawing.Color.White;
-			this.settings4_1_filelocation_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.settings4_1_filelocation_label.ForeColor = System.Drawing.Color.Black;
-			this.settings4_1_filelocation_label.Location = new System.Drawing.Point(61, 120);
-			this.settings4_1_filelocation_label.Name = "settings4_1_filelocation_label";
-			this.settings4_1_filelocation_label.Size = new System.Drawing.Size(114, 19);
-			this.settings4_1_filelocation_label.TabIndex = 57;
-			this.settings4_1_filelocation_label.Text = "生成文件位置：";
-			// 
-			// settings4_4_chkupd_button
-			// 
-			this.settings4_4_chkupd_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.settings4_4_chkupd_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.settings4_4_chkupd_button.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold);
-			this.settings4_4_chkupd_button.Location = new System.Drawing.Point(413, 314);
-			this.settings4_4_chkupd_button.Name = "settings4_4_chkupd_button";
-			this.settings4_4_chkupd_button.Size = new System.Drawing.Size(122, 35);
-			this.settings4_4_chkupd_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.settings4_4_chkupd_button.TabIndex = 63;
-			this.settings4_4_chkupd_button.Text = "手动检测更新";
-			// 
-			// settings4_4_chkupd
-			// 
-			// 
-			// 
-			// 
-			this.settings4_4_chkupd.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.settings4_4_chkupd.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.settings4_4_chkupd.Location = new System.Drawing.Point(65, 320);
-			this.settings4_4_chkupd.Name = "settings4_4_chkupd";
-			this.settings4_4_chkupd.Size = new System.Drawing.Size(66, 22);
-			this.settings4_4_chkupd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.settings4_4_chkupd.SwitchFont = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.settings4_4_chkupd.TabIndex = 65;
-			// 
-			// settings4_4_chkupd_label
-			// 
-			this.settings4_4_chkupd_label.AutoSize = true;
-			this.settings4_4_chkupd_label.BackColor = System.Drawing.Color.White;
-			this.settings4_4_chkupd_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.settings4_4_chkupd_label.Location = new System.Drawing.Point(150, 322);
-			this.settings4_4_chkupd_label.Name = "settings4_4_chkupd_label";
-			this.settings4_4_chkupd_label.Size = new System.Drawing.Size(174, 19);
-			this.settings4_4_chkupd_label.TabIndex = 66;
-			this.settings4_4_chkupd_label.Text = "程序启动时自动检测更新";
-			// 
-			// Settings_Page4
-			// 
-			this.AllowDrop = true;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.BackColor = System.Drawing.Color.White;
-			this.Controls.Add(this.settings4_4_chkupd_label);
-			this.Controls.Add(this.settings4_4_chkupd);
-			this.Controls.Add(this.settings4_4_chkupd_button);
-			this.Controls.Add(this.settings4_3_reset_button);
-			this.Controls.Add(this.settings4_2_deletetempfiles_label);
-			this.Controls.Add(this.settings4_2_deletetempfiles);
-			this.Controls.Add(this.settings4_1_filelocation_button);
-			this.Controls.Add(this.settings4_1_filelocation);
-			this.Controls.Add(this.settings4_1_filelocation_label);
-			this.DoubleBuffered = true;
-			this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Margin = new System.Windows.Forms.Padding(0);
-			this.Name = "Settings_Page4";
-			this.Size = new System.Drawing.Size(742, 595);
-			this.ResumeLayout(false);
-			this.PerformLayout();
+            this.settings4_1_filelocation_dialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.settings4_3_reset_button = new DevComponents.DotNetBar.ButtonX();
+            this.settings4_2_deletetempfiles_label = new System.Windows.Forms.Label();
+            this.settings4_2_deletetempfiles = new DevComponents.DotNetBar.Controls.SwitchButton();
+            this.settings4_1_filelocation_button = new DevComponents.DotNetBar.ButtonX();
+            this.settings4_1_filelocation = new System.Windows.Forms.TextBox();
+            this.settings4_1_filelocation_label = new System.Windows.Forms.Label();
+            this.settings4_4_chkupd_button = new DevComponents.DotNetBar.ButtonX();
+            this.settings4_4_chkupd = new DevComponents.DotNetBar.Controls.SwitchButton();
+            this.settings4_4_chkupd_label = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // settings4_1_filelocation_dialog
+            // 
+            this.settings4_1_filelocation_dialog.Description = "选择文件生成目录：";
+            // 
+            // settings4_3_reset_button
+            // 
+            this.settings4_3_reset_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.settings4_3_reset_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.settings4_3_reset_button.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings4_3_reset_button.Location = new System.Drawing.Point(265, 470);
+            this.settings4_3_reset_button.Name = "settings4_3_reset_button";
+            this.settings4_3_reset_button.Size = new System.Drawing.Size(212, 80);
+            this.settings4_3_reset_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.settings4_3_reset_button.TabIndex = 62;
+            this.settings4_3_reset_button.Text = "还原为默认设置";
+            // 
+            // settings4_2_deletetempfiles_label
+            // 
+            this.settings4_2_deletetempfiles_label.AutoSize = true;
+            this.settings4_2_deletetempfiles_label.BackColor = System.Drawing.Color.White;
+            this.settings4_2_deletetempfiles_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings4_2_deletetempfiles_label.Location = new System.Drawing.Point(150, 220);
+            this.settings4_2_deletetempfiles_label.Name = "settings4_2_deletetempfiles_label";
+            this.settings4_2_deletetempfiles_label.Size = new System.Drawing.Size(189, 19);
+            this.settings4_2_deletetempfiles_label.TabIndex = 61;
+            this.settings4_2_deletetempfiles_label.Text = "删除转换过程中的临时文件";
+            // 
+            // settings4_2_deletetempfiles
+            // 
+            // 
+            // 
+            // 
+            this.settings4_2_deletetempfiles.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.settings4_2_deletetempfiles.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings4_2_deletetempfiles.Location = new System.Drawing.Point(65, 220);
+            this.settings4_2_deletetempfiles.Name = "settings4_2_deletetempfiles";
+            this.settings4_2_deletetempfiles.Size = new System.Drawing.Size(66, 22);
+            this.settings4_2_deletetempfiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.settings4_2_deletetempfiles.SwitchFont = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings4_2_deletetempfiles.TabIndex = 60;
+            // 
+            // settings4_1_filelocation_button
+            // 
+            this.settings4_1_filelocation_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.settings4_1_filelocation_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.settings4_1_filelocation_button.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings4_1_filelocation_button.Location = new System.Drawing.Point(610, 117);
+            this.settings4_1_filelocation_button.Name = "settings4_1_filelocation_button";
+            this.settings4_1_filelocation_button.Size = new System.Drawing.Size(70, 27);
+            this.settings4_1_filelocation_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.settings4_1_filelocation_button.TabIndex = 59;
+            this.settings4_1_filelocation_button.Text = "选择";
+            // 
+            // settings4_1_filelocation
+            // 
+            this.settings4_1_filelocation.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settings4_1_filelocation.Location = new System.Drawing.Point(181, 117);
+            this.settings4_1_filelocation.Name = "settings4_1_filelocation";
+            this.settings4_1_filelocation.Size = new System.Drawing.Size(410, 27);
+            this.settings4_1_filelocation.TabIndex = 58;
+            // 
+            // settings4_1_filelocation_label
+            // 
+            this.settings4_1_filelocation_label.AutoSize = true;
+            this.settings4_1_filelocation_label.BackColor = System.Drawing.Color.White;
+            this.settings4_1_filelocation_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settings4_1_filelocation_label.ForeColor = System.Drawing.Color.Black;
+            this.settings4_1_filelocation_label.Location = new System.Drawing.Point(61, 120);
+            this.settings4_1_filelocation_label.Name = "settings4_1_filelocation_label";
+            this.settings4_1_filelocation_label.Size = new System.Drawing.Size(114, 19);
+            this.settings4_1_filelocation_label.TabIndex = 57;
+            this.settings4_1_filelocation_label.Text = "生成文件位置：";
+            // 
+            // settings4_4_chkupd_button
+            // 
+            this.settings4_4_chkupd_button.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.settings4_4_chkupd_button.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.settings4_4_chkupd_button.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.settings4_4_chkupd_button.Location = new System.Drawing.Point(413, 314);
+            this.settings4_4_chkupd_button.Name = "settings4_4_chkupd_button";
+            this.settings4_4_chkupd_button.Size = new System.Drawing.Size(122, 35);
+            this.settings4_4_chkupd_button.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.settings4_4_chkupd_button.TabIndex = 63;
+            this.settings4_4_chkupd_button.Text = "手动检测更新";
+            // 
+            // settings4_4_chkupd
+            // 
+            // 
+            // 
+            // 
+            this.settings4_4_chkupd.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.settings4_4_chkupd.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings4_4_chkupd.Location = new System.Drawing.Point(65, 320);
+            this.settings4_4_chkupd.Name = "settings4_4_chkupd";
+            this.settings4_4_chkupd.Size = new System.Drawing.Size(66, 22);
+            this.settings4_4_chkupd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.settings4_4_chkupd.SwitchFont = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings4_4_chkupd.TabIndex = 65;
+            // 
+            // settings4_4_chkupd_label
+            // 
+            this.settings4_4_chkupd_label.AutoSize = true;
+            this.settings4_4_chkupd_label.BackColor = System.Drawing.Color.White;
+            this.settings4_4_chkupd_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings4_4_chkupd_label.Location = new System.Drawing.Point(150, 322);
+            this.settings4_4_chkupd_label.Name = "settings4_4_chkupd_label";
+            this.settings4_4_chkupd_label.Size = new System.Drawing.Size(174, 19);
+            this.settings4_4_chkupd_label.TabIndex = 66;
+            this.settings4_4_chkupd_label.Text = "程序启动时自动检测更新";
+            // 
+            // Settings_Page4
+            // 
+            this.AllowDrop = true;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.settings4_4_chkupd_label);
+            this.Controls.Add(this.settings4_4_chkupd);
+            this.Controls.Add(this.settings4_4_chkupd_button);
+            this.Controls.Add(this.settings4_3_reset_button);
+            this.Controls.Add(this.settings4_2_deletetempfiles_label);
+            this.Controls.Add(this.settings4_2_deletetempfiles);
+            this.Controls.Add(this.settings4_1_filelocation_button);
+            this.Controls.Add(this.settings4_1_filelocation);
+            this.Controls.Add(this.settings4_1_filelocation_label);
+            this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(0);
+            this.Name = "Settings_Page4";
+            this.Size = new System.Drawing.Size(742, 595);
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 
@@ -187,7 +187,7 @@
 		protected internal DevComponents.DotNetBar.ButtonX settings4_4_chkupd_button;
 		protected internal DevComponents.DotNetBar.Controls.SwitchButton settings4_4_chkupd;
 		private System.Windows.Forms.Label settings4_4_chkupd_label;
-		protected internal DevComponents.DotNetBar.ButtonX settings4_1_filelocation_button;
+        protected internal DevComponents.DotNetBar.ButtonX settings4_1_filelocation_button;
 
 
 

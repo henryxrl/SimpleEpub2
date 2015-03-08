@@ -86,9 +86,9 @@
 			this.email_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.email_label.Location = new System.Drawing.Point(431, 274);
 			this.email_label.Name = "email_label";
-			this.email_label.Size = new System.Drawing.Size(62, 20);
+			this.email_label.Size = new System.Drawing.Size(54, 20);
 			this.email_label.TabIndex = 4;
-			this.email_label.Text = "Email：";
+			this.email_label.Text = "邮箱：";
 			// 
 			// intro_label
 			// 
@@ -122,7 +122,7 @@
 			this.email.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.email.Location = new System.Drawing.Point(509, 274);
 			this.email.Name = "email";
-			this.email.Size = new System.Drawing.Size(45, 18);
+			this.email.Size = new System.Drawing.Size(50, 19);
 			this.email.TabIndex = 6;
 			this.email.Text = "labelX1";
 			// 
@@ -135,7 +135,7 @@
 			this.author.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.author.Location = new System.Drawing.Point(509, 234);
 			this.author.Name = "author";
-			this.author.Size = new System.Drawing.Size(45, 18);
+			this.author.Size = new System.Drawing.Size(50, 19);
 			this.author.TabIndex = 6;
 			this.author.Text = "labelX1";
 			// 
@@ -148,7 +148,7 @@
 			this.version.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.version.Location = new System.Drawing.Point(509, 194);
 			this.version.Name = "version";
-			this.version.Size = new System.Drawing.Size(45, 18);
+			this.version.Size = new System.Drawing.Size(50, 19);
 			this.version.TabIndex = 6;
 			this.version.Text = "labelX1";
 			// 

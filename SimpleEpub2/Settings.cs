@@ -1,5 +1,6 @@
 ﻿using DevComponents.DotNetBar;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Text.RegularExpressions;

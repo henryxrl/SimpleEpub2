@@ -38,6 +38,7 @@ namespace SimpleEpub2
 		protected internal String fileLocation;
 		protected internal Boolean deleteTempFiles;
 		protected internal Boolean autoUpdate;
+		protected internal String language;
 
 		#endregion
 
@@ -72,6 +73,7 @@ namespace SimpleEpub2
 			fileLocation = Application.StartupPath;
 			deleteTempFiles = true;
 			autoUpdate = true;
+			language = "zh-CN";
 		}
 
 		public void loadFromSettings(Settings sts)
@@ -174,6 +176,7 @@ namespace SimpleEpub2
 			fileLocation = ini.INIReadValue("Tab_4", "Generated_File_Location");
 			deleteTempFiles = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_4", "Delete_Temp_Files")));
 			autoUpdate = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_4", "Auto_Update")));
+			language = ini.INIReadValue("Tab_4", "Language");
 		}
 
 		public void writeToIni()
@@ -203,6 +206,7 @@ namespace SimpleEpub2
 			ini.INIWriteValue("Tab_4", "Generated_File_Location", fileLocation);
 			ini.INIWriteValue("Tab_4", "Delete_Temp_Files", (Convert.ToInt32(deleteTempFiles)).ToString());
 			ini.INIWriteValue("Tab_4", "Auto_Update", (Convert.ToInt32(autoUpdate)).ToString());
+			ini.INIWriteValue("Tab_4", "Language", language);
 		}
 	}
 }

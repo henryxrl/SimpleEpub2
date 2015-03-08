@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace SimpleEpub2
 {
@@ -15,7 +17,7 @@ namespace SimpleEpub2
 
 			SlideOutButtonVisible = false;
 
-			settings4_1_filelocation_button.Click += settings4_1_filelocation_button_Click;
+            settings4_1_filelocation_button.Click += settings4_1_filelocation_button_Click;
 		}
 
 		private void settings4_1_filelocation_button_Click(object sender, EventArgs e)
@@ -26,5 +28,6 @@ namespace SimpleEpub2
 			}
 		}
 
+		
 	}
 }

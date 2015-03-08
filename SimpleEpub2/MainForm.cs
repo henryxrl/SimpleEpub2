@@ -10,6 +10,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -29,17 +30,21 @@ namespace SimpleEpub2
 		
 
 		#region Variables
-		private AutoUpdater.AutoUpdater updater;
+		private static String NAMESPACE = "SimpleEpub2";
+		private static Assembly a = Assembly.Load(NAMESPACE);
+	
 
 		#region AutoUpdate
+		private AutoUpdater.AutoUpdater updater;
+
 		public string ApplicationName
 		{
-			get { return "SimpleEpub2"; }
+			get { return NAMESPACE; }
 		}
 
 		public string ApplicationID
 		{
-			get { return "SimpleEpub2"; }
+			get { return NAMESPACE; }
 		}
 
 		public Assembly ApplicationAssembly
@@ -77,9 +82,9 @@ namespace SimpleEpub2
 		private System.Drawing.Color themeColor = System.Drawing.Color.FromArgb(255, 90, 35, 120);
 
 
-		/*private static String tempPath = Path.Combine(Path.GetTempPath(), "SimpleEpub2");
-		private static String resourcesPath = Path.Combine(Path.GetTempPath(), "SimpleEpub2") + "\\Resources";*/
-		private static String tempPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleEpub2");
+		/*private static String tempPath = Path.Combine(Path.GetTempPath(), NAMESPACE);
+		private static String resourcesPath = Path.Combine(Path.GetTempPath(), NAMESPACE) + "\\Resources";*/
+		private static String tempPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), NAMESPACE);
 		private static String resourcesPath = tempPath + "\\Resources";
 		private static String settingsPath = resourcesPath + "\\settings.ini";
 
@@ -204,7 +209,7 @@ namespace SimpleEpub2
 			Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("zh-CN");
 
 			#region Set Subpages
-			Extract("SimpleEpub2", resourcesPath, "Resources", "About.png");
+			Extract(resourcesPath, "Resources", "About.png");
 			setSubPages(true);
 			#endregion
 
@@ -236,6 +241,7 @@ namespace SimpleEpub2
 				updater.DoUpdate(true);
 
 			#endregion
+		
 		}
 
 		#region Set Subpages Helper Functions
@@ -387,7 +393,7 @@ namespace SimpleEpub2
 
 		private void FormHelpButtonClicked(object sender, EventArgs e)
 		{
-			Extract("SimpleEpub2", resourcesPath, "Resources", "help.pdf");
+			Extract(resourcesPath, "Resources", "help.pdf");
 			try
 			{
 				System.Diagnostics.Process.Start(resourcesPath + "\\help.pdf");
@@ -1332,7 +1338,7 @@ namespace SimpleEpub2
 				if (hasFootNote)
 				{
 					// Use the note.png from resourses
-					//Extract("SimpleEpub2", resourcesPath, "Resources", "note.png");
+					//Extract(resourcesPath, "Resources", "note.png");
 					//zip.AddFile(resourcesPath + "\\note.png", "OEBPS\\Images\\");
 					
 					// Use auto-generated note.png
@@ -2182,7 +2188,7 @@ namespace SimpleEpub2
 						}
 
 						String author = sr.ReadLine();
-						if (author == null || author.Trim() == "") author = "SimpleEpub2";
+						if (author == null || author.Trim() == "") author = NAMESPACE;
 						else
 						{
 							author = author.Trim();
@@ -2239,7 +2245,7 @@ namespace SimpleEpub2
 						}
 
 						String author = sr.ReadLine();
-						if (author == null || author.Trim() == "") author = "SimpleEpub2";
+						if (author == null || author.Trim() == "") author = NAMESPACE;
 						else
 						{
 							author = author.Replace("作者：", "");
@@ -3157,11 +3163,11 @@ namespace SimpleEpub2
 
 		#region Other Helper Functions
 
-		private static void Extract(String nameSpace, String outDirectory, String internalFilePath, String resourceName)
+		private static void Extract(String outDirectory, String internalFilePath, String resourceName)
 		{
 			Assembly assembly = Assembly.GetCallingAssembly();
 
-			using (Stream s = assembly.GetManifestResourceStream(nameSpace + "." + (internalFilePath == "" ? "" : internalFilePath + ".") + resourceName))
+			using (Stream s = assembly.GetManifestResourceStream(NAMESPACE + "." + (internalFilePath == "" ? "" : internalFilePath + ".") + resourceName))
 			using (BinaryReader r = new BinaryReader(s))
 			using (FileStream fs = new FileStream(outDirectory + "\\" + resourceName, FileMode.OpenOrCreate))
 			using (BinaryWriter w = new BinaryWriter(fs))
