@@ -117,4 +117,1006 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="en_AOT" xml:space="preserve">
+    <value>Enable AOT</value>
+  </data>
+  <data name="en_AOT_cancel" xml:space="preserve">
+    <value>Disable AOT</value>
+  </data>
+  <data name="en_balloontip_AOT" xml:space="preserve">
+    <value>Always-on-Top Enabled</value>
+  </data>
+  <data name="en_balloontip_AOT_cancel" xml:space="preserve">
+    <value>Always-on-Top Disabled</value>
+  </data>
+  <data name="en_balloontip_fail" xml:space="preserve">
+    <value>Failed!</value>
+  </data>
+  <data name="en_balloontip_NoEnTitleAuthor" xml:space="preserve">
+    <value>No title or author info found in the file name!</value>
+  </data>
+  <data name="en_balloontip_NoEnTitleAuthor_detail" xml:space="preserve">
+    <value>File name example: "BookName By Author"{0}(The word "by" must present, not case-sensitive){0}{0}Detecting the first two lines of the file...{0}The first line will become the book title.{0}The second line will become the author.</value>
+  </data>
+  <data name="en_balloontip_NoHelpFile" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="en_balloontip_NoHelpFile_detail" xml:space="preserve">
+    <value>No help file found!</value>
+  </data>
+  <data name="en_balloontip_NoZhTitleAuthor" xml:space="preserve">
+    <value>No title or author info found in the file name!</value>
+  </data>
+  <data name="en_balloontip_NoZhTitleAuthor_detail" xml:space="preserve">
+    <value>File name example: "《书名》作者：作者名"{0}(The word "作者" must present; 《》can be omitted.){0}{0}Detecting the first two lines of the file...{0}The first line will become the book title.{0}The second line will become the author.</value>
+  </data>
+  <data name="en_balloontip_success" xml:space="preserve">
+    <value>Created!</value>
+  </data>
+  <data name="en_balloontip_title" xml:space="preserve">
+    <value>Reminder</value>
+  </data>
+  <data name="en_balloontip_TOC_done" xml:space="preserve">
+    <value>TOC Extraction Done!</value>
+  </data>
+  <data name="en_event_setting_load_error" xml:space="preserve">
+    <value>Failed to load settings file. Going to import defaul settings!</value>
+  </data>
+  <data name="en_event_setting_reset" xml:space="preserve">
+    <value>Are you sure to reset all settings?</value>
+  </data>
+  <data name="en_event_setting_reset_title" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="en_mainpage1_cover_author_label" xml:space="preserve">
+    <value>&lt;b&gt;Author&lt;/b&gt;</value>
+  </data>
+  <data name="en_mainpage1_cover_bookname_label" xml:space="preserve">
+    <value>&lt;b&gt;Title&lt;/b&gt;</value>
+  </data>
+  <data name="en_mainpage1_cover_intro_label" xml:space="preserve">
+    <value>&lt;b&gt;Description&lt;/b&gt;</value>
+  </data>
+  <data name="en_mainpage1_img1_string1" xml:space="preserve">
+    <value>Drag a TXT file here</value>
+  </data>
+  <data name="en_mainpage1_img1_string2" xml:space="preserve">
+    <value>OR... Double click here</value>
+  </data>
+  <data name="en_mainpage1_img2_string1" xml:space="preserve">
+    <value>Processing TXT</value>
+  </data>
+  <data name="en_mainpage1_img2_string2" xml:space="preserve">
+    <value>Please wait...</value>
+  </data>
+  <data name="en_mainpage1_img3_string1" xml:space="preserve">
+    <value>TXT selected!</value>
+  </data>
+  <data name="en_mainpage1_txt_click_filter" xml:space="preserve">
+    <value>Text Files</value>
+  </data>
+  <data name="en_mainpage1_txt_click_title" xml:space="preserve">
+    <value>Please select a TXT file</value>
+  </data>
+  <data name="en_mainpage1_txt_dragdrop_singlefile" xml:space="preserve">
+    <value>One file at a time please!</value>
+  </data>
+  <data name="en_mainpage1_txt_dragdrop_txtonly" xml:space="preserve">
+    <value>TXT file only!</value>
+  </data>
+  <data name="en_mainpage2_cover_dragdrop_imgonly" xml:space="preserve">
+    <value>Image file only!</value>
+  </data>
+  <data name="en_mainpage2_cover_dragdrop_singlefile" xml:space="preserve">
+    <value>One file at a time please!</value>
+  </data>
+  <data name="en_mainpage2_helper_cover_delete_failed" xml:space="preserve">
+    <value>Previous cover picture deletion failed!</value>
+  </data>
+  <data name="en_mainpage2_helper_img_quality" xml:space="preserve">
+    <value>Image quality must be between 0 and 100!</value>
+  </data>
+  <data name="en_mainpage2_helper_notepic_delete_failed" xml:space="preserve">
+    <value>Note picture deletion failed!</value>
+  </data>
+  <data name="en_mainpage2_img_string" xml:space="preserve">
+    <value>Book Cover</value>
+  </data>
+  <data name="en_mainpage2_invalid_action" xml:space="preserve">
+    <value>Invalid action!</value>
+  </data>
+  <data name="en_mainpage2_rm1_item1" xml:space="preserve">
+    <value>Export TOC</value>
+  </data>
+  <data name="en_mainpage2_rm1_item2" xml:space="preserve">
+    <value>Clear TOC</value>
+  </data>
+  <data name="en_mainpage2_rm1_item3" xml:space="preserve">
+    <value>Import TOC</value>
+  </data>
+  <data name="en_mainpage2_rm2_item1" xml:space="preserve">
+    <value>Chapters UP</value>
+  </data>
+  <data name="en_mainpage2_rm2_item2" xml:space="preserve">
+    <value>Chapters DOWN</value>
+  </data>
+  <data name="en_mainpage2_rm3_item1" xml:space="preserve">
+    <value>Use generated cover</value>
+  </data>
+  <data name="en_mainpage2_rm3_item2" xml:space="preserve">
+    <value>Choose a cover</value>
+  </data>
+  <data name="en_mainpage2_select_cover_filter" xml:space="preserve">
+    <value>Image Files</value>
+  </data>
+  <data name="en_mainpage2_select_cover_title" xml:space="preserve">
+    <value>Please select a cover picture</value>
+  </data>
+  <data name="en_mainpage2_TOC_clear" xml:space="preserve">
+    <value>Clear TOC</value>
+  </data>
+  <data name="en_mainpage2_TOC_cleared" xml:space="preserve">
+    <value>TOC cleared!</value>
+  </data>
+  <data name="en_mainpage2_TOC_clear_confirm_detail" xml:space="preserve">
+    <value>It's recommended to save the current TOC first{0}Are you sure to clear the current TOC?</value>
+  </data>
+  <data name="en_mainpage2_TOC_clear_confirm_title" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="en_mainpage2_TOC_clear_invalid" xml:space="preserve">
+    <value>TOC is already empty. Can't be cleared again!</value>
+  </data>
+  <data name="en_mainpage2_TOC_dragdrop_singlefile" xml:space="preserve">
+    <value>One file at a time please!</value>
+  </data>
+  <data name="en_mainpage2_TOC_dragdrop_txtonly" xml:space="preserve">
+    <value>TXT file only!</value>
+  </data>
+  <data name="en_mainpage2_TOC_export" xml:space="preserve">
+    <value>Export TOC</value>
+  </data>
+  <data name="en_mainpage2_TOC_exported" xml:space="preserve">
+    <value>TOC exported to: </value>
+  </data>
+  <data name="en_mainpage2_TOC_export_invalid" xml:space="preserve">
+    <value>TOC is already empty. Can't be exported!</value>
+  </data>
+  <data name="en_mainpage2_TOC_import" xml:space="preserve">
+    <value>Import TOC</value>
+  </data>
+  <data name="en_mainpage2_TOC_imported" xml:space="preserve">
+    <value>TOC imported!</value>
+  </data>
+  <data name="en_mainpage2_TOC_import_click_filter" xml:space="preserve">
+    <value>Text Files</value>
+  </data>
+  <data name="en_mainpage2_TOC_import_click_title" xml:space="preserve">
+    <value>Please select a TOC file</value>
+  </data>
+  <data name="en_mainpage2_TOC_import_invalid" xml:space="preserve">
+    <value>Invalid TOC file!</value>
+  </data>
+  <data name="en_mainpage2_TOC_list_ChapterTitle" xml:space="preserve">
+    <value>Chapter Title</value>
+  </data>
+  <data name="en_mainpage2_TOC_list_LineNumber" xml:space="preserve">
+    <value>Line Number</value>
+  </data>
+  <data name="en_mainpage3_bookauthor_label" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="en_mainpage3_bookintro_label" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="en_mainpage3_bookname_label" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="en_mainpage3_bookwordcountnr_label" xml:space="preserve">
+    <value>Unique Word Count</value>
+  </data>
+  <data name="en_mainpage3_bookwordcount_label" xml:space="preserve">
+    <value>Word Count</value>
+  </data>
+  <data name="en_mainpage3_copyImageFile_string1" xml:space="preserve">
+    <value>Can't find </value>
+  </data>
+  <data name="en_mainpage3_copyImageFile_string2" xml:space="preserve">
+    <value>{0}Process stopped!</value>
+  </data>
+  <data name="en_mainpage3_generateEpub_body_not_ttf" xml:space="preserve">
+    <value>Selected body font is not a TTF font. Can't be embedded!</value>
+  </data>
+  <data name="en_mainpage3_generateEpub_no_file" xml:space="preserve">
+    <value>No source TXT file! Please select a TXT file and retry!</value>
+  </data>
+  <data name="en_mainpage3_generateEpub_title_not_ttf" xml:space="preserve">
+    <value>Selected title font is not a TTF font. Can't be embedded!</value>
+  </data>
+  <data name="en_mainpage3_helper_fontsubset_string1" xml:space="preserve">
+    <value>Don't need to embed title font!</value>
+  </data>
+  <data name="en_mainpage3_helper_fontsubset_string2" xml:space="preserve">
+    <value>Don't need to embed body font!</value>
+  </data>
+  <data name="en_mainpage3_helper_fontsubset_string3" xml:space="preserve">
+    <value>Going to use full set font instead!</value>
+  </data>
+  <data name="en_mainpage3_helper_TOC_invalid" xml:space="preserve">
+    <value>Invalid TOC! Line number can only be numbers{0}Cannot continue creating EPUB!</value>
+  </data>
+  <data name="en_mainpage3_location_label" xml:space="preserve">
+    <value>&lt;b&gt;Location: &lt;/b&gt;</value>
+  </data>
+  <data name="en_mainpage3_newbook_button" xml:space="preserve">
+    <value>➢         Next      Book         ➣</value>
+  </data>
+  <data name="en_mainpage3_processing_label1" xml:space="preserve">
+    <value>Creating EPUB...</value>
+  </data>
+  <data name="en_mainpage3_processing_label2" xml:space="preserve">
+    <value>EPUB Created!</value>
+  </data>
+  <data name="en_mainpage3_processing_label3" xml:space="preserve">
+    <value>Failed!!</value>
+  </data>
+  <data name="en_mainpage3_stepItem1_string1" xml:space="preserve">
+    <value>Apply Settings</value>
+  </data>
+  <data name="en_mainpage3_stepItem1_string2" xml:space="preserve">
+    <value>Applying font &amp; para-&lt;br/&gt;graph style settings</value>
+  </data>
+  <data name="en_mainpage3_stepItem2_string1" xml:space="preserve">
+    <value>Create HTML</value>
+  </data>
+  <data name="en_mainpage3_stepItem2_string2" xml:space="preserve">
+    <value>Extract chapter title&lt;br/&gt;Create chapter HTML</value>
+  </data>
+  <data name="en_mainpage3_stepItem3_string1" xml:space="preserve">
+    <value>Create Font</value>
+  </data>
+  <data name="en_mainpage3_stepItem3_string2" xml:space="preserve">
+    <value>Extract all words to&lt;br/&gt;create font subset</value>
+  </data>
+  <data name="en_mainpage3_stepItem4_string1" xml:space="preserve">
+    <value>Create Misc Files</value>
+  </data>
+  <data name="en_mainpage3_stepItem4_string2" xml:space="preserve">
+    <value>Create Images, CSS, OPF,&lt;br/&gt;NCX, MIMETYPE etc.</value>
+  </data>
+  <data name="en_mainpage3_stepItem5_string1" xml:space="preserve">
+    <value>Create EPUB</value>
+  </data>
+  <data name="en_mainpage3_stepItem5_string2" xml:space="preserve">
+    <value>Pack files together,&lt;br/&gt;following EPUB rules</value>
+  </data>
+  <data name="en_mainpage3_time_label1" xml:space="preserve">
+    <value>&lt;b&gt;Time used: &lt;/b&gt;</value>
+  </data>
+  <data name="en_mainpage3_time_label2" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="en_mainpage_about" xml:space="preserve">
+    <value>&lt;b&gt;ABOUT&lt;/b&gt;</value>
+  </data>
+  <data name="en_mainpage_rm_item1" xml:space="preserve">
+    <value>Enable AOT</value>
+  </data>
+  <data name="en_mainpage_rm_item2" xml:space="preserve">
+    <value>Minimize</value>
+  </data>
+  <data name="en_mainpage_rm_item3" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="en_mainpage_settings" xml:space="preserve">
+    <value>&lt;b&gt;SETTINGS&lt;/b&gt;</value>
+  </data>
+  <data name="en_settings1_3_coverfirstpage_label" xml:space="preserve">
+    <value>Cover be the first page</value>
+  </data>
+  <data name="en_settings1_3_covernoTOC_label" xml:space="preserve">
+    <value>Cover NOT in TOC</value>
+  </data>
+  <data name="en_settings1_3_embedFontSubset_label" xml:space="preserve">
+    <value>Embed font subset</value>
+  </data>
+  <data name="en_settings1_3_replace_label" xml:space="preserve">
+    <value>Chapter numbers to Chinese</value>
+  </data>
+  <data name="en_settings1_3_StT_label" xml:space="preserve">
+    <value>Simplified to Traditional</value>
+  </data>
+  <data name="en_settings1_3_TtS_label" xml:space="preserve">
+    <value>Traditional to Simplified</value>
+  </data>
+  <data name="en_settings1_3_vertical_label" xml:space="preserve">
+    <value>Vertical text direction</value>
+  </data>
+  <data name="en_settings2_1_pc_label" xml:space="preserve">
+    <value>Page Color</value>
+  </data>
+  <data name="en_settings2_2_pmD_label" xml:space="preserve">
+    <value>Margin (B)                                     %</value>
+  </data>
+  <data name="en_settings2_2_pmL_label" xml:space="preserve">
+    <value>Margin (L)                                     %</value>
+  </data>
+  <data name="en_settings2_2_pmR_label" xml:space="preserve">
+    <value>Margin (R)                                     %</value>
+  </data>
+  <data name="en_settings2_2_pmU_label" xml:space="preserve">
+    <value>Margin (U)                                     %</value>
+  </data>
+  <data name="en_settings2_3_authornamefont_label" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="en_settings2_3_booknamefont_label" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="en_settings2_tabItem1" xml:space="preserve">
+    <value>Cover Font Settings</value>
+  </data>
+  <data name="en_settings2_tabItem2" xml:space="preserve">
+    <value>Page Settings</value>
+  </data>
+  <data name="en_settings3_1_tcolor_label" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="en_settings3_1_tfont_label" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="en_settings3_1_tsize_label" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="en_settings3_2_bcolor_label" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="en_settings3_2_bfont_label" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="en_settings3_2_bsize_label" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="en_settings3_3_addparagraphspacing_label" xml:space="preserve">
+    <value>Add parag spacing</value>
+  </data>
+  <data name="en_settings3_3_linespacing_label" xml:space="preserve">
+    <value>Line spacing                                 %</value>
+  </data>
+  <data name="en_settings3_tabItem3" xml:space="preserve">
+    <value>Body Content Settings</value>
+  </data>
+  <data name="en_settings3_tabItem4" xml:space="preserve">
+    <value>Chapter Title Settings</value>
+  </data>
+  <data name="en_settings_item1" xml:space="preserve">
+    <value>EPUB Settings</value>
+  </data>
+  <data name="en_settings_item2" xml:space="preserve">
+    <value>Page Settings</value>
+  </data>
+  <data name="en_settings_item3" xml:space="preserve">
+    <value>Content Settings</value>
+  </data>
+  <data name="en_settings_item4" xml:space="preserve">
+    <value>App Settings</value>
+  </data>
+  <data name="en_settings_settings_done_button" xml:space="preserve">
+    <value>⤒⤒          Save     Settings          ⤒⤒</value>
+  </data>
+  <data name="en_settings_settings_success" xml:space="preserve">
+    <value>Settings Saved!</value>
+  </data>
+  <data name="en_TOC" xml:space="preserve">
+    <value>TOC</value>
+  </data>
+  <data name="zh_AOT" xml:space="preserve">
+    <value>窗口置顶</value>
+  </data>
+  <data name="zh_AOT_cancel" xml:space="preserve">
+    <value>取消置顶</value>
+  </data>
+  <data name="zh_balloontip_AOT" xml:space="preserve">
+    <value>已置顶</value>
+  </data>
+  <data name="zh_balloontip_AOT_cancel" xml:space="preserve">
+    <value>已取消置顶</value>
+  </data>
+  <data name="zh_balloontip_fail" xml:space="preserve">
+    <value>生成失败！</value>
+  </data>
+  <data name="zh_balloontip_NoEnTitleAuthor" xml:space="preserve">
+    <value>文件名中无完整英文书名和作者信息！</value>
+  </data>
+  <data name="zh_balloontip_NoEnTitleAuthor_detail" xml:space="preserve">
+    <value>完整信息范例：“BookName By Author”{0}（文件名中一定要有“By”这个词，大小写不限）{0}{0}开始检测文件第一、二行……{0}其中第一行为书名，第二行为作者名！</value>
+  </data>
+  <data name="zh_balloontip_NoHelpFile" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="zh_balloontip_NoHelpFile_detail" xml:space="preserve">
+    <value>帮助文件不存在！</value>
+  </data>
+  <data name="zh_balloontip_NoZhTitleAuthor" xml:space="preserve">
+    <value>文件名中无完整书名和作者信息！</value>
+  </data>
+  <data name="zh_balloontip_NoZhTitleAuthor_detail" xml:space="preserve">
+    <value>完整信息范例：“《书名》作者：作者名”{0}（文件名中一定要有“作者”二字，书名号可以省略）{0}{0}开始检测文件第一、二行……{0}其中第一行为书名，第二行为作者名！</value>
+  </data>
+  <data name="zh_balloontip_success" xml:space="preserve">
+    <value>生成完毕！</value>
+  </data>
+  <data name="zh_balloontip_title" xml:space="preserve">
+    <value>温馨提示</value>
+  </data>
+  <data name="zh_balloontip_TOC_done" xml:space="preserve">
+    <value>目录提取完毕！</value>
+  </data>
+  <data name="zh_event_setting_load_error" xml:space="preserve">
+    <value>加载设置文件出错，即将导入默认设置！</value>
+  </data>
+  <data name="zh_event_setting_reset" xml:space="preserve">
+    <value>是否要还原默认设置？</value>
+  </data>
+  <data name="zh_event_setting_reset_title" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="zh_mainpage1_cover_author_label" xml:space="preserve">
+    <value>&lt;b&gt;作者&lt;/b&gt;</value>
+  </data>
+  <data name="zh_mainpage1_cover_bookname_label" xml:space="preserve">
+    <value>&lt;b&gt;书名&lt;/b&gt;</value>
+  </data>
+  <data name="zh_mainpage1_cover_intro_label" xml:space="preserve">
+    <value>&lt;b&gt;简介&lt;/b&gt;</value>
+  </data>
+  <data name="zh_mainpage1_img1_string1" xml:space="preserve">
+    <value>拖拽TXT文件到框内</value>
+  </data>
+  <data name="zh_mainpage1_img1_string2" xml:space="preserve">
+    <value>或者双击框内</value>
+  </data>
+  <data name="zh_mainpage1_img2_string1" xml:space="preserve">
+    <value>正在处理文件</value>
+  </data>
+  <data name="zh_mainpage1_img2_string2" xml:space="preserve">
+    <value>请稍等……</value>
+  </data>
+  <data name="zh_mainpage1_img3_string1" xml:space="preserve">
+    <value>文件选择成功！</value>
+  </data>
+  <data name="zh_mainpage1_txt_click_filter" xml:space="preserve">
+    <value>文本文件</value>
+  </data>
+  <data name="zh_mainpage1_txt_click_title" xml:space="preserve">
+    <value>请选择TXT文件</value>
+  </data>
+  <data name="zh_mainpage1_txt_dragdrop_singlefile" xml:space="preserve">
+    <value>只能拖入一个文件！</value>
+  </data>
+  <data name="zh_mainpage1_txt_dragdrop_txtonly" xml:space="preserve">
+    <value>只能拖入TXT文件！</value>
+  </data>
+  <data name="zh_mainpage2_cover_dragdrop_imgonly" xml:space="preserve">
+    <value>只能拖入图片文件！</value>
+  </data>
+  <data name="zh_mainpage2_cover_dragdrop_singlefile" xml:space="preserve">
+    <value>只能拖入一个文件！</value>
+  </data>
+  <data name="zh_mainpage2_helper_cover_delete_failed" xml:space="preserve">
+    <value>删除原封面文件失败！</value>
+  </data>
+  <data name="zh_mainpage2_helper_img_quality" xml:space="preserve">
+    <value>图片质量值必须在0到100之间！</value>
+  </data>
+  <data name="zh_mainpage2_helper_notepic_delete_failed" xml:space="preserve">
+    <value>删除标注图片错误！</value>
+  </data>
+  <data name="zh_mainpage2_img_string" xml:space="preserve">
+    <value>封面图片</value>
+  </data>
+  <data name="zh_mainpage2_invalid_action" xml:space="preserve">
+    <value>操作无效！</value>
+  </data>
+  <data name="zh_mainpage2_rm1_item1" xml:space="preserve">
+    <value>导出目录</value>
+  </data>
+  <data name="zh_mainpage2_rm1_item2" xml:space="preserve">
+    <value>清空目录</value>
+  </data>
+  <data name="zh_mainpage2_rm1_item3" xml:space="preserve">
+    <value>导入目录</value>
+  </data>
+  <data name="zh_mainpage2_rm2_item1" xml:space="preserve">
+    <value>选中章节升一级</value>
+  </data>
+  <data name="zh_mainpage2_rm2_item2" xml:space="preserve">
+    <value>选中章节降一级</value>
+  </data>
+  <data name="zh_mainpage2_rm3_item1" xml:space="preserve">
+    <value>使用自动生成封面</value>
+  </data>
+  <data name="zh_mainpage2_rm3_item2" xml:space="preserve">
+    <value>选择封面图片</value>
+  </data>
+  <data name="zh_mainpage2_select_cover_filter" xml:space="preserve">
+    <value>图片文件</value>
+  </data>
+  <data name="zh_mainpage2_select_cover_title" xml:space="preserve">
+    <value>请选择封面图片</value>
+  </data>
+  <data name="zh_mainpage2_TOC_clear" xml:space="preserve">
+    <value>清空目录</value>
+  </data>
+  <data name="zh_mainpage2_TOC_cleared" xml:space="preserve">
+    <value>目录清空完毕！</value>
+  </data>
+  <data name="zh_mainpage2_TOC_clear_confirm_detail" xml:space="preserve">
+    <value>建议你按导出目录菜单以保存列表框中的数据{0}你确定要清空列表框中的数据？</value>
+  </data>
+  <data name="zh_mainpage2_TOC_clear_confirm_title" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="zh_mainpage2_TOC_clear_invalid" xml:space="preserve">
+    <value>目录是空的，无法清空！</value>
+  </data>
+  <data name="zh_mainpage2_TOC_dragdrop_singlefile" xml:space="preserve">
+    <value>只能拖入一个文件！</value>
+  </data>
+  <data name="zh_mainpage2_TOC_dragdrop_txtonly" xml:space="preserve">
+    <value>只能拖入TXT文件！</value>
+  </data>
+  <data name="zh_mainpage2_TOC_export" xml:space="preserve">
+    <value>导出目录</value>
+  </data>
+  <data name="zh_mainpage2_TOC_exported" xml:space="preserve">
+    <value>目录导出到：</value>
+  </data>
+  <data name="zh_mainpage2_TOC_export_invalid" xml:space="preserve">
+    <value>目录是空的，无法导出！</value>
+  </data>
+  <data name="zh_mainpage2_TOC_import" xml:space="preserve">
+    <value>导入目录</value>
+  </data>
+  <data name="zh_mainpage2_TOC_imported" xml:space="preserve">
+    <value>目录导入完毕！</value>
+  </data>
+  <data name="zh_mainpage2_TOC_import_click_filter" xml:space="preserve">
+    <value>文本文件</value>
+  </data>
+  <data name="zh_mainpage2_TOC_import_click_title" xml:space="preserve">
+    <value>请选择目录文件</value>
+  </data>
+  <data name="zh_mainpage2_TOC_import_invalid" xml:space="preserve">
+    <value>无效的目录文件！</value>
+  </data>
+  <data name="zh_mainpage2_TOC_list_ChapterTitle" xml:space="preserve">
+    <value>章节名称</value>
+  </data>
+  <data name="zh_mainpage2_TOC_list_LineNumber" xml:space="preserve">
+    <value>行号</value>
+  </data>
+  <data name="zh_mainpage3_bookauthor_label" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="zh_mainpage3_bookintro_label" xml:space="preserve">
+    <value>简介</value>
+  </data>
+  <data name="zh_mainpage3_bookname_label" xml:space="preserve">
+    <value>书名</value>
+  </data>
+  <data name="zh_mainpage3_bookwordcountnr_label" xml:space="preserve">
+    <value>不重复字数</value>
+  </data>
+  <data name="zh_mainpage3_bookwordcount_label" xml:space="preserve">
+    <value>总字数</value>
+  </data>
+  <data name="zh_mainpage3_copyImageFile_string1" xml:space="preserve">
+    <value>找不到</value>
+  </data>
+  <data name="zh_mainpage3_copyImageFile_string2" xml:space="preserve">
+    <value>文件！{0}无法继续生成！</value>
+  </data>
+  <data name="zh_mainpage3_generateEpub_body_not_ttf" xml:space="preserve">
+    <value>指定的正文字体不是TTF字体，无法嵌入！</value>
+  </data>
+  <data name="zh_mainpage3_generateEpub_no_file" xml:space="preserve">
+    <value>没有源文件！请拖入TXT文件后重试！</value>
+  </data>
+  <data name="zh_mainpage3_generateEpub_title_not_ttf" xml:space="preserve">
+    <value>指定的标题字体不是TTF字体，无法嵌入！</value>
+  </data>
+  <data name="zh_mainpage3_helper_fontsubset_string1" xml:space="preserve">
+    <value>不需要内嵌标题字体！</value>
+  </data>
+  <data name="zh_mainpage3_helper_fontsubset_string2" xml:space="preserve">
+    <value>不需要内嵌正文字体！</value>
+  </data>
+  <data name="zh_mainpage3_helper_fontsubset_string3" xml:space="preserve">
+    <value>字符太多！将用字体全集！</value>
+  </data>
+  <data name="zh_mainpage3_helper_TOC_invalid" xml:space="preserve">
+    <value>无效的目录！行号只能是数字！{0}无法继续生成Epub！</value>
+  </data>
+  <data name="zh_mainpage3_location_label" xml:space="preserve">
+    <value>&lt;b&gt;位置：&lt;/b&gt;</value>
+  </data>
+  <data name="zh_mainpage3_newbook_button" xml:space="preserve">
+    <value>➢          下    本    书          ➣</value>
+  </data>
+  <data name="zh_mainpage3_processing_label1" xml:space="preserve">
+    <value>正在生成……</value>
+  </data>
+  <data name="zh_mainpage3_processing_label2" xml:space="preserve">
+    <value>生成完毕！</value>
+  </data>
+  <data name="zh_mainpage3_processing_label3" xml:space="preserve">
+    <value>生成失败！！</value>
+  </data>
+  <data name="zh_mainpage3_stepItem1_string1" xml:space="preserve">
+    <value>加载设置</value>
+  </data>
+  <data name="zh_mainpage3_stepItem1_string2" xml:space="preserve">
+    <value>加载字体样式、&lt;br/&gt;段落样式等设置</value>
+  </data>
+  <data name="zh_mainpage3_stepItem2_string1" xml:space="preserve">
+    <value>生成HTML文件</value>
+  </data>
+  <data name="zh_mainpage3_stepItem2_string2" xml:space="preserve">
+    <value>用正则表达式提取章节&lt;br/&gt;并按章节生成HTML文件</value>
+  </data>
+  <data name="zh_mainpage3_stepItem3_string1" xml:space="preserve">
+    <value>生成内嵌字体文件</value>
+  </data>
+  <data name="zh_mainpage3_stepItem3_string2" xml:space="preserve">
+    <value>提取TXT文件的所有字符&lt;br/&gt;生成字体文件的子集</value>
+  </data>
+  <data name="zh_mainpage3_stepItem4_string1" xml:space="preserve">
+    <value>生成其它文件</value>
+  </data>
+  <data name="zh_mainpage3_stepItem4_string2" xml:space="preserve">
+    <value>生成图片、CSS、OPF、&lt;br/&gt;NCX、MIMETYPE等文件</value>
+  </data>
+  <data name="zh_mainpage3_stepItem5_string1" xml:space="preserve">
+    <value>生成EPUB文件</value>
+  </data>
+  <data name="zh_mainpage3_stepItem5_string2" xml:space="preserve">
+    <value>打包所有文件，&lt;br/&gt;严格按照EPUB规则生成电子书</value>
+  </data>
+  <data name="zh_mainpage3_time_label1" xml:space="preserve">
+    <value>&lt;b&gt;耗时：&lt;/b&gt;</value>
+  </data>
+  <data name="zh_mainpage3_time_label2" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="zh_mainpage_about" xml:space="preserve">
+    <value>&lt;b&gt;关于&lt;/b&gt;</value>
+  </data>
+  <data name="zh_mainpage_rm_item1" xml:space="preserve">
+    <value>窗口置顶</value>
+  </data>
+  <data name="zh_mainpage_rm_item2" xml:space="preserve">
+    <value>最小化</value>
+  </data>
+  <data name="zh_mainpage_rm_item3" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="zh_mainpage_settings" xml:space="preserve">
+    <value>&lt;b&gt;设置&lt;/b&gt;</value>
+  </data>
+  <data name="zh_settings1_3_coverfirstpage_label" xml:space="preserve">
+    <value>封面作为电子书的第一页</value>
+  </data>
+  <data name="zh_settings1_3_covernoTOC_label" xml:space="preserve">
+    <value>第一页的封面不出现在目录里</value>
+  </data>
+  <data name="zh_settings1_3_embedFontSubset_label" xml:space="preserve">
+    <value>嵌入字体（子集）</value>
+  </data>
+  <data name="zh_settings1_3_replace_label" xml:space="preserve">
+    <value>替换标题中的数字为汉字</value>
+  </data>
+  <data name="zh_settings1_3_StT_label" xml:space="preserve">
+    <value>简体转繁体</value>
+  </data>
+  <data name="zh_settings1_3_TtS_label" xml:space="preserve">
+    <value>繁体转简体</value>
+  </data>
+  <data name="zh_settings1_3_vertical_label" xml:space="preserve">
+    <value>整本书竖排版</value>
+  </data>
+  <data name="zh_settings2_1_pc_label" xml:space="preserve">
+    <value>页面颜色：</value>
+  </data>
+  <data name="zh_settings2_2_pmD_label" xml:space="preserve">
+    <value>下边距：                                        %</value>
+  </data>
+  <data name="zh_settings2_2_pmL_label" xml:space="preserve">
+    <value>左边距：                                        %</value>
+  </data>
+  <data name="zh_settings2_2_pmR_label" xml:space="preserve">
+    <value>右边距：                                        %</value>
+  </data>
+  <data name="zh_settings2_2_pmU_label" xml:space="preserve">
+    <value>上边距：                                        %</value>
+  </data>
+  <data name="zh_settings2_3_authornamefont_label" xml:space="preserve">
+    <value>作者字体：</value>
+  </data>
+  <data name="zh_settings2_3_booknamefont_label" xml:space="preserve">
+    <value>书名字体：</value>
+  </data>
+  <data name="zh_settings2_tabItem1" xml:space="preserve">
+    <value>封面设置</value>
+  </data>
+  <data name="zh_settings2_tabItem2" xml:space="preserve">
+    <value>页面设置</value>
+  </data>
+  <data name="zh_settings3_1_tcolor_label" xml:space="preserve">
+    <value>标题颜色：</value>
+  </data>
+  <data name="zh_settings3_1_tfont_label" xml:space="preserve">
+    <value>标题字体：</value>
+  </data>
+  <data name="zh_settings3_1_tsize_label" xml:space="preserve">
+    <value>标题字号：                                     号</value>
+  </data>
+  <data name="zh_settings3_2_bcolor_label" xml:space="preserve">
+    <value>正文颜色：</value>
+  </data>
+  <data name="zh_settings3_2_bfont_label" xml:space="preserve">
+    <value>正文字体：</value>
+  </data>
+  <data name="zh_settings3_2_bsize_label" xml:space="preserve">
+    <value>正文字号：                                     号</value>
+  </data>
+  <data name="zh_settings3_3_addparagraphspacing_label" xml:space="preserve">
+    <value>增加段落前后的间距</value>
+  </data>
+  <data name="zh_settings3_3_linespacing_label" xml:space="preserve">
+    <value>行距：                                            %</value>
+  </data>
+  <data name="zh_settings3_tabItem3" xml:space="preserve">
+    <value>正文设置</value>
+  </data>
+  <data name="zh_settings3_tabItem4" xml:space="preserve">
+    <value>标题设置</value>
+  </data>
+  <data name="zh_settings_item1" xml:space="preserve">
+    <value>电子书整体设置</value>
+  </data>
+  <data name="zh_settings_item2" xml:space="preserve">
+    <value>页面设置</value>
+  </data>
+  <data name="zh_settings_item3" xml:space="preserve">
+    <value>文字样式设置</value>
+  </data>
+  <data name="zh_settings_item4" xml:space="preserve">
+    <value>其它设置</value>
+  </data>
+  <data name="zh_settings_settings_done_button" xml:space="preserve">
+    <value>⤒⤒          确    认    设    置          ⤒⤒</value>
+  </data>
+  <data name="zh_settings_settings_success" xml:space="preserve">
+    <value>设置成功！</value>
+  </data>
+  <data name="zh_TOC" xml:space="preserve">
+    <value>目录</value>
+  </data>
+  <data name="en_about_author_label" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="en_about_email_label" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="en_about_intro" xml:space="preserve">
+    <value>SimpleEpub2 converts a TXT file to a EPUB file.{0}{0}If you have any suggestions, please feel free to email me.{0}{0}Thank you for your support! :)</value>
+  </data>
+  <data name="en_about_intro_label" xml:space="preserve">
+    <value>Intro</value>
+  </data>
+  <data name="en_about_version_label" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="en_button_cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="en_button_ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="en_settings4_1_filelocation_button" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="en_settings4_1_filelocation_dialog" xml:space="preserve">
+    <value>Choose EPUB location</value>
+  </data>
+  <data name="en_settings4_1_filelocation_label" xml:space="preserve">
+    <value>EPUB Location</value>
+  </data>
+  <data name="en_settings4_2_deletetempfiles_label" xml:space="preserve">
+    <value>Delete temporary files</value>
+  </data>
+  <data name="en_settings4_3_reset_button" xml:space="preserve">
+    <value>Reset to default settings</value>
+  </data>
+  <data name="en_settings4_4_chkupd_button" xml:space="preserve">
+    <value>Manually check</value>
+  </data>
+  <data name="en_settings4_4_chkupd_label" xml:space="preserve">
+    <value>Automatically check for updates</value>
+  </data>
+  <data name="zh_about_author_label" xml:space="preserve">
+    <value>作者：</value>
+  </data>
+  <data name="zh_about_email_label" xml:space="preserve">
+    <value>邮箱：</value>
+  </data>
+  <data name="zh_about_intro" xml:space="preserve">
+    <value>SimpleEpub2是一款把TXT转换为EPUB的小工具。{0}如果有任何建议或者意见请发Email联系。{0}谢谢支持！</value>
+  </data>
+  <data name="zh_about_intro_label" xml:space="preserve">
+    <value>简介：</value>
+  </data>
+  <data name="zh_about_version_label" xml:space="preserve">
+    <value>版本：</value>
+  </data>
+  <data name="zh_button_cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="zh_button_ok" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="zh_settings4_1_filelocation_button" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="zh_settings4_1_filelocation_dialog" xml:space="preserve">
+    <value>选择文件生成目录</value>
+  </data>
+  <data name="zh_settings4_1_filelocation_label" xml:space="preserve">
+    <value>生成文件位置：</value>
+  </data>
+  <data name="zh_settings4_2_deletetempfiles_label" xml:space="preserve">
+    <value>删除转换过程中的临时文件</value>
+  </data>
+  <data name="zh_settings4_3_reset_button" xml:space="preserve">
+    <value>还原为默认设置</value>
+  </data>
+  <data name="zh_settings4_4_chkupd_button" xml:space="preserve">
+    <value>手动检测更新</value>
+  </data>
+  <data name="zh_settings4_4_chkupd_label" xml:space="preserve">
+    <value>程序启动时自动检测更新</value>
+  </data>
+  <data name="en_autoUpdater_msg_failed" xml:space="preserve">
+    <value>Update failed!&lt;br/&gt;Please try again later!</value>
+  </data>
+  <data name="en_autoUpdater_msg_failed_title" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="en_autoUpdater_msg_success" xml:space="preserve">
+    <value>Success!&lt;br/&gt;Application restarts in 5 seconds!</value>
+  </data>
+  <data name="en_autoUpdater_msg_success_title" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="en_autoUpdater_msg_terminated" xml:space="preserve">
+    <value>Update terminated!&lt;br/&gt;Cannot complete update!</value>
+  </data>
+  <data name="en_autoUpdater_msg_terminated_title" xml:space="preserve">
+    <value>Terminated</value>
+  </data>
+  <data name="en_autoUpdater_result_latest" xml:space="preserve">
+    <value>Latest version already!</value>
+  </data>
+  <data name="en_autoUpdater_result_none" xml:space="preserve">
+    <value>No update info found!</value>
+  </data>
+  <data name="en_settings3_3_dropCap_label" xml:space="preserve">
+    <value>Drop Cap</value>
+  </data>
+  <data name="en_settings3_3_stickupCap_label" xml:space="preserve">
+    <value>Stick-up Cap</value>
+  </data>
+  <data name="en_settings4_4_language_changed" xml:space="preserve">
+    <value>UI Language has been changed.&lt;br/&gt;Please restart the app to see the effect!</value>
+  </data>
+  <data name="en_settings4_4_language_label" xml:space="preserve">
+    <value>UI Language</value>
+  </data>
+  <data name="en_update_completed" xml:space="preserve">
+    <value>Completed: </value>
+  </data>
+  <data name="en_update_cur" xml:space="preserve">
+    <value>Cur Version</value>
+  </data>
+  <data name="en_update_description" xml:space="preserve">
+    <value>Update Description</value>
+  </data>
+  <data name="en_update_download" xml:space="preserve">
+    <value>Download Update</value>
+  </data>
+  <data name="en_update_downloaded" xml:space="preserve">
+    <value>Downloaded: </value>
+  </data>
+  <data name="en_update_downloading" xml:space="preserve">
+    <value>Downloading Update ...</value>
+  </data>
+  <data name="en_update_found" xml:space="preserve">
+    <value>Update found!</value>
+  </data>
+  <data name="en_update_found_title" xml:space="preserve">
+    <value>Update found</value>
+  </data>
+  <data name="en_update_new" xml:space="preserve">
+    <value>New Version</value>
+  </data>
+  <data name="en_update_verifying" xml:space="preserve">
+    <value>Verifying Update ...</value>
+  </data>
+  <data name="zh_autoUpdater_msg_failed" xml:space="preserve">
+    <value>更新出错！&lt;br/&gt;请稍后再试一次！</value>
+  </data>
+  <data name="zh_autoUpdater_msg_failed_title" xml:space="preserve">
+    <value>更新出错</value>
+  </data>
+  <data name="zh_autoUpdater_msg_success" xml:space="preserve">
+    <value>更新成功！&lt;br/&gt;程序5秒后即将自动重启！</value>
+  </data>
+  <data name="zh_autoUpdater_msg_success_title" xml:space="preserve">
+    <value>更新成功</value>
+  </data>
+  <data name="zh_autoUpdater_msg_terminated" xml:space="preserve">
+    <value>更新过程被中断！&lt;br/&gt;无法完成更新！</value>
+  </data>
+  <data name="zh_autoUpdater_msg_terminated_title" xml:space="preserve">
+    <value>更新中断</value>
+  </data>
+  <data name="zh_autoUpdater_result_latest" xml:space="preserve">
+    <value>已经是最新版本！</value>
+  </data>
+  <data name="zh_autoUpdater_result_none" xml:space="preserve">
+    <value>没有找到更新信息！</value>
+  </data>
+  <data name="zh_settings3_3_dropCap_label" xml:space="preserve">
+    <value>章节首字母下沉</value>
+  </data>
+  <data name="zh_settings3_3_stickupCap_label" xml:space="preserve">
+    <value>章节首字母上升</value>
+  </data>
+  <data name="zh_settings4_4_language_changed" xml:space="preserve">
+    <value>界面语言已被更改&lt;br/&gt;程序重启后生效！</value>
+  </data>
+  <data name="zh_settings4_4_language_label" xml:space="preserve">
+    <value>界面语言：</value>
+  </data>
+  <data name="zh_update_completed" xml:space="preserve">
+    <value>已完成：</value>
+  </data>
+  <data name="zh_update_cur" xml:space="preserve">
+    <value>当前版本</value>
+  </data>
+  <data name="zh_update_description" xml:space="preserve">
+    <value>更新内容</value>
+  </data>
+  <data name="zh_update_download" xml:space="preserve">
+    <value>下载更新</value>
+  </data>
+  <data name="zh_update_downloaded" xml:space="preserve">
+    <value>已下载：</value>
+  </data>
+  <data name="zh_update_downloading" xml:space="preserve">
+    <value>正在下载更新……</value>
+  </data>
+  <data name="zh_update_found" xml:space="preserve">
+    <value>有新版本发布！</value>
+  </data>
+  <data name="zh_update_found_title" xml:space="preserve">
+    <value>检测到更新</value>
+  </data>
+  <data name="zh_update_new" xml:space="preserve">
+    <value>更新版本</value>
+  </data>
+  <data name="zh_update_verifying" xml:space="preserve">
+    <value>验证更新……</value>
+  </data>
 </root>

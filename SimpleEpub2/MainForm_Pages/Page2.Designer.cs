@@ -184,7 +184,7 @@
             this.Space6,
             this.Item7,
             this.Space7});
-            this.radialMenu3.Location = new System.Drawing.Point(33, 3);
+            this.radialMenu3.Location = new System.Drawing.Point(33, 4);
             this.radialMenu3.Name = "radialMenu3";
             this.radialMenu3.Size = new System.Drawing.Size(28, 28);
             this.radialMenu3.Symbol = "";
@@ -301,6 +301,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.TOC_list.DefaultCellStyle = dataGridViewCellStyle1;
+            this.TOC_list.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.TOC_list.Location = new System.Drawing.Point(470, 0);
             this.TOC_list.Name = "TOC_list";
             this.TOC_list.RowHeadersWidth = 25;
@@ -329,9 +330,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.TOC_list);
             this.Controls.Add(this.radialMenu2);
             this.Controls.Add(this.radialMenu1);
+            this.Controls.Add(this.TOC_list);
             this.Controls.Add(this.radialMenu3);
             this.Controls.Add(this.overlay_TOC_buttons);
             this.Controls.Add(this.TOC_import);

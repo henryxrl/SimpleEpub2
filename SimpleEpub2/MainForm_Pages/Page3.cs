@@ -7,13 +7,15 @@ namespace SimpleEpub2
 {
 	public partial class Page3 : DevComponents.DotNetBar.Controls.SlidePanel
 	{
-		Color themeColor = Color.Black;
+		Color themeColor;
+        Language LANG;
 
-		public Page3(Color c)
+		public Page3(Color c, Language lang)
 		{
 			InitializeComponent();
 			
 			themeColor = c;
+            LANG = lang;
 
 			SlideOutButtonVisible = false;
 
@@ -29,7 +31,7 @@ namespace SimpleEpub2
 			stepItem4.ProgressColors = new Color[] { Color.FromArgb(150, themeColor) };
 			stepItem5.ProgressColors = new Color[] { Color.FromArgb(150, themeColor) };
 
-			newbook_button.Text = "➢          下    本    书          ➣";
+            newbook_button.Text = LANG.getString("mainpage3_newbook_button");
 			newbook_button.FlatStyle = FlatStyle.Flat;
 			newbook_button.FlatAppearance.BorderSize = 0;
 			newbook_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(255, 250, 242, 255);
@@ -47,18 +49,23 @@ namespace SimpleEpub2
 			FAILED.Visible = false;
 
 			processing_label.Location = new Point(72, 10);
-			processing_label.Text = "正在生成……";
+            processing_label.Text = LANG.getString("mainpage3_processing_label1");
 			location_label.Visible = false;
 			location_label.Text = "";
 			time_label.Visible = false;
 			time_label.Text = "";
 
 			progressSteps.Location = new Point(79, 90);
-			stepItem1.Text = "<font size=\"+2\"><b>加载设置</b></font><br/><font size=\"-1\">加载字体样式、<br/>段落样式等设置</font>";
-			stepItem2.Text = "<font size=\"+2\"><b>生成HTML文件</b></font><br/><font size=\"-1\">用正则表达式提取章节<br/>并按章节生成HTML文件</font>";
-			stepItem3.Text = "<font size=\"+2\"><b>生成内嵌字体文件</b></font><br/><font size=\"-1\">提取TXT文件的所有字符<br/>生成字体文件的子集</font>";
-			stepItem4.Text = "<font size=\"+2\"><b>生成其它文件</b></font><br/><font size=\"-1\">生成图片、CSS、OPF、<br/>NCX、MIMETYPE等文件</font>";
-			stepItem5.Text = "<font size=\"+2\"><b>生成EPUB文件</b></font><br/><font size=\"-1\">打包所有文件，<br/>严格按照EPUB规则生成电子书</font>";
+            stepItem1.Text = processStepItemDetailText(LANG.getString("mainpage3_stepItem1_string1"), 
+                LANG.getString("mainpage3_stepItem1_string2"));
+            stepItem2.Text = processStepItemDetailText(LANG.getString("mainpage3_stepItem2_string1"),
+                LANG.getString("mainpage3_stepItem2_string2"));
+            stepItem3.Text = processStepItemDetailText(LANG.getString("mainpage3_stepItem3_string1"),
+                LANG.getString("mainpage3_stepItem3_string2"));
+            stepItem4.Text = processStepItemDetailText(LANG.getString("mainpage3_stepItem4_string1"),
+                LANG.getString("mainpage3_stepItem4_string2"));
+            stepItem5.Text = processStepItemDetailText(LANG.getString("mainpage3_stepItem5_string1"),
+                LANG.getString("mainpage3_stepItem5_string2"));
 
 			circularProgress.Visible = true;
 			circularProgress.IsRunning = true;
@@ -86,20 +93,26 @@ namespace SimpleEpub2
 			//this.Size = new Size(841, 605);
 
 			processing_label.Location = new Point(72, 0);
-			processing_label.Text = "生成完毕！";
+            processing_label.Text = LANG.getString("mainpage3_processing_label2");
 			location_label.Location = new Point(79, 58);
 			location_label.Visible = true;
 			//location_label.Text = "位置：";
-			time_label.Location = new Point(75, 88);
+			time_label.Location = new Point(79, 88);
 			time_label.Visible = true;
 			//time_label.Text = "耗时：";
 
+            bookname_label.Text = LANG.getString("mainpage3_bookname_label");
+            bookauthor_label.Text = LANG.getString("mainpage3_bookauthor_label");
+            bookwordcount_label.Text = LANG.getString("mainpage3_bookwordcount_label");
+            bookwordcountnr_label.Text = LANG.getString("mainpage3_bookwordcountnr_label");
+            bookintro_label.Text = LANG.getString("mainpage3_bookintro_label");
+
 			progressSteps.Location = new Point(79, 122);
-			stepItem1.Text = "<font size=\"+2\"><b>  加载设置  </b></font>";
-			stepItem2.Text = "<font size=\"+2\"><b>  生成HTML文件  </b></font>";
-			stepItem3.Text = "<font size=\"+2\"><b>  生成内嵌字体文件  </b></font><br/>";
-			stepItem4.Text = "<font size=\"+2\"><b>  生成其它文件  </b></font><br/>";
-			stepItem5.Text = "<font size=\"+2\"><b>  生成EPUB文件  </b></font><br/>";
+            stepItem1.Text = processStepItemBriefText(LANG.getString("mainpage3_stepItem1_string1"));
+            stepItem2.Text = processStepItemBriefText(LANG.getString("mainpage3_stepItem2_string1"));
+            stepItem3.Text = processStepItemBriefText(LANG.getString("mainpage3_stepItem3_string1"));
+            stepItem4.Text = processStepItemBriefText(LANG.getString("mainpage3_stepItem4_string1"));
+            stepItem5.Text = processStepItemBriefText(LANG.getString("mainpage3_stepItem5_string1"));
 
 			circularProgress.Visible = false;
 			circularProgress.IsRunning = false;
@@ -156,7 +169,7 @@ namespace SimpleEpub2
 			FAILED.Visible = true;
 
 			processing_label.Location = new Point(72, 10);
-			processing_label.Text = "生成失败！！";
+            processing_label.Text = LANG.getString("mainpage3_processing_label3");
 			location_label.Visible = false;
 			location_label.Text = "";
 			time_label.Visible = false;
@@ -203,8 +216,8 @@ namespace SimpleEpub2
 
 				using (SolidBrush b = new SolidBrush(themeColor))
 				{
-					String s = "封面图片";
-					Font f = new Font("微软雅黑", 25, FontStyle.Bold);
+                    String s = LANG.getString("mainpage2_img_string");
+                    Font f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = cover.Width / 2 - size.Width / 2;
 					Single py = cover.Height / 2 - size.Height / 2 - 20;
@@ -215,5 +228,15 @@ namespace SimpleEpub2
 
 			return img;
 		}
-	}
+
+        private String processStepItemDetailText(String s1, String s2)
+        {
+            return "<font size=\"+2\"><b>" + s1 + "</b></font><br/><font size=\"-1\">" + s2 + "</font>";
+        }
+
+        private String processStepItemBriefText(String s)
+        {
+            return "<font size=\"+2\"><b>" + s + "</b></font>";
+        }
+    }
 }

@@ -19,6 +19,10 @@ namespace SimpleEpub2.AutoUpdater
 		/// Should be the same as your appId in the update.xml
 		/// </summary>
 		String ApplicationID { get; }
+        /// <summary>
+        /// The current language code
+        /// </summary>
+        Language Lang { get; }
 		/// <summary>
 		/// The current assembly
 		/// </summary>

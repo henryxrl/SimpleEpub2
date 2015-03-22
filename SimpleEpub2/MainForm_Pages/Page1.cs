@@ -7,13 +7,15 @@ namespace SimpleEpub2
 {
 	public partial class Page1 : DevComponents.DotNetBar.Controls.SlidePanel
 	{
-		Color themeColor = Color.Black;
+		Color themeColor;
+        Language LANG;
 
-		public Page1(Color c)
+		public Page1(Color c, Language lang)
 		{
 			InitializeComponent();
 
 			themeColor = c;
+            LANG = lang;
 
 			SlideOutButtonVisible = false;
 
@@ -37,48 +39,48 @@ namespace SimpleEpub2
 
 			cover_bookname_tile.BackColor = themeColor;
 			cover_bookname_label.Parent = cover_bookname_tile;
-			cover_bookname_label.Text = "<b>书名</b>";
+            cover_bookname_label.Text = LANG.getString("mainpage1_cover_bookname_label");
 			cover_bookname_label.ForeColor = Color.White;
 			cover_bookname_label.Location = new Point(5, 2);
-			cover_bookname_label.Size = new Size(60, 30);
+			cover_bookname_label.Size = new Size(100, 30);
 			//cover_bookname_textbox.Parent = cover_bookname_tile;		// If this is set, cannot input Chinese
 			cover_bookname_textbox.Multiline = true;
 			cover_bookname_textbox.BorderStyle = BorderStyle.None;
 			cover_bookname_textbox.BackColor = themeColor;
 			cover_bookname_textbox.ForeColor = Color.White;
-			cover_bookname_textbox.Font = new Font("微软雅黑", 18, FontStyle.Bold);
+			cover_bookname_textbox.Font = new Font("Microsoft YaHei UI", 18, FontStyle.Bold);
 			cover_bookname_textbox.Location = new Point(626, 32);
 			cover_bookname_textbox.Size = new Size(287, 107);
 			cover_bookname_textbox.MouseLeave += cover_bookname_textbox_MouseLeave;
 
 			cover_author_tile.BackColor = themeColor;
 			cover_author_label.Parent = cover_author_tile;
-			cover_author_label.Text = "<b>作者</b>";
+            cover_author_label.Text = LANG.getString("mainpage1_cover_author_label");
 			cover_author_label.ForeColor = Color.White;
 			cover_author_label.Location = new Point(5, 2);
-			cover_author_label.Size = new Size(60, 30);
+			cover_author_label.Size = new Size(100, 30);
 			//cover_author_textbox.Parent = cover_author_tile;
 			cover_author_textbox.Multiline = true;
 			cover_author_textbox.BorderStyle = BorderStyle.None;
 			cover_author_textbox.BackColor = themeColor;
 			cover_author_textbox.ForeColor = Color.White;
-			cover_author_textbox.Font = new Font("微软雅黑", 18, FontStyle.Bold);
+			cover_author_textbox.Font = new Font("Microsoft YaHei UI", 18, FontStyle.Bold);
 			cover_author_textbox.Location = new Point(626, 183);
 			cover_author_textbox.Size = new Size(287, 107);
 			cover_author_textbox.MouseLeave += cover_author_textbox_MouseLeave;
 
 			cover_intro_tile.BackColor = themeColor;
 			cover_intro_label.Parent = cover_intro_tile;
-			cover_intro_label.Text = "<b>简介</b>";
+            cover_intro_label.Text = LANG.getString("mainpage1_cover_intro_label");
 			cover_intro_label.ForeColor = Color.White;
 			cover_intro_label.Location = new Point(5, 2);
-			cover_intro_label.Size = new Size(60, 30);
+			cover_intro_label.Size = new Size(100, 30);
 			//cover_intro_textbox.Parent = cover_intro_tile;
 			cover_intro_textbox.Multiline = true;
 			cover_intro_textbox.BorderStyle = BorderStyle.None;
 			cover_intro_textbox.BackColor = themeColor;
 			cover_intro_textbox.ForeColor = Color.White;
-			cover_intro_textbox.Font = new Font("微软雅黑", 10, FontStyle.Bold);
+			cover_intro_textbox.Font = new Font("Microsoft YaHei UI", 10, FontStyle.Bold);
 			cover_intro_textbox.Location = new Point(626, 334);
 			cover_intro_textbox.Size = new Size(287, 261);
 			cover_intro_textbox.MouseLeave += cover_intro_textbox_MouseLeave;
@@ -190,16 +192,16 @@ namespace SimpleEpub2
 
 				using (SolidBrush b = new SolidBrush(themeColor))
 				{
-					String s = "拖拽TXT文件到框内";
-					Font f = new Font("微软雅黑", 25, FontStyle.Bold);
+                    String s = LANG.getString("mainpage1_img1_string1");
+					Font f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = txt_picturebox.Width / 2 - size.Width / 2;
 					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 50;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 
-					s = "或者双击框内";
-					f = new Font("微软雅黑", 25, FontStyle.Bold);
+                    s = LANG.getString("mainpage1_img1_string2");
+					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
 					py = txt_picturebox.Height / 2 - size.Height / 2 + 10;
@@ -230,16 +232,16 @@ namespace SimpleEpub2
 
 				using (SolidBrush b = new SolidBrush(themeColor))
 				{
-					String s = "正在处理文件";
-					Font f = new Font("微软雅黑", 25, FontStyle.Bold);
+                    String s = LANG.getString("mainpage1_img2_string1");
+					Font f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = txt_picturebox.Width / 2 - size.Width / 2;
 					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 180;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 
-					s = "请稍等……";
-					f = new Font("微软雅黑", 25, FontStyle.Bold);
+                    s = LANG.getString("mainpage1_img2_string2");
+					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
 					py = txt_picturebox.Height / 2 - size.Height / 2 - 110;
@@ -271,31 +273,31 @@ namespace SimpleEpub2
 				using (SolidBrush b = new SolidBrush(themeColor))
 				{
 					String s = "✔";
-					Font f = new Font("微软雅黑", 50, FontStyle.Bold);
+					Font f = new Font("Microsoft YaHei UI", 50, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = txt_picturebox.Width / 2 - size.Width / 2;
 					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 180;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 
-					s = "文件选择成功！";
-					f = new Font("微软雅黑", 25, FontStyle.Bold);
+                    s = LANG.getString("mainpage1_img3_string1");
+					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
 					py = txt_picturebox.Height / 2 - size.Height / 2 - 110;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 
-					s = "拖拽TXT文件到框内";
-					f = new Font("微软雅黑", 25, FontStyle.Bold);
+                    s = LANG.getString("mainpage1_img1_string1");
+					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
 					py = txt_picturebox.Height / 2 - size.Height / 2 - 10;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 
-					s = "或者双击框内";
-					f = new Font("微软雅黑", 25, FontStyle.Bold);
+                    s = LANG.getString("mainpage1_img1_string2");
+					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
 					py = txt_picturebox.Height / 2 - size.Height / 2 + 50;

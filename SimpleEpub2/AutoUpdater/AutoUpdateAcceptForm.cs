@@ -18,6 +18,11 @@ namespace SimpleEpub2.AutoUpdater
 		/// </summary>
 		private AutoUpdateXml updateInfo;
 
+        /// <summary>
+        /// The program to update's langCode
+        /// </summary>
+        private Language lang;
+
 		/// <summary>
 		/// Creates a new AutoUpdateAcceptForm
 		/// </summary>
@@ -29,10 +34,18 @@ namespace SimpleEpub2.AutoUpdater
 
 			this.applicationInfo = applicationInfo;
 			this.updateInfo = updateInfo;
+            this.lang = applicationInfo.Lang;
 
-			this.Text = this.applicationInfo.ApplicationName + " - 检测到更新";
+			this.Text = lang.getString("update_found_title");
 
-			this.lblUpdateAvail.Text = "SimpleEpub2 有新版本发布！\n请问是否更新？";
+            this.lblAppName.Text = this.applicationInfo.ApplicationName;
+            this.lblUpdateAvail.Text = lang.getString("update_found");
+            this.lblNewVersion_label.Text = lang.getString("update_new");
+            this.lblCurVersion_label.Text = lang.getString("update_cur");
+            this.lblDescription.Text = lang.getString("update_description");
+
+            this.btnYes.Text = lang.getString("button_ok");
+            this.btnNo.Text = lang.getString("button_cancel");
 
 			// Assigns the icon if it isn't null
 			if (this.applicationInfo.ApplicationIcon != null)

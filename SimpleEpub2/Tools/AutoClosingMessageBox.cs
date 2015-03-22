@@ -7,9 +7,9 @@ namespace SimpleEpub2.Tools
 	internal class AutoClosingMessageBox
 	{
 		System.Threading.Timer _timeoutTimer;
-		string _caption;
+		String _caption;
 
-		public AutoClosingMessageBox(Form f, string text, string caption, int timeout)
+		public AutoClosingMessageBox(Form f, String text, String caption, Int32 timeout)
 		{
 			_caption = caption;
 			_timeoutTimer = new System.Threading.Timer(OnTimerElapsed,
@@ -17,7 +17,7 @@ namespace SimpleEpub2.Tools
 			MessageBoxEx.Show(f, text, caption);
 		}
 
-		public static void Show(Form f, string text, string caption, int timeout)
+		public static void Show(Form f, String text, String caption, Int32 timeout)
 		{
 			new AutoClosingMessageBox(f, text, caption, timeout);
 		}
@@ -30,9 +30,9 @@ namespace SimpleEpub2.Tools
 			_timeoutTimer.Dispose();
 		}
 
-		const int WM_CLOSE = 0x0010;
+		const Int32 WM_CLOSE = 0x0010;
 		[System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
-		static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+		static extern IntPtr FindWindow(String lpClassName, String lpWindowName);
 		[System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
 		static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
 	}

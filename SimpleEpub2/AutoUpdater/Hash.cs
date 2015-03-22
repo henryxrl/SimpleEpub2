@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -25,7 +26,7 @@ namespace SimpleEpub2.AutoUpdater
 		/// <param name="filePath">The file to hash</param>
 		/// <param name="algo">The Type of hash</param>
 		/// <returns>The computed hash</returns>
-		internal static string HashFile(string filePath, HashType algo)
+		internal static String HashFile(String filePath, HashType algo)
 		{
 			switch (algo)
 			{
@@ -45,11 +46,11 @@ namespace SimpleEpub2.AutoUpdater
 		/// </summary>
 		/// <param name="hash">The hash to convert</param>
 		/// <returns>Hash as string</returns>
-		private static string MakeHashString(byte[] hash)
+		private static string MakeHashString(Byte[] hash)
 		{
 			StringBuilder s = new StringBuilder();
 
-			foreach (byte b in hash)
+			foreach (Byte b in hash)
 				s.Append(b.ToString("x2").ToLower());
 
 			return s.ToString();

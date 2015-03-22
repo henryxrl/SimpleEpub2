@@ -18,6 +18,11 @@ namespace SimpleEpub2.AutoUpdater
 		/// </summary>
 		private AutoUpdatable applicationInfo;
 
+        /// <summary>
+        /// Holds the program-to-update's langCode
+        /// </summary>
+        private Language lang;
+
 		/// <summary>
 		/// Thread to find update
 		/// </summary>
@@ -34,6 +39,7 @@ namespace SimpleEpub2.AutoUpdater
 		public AutoUpdater(AutoUpdatable applicationInfo)
 		{
 			this.applicationInfo = applicationInfo;
+            this.lang = applicationInfo.Lang;
 
 			// Set up backgroundworker
 			this.bgWorker = new BackgroundWorker();
@@ -87,11 +93,11 @@ namespace SimpleEpub2.AutoUpdater
 				else
 				{
 					if (!autoCheck)
-						MessageBoxEx.Show(this.applicationInfo.Context, "已经是最新版本！");
+						MessageBoxEx.Show(this.applicationInfo.Context, lang.getString("autoUpdater_result_latest"));
 				}
 			}
 			else
-				MessageBoxEx.Show(this.applicationInfo.Context, "没有找到更新信息！");
+				MessageBoxEx.Show(this.applicationInfo.Context, lang.getString("autoUpdater_result_none"));
 		}
 
 		/// <summary>
@@ -100,7 +106,7 @@ namespace SimpleEpub2.AutoUpdater
 		/// <param name="update">The update xml info</param>
 		private void DownloadUpdate(AutoUpdateXml update)
 		{
-			AutoUpdateDownloadForm form = new AutoUpdateDownloadForm(update.Uri, update.MD5, this.applicationInfo.ApplicationIcon);
+            AutoUpdateDownloadForm form = new AutoUpdateDownloadForm(this.applicationInfo, update.Uri, update.MD5, this.applicationInfo.ApplicationIcon);
 			DialogResult result = form.ShowDialog(this.applicationInfo.Context);
 
 			// Download update
@@ -110,18 +116,27 @@ namespace SimpleEpub2.AutoUpdater
 				String newPath = Path.GetDirectoryName(currentPath) + "\\" + update.FileName;
 
 				// "Install" it
-				AutoClosingMessageBox.Show(this.applicationInfo.Context, "更新成功！\n程序5秒后即将自动重启！", "更新成功", 5000);
+                AutoClosingMessageBox.Show(this.applicationInfo.Context,
+                                            lang.getString("autoUpdater_msg_success"),
+                                            lang.getString("autoUpdater_msg_success_title"),
+                                            5000);
 				UpdateApplication(form.TempFilePath, currentPath, newPath, update.LaunchArgs);
 
 				Application.Exit();
 			}
 			else if (result == DialogResult.Abort)
 			{
-				MessageBoxEx.Show(this.applicationInfo.Context, "更新过程被中断！\n无法完成更新！", "更新中断", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show(this.applicationInfo.Context,
+                                    lang.getString("autoUpdater_msg_terminated"),
+                                    lang.getString("autoUpdater_msg_terminated_title"),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 			else
 			{
-				MessageBoxEx.Show(this.applicationInfo.Context, "更新出错！\n请稍后再试一次！", "更新出错", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show(this.applicationInfo.Context,
+                                    lang.getString("autoUpdater_msg_failed"),
+                                    lang.getString("autoUpdater_msg_failed_title"),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 		}
 

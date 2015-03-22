@@ -1,4 +1,5 @@
 ﻿using DevComponents.DotNetBar;
+using INI;
 using Ionic.Zip;
 using SimpleEpub2.Tools;
 using System;
@@ -47,6 +48,11 @@ namespace SimpleEpub2
 			get { return NAMESPACE; }
 		}
 
+        public Language Lang
+        {
+            get { return LANG; }
+        }
+
 		public Assembly ApplicationAssembly
 		{
 			get { return Assembly.GetExecutingAssembly(); }
@@ -76,6 +82,8 @@ namespace SimpleEpub2
 		
 		private SettingsObject stsObj = null;
 
+        private Language LANG = null;
+
 		//private DevComponents.DotNetBar.Controls.SlidePanel[] cq = null;
 		private Int32 cqIDX = 0;
 
@@ -93,6 +101,7 @@ namespace SimpleEpub2
 		private static String emptyLineRegex = "^\\s*$";
 
 		private List<String> bookAndAuthor = new List<String>();
+        private Boolean bookAndAuthor_isChinese;
 		private List<Tuple<Int32, String>> TOC = new List<Tuple<Int32, String>>();
 		private Int32 FSLinesScanned = 0;
 		private Boolean extraLinesInBeginning = false;
@@ -151,6 +160,12 @@ namespace SimpleEpub2
 		#region Form Preset
 		public MainForm()
 		{
+            // 设置界面语言
+            setLANG();
+
+            // 设置为中文环境
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("zh-CN");
+
 			#region Obsolete Code: Loading dll's from Assembly
 			/*AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
 			{
@@ -170,18 +185,19 @@ namespace SimpleEpub2
 			Directory.CreateDirectory(resourcesPath);
 
 			#region Set Form
-			InitializeComponent();
+			
+            InitializeComponent();
 
 			updater = new AutoUpdater.AutoUpdater(this);
 
 			//this.FormClosing += MainForm_FormClosing;
 
-			TitleText = "<div align=\"left\">  SimpleEpub2</div>";
+			TitleText = "<div align=\"left\">  " + Assembly.GetExecutingAssembly().GetName().Name + "</div>";
 			MaximizeBox = false;
-			SettingsButtonText = "<b>SETTINGS</b>";
+            SettingsButtonText = LANG.getString("mainpage_settings");
 			SettingsButtonVisible = true;
 			SettingsButtonClick += FormSettingsButtonClick;
-			HelpButtonText = "<b>ABOUT</b>";
+			HelpButtonText = LANG.getString("mainpage_about");
 			HelpButtonVisible = true;
 			HelpButtonClick += FormHelpButtonClick;
 			HelpButton = true;
@@ -189,10 +205,13 @@ namespace SimpleEpub2
 
 			radialMenu.Symbol = "";
 			radialMenu.SubMenuEdgeWidth = 8;
-			radialMenu.CenterButtonDiameter = 20;
-			radialMenu.Diameter = 150;
+			radialMenu.CenterButtonDiameter = 30;
+			radialMenu.Diameter = 180;
 			radialMenu.ItemClick += RadialMenuItemClick;
 			radialMenu.SendToBack();
+            Item1.Text = LANG.getString("mainpage_rm_item1");       // 窗口置顶
+            Item2.Text = LANG.getString("mainpage_rm_item2");       // 最小化
+            Item3.Text = LANG.getString("mainpage_rm_item3");       // 关闭
 
 			next_button.ForeColor = themeColor;
 			previous_button.ForeColor = themeColor;
@@ -205,9 +224,6 @@ namespace SimpleEpub2
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			// 设置为中文环境
-			Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("zh-CN");
-
 			#region Set Subpages
 			Extract(resourcesPath, "Resources", "About.png");
 			setSubPages(true);
@@ -229,20 +245,49 @@ namespace SimpleEpub2
 				}
 				catch
 				{
-					MessageBoxEx.Show(this, "加载设置文件出错，即将导入默认设置！");
+                    MessageBoxEx.Show(this, LANG.getString("event_setting_load_error"));
 					stsObj = null;
 					stsObj = new SettingsObject(settingsPath);
 					stsObj.writeToIni();
 				}
 			}
+            stsObj.language = LANG.Lang;
 			stsObj.writeToSettings(sts);
 
 			if (sts.pg4.settings4_4_chkupd.Value)
 				updater.DoUpdate(true);
 
 			#endregion
-		
-		}
+        }
+
+        private void setLANG()
+        {
+            String langFromINI = getINILanguage();
+            String processedLangFromINI = (langFromINI.CompareTo("en_") == 0) ? "en_" :
+                ((langFromINI.CompareTo("zh_") == 0) ? "zh_" : "null");
+
+            if (processedLangFromINI.CompareTo("null") != 0)
+            {
+                LANG = new Language(processedLangFromINI);
+                return;
+            }
+
+            // langCode
+            String langCode;
+            String curLang = System.Globalization.CultureInfo.CurrentCulture.ToString();
+            Boolean isChinese = curLang.Contains("zh") ? true : false;
+            if (isChinese)	//in chinese
+            {
+                langCode = "zh_";
+            }
+            else	//in english
+            {
+                langCode = "en_";
+            }
+
+            // set tools
+            LANG = new Language(langCode);
+        }
 
 		#region Set Subpages Helper Functions
 
@@ -263,7 +308,7 @@ namespace SimpleEpub2
 		private void setPage1()
 		{
 			SuspendLayout();
-			pg1 = new Page1(themeColor);
+			pg1 = new Page1(themeColor, LANG);
 			pg1.IsOpen = true;
 			pg1.SetBounds(4, 8, 918, 600);
 			pg1.Parent = this;
@@ -279,7 +324,7 @@ namespace SimpleEpub2
 		private void setPage2()
 		{
 			SuspendLayout();
-			pg2 = new Page2(themeColor);
+			pg2 = new Page2(themeColor, LANG);
 			pg2.IsOpen = true;
 			pg2.SetBounds(3, 8, 920, 600);
 			pg2.Parent = this;
@@ -300,7 +345,7 @@ namespace SimpleEpub2
 		private void setPage3()
 		{
 			SuspendLayout();
-			pg3 = new Page3(themeColor);
+			pg3 = new Page3(themeColor, LANG);
 			pg3.IsOpen = true;
 			pg3.SetBounds(3, 3, 940, 605);
 			pg3.Parent = this;
@@ -312,7 +357,7 @@ namespace SimpleEpub2
 		private void setAbout(Boolean show)
 		{
 			SuspendLayout();
-			abt = new About(themeColor);
+			abt = new About(themeColor, LANG);
 			abt.IsOpen = true;
 			abt.SetBounds(8, 8, 950, 650);
 			if (!show)
@@ -331,7 +376,7 @@ namespace SimpleEpub2
 		private void setSettings(Boolean show)
 		{
 			SuspendLayout();
-			sts = new Settings(themeColor);
+			sts = new Settings(themeColor, LANG);
 			sts.IsOpen = true;
 			sts.SetBounds(8, 8, 950, 650);
 			if (!show)
@@ -401,7 +446,7 @@ namespace SimpleEpub2
 			catch
 			{
 				notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
-				showBalloonTip("错误！", "帮助文件不存在！");
+                showBalloonTip(LANG.getString("balloontip_NoHelpFile"), LANG.getString("balloontip_NoHelpFile_detail"));
 			}
 		}
 
@@ -488,21 +533,48 @@ namespace SimpleEpub2
 			RadialMenuItem item = sender as RadialMenuItem;
 			if (item != null && !String.IsNullOrEmpty(item.Text))
 			{
-				switch (item.Text.Substring(item.Text.Length - 2))
-				{
-					case "置顶":
-						switchAOT();
-						break;
-					case "小化":
-						this.WindowState = FormWindowState.Minimized;
-						break;
-					case "关闭":
-						Application.Exit();
-						break;
-					default:
-						MessageBoxEx.Show(this, item.Text);
-						break;
-				}
+                if (LANG.Lang.Contains("zh"))
+                {
+                    switch (item.Text)
+                    {
+                        case "窗口置顶":
+                            enableAOT();
+                            break;
+                        case "取消置顶":
+                            disableAOT();
+                            break;
+                        case "最小化":
+                            this.WindowState = FormWindowState.Minimized;
+                            break;
+                        case "关闭":
+                            Application.Exit();
+                            break;
+                        default:
+                            MessageBoxEx.Show(this, item.Text);
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (item.Text)
+                    {
+                        case "Enable AOT":
+                            enableAOT();
+                            break;
+                        case "Disable AOT":
+                            disableAOT();
+                            break;
+                        case "Minimize":
+                            this.WindowState = FormWindowState.Minimized;
+                            break;
+                        case "Close":
+                            Application.Exit();
+                            break;
+                        default:
+                            MessageBoxEx.Show(this, item.Text);
+                            break;
+                    }
+                }
 			}
 		}
 
@@ -549,7 +621,7 @@ namespace SimpleEpub2
 				}
 				catch
 				{
-					MessageBoxEx.Show(this, "加载设置文件出错，即将导入默认设置！");
+                    MessageBoxEx.Show(this, LANG.getString("event_setting_load_error"));
 					stsObj = null;
 					stsObj = new SettingsObject(settingsPath);
 					stsObj.writeToSettings(sts);
@@ -579,7 +651,10 @@ namespace SimpleEpub2
 
 		private void sts_pg4_settings4_3_reset_button_Click(object sender, EventArgs e)
 		{
-			DialogResult dialogResult = MessageBoxEx.Show(this, "是否要还原默认设置？", "确认", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBoxEx.Show(this,
+                LANG.getString("event_setting_reset"),
+                LANG.getString("event_setting_reset_title"),
+                MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
 				stsObj = null;
@@ -647,13 +722,13 @@ namespace SimpleEpub2
 			String[] files = (String[])e.Data.GetData(DataFormats.FileDrop);
 			if (files.Length != 1)
 			{
-				MessageBoxEx.Show(this, "只能拖入一个文件！");
+                MessageBoxEx.Show(this, LANG.getString("mainpage1_txt_dragdrop_singlefile"));
 				pg1.overlay_cover.Hide();
 				return;
 			}
 			if (!files[0].ToLower().EndsWith(".txt"))
 			{
-				MessageBoxEx.Show(this, "只能拖入TXT文件！");
+                MessageBoxEx.Show(this, LANG.getString("mainpage1_txt_dragdrop_txtonly"));
 				pg1.overlay_cover.Hide();
 			}
 			else
@@ -673,8 +748,8 @@ namespace SimpleEpub2
 		{
 			pg1.overlay_cover.Show();
 
-			pg1.openFileDialog.Title = "请选择TXT文件";
-			pg1.openFileDialog.Filter = "Text Files|*.txt";
+            pg1.openFileDialog.Title = LANG.getString("mainpage1_txt_click_title");
+            pg1.openFileDialog.Filter = LANG.getString("mainpage1_txt_click_filter") + "|*.txt";
 			if (pg1.openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
 				pg1.overlay_cover.Hide();
@@ -722,7 +797,7 @@ namespace SimpleEpub2
 			// Prepare a list of title line numbers
 			using (FileStream fs = File.Open(TXTPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
 			using (BufferedStream bs = new BufferedStream(fs))
-			using (StreamReader sr = new StreamReader(TXTPath, Encoding.GetEncoding("GB2312")))
+			using (StreamReader sr = new StreamReader(TXTPath, Encoding.Default))
 			{
 				String nextLine;
 				Int32 lineNumber = 1;
@@ -771,13 +846,14 @@ namespace SimpleEpub2
 			String[] files = (String[])e.Data.GetData(DataFormats.FileDrop);
 			if (files.Length != 1)
 			{
-				MessageBoxEx.Show(this, "只能拖入一个文件！");
+                MessageBoxEx.Show(this, LANG.getString("mainpage2_cover_dragdrop_singlefile"));
 				pg2.overlay_cover.Hide();
 				return;
 			}
-			if (!files[0].ToLower().EndsWith(".jpg") && !files[0].ToLower().EndsWith(".jpeg") && !files[0].ToLower().EndsWith(".png") && !files[0].ToLower().EndsWith(".bmp"))
+			if (!files[0].ToLower().EndsWith(".jpg") && !files[0].ToLower().EndsWith(".jpeg")
+                && !files[0].ToLower().EndsWith(".png") && !files[0].ToLower().EndsWith(".bmp"))
 			{
-				MessageBoxEx.Show(this, "只能拖入图片文件！");
+                MessageBoxEx.Show(this, LANG.getString("mainpage2_cover_dragdrop_imgonly"));
 				pg2.overlay_cover.Hide();
 			}
 			else
@@ -796,8 +872,8 @@ namespace SimpleEpub2
 
 			pg2.overlay_cover.Show();
 
-			pg2.openFileDialog.Title = "请选择封面图片";
-			pg2.openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.bmp;*.png";
+            pg2.openFileDialog.Title = LANG.getString("mainpage2_select_cover_title");
+            pg2.openFileDialog.Filter = LANG.getString("mainpage2_select_cover_filter") + "|*.jpg;*.jpeg;*.bmp;*.png";
 			if (pg2.openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
 				//MessageBoxEx.Show(this, pg2.openFileDialog.FileName);
@@ -826,22 +902,44 @@ namespace SimpleEpub2
 			RadialMenuItem item = sender as RadialMenuItem;
 			if (item != null && !String.IsNullOrEmpty(item.Text))
 			{
-				switch (item.Text)
-				{
-					case "使用自动生成封面":
-						generateTempCovers();
-						pg2.cover_picturebox.Image = covers[0];
-						reCovers = false;
-						isPicCover = false;
-						pg2.overlay_cover.Hide();
-						break;
-					case "选择封面图片":
-						cover_picturebox_DoubleClick(sender, e);
-						break;
-					default:
-						MessageBoxEx.Show(this, item.Text);
-						break;
-				}
+                if (LANG.Lang.Contains("zh"))
+                {
+                    switch (item.Text)
+                    {
+                        case "使用自动生成封面":
+                            generateTempCovers();
+                            pg2.cover_picturebox.Image = covers[0];
+                            reCovers = false;
+                            isPicCover = false;
+                            pg2.overlay_cover.Hide();
+                            break;
+                        case "选择封面图片":
+                            cover_picturebox_DoubleClick(sender, e);
+                            break;
+                        default:
+                            MessageBoxEx.Show(this, item.Text);
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (item.Text)
+                    {
+                        case "Use generated cover":
+                            generateTempCovers();
+                            pg2.cover_picturebox.Image = covers[0];
+                            reCovers = false;
+                            isPicCover = false;
+                            pg2.overlay_cover.Hide();
+                            break;
+                        case "Choose a cover":
+                            cover_picturebox_DoubleClick(sender, e);
+                            break;
+                        default:
+                            MessageBoxEx.Show(this, item.Text);
+                            break;
+                    }
+                }
 			}
 		}
 
@@ -863,7 +961,7 @@ namespace SimpleEpub2
 				catch
 				{
 					if (File.Exists(CoverPath))
-						MessageBoxEx.Show(this, "删除原封面文件失败！");
+                        MessageBoxEx.Show(this, LANG.getString("mainpage2_helper_cover_delete_failed"));
 				}
 			}
 			if (File.Exists(CoverPathSlim))
@@ -875,7 +973,7 @@ namespace SimpleEpub2
 				catch
 				{
 					if (File.Exists(CoverPathSlim))
-						MessageBoxEx.Show(this, "删除原封面文件失败！");
+                        MessageBoxEx.Show(this, LANG.getString("mainpage2_helper_cover_delete_failed"));
 				}
 			}
 
@@ -889,37 +987,43 @@ namespace SimpleEpub2
 			RadialMenuItem item = sender as RadialMenuItem;
 			if (item != null && !String.IsNullOrEmpty(item.Text))
 			{
-				switch (item.Text)
-				{
-					case "导出目录":
-						TOC_export_Click(sender, e);
-						break;
-					case "导入目录":
-						TOC_import_Click(sender, e);
-						break;
-					case "清空目录":
-						TOC_clear_Click(sender, e);
-						break;
-					default:
-						MessageBoxEx.Show(this, item.Text);
-						break;
-				}
+                if (LANG.Lang.Contains("zh"))
+                {
+                    switch (item.Text)
+                    {
+                        case "导出目录":
+                            TOC_export_Click(sender, e);
+                            break;
+                        case "导入目录":
+                            TOC_import_Click(sender, e);
+                            break;
+                        case "清空目录":
+                            TOC_clear_Click(sender, e);
+                            break;
+                        default:
+                            MessageBoxEx.Show(this, item.Text);
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (item.Text)
+                    {
+                        case "Export TOC":
+                            TOC_export_Click(sender, e);
+                            break;
+                        case "Import TOC":
+                            TOC_import_Click(sender, e);
+                            break;
+                        case "Clear TOC":
+                            TOC_clear_Click(sender, e);
+                            break;
+                        default:
+                            MessageBoxEx.Show(this, item.Text);
+                            break;
+                    }
+                }
 			}
-		}
-
-		private void TOC_import_Click(object sender, EventArgs e)
-		{
-			pg2.openFileDialog.Title = "请选择目录文件";
-			pg2.openFileDialog.Filter = "Text Files|*.txt";
-			if (pg2.openFileDialog.ShowDialog(this) == DialogResult.OK)
-			{
-				//MessageBoxEx.Show(this, pg2.openFileDialog.FileName);
-				importTOC(pg2.openFileDialog.FileName);
-			}
-
-			pg2.overlay_TOC_buttons.Hide();
-			pg2.TOC_import.Hide();
-			pg2.TOC_export.Hide();
 		}
 
 		private void TOC_list_DragDrop(object sender, DragEventArgs e)
@@ -927,13 +1031,13 @@ namespace SimpleEpub2
 			String[] files = (String[])e.Data.GetData(DataFormats.FileDrop);
 			if (files.Length != 1)
 			{
-				MessageBoxEx.Show(this, "只能拖入一个文件！");
+                MessageBoxEx.Show(this, LANG.getString("mainpage2_TOC_dragdrop_singlefile"));
 				pg2.overlay_TOC.Hide();
 				return;
 			}
 			if (!files[0].ToLower().EndsWith(".txt"))
 			{
-				MessageBoxEx.Show(this, "只能拖入TXT文件！");
+                MessageBoxEx.Show(this, LANG.getString("mainpage2_TOC_dragdrop_txtonly"));
 				pg2.overlay_TOC.Hide();
 			}
 			else
@@ -945,15 +1049,32 @@ namespace SimpleEpub2
 			}
 		}
 
+        private void TOC_import_Click(object sender, EventArgs e)
+        {
+            pg2.openFileDialog.Title = LANG.getString("mainpage2_TOC_import_click_title");
+            pg2.openFileDialog.Filter = LANG.getString("mainpage2_TOC_import_click_filter") + "|*.txt";
+            if (pg2.openFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                //MessageBoxEx.Show(this, pg2.openFileDialog.FileName);
+                importTOC(pg2.openFileDialog.FileName);
+            }
+
+            pg2.overlay_TOC_buttons.Hide();
+            pg2.TOC_import.Hide();
+            pg2.TOC_export.Hide();
+        }
+
 		private void importTOC(String TOCPath)
 		{
 			//String TOCPath = getTOCPath();
 
 			Boolean broken = false;
 
+            MessageBoxEx.Show(LANG.getString("testtest"));
+
 			using (FileStream fs = File.Open(TOCPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
 			using (BufferedStream bs = new BufferedStream(fs))
-			using (StreamReader sr = new StreamReader(TOCPath, Encoding.GetEncoding("GB2312")))
+			using (StreamReader sr = new StreamReader(TOCPath, Encoding.Default))
 			{
 				// Set cell font colors
 				//setCellFontColor(System.Drawing.Color.Black, System.Drawing.Color.RoyalBlue);
@@ -989,12 +1110,12 @@ namespace SimpleEpub2
 
 			if (broken)
 			{
-				MessageBoxEx.Show(this, "无效的目录文件！");
+                MessageBoxEx.Show(this, LANG.getString("mainpage2_TOC_import_invalid"));
 				clearOverLay();
 				return;
 			}
 			notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-			showBalloonTip("温馨提示", "目录导入完毕！");
+            showBalloonTip(LANG.getString("balloontip_title"), LANG.getString("mainpage2_TOC_imported"));
 		}
 
 		private void TOC_export_Click(object sender, EventArgs e)
@@ -1012,7 +1133,7 @@ namespace SimpleEpub2
 			if (pg2.TOC_list.Rows[0].Cells[0].Value != null && pg2.TOC_list.Rows[0].Cells[1].Value != null)
 			{
 				String TOCPath = getTOCPath();
-				StreamWriter sw = new StreamWriter(TOCPath, false, Encoding.GetEncoding("GB2312"));
+				StreamWriter sw = new StreamWriter(TOCPath, false, Encoding.Default);
 
 				foreach (DataGridViewRow row in pg2.TOC_list.Rows)
 				{
@@ -1025,11 +1146,11 @@ namespace SimpleEpub2
 				sw.Close();
 
 				notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-				showBalloonTip("温馨提示", "目录导出完毕！\n目录位置：" + TOCPath);
+                showBalloonTip(LANG.getString("balloontip_title"), LANG.getString("mainpage2_TOC_exported") + TOCPath);
 			}
 			else
 			{
-				MessageBoxEx.Show(this, "目录是空的，无法导出！");
+                MessageBoxEx.Show(this, LANG.getString("mainpage2_TOC_export_invalid"));
 				clearOverLay();
 			}
 		}
@@ -1048,18 +1169,21 @@ namespace SimpleEpub2
 		{
 			if (pg2.TOC_list.Rows[0].Cells[0].Value != null && pg2.TOC_list.Rows[0].Cells[1].Value != null)
 			{
-				DialogResult dialogResult = MessageBoxEx.Show(this, "建议你按导出目录菜单以保存列表框中的数据\n你确定要清空列表框中的数据？", "确认", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBoxEx.Show(this,
+                    String.Format(LANG.getString("mainpage2_TOC_clear_confirm_detail"), Environment.NewLine), 
+                    LANG.getString("mainpage2_TOC_clear_confirm_title"),
+                    MessageBoxButtons.YesNo);
 				if (dialogResult == DialogResult.Yes)
 				{
 					pg2.TOC_list.Rows.Clear();
 
 					notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-					showBalloonTip("温馨提示", "目录清空完毕！");
+                    showBalloonTip(LANG.getString("balloontip_title"), LANG.getString("mainpage2_TOC_cleared"));
 				}
 			}
 			else
 			{
-				MessageBoxEx.Show(this, "目录是空的，无法清空！");
+                MessageBoxEx.Show(this, LANG.getString("mainpage2_TOC_clear_invalid"));
 				clearOverLay();
 			}
 		}
@@ -1069,18 +1193,36 @@ namespace SimpleEpub2
 			RadialMenuItem item = sender as RadialMenuItem;
 			if (item != null && !String.IsNullOrEmpty(item.Text))
 			{
-				switch (item.Text)
-				{
-					case "选中章节升一级":
-						TOC_button1_Click(sender, e);
-						break;
-					case "选中章节降一级":
-						TOC_button2_Click(sender, e);
-						break;
-					default:
-						MessageBoxEx.Show(this, item.Text);
-						break;
-				}
+                if (LANG.Lang.Contains("zh"))
+                {
+                    switch (item.Text)
+                    {
+                        case "选中章节升一级":
+                            TOC_button1_Click(sender, e);
+                            break;
+                        case "选中章节降一级":
+                            TOC_button2_Click(sender, e);
+                            break;
+                        default:
+                            MessageBoxEx.Show(this, item.Text);
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (item.Text)
+                    {
+                        case "Chapters UP":
+                            TOC_button1_Click(sender, e);
+                            break;
+                        case "Chapters DOWN":
+                            TOC_button2_Click(sender, e);
+                            break;
+                        default:
+                            MessageBoxEx.Show(this, item.Text);
+                            break;
+                    }
+                }
 			}
 		}
 
@@ -1095,7 +1237,7 @@ namespace SimpleEpub2
 				{
 					if (pg2.TOC_list.SelectedRows[i].Cells[0].Value == null || pg2.TOC_list.SelectedRows[i].Cells[1].Value == null)
 					{
-						MessageBoxEx.Show(this, "操作无效！");
+                        MessageBoxEx.Show(this, LANG.getString("mainpage2_invalid_action"));
 						selectedValid = false;
 						break;
 					}
@@ -1112,7 +1254,7 @@ namespace SimpleEpub2
 						}
 						else
 						{
-							MessageBoxEx.Show(this, "操作无效！");
+                            MessageBoxEx.Show(this, LANG.getString("mainpage2_invalid_action"));
 							clearOverLay();
 							return;
 						}
@@ -1127,7 +1269,7 @@ namespace SimpleEpub2
 			}
 			else
 			{
-				MessageBoxEx.Show(this, "操作无效！");
+                MessageBoxEx.Show(this, LANG.getString("mainpage2_invalid_action"));
 				clearOverLay();
 				return;
 			}
@@ -1144,7 +1286,7 @@ namespace SimpleEpub2
 				{
 					if (pg2.TOC_list.SelectedRows[i].Cells[0].Value == null || pg2.TOC_list.SelectedRows[i].Cells[1].Value == null)
 					{
-						MessageBoxEx.Show(this, "操作无效！");
+                        MessageBoxEx.Show(this, LANG.getString("mainpage2_invalid_action"));
 						selectedValid = false;
 						break;
 					}
@@ -1153,7 +1295,7 @@ namespace SimpleEpub2
 				{
 					if (String.Compare(pg2.TOC_list.SelectedRows[0].Cells[0].Value.ToString(), pg2.TOC_list.Rows[0].Cells[0].Value.ToString()) == 0 && String.Compare(pg2.TOC_list.SelectedRows[0].Cells[1].Value.ToString(), pg2.TOC_list.Rows[0].Cells[1].Value.ToString()) == 0)
 					{
-						MessageBoxEx.Show(this, "操作无效！");
+                        MessageBoxEx.Show(this, LANG.getString("mainpage2_invalid_action"));
 						clearOverLay();
 						return;
 					}
@@ -1161,7 +1303,7 @@ namespace SimpleEpub2
 					{
 						if (pg2.TOC_list.SelectedRows[i].Cells[0].Value.ToString().StartsWith(" ***  ***  *** "))
 						{
-							MessageBoxEx.Show(this, "操作无效！");
+                            MessageBoxEx.Show(this, LANG.getString("mainpage2_invalid_action"));
 							clearOverLay();
 							return;
 						}
@@ -1182,7 +1324,7 @@ namespace SimpleEpub2
 			}
 			else
 			{
-				MessageBoxEx.Show(this, "操作无效！");
+                MessageBoxEx.Show(this, LANG.getString("mainpage2_invalid_action"));
 				clearOverLay();
 				return;
 			}
@@ -1210,7 +1352,7 @@ namespace SimpleEpub2
 
 			if (TXTPath == null)
 			{
-				MessageBoxEx.Show("没有源文件！请拖入TXT文件后重试！");
+                MessageBoxEx.Show(LANG.getString("mainpage3_generateEpub_no_file"));
 				return;
 			}
 
@@ -1257,7 +1399,7 @@ namespace SimpleEpub2
 			{
 				titleFontPath = FontNameFile.getFontFileName(stsObj.titleFont);
 				if (titleFontPath.CompareTo("") == 0)
-					MessageBoxEx.Show("指定的标题字体不是TTF字体，无法嵌入！");
+                    MessageBoxEx.Show(LANG.getString("mainpage3_generateEpub_title_not_ttf"));
 				else
 				{
 					URIT = new Uri(titleFontPath);
@@ -1265,7 +1407,7 @@ namespace SimpleEpub2
 				}
 				bodyFontPath = FontNameFile.getFontFileName(stsObj.bodyFont);
 				if (bodyFontPath.CompareTo("") == 0)
-					MessageBoxEx.Show("指定的正文字体不是TTF字体，无法嵌入！");
+                    MessageBoxEx.Show(LANG.getString("mainpage3_generateEpub_body_not_ttf"));
 				else
 				{
 					URIB = new Uri(bodyFontPath);
@@ -1275,12 +1417,12 @@ namespace SimpleEpub2
 			epubWorker.ReportProgress(20);
 
 			/*** Generate temp HTML ***/
-			Boolean HTML = generateHTML(stsObj.coverFirstPage, translation, stsObj.verticalText, stsObj.replaceNumByHan, stsObj.embedFontSubset);
+			Boolean HTML = generateHTML(stsObj.coverFirstPage, translation, stsObj.verticalText, stsObj.replaceNumByHan, stsObj.embedFontSubset, stsObj.dropCap, stsObj.stickupCap);
 			if (!HTML) { broken = true; return; }
 			epubWorker.ReportProgress(60);
 
 			/*** Generate CSS ***/
-			generateCSS(stsObj.verticalText, stsObj.marginL, stsObj.marginR, stsObj.marginT, stsObj.marginB, stsObj.lineSpacing, stsObj.addParagraphSpacing, stsObj.titleFont, stsObj.titleColor, stsObj.bodyFont, stsObj.bodyColor, stsObj.pageColor, stsObj.embedFontSubset);
+            generateCSS(stsObj.verticalText, stsObj.marginL, stsObj.marginR, stsObj.marginT, stsObj.marginB, stsObj.lineSpacing, stsObj.addParagraphSpacing, stsObj.titleFont, stsObj.titleSize, stsObj.titleColor, stsObj.bodyFont, stsObj.bodySize, stsObj.bodyColor, stsObj.pageColor, stsObj.embedFontSubset);
 
 			/*** Image File ***/
 			Boolean IMG = copyImageFile(stsObj.verticalText, stsObj.bookNameFont, stsObj.authorNameFont);
@@ -1301,7 +1443,10 @@ namespace SimpleEpub2
 			epubWorker.ReportProgress(80);
 
 			/*** ZIP ***/
-			DocName = "《" + bookAndAuthor[0] + "》作者：" + bookAndAuthor[1];
+            if (bookAndAuthor_isChinese)
+			    DocName = "《" + bookAndAuthor[0] + "》作者：" + bookAndAuthor[1];
+            else
+                DocName = bookAndAuthor[0] + " By " + bookAndAuthor[1];
 			zipPath = stsObj.fileLocation + "\\" + DocName + ".epub";
 
 			using (ZipFile zip = new ZipFile())
@@ -1370,17 +1515,18 @@ namespace SimpleEpub2
 
 		}
 
-		private Boolean generateHTML(Boolean coverFirstPage, Int32 translation, Boolean vertical, Boolean replace, Boolean embedFontSubset)
+		private Boolean generateHTML(Boolean coverFirstPage, Int32 translation, Boolean vertical, Boolean replace, Boolean embedFontSubset, Boolean dropCap, Boolean stickupCap)
 		{
 			if (!File.Exists(TXTPath))
 			{
-				MessageBoxEx.Show("找不到" + TXTPath + "文件！\n无法继续生成！");
+                MessageBoxEx.Show(LANG.getString("mainpage3_copyImageFile_string1")
+                    + TXTPath + String.Format(LANG.getString("mainpage3_copyImageFile_string2"), Environment.NewLine));
 				return false;
 			}
 
 			using (FileStream fs = File.Open(TXTPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
 			using (BufferedStream bs = new BufferedStream(fs))
-			using (StreamReader sr = new StreamReader(bs, Encoding.GetEncoding("GB2312")))
+			using (StreamReader sr = new StreamReader(bs, Encoding.Default))
 			{
 				String nextLine;
 				Int32 TXTlineNumber = 1;
@@ -1397,7 +1543,7 @@ namespace SimpleEpub2
 					title = translate(title, translation);		// 简繁转换
 
 					coverHtml.Append(HTMLHead(title, "", 0));
-					coverHtml.Append("\n<img src=\"../Images/cover.jpg\" alt=\"Cover\" />\n</div>\n</body>\n</html>");
+					coverHtml.Append("\n<img src=\"../Images/cover.jpg\" alt=\"Cover\" />\n</body>\n</html>");
 
 					//chapterNumber++;
 				}
@@ -1416,7 +1562,7 @@ namespace SimpleEpub2
 
 					title = translate(title, translation);		// 简繁转换
 
-					String tempToPrint = HTMLHead(title, "picture" + i, 2) + "\n<img src=\"../Images/" + "picture" + i + ".jpg\" alt=\"Cover\" />\n</div>\n</body>\n</html>";
+					String tempToPrint = HTMLHead(title, "picture" + i, 2) + "\n<img src=\"../Images/" + "picture" + i + ".jpg\" alt=\"Cover\" />\n</body>\n</html>";
 					picHtmlList.Add(tempToPrint);
 				}
 
@@ -1439,6 +1585,7 @@ namespace SimpleEpub2
 					extraLinesInBeginning = true;
 					StringBuilder html = new StringBuilder();
 					Boolean firstTime = true;
+                    Boolean firstLine = false;
 
 					while (titleLineNumbers[0] > TXTlineNumber && (nextLine = sr.ReadLine()) != null)
 					{
@@ -1481,13 +1628,25 @@ namespace SimpleEpub2
 							{
 								storeFootNoteLocation(ref nextLine, footNoteQueuePre, ref chapterFootNoteCount, 1, ref titleHasFootNote);
 
-								if (firstTime)
-								{
-									html.Append(HTMLHead(nextLine, "", 1) + "\n");
-									firstTime = false;
-								}
-								else
-									html.Append("<p>" + nextLine + "</p>\n");
+                                if (firstTime)
+                                {
+                                    html.Append(HTMLHead(nextLine, "", 1) + "\n");
+                                    firstTime = false;
+                                    firstLine = true;
+                                }
+                                else
+                                {
+                                    if (firstLine && (dropCap || stickupCap))
+                                    {
+                                        String span = dropCap ? "dropCap" : (stickupCap ? "stickupCap" : "");
+                                        Tuple<String, String> tokens = processFirstLine(nextLine);
+                                        String newNextLine = "<p class=\"first\"><span class=\"" + span + "\">" + tokens.Item1 + "</span>" + tokens.Item2 + "</p>\n";
+                                        html.Append(newNextLine);
+                                        firstLine = false;
+                                    }
+                                    else
+                                        html.Append("<p>" + nextLine + "</p>\n");
+                                }
 							}
 
 						}
@@ -1497,7 +1656,7 @@ namespace SimpleEpub2
 
 					appendFootNotes(footNoteQueuePost, html);
 
-					html.Append("</div>\n</body>\n</html>\n");
+					html.Append("</body>\n</html>\n");
 					if (extraLinesNotEmpty)
 						txtHtmlList.Add(html.ToString());
 					chapterNumber++;
@@ -1506,6 +1665,7 @@ namespace SimpleEpub2
 				while (true)
 				{
 					StringBuilder html = new StringBuilder();
+                    Boolean firstLine = true;
 
 					chapterFootNoteCount = 0;
 					if (!titleHasFootNote)
@@ -1589,7 +1749,16 @@ namespace SimpleEpub2
 								{
 									storeFootNoteLocation(ref nextLine, footNoteQueuePre, ref chapterFootNoteCount, 1, ref titleHasFootNote);
 
-									html.Append("<p>" + nextLine + "</p>\n");
+                                    if (firstLine && (dropCap || stickupCap))
+                                    {
+                                        String span = dropCap ? "dropCap" : (stickupCap ? "stickupCap" : "");
+                                        Tuple<String, String> tokens = processFirstLine(nextLine);
+                                        String newNextLine = "<p class=\"first\"><span class=\"" + span + "\">" + tokens.Item1 + "</span>" + tokens.Item2 + "</p>\n";
+                                        html.Append(newNextLine);
+                                        firstLine = false;
+                                    }
+                                    else
+                                        html.Append("<p>" + nextLine + "</p>\n");
 								}
 							}
 						}
@@ -1600,7 +1769,7 @@ namespace SimpleEpub2
 					{
 						appendFootNotes(footNoteQueuePost, html);
 
-						html.Append("</div>\n</body>\n</html>\n");
+						html.Append("</body>\n</html>\n");
 						txtHtmlList.Add(html.ToString());
 						chapterNumber++;
 					}
@@ -1608,7 +1777,7 @@ namespace SimpleEpub2
 					{
 						appendFootNotes(footNoteQueuePost, html);
 
-						html.Append("</div>\n</body>\n</html>\n");
+						html.Append("</body>\n</html>\n");
 						txtHtmlList.Add(html.ToString());
 						break;
 					}
@@ -1680,10 +1849,11 @@ namespace SimpleEpub2
 			}
 		}
 
-		private void generateCSS(Boolean vertical, Single marginL, Single marginR, Single marginT, Single marginB, Single lineHeight, Boolean addParagraphSpacing, String titleFont, System.Drawing.Color titleColorC, String bodyFont, System.Drawing.Color bodyColorC, System.Drawing.Color pageColor, Boolean embedFontSubset)
+		private void generateCSS(Boolean vertical, Single marginL, Single marginR, Single marginT, Single marginB, Single lineHeight, Boolean addParagraphSpacing, String titleFont, Single titleSize, System.Drawing.Color titleColorC, String bodyFont, Single bodySize, System.Drawing.Color bodyColorC, System.Drawing.Color pageColor, Boolean embedFontSubset)
 		{
 			String bodyColor = (bodyColorC == System.Drawing.Color.Transparent || bodyColorC == System.Drawing.Color.Empty) ? "" : ColorTranslator.ToHtml(bodyColorC);
 			String titleColor = (titleColorC == System.Drawing.Color.Transparent || titleColorC == System.Drawing.Color.Empty) ? "" : ColorTranslator.ToHtml(titleColorC);
+            Single LH = lineHeight / 100;
 
 			String background = "";
 			background = "\n\tbackground-color:" + ColorTranslator.ToHtml(pageColor) + ";";
@@ -1691,7 +1861,7 @@ namespace SimpleEpub2
 				background = "";
 
 			StringBuilder font1 = new StringBuilder();
-			font1.Append("@font-face {\n\tfont-family:\"" + titleFont + "\";\n\tsrc:local(\"" + titleFont + "\"),\n\turl(res:///opt/sony/ebook/FONT/" + titleFont + ".ttf),\n\turl(res:///Data/FONT/" + titleFont + ".ttf),\n\turl(res:///opt/sony/ebook/FONT/" + titleFont + ".ttf),\n\turl(res:///fonts/ttf/" + titleFont + ".ttf),\n\turl(res:///../../media/mmcblk0p1/fonts/" + titleFont + ".ttf),\n\turl(res:///DK_System/system/font/" + titleFont + ".ttf),\n\turl(res:///abook/fonts/" + titleFont + ".ttf),\n\turl(res:///system/fonts/" + titleFont + ".ttf),\n\turl(res:///system/media/sdcard/fonts/" + titleFont + ".ttf),\n\turl(res:///media/fonts/" + titleFont + ".ttf),\n\turl(res:///sdcard/fonts/" + titleFont + ".ttf),\n\turl(res:///system/fonts/" + titleFont + ".ttf),\n\turl(res:///mnt/MOVIFAT/font/" + titleFont + ".ttf)");
+            font1.Append("@font-face {\n\tfont-family:\"" + titleFont + "\";\n\tsrc:local(\"" + titleFont + "\"),\n\turl(res:///opt/sony/ebook/FONT/" + titleFont + ".ttf),\n\turl(res:///Data/FONT/" + titleFont + ".ttf),\n\turl(res:///opt/sony/ebook/FONT/" + titleFont + ".ttf),\n\turl(res:///fonts/ttf/" + titleFont + ".ttf),\n\turl(res:///fonts/" + titleFont + ".ttf),\n\turl(res:///../../media/mmcblk0p1/fonts/" + titleFont + ".ttf),\n\turl(res:///DK_System/system/font/" + titleFont + ".ttf),\n\turl(res:///abook/fonts/" + titleFont + ".ttf),\n\turl(res:///system/fonts/" + titleFont + ".ttf),\n\turl(res:///system/media/sdcard/fonts/" + titleFont + ".ttf),\n\turl(res:///media/fonts/" + titleFont + ".ttf),\n\turl(res:///sdcard/fonts/" + titleFont + ".ttf),\n\turl(res:///system/fonts/" + titleFont + ".ttf),\n\turl(res:///mnt/MOVIFAT/font/" + titleFont + ".ttf)");
 			if (embedFontSubset && titleFontPath.CompareTo("") != 0 && URIT != null)
 			{
 				CreateFontSubSetT();
@@ -1704,7 +1874,7 @@ namespace SimpleEpub2
 			font1.Append(";\n}\n");
 
 			StringBuilder font2 = new StringBuilder();
-			font2.Append("@font-face {\n\tfont-family:\"" + bodyFont + "\";\n\tsrc:local(\"" + bodyFont + "\"),\n\turl(res:///opt/sony/ebook/FONT/" + bodyFont + ".ttf),\n\turl(res:///Data/FONT/" + bodyFont + ".ttf),\n\turl(res:///opt/sony/ebook/FONT/" + bodyFont + ".ttf),\n\turl(res:///fonts/ttf/" + bodyFont + ".ttf),\n\turl(res:///../../media/mmcblk0p1/fonts/" + bodyFont + ".ttf),\n\turl(res:///DK_System/system/font/" + bodyFont + ".ttf),\n\turl(res:///abook/fonts/" + bodyFont + ".ttf),\n\turl(res:///system/fonts/" + bodyFont + ".ttf),\n\turl(res:///system/media/sdcard/fonts/" + bodyFont + ".ttf),\n\turl(res:///media/fonts/" + bodyFont + ".ttf),\n\turl(res:///sdcard/fonts/" + bodyFont + ".ttf),\n\turl(res:///system/fonts/" + bodyFont + ".ttf),\n\turl(res:///mnt/MOVIFAT/font/" + bodyFont + ".ttf)");
+            font2.Append("@font-face {\n\tfont-family:\"" + bodyFont + "\";\n\tsrc:local(\"" + bodyFont + "\"),\n\turl(res:///opt/sony/ebook/FONT/" + bodyFont + ".ttf),\n\turl(res:///Data/FONT/" + bodyFont + ".ttf),\n\turl(res:///opt/sony/ebook/FONT/" + bodyFont + ".ttf),\n\turl(res:///fonts/ttf/" + bodyFont + ".ttf),\n\turl(res:///fonts/" + bodyFont + ".ttf),\n\turl(res:///../../media/mmcblk0p1/fonts/" + bodyFont + ".ttf),\n\turl(res:///DK_System/system/font/" + bodyFont + ".ttf),\n\turl(res:///abook/fonts/" + bodyFont + ".ttf),\n\turl(res:///system/fonts/" + bodyFont + ".ttf),\n\turl(res:///system/media/sdcard/fonts/" + bodyFont + ".ttf),\n\turl(res:///media/fonts/" + bodyFont + ".ttf),\n\turl(res:///sdcard/fonts/" + bodyFont + ".ttf),\n\turl(res:///system/fonts/" + bodyFont + ".ttf),\n\turl(res:///mnt/MOVIFAT/font/" + bodyFont + ".ttf)");
 			if (embedFontSubset && bodyFontPath.CompareTo("") != 0 && URIB != null)
 			{
 				CreateFontSubSetB();
@@ -1719,26 +1889,23 @@ namespace SimpleEpub2
 
 			String html = (vertical ? "html {\n\twriting-mode:vertical-rl;\n\t-webkit-writing-mode:vertical-rl;\n\t-epub-writing-mode:vertical-rl;\n\t-epub-line-break:strict;\n\tline-break:strict;\n\t-epub-word-break:normal;\n\tword-break:normal;\n\tmargin:0;\n\tpadding:0;\n}\n" : "");
 
-			String body = "body {\n\tmargin-top:" + marginT + "%;\n\tmargin-bottom:" + marginB + "%;\n\tmargin-left:" + marginL + "%;\n\tmargin-right:" + marginR + "%;\n\tline-height:" + lineHeight + "%;\n\ttext-align:justify;\n\tfont-family:" + bodyFont + ";\n\tcolor:" + bodyColor + ";" + background + "\n}\n";
-
-			String div = "div {\n\tmargin:0px;\n\tline-height:" + lineHeight + "%;\n\ttext-align:justify;\n\tfont-family:" + bodyFont + ";\n\tcolor:" + bodyColor + ";\n}\n";
+            String body = "body {\n\tmargin-top:" + marginT + "%;\n\tmargin-bottom:" + marginB + "%;\n\tmargin-left:" + marginL + "%;\n\tmargin-right:" + marginR + "%;" + background + "\n}\n";
 
 			String img = "img {\n\tmax-width:100%;\n\tmax-height:100%;\n\tbottom:0;\n\tleft:0;\n\tmargin:auto;\n\toverflow:auto;\n\tposition:fixed;\n\tright:0;\n\ttop:0;\n}\n";
 			//String img = "img {\n\tbottom:0;\n\tleft:0;\n\tmargin:auto;\n\toverflow:auto;\n\tposition:fixed;\n\tright:0;\n\ttop:0;\n}\n";
 			//String img = "";
 
-			Int32 pMargin = (addParagraphSpacing ? 5 : 0);
-			String p = "p {\n\ttext-align:justify;\n\ttext-indent:2em;\n\tline-height:" + lineHeight + "%;\n\tmargin-top:" + pMargin + "pt;\n\tmargin-bottom:" + pMargin + "pt;\n}\n";
+			Int32 pMargin = (addParagraphSpacing ? 6 : 0);
+            String p = "p {\n\tfont-family:" + bodyFont + ";\n\tfont-size:" + bodySize + "pt;\n\tcolor:" + bodyColor + ";\n\ttext-align:justify;\n\ttext-indent:2em;\n\tline-height:" + LH + "em;\n\tmargin-top:" + pMargin + "pt;\n\tmargin-bottom:" + pMargin + "pt;\n}\np.first {\n\ttext-indent:0em!important;\n}\n";
 
-			String others = ".cover {\n\twidth:100%;\n}\n.center {\n\ttext-align:center;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.left {\n\ttext-align:left;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.right {\n\ttext-align:right;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.quote {\n\tmargin-top:0%;\n\tmargin-bottom:0%;\n\tmargin-left:1em;\n\tmargin-right:1em;\n\ttext-align:justify;\n\tfont-family:" + bodyFont + ";\n\tcolor:" + bodyColor + ";\n}\n";
+            String others = ".cover {\n\twidth:100%;\n}\n.center {\n\ttext-align:center;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.left {\n\ttext-align:left;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.right {\n\ttext-align:right;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.quote {\n\tmargin-top:0%;\n\tmargin-bottom:0%;\n\tmargin-left:1em;\n\tmargin-right:1em;\n\ttext-align:justify;\n\tfont-family:" + bodyFont + ";\n\tcolor:" + bodyColor + ";\n}\n.stickupCap {\n\tfont-size:2em;\n\tfont-weight:bold;\n}\n.dropCap {\n\tfont-size:2em;\n\tfont-weight:bold;\n\tfloat:left;\n\tmargin:5px;\n\tpadding:3px;\n}\n";
 
-			String headers = "h1 {\n\tline-height:" + lineHeight + "%;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:xx-large;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh2 {\n\tline-height:" + lineHeight + "%;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:x-large;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh3 {\n\tline-height:" + lineHeight + "%;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:large;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh4 {\n\tline-height:" + lineHeight + "%;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:medium;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh5 {\n\tline-height:" + lineHeight + "%;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:small;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh6 {\n\tline-height:" + lineHeight + "%;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:x-small;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\n";
+            String headers = "h1 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + titleSize + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh2 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 2) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh3 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 4) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh4 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 6) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh5 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 8) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh6 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 10) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\n";
 
 			css.Append(font1);
 			css.Append(font2);
 			css.Append(html);
 			css.Append(body);
-			css.Append(div);
 			css.Append(img);
 			css.Append(p);
 			css.Append(others);
@@ -1777,7 +1944,8 @@ namespace SimpleEpub2
 			{
 				if (!File.Exists(CoverPath))
 				{
-					MessageBoxEx.Show("找不到" + CoverPath + "文件！\n无法继续生成！");
+                    MessageBoxEx.Show(LANG.getString("mainpage3_copyImageFile_string1")
+                        + CoverPath + LANG.getString("mainpage3_copyImageFile_string2"));
 					return false;
 				}
 			}
@@ -1805,7 +1973,8 @@ namespace SimpleEpub2
 			{
 				if (!File.Exists(CoverPathSlim))
 				{
-					MessageBoxEx.Show("找不到" + CoverPathSlim + "文件！\n无法继续生成！");
+                    MessageBoxEx.Show(LANG.getString("mainpage3_copyImageFile_string1")
+                        + CoverPathSlim + LANG.getString("mainpage3_copyImageFile_string2"));
 					return false;
 				}
 			}
@@ -1817,12 +1986,14 @@ namespace SimpleEpub2
 
 				if (!File.Exists(origPic))
 				{
-					MessageBoxEx.Show("找不到" + origPic + "文件！\n无法继续生成！");
+                    MessageBoxEx.Show(LANG.getString("mainpage3_copyImageFile_string1")
+                        + origPic + LANG.getString("mainpage3_copyImageFile_string2"));
 					return false;
 				}
 				if (!File.Exists(origPicSlim))
 				{
-					MessageBoxEx.Show("找不到" + origPicSlim + "文件！\n无法继续生成！");
+                    MessageBoxEx.Show(LANG.getString("mainpage3_copyImageFile_string1")
+                        + origPicSlim + LANG.getString("mainpage3_copyImageFile_string2"));
 					return false;
 				}
 			}
@@ -1832,8 +2003,9 @@ namespace SimpleEpub2
 		private void generateOPF(Boolean coverFirstPage, Int32 translation, Boolean vertical, Boolean embedFontSubset)
 		{
 			Intro = translate(Intro, translation);
+            String Language = bookAndAuthor_isChinese ? "zh-CN" : "en-US";
 
-			String head = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<package version=\"2.0\" unique-identifier=\"BookID\" xmlns=\"http://www.idpf.org/2007/opf\">\n<metadata xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:opf=\"http://www.idpf.org/2007/opf\">\n<dc:title>" + bookAndAuthor[0] + "</dc:title>\n<dc:identifier id=\"BookID\">urn:uuid:henryxrl@gmail.com</dc:identifier>\n<dc:language>zh-CN</dc:language>\n<dc:creator opf:role=\"aut\">" + bookAndAuthor[1] + "</dc:creator>\n<dc:description>" + Intro + "</dc:description>\n<meta name=\"cover\" content=\"cover-image\" />\n</metadata>\n<manifest>\n<!-- Content Documents -->\n";
+			String head = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<package version=\"2.0\" unique-identifier=\"BookID\" xmlns=\"http://www.idpf.org/2007/opf\">\n<metadata xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:opf=\"http://www.idpf.org/2007/opf\">\n<dc:title>" + bookAndAuthor[0] + "</dc:title>\n<dc:identifier id=\"BookID\">urn:uuid:henryxrl@gmail.com</dc:identifier>\n<dc:language>" + Language + "</dc:language>\n<dc:creator opf:role=\"aut\">" + bookAndAuthor[1] + "</dc:creator>\n<dc:description>" + Intro + "</dc:description>\n<meta name=\"cover\" content=\"cover-image\" />\n</metadata>\n<manifest>\n";
 
 			StringBuilder body1 = new StringBuilder();
 			if (coverFirstPage)
@@ -1912,7 +2084,7 @@ namespace SimpleEpub2
 				{
 					String fontPath = embedFontPaths[i];
 					String fontName = fontPath.Substring(fontPath.LastIndexOf("\\") + 1);
-					embedFonts.Append("\n<item id=\"" + fontName + "\" href=\"Fonts/" + fontName + "\" media-type=\"application/vnd.ms-opentype\" />");
+                    embedFonts.Append("\n<item id=\"" + fontName + "\" href=\"Fonts/" + fontName + "\" media-type=\"application/x-font-ttf\" />");
 				}
 			}
 
@@ -2154,6 +2326,8 @@ namespace SimpleEpub2
 			Match m = Regex.Match(filename, "^[a-zA-ZÀ-ÿ\\p{P}\\s\\p{N}]*$");
 			if (m.Success)		// is English book name
 			{
+                bookAndAuthor_isChinese = false;
+
 				//Match m1 = Regex.Match(filename, "^[a-zA-Z0-9?><;,{}[\\]\\-_+=!@#$%\\^&*|'\\s]*(\\s(?i)by\\s)[a-zA-Z0-9?><;,{}[\\]\\-_+=!@#$%\\^&*|'\\s]*$");
 				// 1. get info from file name
 				Int32 pos = filename.ToLower().IndexOf(" by ");
@@ -2175,10 +2349,11 @@ namespace SimpleEpub2
 
 					// No complete book name and author info
 					notifyIcon1.BalloonTipIcon = ToolTipIcon.Warning;
-					showBalloonTip("文件名中无完整英文书名和作者信息！", "完整信息范例：“BookName By Author”\n（文件名中一定要有“By”这个词，大小写不限）\n\n开始检测文件第一、二行……\n其中第一行为书名，第二行为作者名！");
+                    showBalloonTip(LANG.getString("balloontip_NoEnTitleAuthor"),
+                        String.Format(LANG.getString("balloontip_NoEnTitleAuthor_detail"), Environment.NewLine));
 
 					// Treat first line as book name and second line as author
-					using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding("GB2312")))
+					using (StreamReader sr = new StreamReader(path, Encoding.Default))
 					{
 						String bookname = sr.ReadLine();
 						if (bookname == null || bookname.Trim() == "") bookname = filename;
@@ -2202,6 +2377,8 @@ namespace SimpleEpub2
 			}
 			else
 			{
+                bookAndAuthor_isChinese = true;
+
 				// 1. get info from file name
 				Int32 pos = filename.IndexOf("作者：");
 				if (pos == -1)
@@ -2228,10 +2405,11 @@ namespace SimpleEpub2
 
 					// No complete book name and author info
 					notifyIcon1.BalloonTipIcon = ToolTipIcon.Warning;
-					showBalloonTip("文件名中无完整书名和作者信息！", "完整信息范例：“《书名》作者：作者名”\n（文件名中一定要有“作者”二字，书名号可以省略）\n\n开始检测文件第一、二行……\n其中第一行为书名，第二行为作者名！");
+                    showBalloonTip(LANG.getString("balloontip_NoZhTitleAuthor"),
+                        String.Format(LANG.getString("balloontip_NoZhTitleAuthor_detail"), Environment.NewLine));
 
 					// Treat first line as book name and second line as author
-					using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding("GB2312")))
+					using (StreamReader sr = new StreamReader(path, Encoding.Default))
 					{
 						String bookname = sr.ReadLine();
 						if (bookname == null || bookname.Trim() == "") bookname = filename;
@@ -2267,7 +2445,7 @@ namespace SimpleEpub2
 
 			using (FileStream fs = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
 			using (BufferedStream bs = new BufferedStream(fs))
-			using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding("GB2312")))
+			using (StreamReader sr = new StreamReader(path, Encoding.Default))
 			{
 				String line = "";
 				Boolean titleFirstLine = false;
@@ -2341,7 +2519,7 @@ namespace SimpleEpub2
 				catch
 				{
 					if (File.Exists(CoverPath))
-						MessageBoxEx.Show(this, "删除原封面文件失败！");
+                        MessageBoxEx.Show(this, LANG.getString("mainpage2_helper_cover_delete_failed"));
 				}
 			}
 			if (File.Exists(CoverPathSlim))
@@ -2353,7 +2531,7 @@ namespace SimpleEpub2
 				catch
 				{
 					if (File.Exists(CoverPathSlim))
-						MessageBoxEx.Show(this, "删除原封面文件失败！");
+                        MessageBoxEx.Show(this, LANG.getString("mainpage2_helper_cover_delete_failed"));
 				}
 			}
 
@@ -2403,7 +2581,7 @@ namespace SimpleEpub2
 				catch
 				{
 					if (File.Exists(NotePath))
-						MessageBoxEx.Show("Deletion failed");
+                        MessageBoxEx.Show(LANG.getString("mainpage2_helper_notepic_delete_failed"));
 				}
 			}
 
@@ -2702,7 +2880,7 @@ namespace SimpleEpub2
 			return result.ToString().Trim();
 		}
 
-		private static void crop(String tempIMGNamePart1)
+		private void crop(String tempIMGNamePart1)
 		{
 			String tempIMGPath = tempPath + "\\" + tempIMGNamePart1 + "temp.jpg";
 
@@ -2786,10 +2964,10 @@ namespace SimpleEpub2
 			}
 		}
 		
-		private static void SaveJpeg(String path, Image img, Int32 quality)
+		private void SaveJpeg(String path, Image img, Int32 quality)
 		{
 			if (quality < 0 || quality > 100)
-				throw new ArgumentOutOfRangeException("quality must be between 0 and 100.");
+                throw new ArgumentOutOfRangeException(LANG.getString("mainpage2_helper_img_quality"));
 
 
 			// Encoder parameter for image quality 
@@ -2803,10 +2981,10 @@ namespace SimpleEpub2
 			img.Save(path, jpegCodec, encoderParams);
 		}
 
-		private static void SavePng(String path, Image img, Int32 quality)
+		private void SavePng(String path, Image img, Int32 quality)
 		{
 			if (quality < 0 || quality > 100)
-				throw new ArgumentOutOfRangeException("quality must be between 0 and 100.");
+                throw new ArgumentOutOfRangeException(LANG.getString("mainpage2_helper_img_quality"));
 
 
 			// Encoder parameter for image quality 
@@ -2840,7 +3018,7 @@ namespace SimpleEpub2
 
 		private String getTOCPath()
 		{
-			return getROOTPath() + "\\目录.txt";
+			return getROOTPath() + "\\" + LANG.getString("TOC") + ".txt";
 		}
 
 		private void clearOverLay()
@@ -2900,14 +3078,14 @@ namespace SimpleEpub2
 						}
 						catch
 						{
-							MessageBoxEx.Show("无效的目录！行号只能是数字！\n无法继续生成Epub！");
+                            MessageBoxEx.Show(String.Format(LANG.getString("mainpage3_helper_TOC_invalid"), Environment.NewLine));
 							validTOC = false;
 							break;
 						}
 					}
 					else
 					{
-						MessageBoxEx.Show("无效的目录！行号只能是数字！\n无法继续生成Epub！");
+                        MessageBoxEx.Show(String.Format(LANG.getString("mainpage3_helper_TOC_invalid"), Environment.NewLine));
 						validTOC = false;
 						break;
 					}
@@ -2961,17 +3139,17 @@ namespace SimpleEpub2
 		{
 			if (flag == 0)
 			{
-				return "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"zh-CN\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"../Styles/main.css\" />\n<script type=\"text/javascript\">\n$(function() {\n\tif(($(window).height() / $(window).width()) >= 1.5) {\n\t\t$(\"img\").each(function() {\n\t\t\t$(this).attr(\"src\", $(this).attr(\"src\").replace(\"../Images/cover.jpg\", \"../Images/cover~slim.jpg\"));\n\t\t});\n\t}\n});\n</script>\n<title>" + chapterTitle + "</title>\n</head>\n<body>\n<div>";
+				return "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"zh-CN\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"../Styles/main.css\" />\n<script type=\"text/javascript\">\n$(function() {\n\tif(($(window).height() / $(window).width()) >= 1.5) {\n\t\t$(\"img\").each(function() {\n\t\t\t$(this).attr(\"src\", $(this).attr(\"src\").replace(\"../Images/cover.jpg\", \"../Images/cover~slim.jpg\"));\n\t\t});\n\t}\n});\n</script>\n<title>" + chapterTitle + "</title>\n</head>\n<body>";
 			}
 			else if (flag == 1)
 			{
 				Int32 footNoteIdx = chapterTitle.IndexOf("<a class=\"duokan-footnote\"");
 				String title = (footNoteIdx > 0) ? chapterTitle.Substring(0, footNoteIdx) : chapterTitle;
-				return "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"zh-CN\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"../Styles/main.css\" />\n<title>" + title + "</title>\n</head>\n<body>\n<div>\n<h2>" + chapterTitle + "</h2>";
+				return "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"zh-CN\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"../Styles/main.css\" />\n<title>" + title + "</title>\n</head>\n<body>\n<h1>" + chapterTitle + "</h1>";
 			}
 			else
 			{
-				return "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"zh-CN\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"../Styles/main.css\" />\n<script type=\"text/javascript\">\n$(function() {\n\tif(($(window).height() / $(window).width()) >= 1.5) {\n\t\t$(\"img\").each(function() {\n\t\t\t$(this).attr(\"src\", $(this).attr(\"src\").replace(\"../Images/" + picName + ".jpg\", \"../Images/" + picName + "~slim.jpg\"));\n\t\t});\n\t}\n});\n</script>\n<title>" + chapterTitle + "</title>\n</head>\n<body>\n<div>";
+				return "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"zh-CN\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"../Styles/main.css\" />\n<script type=\"text/javascript\">\n$(function() {\n\tif(($(window).height() / $(window).width()) >= 1.5) {\n\t\t$(\"img\").each(function() {\n\t\t\t$(this).attr(\"src\", $(this).attr(\"src\").replace(\"../Images/" + picName + ".jpg\", \"../Images/" + picName + "~slim.jpg\"));\n\t\t});\n\t}\n});\n</script>\n<title>" + chapterTitle + "</title>\n</head>\n<body>";
 			}
 		}
 
@@ -3003,6 +3181,15 @@ namespace SimpleEpub2
 			}
 			return count;
 		}
+
+        private Tuple<String, String> processFirstLine(String s)
+        {
+            Match m = Regex.Match(s[0].ToString(), "^[\\p{P}\\p{S}]$");
+            if (m.Success)		// first char is punctuation
+                return new Tuple<String, String>(s.Substring(0, 2), s.Substring(2));
+            else
+                return new Tuple<String, String>(s[0].ToString(), s.Substring(1));
+        }
 
 		private static Int32 translationState(Boolean StT, Boolean TtS)
 		{
@@ -3075,13 +3262,13 @@ namespace SimpleEpub2
 				Int32 wordCount = IndexT.Count;
 				if (wordCount <= 0)
 				{
-					MessageBoxEx.Show("不需要内嵌标题字体！");
+                    MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string1"));
 					noNeedEmbed = true;
 					return;
 				}
 				else if (wordCount > 65535)
 				{
-					MessageBoxEx.Show("字符太多！将用字体全集！");
+                    MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string3"));
 					File.Copy(URIT.AbsolutePath, (tempPath + "\\title.ttf"));
 					return;
 				}
@@ -3105,13 +3292,13 @@ namespace SimpleEpub2
 				wordcountnr = IndexB.Count;
 				if (wordcountnr <= 0)
 				{
-					MessageBoxEx.Show("不需要内嵌正文字体！");
+                    MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string2"));
 					noNeedEmbed = true;
 					return;
 				}
 				else if (wordcountnr > 65535)
 				{
-					MessageBoxEx.Show("字符太多！将用字体全集！");
+                    MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string3"));
 					File.Copy(URIB.AbsolutePath, (tempPath + "\\body.ttf"));
 					return;
 				}
@@ -3174,21 +3361,36 @@ namespace SimpleEpub2
 				w.Write(r.ReadBytes((Int32)s.Length));
 		}
 
-		private void switchAOT()
-		{
-			if (this.TopMost)
-			{
-				this.TopMost = false;
-				notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-				showBalloonTip("温馨提示", "已取消置顶");
-				Item1.Text = "窗口置顶";
-			}
-			else
+        private static String getINILanguage()
+        {
+            if (!File.Exists(settingsPath))
+            {
+                return null;
+            }
+
+            INIFile ini = new INIFile(settingsPath);
+            return ini.INIReadValue("Tab_4", "Language");
+        }
+
+        private void disableAOT()
+        {
+            if (this.TopMost)
+            {
+                this.TopMost = false;
+                notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                showBalloonTip(LANG.getString("balloontip_title"), LANG.getString("balloontip_AOT_cancel"));
+                Item1.Text = LANG.getString("AOT");
+            }
+        }
+
+        private void enableAOT()
+        {
+			if (!this.TopMost)
 			{
 				this.TopMost = true;
 				notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-				showBalloonTip("温馨提示", "已置顶");
-				Item1.Text = "取消置顶";
+                showBalloonTip(LANG.getString("balloontip_title"), LANG.getString("balloontip_AOT"));
+                Item1.Text = LANG.getString("AOT_cancel");
 			}
 		}
 
@@ -3285,7 +3487,7 @@ namespace SimpleEpub2
 				pg1.processedMode();
 
 				notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-				showBalloonTip("温馨提示", "目录提取完毕！");
+                showBalloonTip(LANG.getString("balloontip_title"), LANG.getString("balloontip_TOC_done"));
 
 				next_button.Enabled = true;
 			}
@@ -3351,8 +3553,9 @@ namespace SimpleEpub2
 				pg3.bookintro.Text = processedIntro;
 				pg3.bookwordcount.Text = wordcount.ToString();
 				pg3.bookwordcountnr.Text = wordcountnr.ToString();
-				pg3.location_label.Text = "位置：" + zipPath;
-				pg3.time_label.Text = "耗时：" + getProcessTime().ToString() + " 秒";
+                pg3.location_label.Text = LANG.getString("mainpage3_location_label") + zipPath;
+                pg3.time_label.Text = LANG.getString("mainpage3_time_label1")
+                    + getProcessTime().ToString() + " " + LANG.getString("mainpage3_time_label2");
 				pg3.ProcessedMode();
 				if (!stsObj.embedFontSubset || URIT == null || URIB == null || noNeedEmbed)
 				{
@@ -3378,13 +3581,13 @@ namespace SimpleEpub2
 				}
 
 				notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-				showBalloonTip("温馨提示", DocName + ".epub" + "\n已生成完毕！");
+                showBalloonTip(LANG.getString("balloontip_title"), DocName + ".epub\n" + LANG.getString("balloontip_success"));
 			}
 			else
 			{
 				pg3.ProcessFAILEDMode();
 				notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
-				showBalloonTip("温馨提示", "生成失败！");
+                showBalloonTip(LANG.getString("balloontip_title"), LANG.getString("balloontip_fail"));
 			}
 
 			pg3.cover.Image = covers[0];

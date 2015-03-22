@@ -7,18 +7,20 @@ namespace SimpleEpub2
 {
 	public partial class Page2 : DevComponents.DotNetBar.Controls.SlidePanel
 	{
-		Color themeColor = Color.Black;
+		Color themeColor;
+        Language LANG;
 
-		public Page2(Color c)
+		public Page2(Color c, Language lang)
 		{
 			InitializeComponent();
 
 			themeColor = c;
+            LANG = lang;
 
 			SlideOutButtonVisible = false;
 
-			TOC_list_ChapterTitle.HeaderText = "章节名称";
-			TOC_list_LineNumber.HeaderText = "行号";
+            TOC_list_ChapterTitle.HeaderText = LANG.getString("mainpage2_TOC_list_ChapterTitle");
+            TOC_list_LineNumber.HeaderText = LANG.getString("mainpage2_TOC_list_LineNumber");
 			
 			overlay_cover.BackColor = Color.FromArgb(150, Color.Black);
 			overlay_cover.Parent = cover_picturebox;
@@ -37,15 +39,15 @@ namespace SimpleEpub2
 
 			Int32 gap = 25;
 			TOC_export.Parent = overlay_TOC_buttons;
-			TOC_export.Text = "导出目录";
+            TOC_export.Text = LANG.getString("mainpage2_TOC_export");
 			TOC_export.Location = new Point(overlay_TOC_buttons.Width / 2 - TOC_export.Width / 2, overlay_TOC_buttons.Height / 2 - 4 * gap - TOC_export.Height / 2);
 			//TOC_export.Click += TOC_export_Click;
 			TOC_import.Parent = overlay_TOC_buttons;
-			TOC_import.Text = "导入目录";
+            TOC_import.Text = LANG.getString("mainpage2_TOC_import");
 			TOC_import.Location = new Point(overlay_TOC_buttons.Width / 2 - TOC_import.Width / 2, overlay_TOC_buttons.Height / 2);
 			//TOC_import.Click += TOC_import_Click;
 			TOC_clear.Parent = overlay_TOC_buttons;
-			TOC_clear.Text = "清空目录";
+            TOC_clear.Text = LANG.getString("mainpage2_TOC_clear");
 			TOC_clear.Location = new Point(overlay_TOC_buttons.Width / 2 - TOC_clear.Width / 2, overlay_TOC_buttons.Height / 2 + 4 * gap + TOC_clear.Height / 2);
 			//TOC_clear.Click += TOC_clear_Click;
 
@@ -73,19 +75,29 @@ namespace SimpleEpub2
 			openFileDialog.FilterIndex = 1;
 
 			radialMenu1.Symbol = "";
-			radialMenu1.SubMenuEdgeWidth = 8;
-			radialMenu1.CenterButtonDiameter = 45;
+			radialMenu1.SubMenuEdgeWidth = 5;
+			radialMenu1.CenterButtonDiameter = 50;
+            radialMenu1.Diameter = 210;
 			//radialMenu1.ItemClick += RadialMenu1ItemClick;
+            Item1.Text = LANG.getString("mainpage2_rm1_item1");     // 导出目录
+            Item2.Text = LANG.getString("mainpage2_rm1_item2");     // 清空目录
+            Item3.Text = LANG.getString("mainpage2_rm1_item3");     // 导入目录
 
 			radialMenu2.Symbol = "";
-			radialMenu2.SubMenuEdgeWidth = 8;
-			radialMenu2.CenterButtonDiameter = 45;
+			radialMenu2.SubMenuEdgeWidth = 5;
+			radialMenu2.CenterButtonDiameter = 50;
+            radialMenu2.Diameter = 210;
 			//radialMenu2.ItemClick += RadialMenu2ItemClick;
+            Item4.Text = LANG.getString("mainpage2_rm2_item1");     // 选中章节升一级
+            Item5.Text = LANG.getString("mainpage2_rm2_item2");     // 选中章节降一级
 
 			radialMenu3.Symbol = "";
-			radialMenu3.SubMenuEdgeWidth = 8;
-			radialMenu3.CenterButtonDiameter = 45;
+			radialMenu3.SubMenuEdgeWidth = 5;
+			radialMenu3.CenterButtonDiameter = 50;
+            radialMenu3.Diameter = 210;
 			//radialMenu3.ItemClick += RadialMenu2ItemClick;
+            Item6.Text = LANG.getString("mainpage2_rm3_item1");     // 使用自动生成封面
+            Item7.Text = LANG.getString("mainpage2_rm3_item2");     // 选择封面图片
 
 			// Set cell font colors
 			setCellFontColor(System.Drawing.Color.Black, themeColor);
@@ -318,8 +330,8 @@ namespace SimpleEpub2
 
 				using (SolidBrush b = new SolidBrush(themeColor))
 				{
-					String s = "封面图片";
-					Font f = new Font("微软雅黑", 35, FontStyle.Bold);
+                    String s = LANG.getString("mainpage2_img_string");
+                    Font f = new Font("Microsoft YaHei UI", 35, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = cover_picturebox.Width / 2 - size.Width / 2;
 					Single py = cover_picturebox.Height / 2 - size.Height / 2 - 27;

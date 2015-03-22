@@ -35,6 +35,8 @@ namespace SimpleEpub2
 		protected internal Color bodyColor;
 		protected internal Single lineSpacing;
 		protected internal Boolean addParagraphSpacing;
+        protected internal Boolean dropCap;
+        protected internal Boolean stickupCap;
 		protected internal String fileLocation;
 		protected internal Boolean deleteTempFiles;
 		protected internal Boolean autoUpdate;
@@ -60,20 +62,22 @@ namespace SimpleEpub2
 			pageColor = Color.Empty;
 			marginT = 0;
 			marginB = 0;
-			marginL = 1;
-			marginR = 1;
+			marginL = 0;
+			marginR = 0;
 			titleFont = "微软雅黑";
-			titleSize = 24;
+			titleSize = 20;
 			titleColor = Color.SteelBlue;
 			bodyFont = "微软雅黑";
-			bodySize = 14;
+			bodySize = 12;
 			bodyColor = Color.Black;
-			lineSpacing = 115;
-			addParagraphSpacing = false;
+			lineSpacing = 130;
+			addParagraphSpacing = true;
+            dropCap = false;
+            stickupCap = false;
 			fileLocation = Application.StartupPath;
 			deleteTempFiles = true;
 			autoUpdate = true;
-			language = "zh-CN";
+			language = "null";
 		}
 
 		public void loadFromSettings(Settings sts)
@@ -100,9 +104,13 @@ namespace SimpleEpub2
 			bodyColor = sts.pg3.settings3_2_bcolor.SelectedColor;
 			lineSpacing = Int32.Parse(sts.pg3.settings3_3_linespacing.Text);
 			addParagraphSpacing = sts.pg3.settings3_3_addparagraphspacing.Value;
+            dropCap = sts.pg3.settings3_3_dropCap.Value;
+            stickupCap = sts.pg3.settings3_3_stickupCap.Value;
 			fileLocation = sts.pg4.settings4_1_filelocation.Text;
 			deleteTempFiles = sts.pg4.settings4_2_deletetempfiles.Value;
 			autoUpdate = sts.pg4.settings4_4_chkupd.Value;
+            language = (sts.pg4.settings4_4_language.Text.CompareTo("English") == 0) ? "en_" : 
+                ((sts.pg4.settings4_4_language.Text.CompareTo("简体中文") == 0) ? "zh_" : "null");
 		}
 
 		public void writeToSettings(Settings sts)
@@ -144,9 +152,23 @@ namespace SimpleEpub2
 			sts.pg3.settings3_2_bcolor.SelectedColor = bodyColor;
 			sts.pg3.settings3_3_linespacing.Text = lineSpacing.ToString();
 			sts.pg3.settings3_3_addparagraphspacing.Value = addParagraphSpacing;
+            sts.pg3.settings3_3_dropCap.Value = dropCap;
+            sts.pg3.settings3_3_stickupCap.Value = stickupCap;
+            if (sts.pg3.settings3_3_dropCap.Value)
+            {
+                sts.pg3.settings3_3_stickupCap.Value = false;
+                sts.pg3.settings3_3_stickupCap.Enabled = false;
+            }
+            if (sts.pg3.settings3_3_stickupCap.Value)
+            {
+                sts.pg3.settings3_3_dropCap.Value = false;
+                sts.pg3.settings3_3_dropCap.Enabled = false;
+            }
 			sts.pg4.settings4_1_filelocation.Text = fileLocation;
 			sts.pg4.settings4_2_deletetempfiles.Value = deleteTempFiles;
 			sts.pg4.settings4_4_chkupd.Value = autoUpdate;
+            sts.pg4.settings4_4_language.Text = (language.CompareTo("en_") == 0) ? "English" : 
+                ((language.CompareTo("zh_") == 0) ? "简体中文" : "null");
 		}
 
 		public void loadFromIni()
@@ -173,7 +195,9 @@ namespace SimpleEpub2
 			bodyColor = ColorTranslator.FromHtml(ini.INIReadValue("Tab_3", "Body_Color"));
 			lineSpacing = Int32.Parse(ini.INIReadValue("Tab_3", "Line_Spacing"));
 			addParagraphSpacing = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_3", "Add_Paragraph_Spacing")));
-			fileLocation = ini.INIReadValue("Tab_4", "Generated_File_Location");
+            dropCap = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_3", "Drop_Cap")));
+            stickupCap = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_3", "Stickup_Cap")));
+            fileLocation = ini.INIReadValue("Tab_4", "Generated_File_Location");
 			deleteTempFiles = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_4", "Delete_Temp_Files")));
 			autoUpdate = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_4", "Auto_Update")));
 			language = ini.INIReadValue("Tab_4", "Language");
@@ -203,7 +227,9 @@ namespace SimpleEpub2
 			ini.INIWriteValue("Tab_3", "Body_Color", ColorTranslator.ToHtml(bodyColor));
 			ini.INIWriteValue("Tab_3", "Line_Spacing", lineSpacing.ToString());
 			ini.INIWriteValue("Tab_3", "Add_Paragraph_Spacing", (Convert.ToInt32(addParagraphSpacing)).ToString());
-			ini.INIWriteValue("Tab_4", "Generated_File_Location", fileLocation);
+            ini.INIWriteValue("Tab_3", "Drop_Cap", (Convert.ToInt32(dropCap)).ToString());
+            ini.INIWriteValue("Tab_3", "Stickup_Cap", (Convert.ToInt32(stickupCap)).ToString());
+            ini.INIWriteValue("Tab_4", "Generated_File_Location", fileLocation);
 			ini.INIWriteValue("Tab_4", "Delete_Temp_Files", (Convert.ToInt32(deleteTempFiles)).ToString());
 			ini.INIWriteValue("Tab_4", "Auto_Update", (Convert.ToInt32(autoUpdate)).ToString());
 			ini.INIWriteValue("Tab_4", "Language", language);

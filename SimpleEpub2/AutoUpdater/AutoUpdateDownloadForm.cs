@@ -12,6 +12,16 @@ namespace SimpleEpub2.AutoUpdater
 	/// </summary>
 	internal partial class AutoUpdateDownloadForm : DevComponents.DotNetBar.Metro.MetroForm
 	{
+        /// <summary>
+        /// The program to update's info
+        /// </summary>
+        private AutoUpdatable applicationInfo;
+
+        /// <summary>
+        /// The program to update's langCode
+        /// </summary>
+        private Language lang;
+
 		/// <summary>
 		/// The web client to download the update
 		/// </summary>
@@ -25,17 +35,17 @@ namespace SimpleEpub2.AutoUpdater
 		/// <summary>
 		/// A temp file name to download to
 		/// </summary>
-		private string tempFile;
+		private String tempFile;
 
 		/// <summary>
 		/// The MD5 hash of the file to download
 		/// </summary>
-		private string md5;
+		private String md5;
 
 		/// <summary>
 		/// Gets the temp file path for the downloaded file
 		/// </summary>
-		internal string TempFilePath
+		internal String TempFilePath
 		{
 			get { return this.tempFile; }
 		}
@@ -43,14 +53,19 @@ namespace SimpleEpub2.AutoUpdater
 		/// <summary>
 		/// Creates a new AutoUpdateDownloadForm
 		/// </summary>
-		internal AutoUpdateDownloadForm(Uri location, String md5, Icon programIcon)
+        internal AutoUpdateDownloadForm(AutoUpdatable applicationInfo, Uri location, String md5, Icon programIcon)
 		{
 			InitializeComponent();
+
+            this.applicationInfo = applicationInfo;
+            this.lang = applicationInfo.Lang;
 
 			if (programIcon != null)
 				this.Icon = programIcon;
 
-			this.Text = "SimpleEpub2 - 下载更新";
+            this.Text = applicationInfo.ApplicationName + " - " + lang.getString("update_download");
+
+            this.lblDownloading.Text = lang.getString("update_downloading");
 
 			// Set the temp file name and create new 0-byte file
 			tempFile = Path.GetTempFileName();
@@ -78,8 +93,8 @@ namespace SimpleEpub2.AutoUpdater
 		private void webClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
 			// Update progressbar on download
-			this.lblPercentage.Text = String.Format("已完成： {0}", FormatPercentage(e.BytesReceived, e.TotalBytesToReceive, 0));
-			this.lblProgress.Text = String.Format("已下载： {0} / {1}", FormatBytes(e.BytesReceived, 1, true), FormatBytes(e.TotalBytesToReceive, 1, true));
+			this.lblPercentage.Text = String.Format(lang.getString("update_completed") + " {0}", FormatPercentage(e.BytesReceived, e.TotalBytesToReceive, 0));
+            this.lblProgress.Text = String.Format(lang.getString("update_downloaded") + " {0} / {1}", FormatBytes(e.BytesReceived, 1, true), FormatBytes(e.TotalBytesToReceive, 1, true));
 			this.progressBar.Value = e.ProgressPercentage;
 		}
 
@@ -98,8 +113,7 @@ namespace SimpleEpub2.AutoUpdater
 			else
 			{
 				// Show the "Hashing" label and set the progressbar to marquee
-				this.lblProgress.Text = "验证更新……";
-				this.progressBar.Style = ProgressBarStyle.Marquee;
+                this.lblProgress.Text = lang.getString("update_verifying");
 
 				// Start the hashing
 				bgWorker.RunWorkerAsync(new String[] { this.tempFile, this.md5 });

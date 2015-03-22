@@ -1,12 +1,31 @@
 <?xml version="1.0"?> 
 <sharpUpdate> 
     <update appID="SimpleEpub2"> 
-        <version>2.12.18.6</version> 
-        <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url> 
-        <fileName>SimpleEpub2.exe</fileName> 
-        <md5>7784422BCF66B17CE7E7BF3B53D28162</md5>
-        <description>2015/03/08更新：
-    1. 更新目录界面样式</description> 
-        <launchArgs></launchArgs> 
-    </update> 
+        <version>2.15.0.6</version>
+        <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
+        <fileName>SimpleEpub2.exe</fileName>
+        <md5>C96E33B3FA435036E8D1DFEEE74E9392</md5>
+        <description>2015-03-21 Update:
+    1. NEW FEATURE: Multilingual UI (English and Chinese)
+    2. NEW FEATURE: Auto adapt UI language to system language
+    3. NEW FEATURE: Manually swith UI language in the app
+    4. NEW FEATURE: Add "Drop Cap"
+    5. NEW FEATURE: Add "Stick-up Cap"
+    6. FIXED: Tweaked some default values
+    7. FIXED: Cleaned up CSS
+    8. FIXED: Cleaned up OPF
+    9. FIXED: Some UI change
+
+2015-03-21 更新:
+    1. 新增：中英多语言界面
+    2. 新增：检测系统语言并调整程序界面语言
+    3. 新增：手动切换界面语言
+    4. 新增：“每章首字下沉”
+    5. 新增：“每章首字上升”
+    6. 修复：更改了一些默认值
+    7. 修复：清理CSS文件代码
+    8. 修复：清理OPF文件代码
+    9. 修复：一些UI更改</description>
+        <launchArgs></launchArgs>
+    </update>
 </sharpUpdate>
