@@ -322,6 +322,24 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show/Hide.
+        /// </summary>
+        internal static string en_contextual_menu_1 {
+            get {
+                return ResourceManager.GetString("en_contextual_menu_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string en_contextual_menu_2 {
+            get {
+                return ResourceManager.GetString("en_contextual_menu_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to load settings file. Going to import defaul settings!.
         /// </summary>
         internal static string en_event_setting_load_error {
@@ -1821,6 +1839,24 @@ namespace SimpleEpub2.Properties {
         internal static string zh_button_ok {
             get {
                 return ResourceManager.GetString("zh_button_ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 显示/隐藏.
+        /// </summary>
+        internal static string zh_contextual_menu_1 {
+            get {
+                return ResourceManager.GetString("zh_contextual_menu_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 退出.
+        /// </summary>
+        internal static string zh_contextual_menu_2 {
+            get {
+                return ResourceManager.GetString("zh_contextual_menu_2", resourceCulture);
             }
         }
         

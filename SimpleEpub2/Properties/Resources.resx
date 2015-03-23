@@ -1119,4 +1119,16 @@
   <data name="zh_update_verifying" xml:space="preserve">
     <value>验证更新……</value>
   </data>
+  <data name="en_contextual_menu_1" xml:space="preserve">
+    <value>Show/Hide</value>
+  </data>
+  <data name="en_contextual_menu_2" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="zh_contextual_menu_1" xml:space="preserve">
+    <value>显示/隐藏</value>
+  </data>
+  <data name="zh_contextual_menu_2" xml:space="preserve">
+    <value>退出</value>
+  </data>
 </root>

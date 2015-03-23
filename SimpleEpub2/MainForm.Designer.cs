@@ -40,8 +40,6 @@
             this.Space3 = new DevComponents.DotNetBar.RadialMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toostripmenu1_show = new System.Windows.Forms.ToolStripMenuItem();
-            this.toostripmenu2_exit = new System.Windows.Forms.ToolStripMenuItem();
             this.navigationBar1 = new DevComponents.DotNetBar.NavigationBar();
             this.previous_button = new DevComponents.DotNetBar.ButtonItem();
             this.next_button = new DevComponents.DotNetBar.ButtonItem();
@@ -51,7 +49,6 @@
             this.pageSliderPage1 = new DevComponents.DotNetBar.Controls.PageSliderPage();
             this.pageSliderPage2 = new DevComponents.DotNetBar.Controls.PageSliderPage();
             this.pageSliderPage3 = new DevComponents.DotNetBar.Controls.PageSliderPage();
-            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navigationBar1)).BeginInit();
             this.pageSlider1.SuspendLayout();
             this.SuspendLayout();
@@ -120,25 +117,8 @@
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toostripmenu1_show,
-            this.toostripmenu2_exit});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 48);
-            // 
-            // toostripmenu1_show
-            // 
-            this.toostripmenu1_show.Name = "toostripmenu1_show";
-            this.toostripmenu1_show.Size = new System.Drawing.Size(166, 22);
-            this.toostripmenu1_show.Text = "显示 SimpleEpub";
-            this.toostripmenu1_show.Click += new System.EventHandler(this.toostripmenu1_show_Click);
-            // 
-            // toostripmenu2_exit
-            // 
-            this.toostripmenu2_exit.Name = "toostripmenu2_exit";
-            this.toostripmenu2_exit.Size = new System.Drawing.Size(166, 22);
-            this.toostripmenu2_exit.Text = "退出";
-            this.toostripmenu2_exit.Click += new System.EventHandler(this.toostripmenu2_exit_Click);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // navigationBar1
             // 
@@ -266,7 +246,6 @@
             this.Padding = new System.Windows.Forms.Padding(4, 5, 5, 5);
             this.Text = "SimpleEpub";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navigationBar1)).EndInit();
             this.pageSlider1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -282,8 +261,6 @@
         private DevComponents.DotNetBar.RadialMenuItem Space3;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toostripmenu1_show;
-        private System.Windows.Forms.ToolStripMenuItem toostripmenu2_exit;
 		protected internal DevComponents.DotNetBar.RadialMenuItem Item1;
 		protected internal DevComponents.DotNetBar.RadialMenuItem Item2;
 		protected internal DevComponents.DotNetBar.RadialMenuItem Item3;

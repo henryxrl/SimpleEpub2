@@ -1,31 +1,35 @@
 <?xml version="1.0"?> 
 <sharpUpdate> 
     <update appID="SimpleEpub2"> 
-        <version>2.15.0.6</version>
+        <version>2.15.0.9</version>
         <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
         <fileName>SimpleEpub2.exe</fileName>
-        <md5>C96E33B3FA435036E8D1DFEEE74E9392</md5>
-        <description>2015-03-21 Update:
+        <md5>28711628EE068CB2C4451C0552FB84E4</md5>
+        <description>2015-03-23 Update:
     1. NEW FEATURE: Multilingual UI (English and Chinese)
     2. NEW FEATURE: Auto adapt UI language to system language
     3. NEW FEATURE: Manually swith UI language in the app
     4. NEW FEATURE: Add "Drop Cap"
     5. NEW FEATURE: Add "Stick-up Cap"
-    6. FIXED: Tweaked some default values
-    7. FIXED: Cleaned up CSS
-    8. FIXED: Cleaned up OPF
-    9. FIXED: Some UI change
+    6. NEW FEATURE: New designed icon
+    7. FIXED: Tweaked some default values
+    8. FIXED: Cleaned up CSS
+    9. FIXED: Cleaned up OPF
+    10. FIXED: Some UI change
+    11. FIXED: Fixed contextual menu behaviors
 
-2015-03-21 更新:
+2015-03-23 更新:
     1. 新增：中英多语言界面
     2. 新增：检测系统语言并调整程序界面语言
     3. 新增：手动切换界面语言
     4. 新增：“每章首字下沉”
     5. 新增：“每章首字上升”
-    6. 修复：更改了一些默认值
-    7. 修复：清理CSS文件代码
-    8. 修复：清理OPF文件代码
-    9. 修复：一些UI更改</description>
+    6. 新增：新设计的图标
+    7. 修复：更改了一些默认值
+    8. 修复：清理CSS文件代码
+    9. 修复：清理OPF文件代码
+    10. 修复：一些UI更改
+    11. 修复：修复了通知栏图标右键菜单逻辑</description>
         <launchArgs></launchArgs>
     </update>
 </sharpUpdate>

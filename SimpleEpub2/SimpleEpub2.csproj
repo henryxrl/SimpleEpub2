@@ -50,7 +50,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\SimpleEpub2.ico</ApplicationIcon>
+    <ApplicationIcon>SimpleEpub2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>754028701F7E96C116F25066A997F95A954AA388</ManifestCertificateThumbprint>
@@ -255,7 +255,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="SimpleEpub2.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Ilmerge.CSharp.targets" />
   <!-- <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" /> -->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

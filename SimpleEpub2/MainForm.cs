@@ -213,6 +213,9 @@ namespace SimpleEpub2
             Item2.Text = LANG.getString("mainpage_rm_item2");       // 最小化
             Item3.Text = LANG.getString("mainpage_rm_item3");       // 关闭
 
+            contextMenuStrip1.Items.Add(LANG.getString("contextual_menu_1") + " " + NAMESPACE, null, toostripmenu1_show_Click);
+            contextMenuStrip1.Items.Add(LANG.getString("contextual_menu_2"), null, toostripmenu2_exit_Click);
+
 			next_button.ForeColor = themeColor;
 			previous_button.ForeColor = themeColor;
 			next_button.Enabled = false;
@@ -580,7 +583,10 @@ namespace SimpleEpub2
 
 		private void toostripmenu1_show_Click(object sender, EventArgs e)
 		{
-			this.WindowState = FormWindowState.Normal;
+            if (this.WindowState == FormWindowState.Minimized)
+                this.WindowState = FormWindowState.Normal;
+            else if (this.WindowState == FormWindowState.Normal)
+                this.WindowState = FormWindowState.Minimized;
 		}
 
 		private void toostripmenu2_exit_Click(object sender, EventArgs e)
@@ -592,7 +598,7 @@ namespace SimpleEpub2
 		{
 			if (this.WindowState == FormWindowState.Minimized)
 				this.WindowState = FormWindowState.Normal;
-			if (this.WindowState == FormWindowState.Normal)
+			else if (this.WindowState == FormWindowState.Normal)
 				this.WindowState = FormWindowState.Minimized;
 		}
 
