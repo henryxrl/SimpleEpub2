@@ -1,39 +1,41 @@
 <?xml version="1.0"?> 
 <sharpUpdate> 
     <update appID="SimpleEpub2"> 
-        <version>2.15.1.0</version>
+        <version>2.15.1.1</version>
         <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
         <fileName>SimpleEpub2.exe</fileName>
-        <md5>D2741D2E83A5E35F885244FB416F2B87</md5>
-        <description>2015-03-24 Update:
+        <md5>798F0E9D4160435F584D80F8D98211B9</md5>
+        <description>2015-03-25 Update:
     1. NEW: Multilingual UI (English and Chinese)
     2. NEW: Auto adapt UI language to system language
     3. NEW: Manually swith UI language in the app
     4. NEW: Add "Drop Cap"
     5. NEW: Add "Stick-up Cap"
-    6. NEW: New designed icon
-    7. FIXED: Tweaked some default values
-    8. FIXED: Cleaned up CSS
-    9. FIXED: Cleaned up OPF
-    10. FIXED: Some UI change
-    11. FIXED: Fixed contextual menu behaviors
-    12. FIXED: TOC unable to import
-    13. FIXED: In vertical mode, paragraph spacing doesn't work
+    6. NEW: New icon
+    7. NEW: New Regular expression for chapter extraction
+    8. FIXED: Tweaked some default values
+    9. FIXED: Cleaned up CSS
+    10. FIXED: Cleaned up OPF
+    11. FIXED: Some UI change
+    12. FIXED: Fixed contextual menu behaviors
+    13. FIXED: TOC unable to import
+    14. FIXED: In vertical mode, paragraph spacing doesn't work
 
-2015-03-24 更新：
+2015-03-25 更新：
     1. 新增：中英多语言界面
     2. 新增：检测系统语言并调整程序界面语言
     3. 新增：手动切换界面语言
     4. 新增：“每章首字下沉”
     5. 新增：“每章首字上升”
     6. 新增：新设计的图标
-    7. 修复：更改了一些默认值
-    8. 修复：清理CSS文件代码
-    9. 修复：清理OPF文件代码
-    10. 修复：一些UI更改
-    11. 修复：修复了通知栏图标右键菜单逻辑
-    12. 修复：无法导入目录的问题
-    13. 修复：在竖排版下段落间距设置无效的问题</description>
+    7. 新增：新的正则表达式，更准确提取标题
+    8. 修复：更改了一些默认值
+    9. 修复：清理CSS文件代码
+    10. 修复：清理OPF文件代码
+    11. 修复：一些UI更改
+    12. 修复：修复了通知栏图标右键菜单逻辑
+    13. 修复：无法导入目录的问题
+    14. 修复：在竖排版下段落间距设置无效的问题</description>
         <launchArgs></launchArgs>
     </update>
 </sharpUpdate>
