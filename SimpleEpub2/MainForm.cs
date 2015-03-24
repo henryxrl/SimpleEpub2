@@ -1076,8 +1076,6 @@ namespace SimpleEpub2
 
 			Boolean broken = false;
 
-            MessageBoxEx.Show(LANG.getString("testtest"));
-
 			using (FileStream fs = File.Open(TOCPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
 			using (BufferedStream bs = new BufferedStream(fs))
 			using (StreamReader sr = new StreamReader(TOCPath, Encoding.Default))
@@ -1893,7 +1891,7 @@ namespace SimpleEpub2
 			}
 			font2.Append(";\n}\n");
 
-			String html = (vertical ? "html {\n\twriting-mode:vertical-rl;\n\t-webkit-writing-mode:vertical-rl;\n\t-epub-writing-mode:vertical-rl;\n\t-epub-line-break:strict;\n\tline-break:strict;\n\t-epub-word-break:normal;\n\tword-break:normal;\n\tmargin:0;\n\tpadding:0;\n}\n" : "");
+			String html = vertical ? "html {\n\twriting-mode:vertical-rl;\n\t-webkit-writing-mode:vertical-rl;\n\t-epub-writing-mode:vertical-rl;\n\t-epub-line-break:strict;\n\tline-break:strict;\n\t-epub-word-break:normal;\n\tword-break:normal;\n\tmargin:0;\n\tpadding:0;\n}\n" : "";
 
             String body = "body {\n\tmargin-top:" + marginT + "%;\n\tmargin-bottom:" + marginB + "%;\n\tmargin-left:" + marginL + "%;\n\tmargin-right:" + marginR + "%;" + background + "\n}\n";
 
@@ -1901,8 +1899,9 @@ namespace SimpleEpub2
 			//String img = "img {\n\tbottom:0;\n\tleft:0;\n\tmargin:auto;\n\toverflow:auto;\n\tposition:fixed;\n\tright:0;\n\ttop:0;\n}\n";
 			//String img = "";
 
-			Int32 pMargin = (addParagraphSpacing ? 6 : 0);
-            String p = "p {\n\tfont-family:" + bodyFont + ";\n\tfont-size:" + bodySize + "pt;\n\tcolor:" + bodyColor + ";\n\ttext-align:justify;\n\ttext-indent:2em;\n\tline-height:" + LH + "em;\n\tmargin-top:" + pMargin + "pt;\n\tmargin-bottom:" + pMargin + "pt;\n}\np.first {\n\ttext-indent:0em!important;\n}\n";
+			Int32 pMargin = addParagraphSpacing ? 6 : 0;
+            Tuple<String, String> marginPosition = vertical ? new Tuple<String, String>("left", "right") : new Tuple<String, String>("top", "bottom");
+            String p = "p {\n\tfont-family:" + bodyFont + ";\n\tfont-size:" + bodySize + "pt;\n\tcolor:" + bodyColor + ";\n\ttext-align:justify;\n\ttext-indent:2em;\n\tline-height:" + LH + "em;\n\tmargin-" + marginPosition.Item1 + ":" + pMargin + "pt;\n\tmargin-" + marginPosition.Item2 + ":" + pMargin + "pt;\n}\np.first {\n\ttext-indent:0em!important;\n}\n";
 
             String others = ".cover {\n\twidth:100%;\n}\n.center {\n\ttext-align:center;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.left {\n\ttext-align:left;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.right {\n\ttext-align:right;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.quote {\n\tmargin-top:0%;\n\tmargin-bottom:0%;\n\tmargin-left:1em;\n\tmargin-right:1em;\n\ttext-align:justify;\n\tfont-family:" + bodyFont + ";\n\tcolor:" + bodyColor + ";\n}\n.stickupCap {\n\tfont-size:2em;\n\tfont-weight:bold;\n}\n.dropCap {\n\tfont-size:2em;\n\tfont-weight:bold;\n\tfloat:left;\n\tmargin:5px;\n\tpadding:3px;\n}\n";
 
