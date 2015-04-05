@@ -1447,7 +1447,7 @@ namespace SimpleEpub2
 			generateOPF(stsObj.coverFirstPage, translation, stsObj.verticalText, stsObj.embedFontSubset);
 
 			/*** Generate NCX ***/
-			generateNCX(stsObj.coverFirstPage, stsObj.coverNoTOC, translation);
+			generateNCX(stsObj.coverFirstPage, stsObj.coverNoTOC, translation, stsObj.replaceNumByHan);
 
 			/*** Generate other files ***/
 			mimetype = "application/epub+zip";
@@ -1519,8 +1519,7 @@ namespace SimpleEpub2
 				{
 					processedIntro = processedIntro.Replace("&lt;/span&gt;&lt;br/&gt;&lt;span class=\"Apple-style-span\"&gt;", "\r\n");
 				}
-				processedIntro = processedIntro.Replace("&lt;span class=\"Apple-style-span\"&gt;", "");
-				processedIntro = processedIntro.Replace("&lt;/span&gt;", "");
+				processedIntro = processedIntro.Replace("&lt;span class=\"Apple-style-span\"&gt;", "").Replace("&lt;/span&gt;", "");
 			}
 
 			epubWorker.ReportProgress(100);
@@ -2164,7 +2163,7 @@ namespace SimpleEpub2
 			opf.Append(foot);
 		}
 
-		private void generateNCX(Boolean coverFirstPage, Boolean coverNoTOC, Int32 translation)
+		private void generateNCX(Boolean coverFirstPage, Boolean coverNoTOC, Int32 translation, Boolean replace)
 		{
 			/*** head ***/
 			String head = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE ncx PUBLIC \"-//NISO//DTD ncx 2005-1//EN\" \"http://www.daisy.org/z3986/2005/ncx-2005-1.dtd\">\n<ncx version=\"2005-1\" xml:lang=\"zh-CN\" xmlns=\"http://www.daisy.org/z3986/2005/ncx/\">\n<head>\n\t<!-- The following four metadata items are required for all NCX documents, including those conforming to the relaxed constraints of OPS 2.0 -->\n\t<meta name=\"dtb:uid\" content=\"urn:uuid:henryxrl@gmail.com\" />\n\t<meta name=\"dtb:depth\" content=\"1\" />\n\t<meta name=\"dtb:totalPageCount\" content=\"0\" />\n\t<meta name=\"dtb:maxPageNumber\" content=\"0\" />\n</head>\n<docTitle><text>" + bookAndAuthor[0] + "</text></docTitle>\n<docAuthor><text>" + bookAndAuthor[1] + "</text></docAuthor>\n";
@@ -2199,6 +2198,11 @@ namespace SimpleEpub2
 				Int32 end = (txtHtmlList[0].IndexOf("</title>"));
 				Int32 length = end - start;
 				String title = txtHtmlList[0].Substring(start, length);
+                title = translate(title, translation);		// 简繁转换
+                if (replace)		// 替换标题中的数字为汉字
+                {
+                    title = numberToHan(title);
+                }
 				if (extraLinesNotEmpty)
 				{
 					if (!coverNoTOC)
@@ -2247,6 +2251,10 @@ namespace SimpleEpub2
 						if (!fromD)
 						{
 							tempTitleProcessed = translate(tempTitleProcessed, translation);
+                            if (replace)		// 替换标题中的数字为汉字
+                            {
+                                tempTitleProcessed = numberToHan(tempTitleProcessed);
+                            }
 							if (!coverNoTOC)
 								TOCTree.Add(new Tuple<Int32, NavPoint>(occurCount, new NavPoint("chapter" + j, (j + 1), tempTitleProcessed, "Text/chapter" + j + ".html", null, null)));
 							else
@@ -2401,8 +2409,7 @@ namespace SimpleEpub2
 					String bookname = filename.Substring(0, pos);
 					char[] charsToTrim = { '《', '》' };
 					bookname = bookname.Trim(charsToTrim);
-					bookname = bookname.Replace("书名：", "");
-					bookname = bookname.Replace("书名:", "");
+					bookname = bookname.Replace("书名：", "").Replace("书名:", "");
 					bookname = bookname.Trim();
 					String author = filename.Substring(filename.IndexOf("作者：") + 3, filename.Length - filename.IndexOf("作者：") - 3);
 					author = author.Trim();
@@ -2430,8 +2437,7 @@ namespace SimpleEpub2
 						{
 							char[] charsToTrim = { '《', '》' };
 							bookname = bookname.Trim(charsToTrim);
-							bookname = bookname.Replace("书名：", "");
-							bookname = bookname.Replace("书名:", "");
+							bookname = bookname.Replace("书名：", "").Replace("书名:", "");
 							bookname = bookname.Trim();
 						}
 
@@ -2439,8 +2445,7 @@ namespace SimpleEpub2
 						if (author == null || author.Trim() == "") author = NAMESPACE;
 						else
 						{
-							author = author.Replace("作者：", "");
-							author = author.Replace("作者:", "");
+							author = author.Replace("作者：", "").Replace("作者:", "");
 							author = author.Trim();
 						}
 
@@ -3245,27 +3250,9 @@ namespace SimpleEpub2
 
 		private static String numberToHan(String nextLine)
 		{
-			nextLine = nextLine.Replace("0", "零");
-			nextLine = nextLine.Replace("1", "一");
-			nextLine = nextLine.Replace("2", "二");
-			nextLine = nextLine.Replace("3", "三");
-			nextLine = nextLine.Replace("4", "四");
-			nextLine = nextLine.Replace("5", "五");
-			nextLine = nextLine.Replace("6", "六");
-			nextLine = nextLine.Replace("7", "七");
-			nextLine = nextLine.Replace("8", "八");
-			nextLine = nextLine.Replace("9", "九");
-			nextLine = nextLine.Replace("０", "零");
-			nextLine = nextLine.Replace("１", "一");
-			nextLine = nextLine.Replace("２", "二");
-			nextLine = nextLine.Replace("３", "三");
-			nextLine = nextLine.Replace("４", "四");
-			nextLine = nextLine.Replace("５", "五");
-			nextLine = nextLine.Replace("６", "六");
-			nextLine = nextLine.Replace("７", "七");
-			nextLine = nextLine.Replace("８", "八");
-			nextLine = nextLine.Replace("９", "九");
-			return nextLine;
+            StringBuilder sb = new StringBuilder(nextLine);
+            sb.Replace("0", "零").Replace("1", "一").Replace("2", "二").Replace("3", "三").Replace("4", "四").Replace("5", "五").Replace("6", "六").Replace("7", "七").Replace("8", "八").Replace("9", "九").Replace("０", "零").Replace("１", "一").Replace("２", "二").Replace("３", "三").Replace("４", "四").Replace("５", "五").Replace("６", "六").Replace("７", "七").Replace("８", "八").Replace("９", "九");
+            return sb.ToString();
 		}
 
 		private void CreateFontSubSetT()
@@ -3275,13 +3262,15 @@ namespace SimpleEpub2
 				Int32 wordCount = IndexT.Count;
 				if (wordCount <= 0)
 				{
-                    MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string1"));
+                    // MessageBox not allowed in background thread!
+                    //MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string1"));
 					noNeedEmbed = true;
 					return;
 				}
 				else if (wordCount > 65535)
 				{
-                    MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string3"));
+                    // MessageBox not allowed in background thread!
+                    //MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string3"));
 					File.Copy(URIT.AbsolutePath, (tempPath + "\\title.ttf"));
 					return;
 				}
@@ -3305,13 +3294,15 @@ namespace SimpleEpub2
 				wordcountnr = IndexB.Count;
 				if (wordcountnr <= 0)
 				{
-                    MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string2"));
+                    // MessageBox not allowed in background thread!
+                    //MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string2"));
 					noNeedEmbed = true;
 					return;
 				}
 				else if (wordcountnr > 65535)
 				{
-                    MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string3"));
+                    // MessageBox not allowed in background thread!
+                    //MessageBoxEx.Show(LANG.getString("mainpage3_helper_fontsubset_string3"));
 					File.Copy(URIB.AbsolutePath, (tempPath + "\\body.ttf"));
 					return;
 				}
