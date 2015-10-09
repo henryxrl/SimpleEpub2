@@ -7,13 +7,15 @@
     <launchArgs>
     </launchArgs>
     <description>10/9/2015 Update:
-	1. FIXED: Application cannot start if setting ini does not exist
-	2. NEW: Switched from ILMerge to Costura.Fody
-	3. NEW: Use GenerateUpdateXML to automatically write update XML file
+    1. FIXED: Application cannot start if setting ini does not exist
+    2. NEW: Switched from ILMerge to Costura.Fody
+    3. NEW: Use GenerateUpdateXML to automatically write update XML file
+    4. FIXED: GenerateUpdateXML bug fixes
 
 10/9/2015 更新：
-	1. 修复：当设置文件不存在时无法打开应用程序
-	2. 新增：不用ILMerge，改用Costura.Fody
-	3. 新增：用GenerateUpdateXML来自动生成升级日志</description>
+    1. 修复：当设置文件不存在时无法打开应用程序
+    2. 新增：不用ILMerge，改用Costura.Fody
+    3. 新增：用GenerateUpdateXML来自动生成升级日志
+    4. 新增：解决了GenerateUpdateXML的一些bugs</description>
   </update>
 </sharpUpdate>
