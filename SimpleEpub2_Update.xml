@@ -1,9 +1,9 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.16.2.2</version>
+    <version>2.16.2.3</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>30569F29A8A7DFA3A4E0503B2D9BEF77</md5>
+    <md5>F8A3645F7C49F6E5B0D17A4DF4803009</md5>
     <launchArgs>
     </launchArgs>
     <description>10/9/2015 Update:
@@ -11,11 +11,13 @@
     2. NEW: Switched from ILMerge to Costura.Fody
     3. NEW: Use GenerateUpdateXML to automatically write update XML file
     4. FIXED: GenerateUpdateXML bug fixes
+    5. FIXED: Updated Regular Expression for chapter title extraction
 
 10/9/2015 更新：
     1. 修复：当设置文件不存在时无法打开应用程序
     2. 新增：不用ILMerge，改用Costura.Fody
     3. 新增：用GenerateUpdateXML来自动生成升级日志
-    4. 新增：解决了GenerateUpdateXML的一些bugs</description>
+    4. 新增：解决了GenerateUpdateXML的一些bugs
+    5. 修复：更新了提取章节名的正则表达式</description>
   </update>
 </sharpUpdate>
