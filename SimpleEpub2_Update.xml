@@ -1,19 +1,19 @@
-<?xml version="1.0"?> 
-<sharpUpdate> 
-    <update appID="SimpleEpub2"> 
-        <version>2.15.1.2</version>
-        <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
-        <fileName>SimpleEpub2.exe</fileName>
-        <md5>5AC27B4CE8A845D06C77CFDA251C65F8</md5>
-        <description>2015-04-05 Update:
-    1. FIXED: Illegal message box in worker thread
-    2. FIXED: "Change chapter number to chinese" has no effect on TOC chapter titles
-    3. NEW: Rewrote "Change chapter number to chinese" logic
+<sharpUpdate>
+  <update appID="SimpleEpub2">
+    <version>2.16.2.2</version>
+    <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
+    <fileName>SimpleEpub2.exe</fileName>
+    <md5>30569F29A8A7DFA3A4E0503B2D9BEF77</md5>
+    <launchArgs>
+    </launchArgs>
+    <description>10/9/2015 Update:
+	1. FIXED: Application cannot start if setting ini does not exist
+	2. NEW: Switched from ILMerge to Costura.Fody
+	3. NEW: Use GenerateUpdateXML to automatically write update XML file
 
-2015-03-25 更新：
-    1. 修复：工作线程中非法的弹窗
-    2. 修复：“替换章节数字为汉字”对目录中的章节标题无效的问题
-    3. 新增：更新“替换章节数字为汉字”逻辑</description>
-        <launchArgs></launchArgs>
-    </update>
+10/9/2015 更新：
+	1. 修复：当设置文件不存在时无法打开应用程序
+	2. 新增：不用ILMerge，改用Costura.Fody
+	3. 新增：用GenerateUpdateXML来自动生成升级日志</description>
+  </update>
 </sharpUpdate>

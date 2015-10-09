@@ -3367,11 +3367,6 @@ namespace SimpleEpub2
 
         private static String getINILanguage()
         {
-            if (!File.Exists(settingsPath))
-            {
-                return null;
-            }
-
             INIFile ini = new INIFile(settingsPath);
             return ini.INIReadValue("Tab_4", "Language");
         }

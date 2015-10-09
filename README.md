@@ -6,6 +6,5 @@ SimpleEpub is a multi-threading windows application that converts a plain text f
 Help File: SimpleEpub2 / SimpleEpub2 / Resources / help.pdf
 
 HOW TO USE
-1. This program is ONLY used in VS2012. User other versions of VS in your own risk.
-2. Before use, copy "Ilmerge.CSharp.targets" file to "C:\Program Files (x86)\MSBuild"
+1. Import the project into Visual Studio
 3. ENJOY PROGRAMMING!

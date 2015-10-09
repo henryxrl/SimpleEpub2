@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleEpub2", "SimpleEpub2\SimpleEpub2.csproj", "{64C4A0C9-9605-42FF-BDD8-B0FDF83222A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenereateUpdateXML", "GenereateUpdateXML\GenereateUpdateXML.csproj", "{A3C7B41A-08B3-4DC6-8662-F410E5BAF418}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,10 @@ Global
 		{64C4A0C9-9605-42FF-BDD8-B0FDF83222A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64C4A0C9-9605-42FF-BDD8-B0FDF83222A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64C4A0C9-9605-42FF-BDD8-B0FDF83222A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3C7B41A-08B3-4DC6-8662-F410E5BAF418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C7B41A-08B3-4DC6-8662-F410E5BAF418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C7B41A-08B3-4DC6-8662-F410E5BAF418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C7B41A-08B3-4DC6-8662-F410E5BAF418}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
