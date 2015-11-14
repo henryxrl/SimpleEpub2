@@ -1640,11 +1640,11 @@ namespace SimpleEpub2
 							{
 								hasFootNote = true;
 
-								linkFootNote(nextLine, footNoteQueuePre, footNoteQueuePost);
+								linkFootNote(ref nextLine, ref footNoteQueuePre, ref footNoteQueuePost);
 							}
 							else
 							{
-								storeFootNoteLocation(ref nextLine, footNoteQueuePre, ref chapterFootNoteCount, 1, ref titleHasFootNote);
+								storeFootNoteLocation(ref nextLine, ref footNoteQueuePre, ref chapterFootNoteCount, 1, ref titleHasFootNote);
 
                                 if (firstTime)
                                 {
@@ -1672,7 +1672,7 @@ namespace SimpleEpub2
 					}
 					//extraLinesInBeginning = false;
 
-					appendFootNotes(footNoteQueuePost, html);
+					appendFootNotes(ref footNoteQueuePost, ref html);
 
 					html.Append("</body>\n</html>\n");
 					if (extraLinesNotEmpty)
@@ -1735,7 +1735,7 @@ namespace SimpleEpub2
 								}
 								if (embedFontSubset && URIT != null) addStringToUInt16CollectionT(nextLine);
 
-								storeFootNoteLocation(ref nextLine, footNoteQueuePre, ref chapterFootNoteCount, 0, ref titleHasFootNote);
+								storeFootNoteLocation(ref nextLine, ref footNoteQueuePre, ref chapterFootNoteCount, 0, ref titleHasFootNote);
 
 								if (sameChapter)
 								{
@@ -1761,11 +1761,11 @@ namespace SimpleEpub2
 								{
 									hasFootNote = true;
 
-									linkFootNote(nextLine, footNoteQueuePre, footNoteQueuePost);
+									linkFootNote(ref nextLine, ref footNoteQueuePre, ref footNoteQueuePost);
 								}
 								else
 								{
-									storeFootNoteLocation(ref nextLine, footNoteQueuePre, ref chapterFootNoteCount, 1, ref titleHasFootNote);
+									storeFootNoteLocation(ref nextLine, ref footNoteQueuePre, ref chapterFootNoteCount, 1, ref titleHasFootNote);
 
                                     if (firstLine && (dropCap || stickupCap))
                                     {
@@ -1785,7 +1785,7 @@ namespace SimpleEpub2
 
 					if (nextLine != null)
 					{
-						appendFootNotes(footNoteQueuePost, html);
+						appendFootNotes(ref footNoteQueuePost, ref html);
 
 						html.Append("</body>\n</html>\n");
 						txtHtmlList.Add(html.ToString());
@@ -1793,7 +1793,7 @@ namespace SimpleEpub2
 					}
 					else
 					{
-						appendFootNotes(footNoteQueuePost, html);
+						appendFootNotes(ref footNoteQueuePost, ref html);
 
 						html.Append("</body>\n</html>\n");
 						txtHtmlList.Add(html.ToString());
@@ -1805,7 +1805,7 @@ namespace SimpleEpub2
 			return true;
 		}
 
-		private void storeFootNoteLocation(ref String nextLine, Queue<Tuple<String, Int32>> footNoteQueuePre, ref Int32 chapterFootNoteCount, Int32 flag, ref Boolean titleHasFootNote)
+		private void storeFootNoteLocation(ref String nextLine, ref Queue<Tuple<String, Int32>> footNoteQueuePre, ref Int32 chapterFootNoteCount, Int32 flag, ref Boolean titleHasFootNote)
 		{
 			// ① - ⑳: FootNote position!
 			MatchCollection footnotesPos = Regex.Matches(nextLine, "[\u2460-\u2473\u3251-\u325F\u32B1-\u32BF]");
@@ -1829,29 +1829,38 @@ namespace SimpleEpub2
 			}
 		}
 
-		private static void linkFootNote(String nextLine, Queue<Tuple<String, Int32>> footNoteQueuePre, Queue<Tuple<Int32, String>> footNoteQueuePost)
+		private static void linkFootNote(ref String nextLine, ref Queue<Tuple<String, Int32>> footNoteQueuePre, ref Queue<Tuple<Int32, String>> footNoteQueuePost)
 		{
 			try
 			{
-				if (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) == 0)
+                footNoteQueuePost.Enqueue(new Tuple<Int32, String>(footNoteQueuePre.Dequeue().Item2, nextLine.Substring(1)));
+
+                /*
+                 * Let's just not check whether footNoteQueuePre.Peek().Item1 and nextLine[0].ToString() matches
+                 * Since not all the books are proofread well.
+                */
+
+                /*if (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) == 0)
 					footNoteQueuePost.Enqueue(new Tuple<Int32, String>(footNoteQueuePre.Dequeue().Item2, nextLine.Substring(1)));
 				else if (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) < 0)
 				{
 					while (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) < 0)
 					{
-						footNoteQueuePre.Dequeue();
+                        MessageBox.Show("1: " + footNoteQueuePre.Peek().Item1 + ": " + nextLine);
+                        footNoteQueuePre.Dequeue();
 					}
 				}
 				else	// if (footNoteQueuePre.Peek().Item1.CompareTo(nextLine[0].ToString()) > 0)
 				{
-					// do nothing
-				}
+                    // do nothing
+                    MessageBox.Show("2: " + footNoteQueuePre.Peek().Item1 + ": " + nextLine);
+                }*/
 
-			}
-			catch { }
+            }
+            catch { }
 		}
 
-		private void appendFootNotes(Queue<Tuple<Int32, String>> footNoteQueuePost, StringBuilder html)
+		private void appendFootNotes(ref Queue<Tuple<Int32, String>> footNoteQueuePost, ref StringBuilder html)
 		{
 			if (hasFootNote)
 			{
