@@ -154,6 +154,7 @@ namespace SimpleEpub2
 
 		private String mimetype;
 		private String container;
+        private String display_options;
 		private StringBuilder css = new StringBuilder();
 		private StringBuilder opf = new StringBuilder();
 		private StringBuilder ncx = new StringBuilder();
@@ -1459,7 +1460,8 @@ namespace SimpleEpub2
 			/*** Generate other files ***/
 			mimetype = "application/epub+zip";
 			container = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<container version=\"1.0\" xmlns=\"urn:oasis:names:tc:opendocument:xmlns:container\">\n\t<rootfiles>\n\t\t<rootfile full-path=\"OEBPS/content.opf\" media-type=\"application/oebps-package+xml\" />\n\t</rootfiles>\n</container>";
-			epubWorker.ReportProgress(80);
+            display_options = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<display_options>\n\t<platform name=\"*\">\n\t\t<option name=\"specified-fonts\">true</option>\n\t</platform>\n</display_options>";
+            epubWorker.ReportProgress(80);
 
 			/*** ZIP ***/
             if (bookAndAuthor_isChinese)
@@ -1479,6 +1481,7 @@ namespace SimpleEpub2
 				zip.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
 				zip.AddDirectoryByName("META-INF");
 				zip.AddEntry("META-INF\\container.xml", container, Encoding.UTF8);
+                zip.AddEntry("META-INF\\com.apple.ibooks.display-options.xml", display_options, Encoding.UTF8);
 				zip.AddDirectoryByName("OEBPS");
 				zip.AddDirectoryByName("OEBPS\\Images");
 				zip.AddDirectoryByName("OEBPS\\Styles");
@@ -1930,6 +1933,7 @@ namespace SimpleEpub2
 
             String headers = "h1 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + titleSize + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh2 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 2) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh3 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 4) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh4 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 6) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh5 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 8) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh6 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 10) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\n";
 
+            css.Append("@charset \"UTF-8\";\n");
 			css.Append(font1);
 			css.Append(font2);
 			css.Append(html);
