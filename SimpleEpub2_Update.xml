@@ -1,17 +1,15 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.16.2.8</version>
+    <version>2.16.2.9</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>37660DCC35EC920E8E1BE7FD0C9CBD0D</md5>
+    <md5>3596CF17A1D7A1B7EBBF0E218030FE42</md5>
     <launchArgs>
     </launchArgs>
-    <description>12/5/2015 Update:
-    1. NEW: Add "com.apple.ibooks.display-options.xml" file to "META-INF" folder for iBook compatability
-    2. NEW: Add CSS file UTF-8 compatability
+    <description>12/7/2015 Update:
+    1. NEW: Initial support for high DPI
 
-12/5/2015 更新：
-    1. 新增：在"META-INF"文件夹下添加"com.apple.ibooks.display-options.xml"文件，以更好地支持iBook
-    2. 新增：CSS文件支持UTF-8字符集</description>
+12/7/2015 更新：
+    1. 新增：初始支持高DPI</description>
   </update>
 </sharpUpdate>
