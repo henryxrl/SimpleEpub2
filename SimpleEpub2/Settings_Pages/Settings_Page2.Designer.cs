@@ -81,6 +81,10 @@
             // 
             // tabControlPanel5
             // 
+            this.tabControlPanel5.Controls.Add(this.label4);
+            this.tabControlPanel5.Controls.Add(this.label3);
+            this.tabControlPanel5.Controls.Add(this.label2);
+            this.tabControlPanel5.Controls.Add(this.label1);
             this.tabControlPanel5.Controls.Add(this.settings2_2_pmT);
             this.tabControlPanel5.Controls.Add(this.settings2_2_pmL);
             this.tabControlPanel5.Controls.Add(this.settings2_1_pc);
@@ -159,9 +163,9 @@
             this.settings2_2_pmR_label.ForeColor = System.Drawing.Color.Black;
             this.settings2_2_pmR_label.Location = new System.Drawing.Point(340, 150);
             this.settings2_2_pmR_label.Name = "settings2_2_pmR_label";
-            this.settings2_2_pmR_label.Size = new System.Drawing.Size(243, 19);
+            this.settings2_2_pmR_label.Size = new System.Drawing.Size(69, 19);
             this.settings2_2_pmR_label.TabIndex = 44;
-            this.settings2_2_pmR_label.Text = "右边距：                                        %";
+            this.settings2_2_pmR_label.Text = "右边距：";
             // 
             // settings2_2_pmL_label
             // 
@@ -171,9 +175,9 @@
             this.settings2_2_pmL_label.ForeColor = System.Drawing.Color.Black;
             this.settings2_2_pmL_label.Location = new System.Drawing.Point(45, 150);
             this.settings2_2_pmL_label.Name = "settings2_2_pmL_label";
-            this.settings2_2_pmL_label.Size = new System.Drawing.Size(243, 19);
+            this.settings2_2_pmL_label.Size = new System.Drawing.Size(69, 19);
             this.settings2_2_pmL_label.TabIndex = 43;
-            this.settings2_2_pmL_label.Text = "左边距：                                        %";
+            this.settings2_2_pmL_label.Text = "左边距：";
             // 
             // settings2_2_pmD_label
             // 
@@ -183,9 +187,9 @@
             this.settings2_2_pmD_label.ForeColor = System.Drawing.Color.Black;
             this.settings2_2_pmD_label.Location = new System.Drawing.Point(340, 90);
             this.settings2_2_pmD_label.Name = "settings2_2_pmD_label";
-            this.settings2_2_pmD_label.Size = new System.Drawing.Size(243, 19);
+            this.settings2_2_pmD_label.Size = new System.Drawing.Size(69, 19);
             this.settings2_2_pmD_label.TabIndex = 42;
-            this.settings2_2_pmD_label.Text = "下边距：                                        %";
+            this.settings2_2_pmD_label.Text = "下边距：";
             // 
             // settings2_2_pmU_label
             // 
@@ -195,9 +199,9 @@
             this.settings2_2_pmU_label.ForeColor = System.Drawing.Color.Black;
             this.settings2_2_pmU_label.Location = new System.Drawing.Point(45, 90);
             this.settings2_2_pmU_label.Name = "settings2_2_pmU_label";
-            this.settings2_2_pmU_label.Size = new System.Drawing.Size(243, 19);
+            this.settings2_2_pmU_label.Size = new System.Drawing.Size(69, 19);
             this.settings2_2_pmU_label.TabIndex = 41;
-            this.settings2_2_pmU_label.Text = "上边距：                                        %";
+            this.settings2_2_pmU_label.Text = "上边距：";
             // 
             // settings2_1_pc_label
             // 
@@ -316,10 +320,10 @@
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(326, 415);
+            this.label1.Location = new System.Drawing.Point(268, 90);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(23, 19);
-            this.label1.TabIndex = 48;
+            this.label1.TabIndex = 51;
             this.label1.Text = "%";
             // 
             // label2
@@ -328,10 +332,10 @@
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(326, 475);
+            this.label2.Location = new System.Drawing.Point(268, 150);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 19);
-            this.label2.TabIndex = 49;
+            this.label2.TabIndex = 52;
             this.label2.Text = "%";
             // 
             // label3
@@ -340,10 +344,10 @@
             this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(620, 415);
+            this.label3.Location = new System.Drawing.Point(562, 90);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(23, 19);
-            this.label3.TabIndex = 50;
+            this.label3.TabIndex = 53;
             this.label3.Text = "%";
             // 
             // label4
@@ -352,10 +356,10 @@
             this.label4.BackColor = System.Drawing.Color.White;
             this.label4.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(620, 475);
+            this.label4.Location = new System.Drawing.Point(562, 150);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(23, 19);
-            this.label4.TabIndex = 51;
+            this.label4.TabIndex = 54;
             this.label4.Text = "%";
             // 
             // Settings_Page2
@@ -363,10 +367,6 @@
             this.AllowDrop = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl5);
             this.Controls.Add(this.tabControl1);
             this.DoubleBuffered = true;
@@ -383,7 +383,6 @@
             this.tabControlPanel1.ResumeLayout(false);
             this.tabControlPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
 		}
 
@@ -408,10 +407,10 @@
 		private DevComponents.DotNetBar.TabItem tabItem1;
         protected internal System.Windows.Forms.ComboBox settings2_3_booknamefont;
         protected internal System.Windows.Forms.ComboBox settings2_3_authornamefont;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         protected internal DevComponents.DotNetBar.ColorPickerButton settings2_1_pc;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
