@@ -85,7 +85,11 @@ namespace SimpleEpub2.AutoUpdater
 			// Download file
 			try { webClient.DownloadFileAsync(location, this.tempFile); }
 			catch { this.DialogResult = DialogResult.No; this.Close(); }
-		}
+
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		/// <summary>
 		/// Downloads file from server

@@ -55,7 +55,7 @@
             // 
             // styleManager
             // 
-            this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2013;
+            this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
             this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(56)))), ((int)(((byte)(137))))));
             // 
             // radialMenu
@@ -70,7 +70,6 @@
             this.Space3});
             this.radialMenu.Location = new System.Drawing.Point(-100, -100);
             this.radialMenu.Name = "radialMenu";
-            this.radialMenu.Size = new System.Drawing.Size(28, 28);
             this.radialMenu.Symbol = "";
             this.radialMenu.SymbolSize = 13F;
             this.radialMenu.TabIndex = 23;
@@ -117,6 +116,7 @@
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
@@ -136,7 +136,7 @@
             this.next_button});
             this.navigationBar1.Location = new System.Drawing.Point(4, 615);
             this.navigationBar1.Name = "navigationBar1";
-            this.navigationBar1.Size = new System.Drawing.Size(927, 34);
+            this.navigationBar1.Size = new System.Drawing.Size(927, 40);
             this.navigationBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.navigationBar1.TabIndex = 24;
             this.navigationBar1.Text = "navigationBar1";
@@ -229,8 +229,6 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CaptionFont = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClientSize = new System.Drawing.Size(936, 651);
             this.Controls.Add(this.radialMenu);
@@ -238,7 +236,6 @@
             this.Controls.Add(this.navigationBar1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.HelpButtonText = "Help";
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -262,18 +259,18 @@
         private DevComponents.DotNetBar.RadialMenuItem Space3;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-		protected internal DevComponents.DotNetBar.RadialMenuItem Item1;
-		protected internal DevComponents.DotNetBar.RadialMenuItem Item2;
-		protected internal DevComponents.DotNetBar.RadialMenuItem Item3;
 		private DevComponents.DotNetBar.NavigationBar navigationBar1;
 		private DevComponents.DotNetBar.ButtonItem next_button;
-		protected internal DevComponents.DotNetBar.ButtonItem previous_button;
 		private System.ComponentModel.BackgroundWorker processTXTWorker;
 		private System.ComponentModel.BackgroundWorker epubWorker;
 		private DevComponents.DotNetBar.Controls.PageSlider pageSlider1;
 		private DevComponents.DotNetBar.Controls.PageSliderPage pageSliderPage1;
 		private DevComponents.DotNetBar.Controls.PageSliderPage pageSliderPage2;
 		private DevComponents.DotNetBar.Controls.PageSliderPage pageSliderPage3;
-	}
+        private DevComponents.DotNetBar.RadialMenuItem Item1;
+        private DevComponents.DotNetBar.RadialMenuItem Item2;
+        private DevComponents.DotNetBar.RadialMenuItem Item3;
+        private DevComponents.DotNetBar.ButtonItem previous_button;
+    }
 }
 

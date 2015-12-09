@@ -36,7 +36,10 @@ namespace SimpleEpub2
             email_label.Text = LANG.getString("about_email_label");
             intro_label.Text = LANG.getString("about_intro_label");
 
-		}
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+        }
 
 		private void ok_Click(object sender, EventArgs e)
 		{

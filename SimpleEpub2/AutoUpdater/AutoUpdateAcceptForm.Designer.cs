@@ -45,7 +45,7 @@
             // 
             // lblCurVersion
             // 
-            this.lblCurVersion.BackColor = System.Drawing.Color.White;
+            this.lblCurVersion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.lblCurVersion.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.25F);
             this.lblCurVersion.ForeColor = System.Drawing.Color.Black;
             this.lblCurVersion.Location = new System.Drawing.Point(305, 126);
@@ -56,7 +56,7 @@
             // 
             // lblNewVersion
             // 
-            this.lblNewVersion.BackColor = System.Drawing.Color.White;
+            this.lblNewVersion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.lblNewVersion.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.25F);
             this.lblNewVersion.ForeColor = System.Drawing.Color.Black;
             this.lblNewVersion.Location = new System.Drawing.Point(305, 98);
@@ -67,7 +67,7 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.BackColor = System.Drawing.Color.White;
+            this.pictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.pictureBox.ForeColor = System.Drawing.Color.Black;
             this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
             this.pictureBox.Location = new System.Drawing.Point(12, 6);
@@ -79,7 +79,7 @@
             // 
             // lblNewVersion_label
             // 
-            this.lblNewVersion_label.BackColor = System.Drawing.Color.White;
+            this.lblNewVersion_label.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.lblNewVersion_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.25F);
             this.lblNewVersion_label.ForeColor = System.Drawing.Color.Black;
             this.lblNewVersion_label.Location = new System.Drawing.Point(168, 98);
@@ -91,7 +91,7 @@
             // 
             // lblCurVersion_label
             // 
-            this.lblCurVersion_label.BackColor = System.Drawing.Color.White;
+            this.lblCurVersion_label.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.lblCurVersion_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.25F);
             this.lblCurVersion_label.ForeColor = System.Drawing.Color.Black;
             this.lblCurVersion_label.Location = new System.Drawing.Point(168, 126);
@@ -128,12 +128,12 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.BackColor = System.Drawing.Color.White;
+            this.lblDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.lblDescription.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.lblDescription.ForeColor = System.Drawing.Color.Black;
             this.lblDescription.Location = new System.Drawing.Point(9, 178);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(68, 17);
+            this.lblDescription.Size = new System.Drawing.Size(84, 20);
             this.lblDescription.TabIndex = 26;
             this.lblDescription.Text = "更新内容：";
             // 
@@ -160,7 +160,7 @@
             // 
             // lblAppName
             // 
-            this.lblAppName.BackColor = System.Drawing.Color.White;
+            this.lblAppName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             // 
             // 
             // 
@@ -176,7 +176,7 @@
             // 
             // lblUpdateAvail
             // 
-            this.lblUpdateAvail.BackColor = System.Drawing.Color.White;
+            this.lblUpdateAvail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             // 
             // 
             // 
@@ -192,8 +192,8 @@
             // 
             // AutoUpdateAcceptForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(394, 391);
             this.Controls.Add(this.lblAppName);
             this.Controls.Add(this.lblUpdateAvail);

@@ -85,7 +85,7 @@
             this.superTabStrip1.Name = "superTabStrip1";
             this.superTabStrip1.ReorderTabsEnabled = false;
             this.superTabStrip1.SelectedTabFont = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.superTabStrip1.SelectedTabIndex = 3;
+            this.superTabStrip1.SelectedTabIndex = 0;
             this.superTabStrip1.Size = new System.Drawing.Size(202, 592);
             this.superTabStrip1.TabAlignment = DevComponents.DotNetBar.eTabStripAlignment.Left;
             this.superTabStrip1.TabCloseButtonHot = null;
@@ -101,6 +101,7 @@
             this.superTabStrip1.TabVerticalSpacing = 40;
             this.superTabStrip1.Text = "superTabStrip1";
             this.superTabStrip1.TextAlignment = DevComponents.DotNetBar.eItemAlignment.Center;
+            this.superTabStrip1.Visible = true;
             // 
             // superTabItem1
             // 
@@ -191,8 +192,6 @@
             // Settings
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.pageSlider1);

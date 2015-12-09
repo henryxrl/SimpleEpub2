@@ -37,8 +37,14 @@ namespace SimpleEpub2
             settings3_3_addparagraphspacing_label.Text = LANG.getString("settings3_3_addparagraphspacing_label");
             settings3_3_dropCap_label.Text = LANG.getString("settings3_3_dropCap_label");
             settings3_3_stickupCap_label.Text = LANG.getString("settings3_3_stickupCap_label");
+            label1.Text = LANG.getString("settings_label_hao");
+            label2.Text = LANG.getString("settings_label_hao");
+            label3.Text = LANG.getString("settings_label_percentage");
 
-		}
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		private void settings3_1_tfont_MeasureItem(object sender, MeasureItemEventArgs e)
 		{

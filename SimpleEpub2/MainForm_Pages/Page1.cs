@@ -7,10 +7,10 @@ namespace SimpleEpub2
 {
 	public partial class Page1 : DevComponents.DotNetBar.Controls.SlidePanel
 	{
-		Color themeColor;
-        Language LANG;
+        private Color themeColor;
+        private Language LANG;
 
-		public Page1(Color c, Language lang)
+        public Page1(Color c, Language lang)
 		{
 			InitializeComponent();
 
@@ -87,9 +87,12 @@ namespace SimpleEpub2
 
 			circularProgress.ProgressColor = themeColor;
 
-		}
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
-		private void cover_picturebox_DragEnter(object sender, DragEventArgs e)
+        private void cover_picturebox_DragEnter(object sender, DragEventArgs e)
 		{
 			if (e.Data.GetDataPresent(DataFormats.FileDrop))
 			{

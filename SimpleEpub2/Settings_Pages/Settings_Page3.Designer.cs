@@ -56,6 +56,9 @@
             this.settings3_1_tfont_label = new System.Windows.Forms.Label();
             this.settings3_1_tcolor_label = new System.Windows.Forms.Label();
             this.tabItem4 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl7)).BeginInit();
             this.tabControl7.SuspendLayout();
             this.tabControlPanel7.SuspendLayout();
@@ -83,6 +86,8 @@
             // 
             // tabControlPanel7
             // 
+            this.tabControlPanel7.Controls.Add(this.label3);
+            this.tabControlPanel7.Controls.Add(this.label2);
             this.tabControlPanel7.Controls.Add(this.settings3_3_dropCap);
             this.tabControlPanel7.Controls.Add(this.settings3_3_addparagraphspacing_label);
             this.tabControlPanel7.Controls.Add(this.settings3_3_dropCap_label);
@@ -299,6 +304,7 @@
             // 
             // tabControlPanel8
             // 
+            this.tabControlPanel8.Controls.Add(this.label1);
             this.tabControlPanel8.Controls.Add(this.settings3_1_tsize);
             this.tabControlPanel8.Controls.Add(this.settings3_1_tsize_label);
             this.tabControlPanel8.Controls.Add(this.settings3_1_tfont);
@@ -393,11 +399,45 @@
             this.tabItem4.Name = "tabItem4";
             this.tabItem4.Text = "标题设置";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(268, 110);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(24, 19);
+            this.label1.TabIndex = 55;
+            this.label1.Text = "号";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.White;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(268, 89);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(24, 19);
+            this.label2.TabIndex = 56;
+            this.label2.Text = "号";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.White;
+            this.label3.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(269, 150);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(23, 19);
+            this.label3.TabIndex = 63;
+            this.label3.Text = "%";
+            // 
             // Settings_Page3
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.tabControl7);
@@ -447,9 +487,8 @@
         protected internal DevComponents.DotNetBar.Controls.SwitchButton settings3_3_dropCap;
         private System.Windows.Forms.Label settings3_3_stickupCap_label;
         protected internal DevComponents.DotNetBar.Controls.SwitchButton settings3_3_stickupCap;
-
-
-
-
-	}
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+    }
 }

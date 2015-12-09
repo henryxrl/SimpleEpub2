@@ -37,11 +37,14 @@ namespace SimpleEpub2
 			newbook_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(255, 250, 242, 255);
 			newbook_button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(255, 198, 174, 213);
 
-			//ProcessingMode();
+            //ProcessingMode();
 
-			//ProcessedMode();
-			
-		}
+            //ProcessedMode();
+
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		public void ProcessingMode()
 		{

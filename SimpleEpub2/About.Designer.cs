@@ -60,7 +60,7 @@
             this.name.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.name.Location = new System.Drawing.Point(430, 140);
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(173, 31);
+            this.name.Size = new System.Drawing.Size(214, 40);
             this.name.TabIndex = 1;
             this.name.Text = "SimpleEpub2";
             // 
@@ -70,7 +70,7 @@
             this.version_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.version_label.Location = new System.Drawing.Point(435, 195);
             this.version_label.Name = "version_label";
-            this.version_label.Size = new System.Drawing.Size(54, 20);
+            this.version_label.Size = new System.Drawing.Size(69, 25);
             this.version_label.TabIndex = 2;
             this.version_label.Text = "版本：";
             // 
@@ -80,7 +80,7 @@
             this.author_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.author_label.Location = new System.Drawing.Point(435, 235);
             this.author_label.Name = "author_label";
-            this.author_label.Size = new System.Drawing.Size(54, 20);
+            this.author_label.Size = new System.Drawing.Size(69, 25);
             this.author_label.TabIndex = 3;
             this.author_label.Text = "作者：";
             // 
@@ -90,7 +90,7 @@
             this.email_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.email_label.Location = new System.Drawing.Point(435, 275);
             this.email_label.Name = "email_label";
-            this.email_label.Size = new System.Drawing.Size(54, 20);
+            this.email_label.Size = new System.Drawing.Size(69, 25);
             this.email_label.TabIndex = 4;
             this.email_label.Text = "邮箱：";
             // 
@@ -100,7 +100,7 @@
             this.intro_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.intro_label.Location = new System.Drawing.Point(435, 315);
             this.intro_label.Name = "intro_label";
-            this.intro_label.Size = new System.Drawing.Size(54, 20);
+            this.intro_label.Size = new System.Drawing.Size(69, 25);
             this.intro_label.TabIndex = 5;
             this.intro_label.Text = "简介：";
             // 
@@ -129,7 +129,7 @@
             this.email.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.email.Location = new System.Drawing.Point(520, 276);
             this.email.Name = "email";
-            this.email.Size = new System.Drawing.Size(48, 19);
+            this.email.Size = new System.Drawing.Size(60, 23);
             this.email.TabIndex = 6;
             this.email.Text = "labelX1";
             // 
@@ -143,7 +143,7 @@
             this.author.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.author.Location = new System.Drawing.Point(520, 236);
             this.author.Name = "author";
-            this.author.Size = new System.Drawing.Size(48, 19);
+            this.author.Size = new System.Drawing.Size(60, 23);
             this.author.TabIndex = 6;
             this.author.Text = "labelX1";
             // 
@@ -157,7 +157,7 @@
             this.version.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.version.Location = new System.Drawing.Point(520, 196);
             this.version.Name = "version";
-            this.version.Size = new System.Drawing.Size(48, 19);
+            this.version.Size = new System.Drawing.Size(60, 23);
             this.version.TabIndex = 6;
             this.version.Text = "labelX1";
             // 
@@ -176,8 +176,8 @@
             // About
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.ok);

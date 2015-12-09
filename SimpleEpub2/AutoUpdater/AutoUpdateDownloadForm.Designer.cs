@@ -70,14 +70,14 @@
             this.progressBar.Location = new System.Drawing.Point(34, 85);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(375, 23);
-            this.progressBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
+            this.progressBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
             this.progressBar.TabIndex = 10;
             this.progressBar.Text = "progressBarX1";
             // 
             // AutoUpdateDownloadForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(444, 176);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.lblPercentage);

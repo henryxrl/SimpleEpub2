@@ -59,29 +59,45 @@ namespace SimpleEpub2
 			pg1.SetBounds(-12, 0, 742, 595);
 			pg1.Parent = this;
 			pageSliderPage1.Controls.Add(pg1);
+            pageSliderPage1.Location = new System.Drawing.Point(4, 4);
+            pageSliderPage1.MaximumSize = new System.Drawing.Size(735, 585);
+            pageSliderPage1.MinimumSize = new System.Drawing.Size(735, 585);
+            pageSliderPage1.Size = new System.Drawing.Size(735, 585);
 
-			// Page 2
+            // Page 2
             pg2 = new Settings_Page2(themeColor, LANG);
 			pg2.IsOpen = true;
 			pg2.SetBounds(-12, 0, 742, 595);
 			pg2.Parent = this;
 			pageSliderPage2.Controls.Add(pg2);
+            pageSliderPage2.Location = new System.Drawing.Point(4, 588);
+            pageSliderPage2.MaximumSize = new System.Drawing.Size(735, 585);
+            pageSliderPage2.MinimumSize = new System.Drawing.Size(735, 585);
+            pageSliderPage2.Size = new System.Drawing.Size(735, 585);
 
-			// Page 3
+            // Page 3
             pg3 = new Settings_Page3(themeColor, LANG);
 			pg3.IsOpen = true;
 			pg3.SetBounds(-12, 0, 742, 595);
 			pg3.Parent = this;
 			pageSliderPage3.Controls.Add(pg3);
+            pageSliderPage3.Location = new System.Drawing.Point(4, 1172);
+            pageSliderPage3.MaximumSize = new System.Drawing.Size(735, 585);
+            pageSliderPage3.MinimumSize = new System.Drawing.Size(735, 585);
+            pageSliderPage3.Size = new System.Drawing.Size(735, 585);
 
-			// Page 4
+            // Page 4
             pg4 = new Settings_Page4(themeColor, LANG);
 			pg4.IsOpen = true;
 			pg4.SetBounds(-12, 0, 742, 595);
 			pg4.Parent = this;
 			pageSliderPage4.Controls.Add(pg4);
+            pageSliderPage4.Location = new System.Drawing.Point(4, 1756);
+            pageSliderPage4.MaximumSize = new System.Drawing.Size(735, 585);
+            pageSliderPage4.MinimumSize = new System.Drawing.Size(735, 585);
+            pageSliderPage4.Size = new System.Drawing.Size(735, 585);
 
-			ResumeLayout(false);
+            ResumeLayout(false);
 
 
 			// Fill font combobox
@@ -103,7 +119,10 @@ namespace SimpleEpub2
 				}
 			}
 
-		}
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+        }
 
 		private void superTabItem1_Click(object sender, EventArgs e)
 		{

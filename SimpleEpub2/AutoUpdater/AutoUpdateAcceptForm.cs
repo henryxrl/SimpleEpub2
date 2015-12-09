@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SimpleEpub2.AutoUpdater
@@ -59,7 +60,11 @@ namespace SimpleEpub2.AutoUpdater
 
 			// Fill in update info
 			this.txtDescription.Text = updateInfo.Description;
-		}
+
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		private void btnYes_Click(object sender, EventArgs e)
 		{

@@ -32,11 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings_Page2));
             this.tabControl5 = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel5 = new DevComponents.DotNetBar.TabControlPanel();
+            this.settings2_2_pmT = new System.Windows.Forms.TextBox();
+            this.settings2_2_pmL = new System.Windows.Forms.TextBox();
             this.settings2_1_pc = new DevComponents.DotNetBar.ColorPickerButton();
             this.settings2_2_pmR = new System.Windows.Forms.TextBox();
             this.settings2_2_pmB = new System.Windows.Forms.TextBox();
-            this.settings2_2_pmL = new System.Windows.Forms.TextBox();
-            this.settings2_2_pmT = new System.Windows.Forms.TextBox();
             this.settings2_2_pmR_label = new System.Windows.Forms.Label();
             this.settings2_2_pmL_label = new System.Windows.Forms.Label();
             this.settings2_2_pmD_label = new System.Windows.Forms.Label();
@@ -45,11 +45,15 @@
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.settings2_3_authornamefont = new System.Windows.Forms.ComboBox();
+            this.settings2_3_booknamefont = new System.Windows.Forms.ComboBox();
             this.settings2_3_authornamefont_label = new System.Windows.Forms.Label();
             this.settings2_3_booknamefont_label = new System.Windows.Forms.Label();
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.settings2_3_booknamefont = new System.Windows.Forms.ComboBox();
-            this.settings2_3_authornamefont = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl5)).BeginInit();
             this.tabControl5.SuspendLayout();
             this.tabControlPanel5.SuspendLayout();
@@ -77,11 +81,11 @@
             // 
             // tabControlPanel5
             // 
+            this.tabControlPanel5.Controls.Add(this.settings2_2_pmT);
+            this.tabControlPanel5.Controls.Add(this.settings2_2_pmL);
             this.tabControlPanel5.Controls.Add(this.settings2_1_pc);
             this.tabControlPanel5.Controls.Add(this.settings2_2_pmR);
             this.tabControlPanel5.Controls.Add(this.settings2_2_pmB);
-            this.tabControlPanel5.Controls.Add(this.settings2_2_pmL);
-            this.tabControlPanel5.Controls.Add(this.settings2_2_pmT);
             this.tabControlPanel5.Controls.Add(this.settings2_2_pmR_label);
             this.tabControlPanel5.Controls.Add(this.settings2_2_pmL_label);
             this.tabControlPanel5.Controls.Add(this.settings2_2_pmD_label);
@@ -93,14 +97,31 @@
             this.tabControlPanel5.Name = "tabControlPanel5";
             this.tabControlPanel5.Padding = new System.Windows.Forms.Padding(1);
             this.tabControlPanel5.Size = new System.Drawing.Size(620, 208);
-            this.tabControlPanel5.Style.BackColor1.Color = System.Drawing.Color.White;
+            this.tabControlPanel5.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
+            this.tabControlPanel5.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.tabControlPanel5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel5.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
+            this.tabControlPanel5.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
             this.tabControlPanel5.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
             | DevComponents.DotNetBar.eBorderSide.Bottom)));
             this.tabControlPanel5.Style.GradientAngle = 90;
             this.tabControlPanel5.TabIndex = 1;
             this.tabControlPanel5.TabItem = this.tabItem2;
+            // 
+            // settings2_2_pmT
+            // 
+            this.settings2_2_pmT.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings2_2_pmT.Location = new System.Drawing.Point(145, 86);
+            this.settings2_2_pmT.Name = "settings2_2_pmT";
+            this.settings2_2_pmT.Size = new System.Drawing.Size(120, 27);
+            this.settings2_2_pmT.TabIndex = 46;
+            // 
+            // settings2_2_pmL
+            // 
+            this.settings2_2_pmL.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings2_2_pmL.Location = new System.Drawing.Point(145, 146);
+            this.settings2_2_pmL.Name = "settings2_2_pmL";
+            this.settings2_2_pmL.Size = new System.Drawing.Size(120, 27);
+            this.settings2_2_pmL.TabIndex = 47;
             // 
             // settings2_1_pc
             // 
@@ -129,22 +150,6 @@
             this.settings2_2_pmB.Name = "settings2_2_pmB";
             this.settings2_2_pmB.Size = new System.Drawing.Size(120, 27);
             this.settings2_2_pmB.TabIndex = 48;
-            // 
-            // settings2_2_pmL
-            // 
-            this.settings2_2_pmL.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.settings2_2_pmL.Location = new System.Drawing.Point(145, 146);
-            this.settings2_2_pmL.Name = "settings2_2_pmL";
-            this.settings2_2_pmL.Size = new System.Drawing.Size(120, 27);
-            this.settings2_2_pmL.TabIndex = 47;
-            // 
-            // settings2_2_pmT
-            // 
-            this.settings2_2_pmT.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.settings2_2_pmT.Location = new System.Drawing.Point(145, 86);
-            this.settings2_2_pmT.Name = "settings2_2_pmT";
-            this.settings2_2_pmT.Size = new System.Drawing.Size(120, 27);
-            this.settings2_2_pmT.TabIndex = 46;
             // 
             // settings2_2_pmR_label
             // 
@@ -241,14 +246,39 @@
             this.tabControlPanel1.Name = "tabControlPanel1";
             this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
             this.tabControlPanel1.Size = new System.Drawing.Size(620, 178);
-            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.White;
+            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
+            this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
+            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
             this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
             | DevComponents.DotNetBar.eBorderSide.Bottom)));
             this.tabControlPanel1.Style.GradientAngle = 90;
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.tabItem1;
+            // 
+            // settings2_3_authornamefont
+            // 
+            this.settings2_3_authornamefont.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.settings2_3_authornamefont.DropDownHeight = 150;
+            this.settings2_3_authornamefont.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings2_3_authornamefont.FormattingEnabled = true;
+            this.settings2_3_authornamefont.IntegralHeight = false;
+            this.settings2_3_authornamefont.Location = new System.Drawing.Point(145, 105);
+            this.settings2_3_authornamefont.Name = "settings2_3_authornamefont";
+            this.settings2_3_authornamefont.Size = new System.Drawing.Size(287, 29);
+            this.settings2_3_authornamefont.TabIndex = 52;
+            // 
+            // settings2_3_booknamefont
+            // 
+            this.settings2_3_booknamefont.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.settings2_3_booknamefont.DropDownHeight = 150;
+            this.settings2_3_booknamefont.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.settings2_3_booknamefont.FormattingEnabled = true;
+            this.settings2_3_booknamefont.IntegralHeight = false;
+            this.settings2_3_booknamefont.Location = new System.Drawing.Point(145, 35);
+            this.settings2_3_booknamefont.Name = "settings2_3_booknamefont";
+            this.settings2_3_booknamefont.Size = new System.Drawing.Size(287, 29);
+            this.settings2_3_booknamefont.TabIndex = 50;
             // 
             // settings2_3_authornamefont_label
             // 
@@ -280,37 +310,63 @@
             this.tabItem1.Name = "tabItem1";
             this.tabItem1.Text = "封面设置";
             // 
-            // settings2_3_booknamefont
+            // label1
             // 
-            this.settings2_3_booknamefont.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.settings2_3_booknamefont.DropDownHeight = 150;
-            this.settings2_3_booknamefont.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.settings2_3_booknamefont.FormattingEnabled = true;
-            this.settings2_3_booknamefont.IntegralHeight = false;
-            this.settings2_3_booknamefont.Location = new System.Drawing.Point(145, 35);
-            this.settings2_3_booknamefont.Name = "settings2_3_booknamefont";
-            this.settings2_3_booknamefont.Size = new System.Drawing.Size(287, 29);
-            this.settings2_3_booknamefont.TabIndex = 50;
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(326, 415);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(23, 19);
+            this.label1.TabIndex = 48;
+            this.label1.Text = "%";
             // 
-            // settings2_3_authornamefont
+            // label2
             // 
-            this.settings2_3_authornamefont.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.settings2_3_authornamefont.DropDownHeight = 150;
-            this.settings2_3_authornamefont.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.settings2_3_authornamefont.FormattingEnabled = true;
-            this.settings2_3_authornamefont.IntegralHeight = false;
-            this.settings2_3_authornamefont.Location = new System.Drawing.Point(145, 105);
-            this.settings2_3_authornamefont.Name = "settings2_3_authornamefont";
-            this.settings2_3_authornamefont.Size = new System.Drawing.Size(287, 29);
-            this.settings2_3_authornamefont.TabIndex = 52;
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.White;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(326, 475);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(23, 19);
+            this.label2.TabIndex = 49;
+            this.label2.Text = "%";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.White;
+            this.label3.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(620, 415);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(23, 19);
+            this.label3.TabIndex = 50;
+            this.label3.Text = "%";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.White;
+            this.label4.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(620, 475);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(23, 19);
+            this.label4.TabIndex = 51;
+            this.label4.Text = "%";
             // 
             // Settings_Page2
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl5);
             this.Controls.Add(this.tabControl1);
             this.DoubleBuffered = true;
@@ -327,6 +383,7 @@
             this.tabControlPanel1.ResumeLayout(false);
             this.tabControlPanel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 
@@ -349,12 +406,12 @@
         private System.Windows.Forms.Label settings2_3_authornamefont_label;
 		private System.Windows.Forms.Label settings2_3_booknamefont_label;
 		private DevComponents.DotNetBar.TabItem tabItem1;
-        protected internal DevComponents.DotNetBar.ColorPickerButton settings2_1_pc;
         protected internal System.Windows.Forms.ComboBox settings2_3_booknamefont;
         protected internal System.Windows.Forms.ComboBox settings2_3_authornamefont;
-
-
-
-
-	}
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        protected internal DevComponents.DotNetBar.ColorPickerButton settings2_1_pc;
+    }
 }

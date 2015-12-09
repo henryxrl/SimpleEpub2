@@ -102,7 +102,10 @@ namespace SimpleEpub2
 			// Set cell font colors
 			setCellFontColor(System.Drawing.Color.Black, themeColor);
 
-		}
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		private void cover_picturebox_DragEnter(object sender, DragEventArgs e)
 		{

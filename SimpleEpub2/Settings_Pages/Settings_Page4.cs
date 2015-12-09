@@ -33,7 +33,10 @@ namespace SimpleEpub2
             settings4_1_filelocation_dialog.Description = LANG.getString("settings4_1_filelocation_dialog");
             settings4_4_language_label.Text = LANG.getString("settings4_4_language_label");
 
-		}
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		private void settings4_1_filelocation_button_Click(object sender, EventArgs e)
 		{

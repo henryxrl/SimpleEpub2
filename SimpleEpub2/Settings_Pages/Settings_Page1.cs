@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace SimpleEpub2
 {
@@ -29,7 +30,10 @@ namespace SimpleEpub2
             settings1_3_TtS_label.Text = LANG.getString("settings1_3_TtS_label");       // 繁体转简体
             settings1_3_embedFontSubset_label.Text = LANG.getString("settings1_3_embedFontSubset_label");       // 嵌入字体（子集）
 
-		}
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		private void settings1_3_coverfirstpage_ValueChanged(object sender, EventArgs e)
 		{

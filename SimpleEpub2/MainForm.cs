@@ -12,6 +12,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -23,15 +24,40 @@ namespace SimpleEpub2
 {
 	public partial class MainForm : DevComponents.DotNetBar.Metro.MetroForm, AutoUpdater.AutoUpdatable
 	{
-		// 无法将DotNetBar2.dll设为嵌入资源并通过Assembly调用
-		// 将其生成操作设为无以减小程序体积
-		// 在引用文件夹里，将其复制本地设为True
-		// 【更新】把Ionic.Zip.dll也设为复制本地，然后用ILMerge打包成一个exe文件！
-		// 在Build的时候用ILMerge自动生成单文件EXE！
-		
+        // 无法将DotNetBar2.dll设为嵌入资源并通过Assembly调用
+        // 将其生成操作设为无以减小程序体积
+        // 在引用文件夹里，将其复制本地设为True
+        // 【更新】把Ionic.Zip.dll也设为复制本地，然后用ILMerge打包成一个exe文件！
+        // 在Build的时候用ILMerge自动生成单文件EXE！
 
-		#region Variables
-		private static String NAMESPACE = "SimpleEpub2";
+
+        #region DPI
+
+        [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
+        public static extern int GetDeviceCaps(IntPtr hDC, int nIndex);
+
+        public enum DeviceCap
+        {
+            /// <summary>
+            /// Logical pixels inch in X
+            /// </summary>
+            LOGPIXELSX = 88,
+            /// <summary>
+            /// Logical pixels inch in Y
+            /// </summary>
+            LOGPIXELSY = 90
+
+            // Other constants may be founded on pinvoke.net
+        }
+
+        #endregion
+
+
+        #region Variables
+
+        Tuple<Single, Single> DPI;
+
+        private static String NAMESPACE = "SimpleEpub2";
 		private static Assembly a = Assembly.Load(NAMESPACE);
 	
 
@@ -73,6 +99,7 @@ namespace SimpleEpub2
 			get { return this; }
 		}
 		#endregion
+
 
 		private Page1 pg1 = null;
 		private Page2 pg2 = null;
@@ -176,6 +203,9 @@ namespace SimpleEpub2
 		#region Form Preset
 		public MainForm()
 		{
+            // Get DPI
+            DPI = getDPI();
+
             // 设置界面语言
             setLANG();
 
@@ -237,14 +267,29 @@ namespace SimpleEpub2
 			next_button.Enabled = false;
 			previous_button.Enabled = false;
 
-			#endregion
+            #endregion
 
-		}
+            pageSliderPage1.Location = new Point(4, 4);
+            pageSliderPage1.MaximumSize = new Size(932, 610);
+            pageSliderPage1.MinimumSize = new Size(932, 610);
+
+            pageSliderPage2.Location = new Point(932, 4);
+            pageSliderPage2.MaximumSize = new Size(932, 610);
+            pageSliderPage2.MinimumSize = new Size(932, 610);
+
+            pageSliderPage3.Location = new Point(1860, 4);
+            pageSliderPage3.MaximumSize = new Size(932, 610);
+            pageSliderPage3.MinimumSize = new Size(932, 610);
+
+            // DPI settings
+            this.AutoScaleDimensions = new SizeF(96F, 96F);
+            this.AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			#region Set Subpages
-			Extract(resourcesPath, "Resources", "About.png");
+            #region Set Subpages
+            Extract(resourcesPath, "Resources", "About.png");
 			setSubPages(true);
 			#endregion
 
@@ -329,7 +374,7 @@ namespace SimpleEpub2
 			SuspendLayout();
 			pg1 = new Page1(themeColor, LANG);
 			pg1.IsOpen = true;
-			pg1.SetBounds(4, 8, 918, 600);
+			pg1.SetBounds(4, 8, pg1.Width, pg1.Height);
 			pg1.Parent = this;
 			pageSliderPage1.Controls.Add(pg1);
 			pg1.txt_picturebox.DragDrop += txt_picturebox_DragDrop;
@@ -345,7 +390,7 @@ namespace SimpleEpub2
 			SuspendLayout();
 			pg2 = new Page2(themeColor, LANG);
 			pg2.IsOpen = true;
-			pg2.SetBounds(3, 8, 920, 600);
+			pg2.SetBounds(4, 8, pg2.Width, pg2.Height);
 			pg2.Parent = this;
 			pageSliderPage2.Controls.Add(pg2);
 			pg2.cover_picturebox.DragDrop += cover_picturebox_DragDrop;
@@ -366,7 +411,7 @@ namespace SimpleEpub2
 			SuspendLayout();
 			pg3 = new Page3(themeColor, LANG);
 			pg3.IsOpen = true;
-			pg3.SetBounds(3, 3, 940, 605);
+			pg3.SetBounds(4, 3, pg3.Width, pg3.Height);
 			pg3.Parent = this;
 			pageSliderPage3.Controls.Add(pg3);
 			pg3.newbook_button.Click += newbook_button_Click;
@@ -378,7 +423,7 @@ namespace SimpleEpub2
 			SuspendLayout();
 			abt = new About(themeColor, LANG);
 			abt.IsOpen = true;
-			abt.SetBounds(8, 8, 950, 650);
+			abt.SetBounds(8, 8, abt.Width, abt.Height);
 			if (!show)
 				abt.IsOpen = false;
 			Controls.Add(abt);
@@ -397,7 +442,7 @@ namespace SimpleEpub2
 			SuspendLayout();
 			sts = new Settings(themeColor, LANG);
 			sts.IsOpen = true;
-			sts.SetBounds(8, 8, 950, 650);
+			sts.SetBounds(8, 8, sts.Width, sts.Height);
 			if (!show)
 				sts.IsOpen = false;
 			Controls.Add(sts);
@@ -2733,7 +2778,7 @@ namespace SimpleEpub2
 			bookname = ToSBC(bookname);
 			Tuple<String, Int32> settings = setTitleFontSize(bookname.Length, bookNameRec.Width, bookname, vertical);
 			//Font bookFont = new Font(privateFontFamilies[1], settings.Item2, FontStyle.Bold);
-			Font bookFont = new Font(bookfont, settings.Item2, FontStyle.Bold);
+			Font bookFont = new Font(bookfont, settings.Item2 * DPI.Item2 / 96f, FontStyle.Bold, GraphicsUnit.Pixel);
 			drawing.DrawString(settings.Item1, bookFont, blackBrush, bookNameRec, bookDrawFormat);
 
 			StringFormat authorDrawFormat = new StringFormat();
@@ -2743,12 +2788,12 @@ namespace SimpleEpub2
 			authorDrawFormat.LineAlignment = StringAlignment.Center;
 			author = ToSBC(author);
 			//Font authorFont = new Font(privateFontFamilies[0], authorRec1.Width / 2, FontStyle.Bold);
-			Font authorFont = new Font(authorfont, authorRec1.Width / 2, FontStyle.Bold);
+			Font authorFont = new Font(authorfont, authorRec1.Width / 2 * DPI.Item2 / 96, FontStyle.Bold, GraphicsUnit.Pixel);
 			drawing.DrawString(author + " ◆ 著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
 			drawing.DrawString(" ◆ 著", authorFont, yellowBrush, authorRec1, authorDrawFormat);
 			drawing.DrawString("著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
 
-			whiteBrush.Dispose();
+            whiteBrush.Dispose();
 			orangeBrush.Dispose();
 			yellowBrush.Dispose();
 			blackBrush.Dispose();
@@ -3474,14 +3519,24 @@ namespace SimpleEpub2
 			DONE = false;
 		}
 
-		#endregion
+        private Tuple<Single, Single> getDPI()
+        {
+            Graphics g = Graphics.FromHwnd(IntPtr.Zero);
+            IntPtr desktop = g.GetHdc();
+            Int32 Xdpi = GetDeviceCaps(desktop, (Int32)DeviceCap.LOGPIXELSX);
+            Int32 Ydpi = GetDeviceCaps(desktop, (Int32)DeviceCap.LOGPIXELSY);
 
-		#endregion
+            return new Tuple<Single, Single>(Xdpi, Ydpi);
+        }
+
+        #endregion
+
+        #endregion
 
 
-		#region Multithreading
+        #region Multithreading
 
-		private void processTXTWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void processTXTWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			processTXT(e.Argument.ToString());
 		}
@@ -3621,7 +3676,7 @@ namespace SimpleEpub2
 			coverChanged = false;
 		}
 
-		#endregion
+        #endregion
 
-	}
+    }
 }

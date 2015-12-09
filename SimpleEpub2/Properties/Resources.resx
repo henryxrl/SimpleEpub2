@@ -436,16 +436,16 @@
     <value>Page Color</value>
   </data>
   <data name="en_settings2_2_pmD_label" xml:space="preserve">
-    <value>Margin (B)                                     %</value>
+    <value>Margin (B)</value>
   </data>
   <data name="en_settings2_2_pmL_label" xml:space="preserve">
-    <value>Margin (L)                                     %</value>
+    <value>Margin (L)</value>
   </data>
   <data name="en_settings2_2_pmR_label" xml:space="preserve">
-    <value>Margin (R)                                     %</value>
+    <value>Margin (R)</value>
   </data>
   <data name="en_settings2_2_pmU_label" xml:space="preserve">
-    <value>Margin (U)                                     %</value>
+    <value>Margin (U)</value>
   </data>
   <data name="en_settings2_3_authornamefont_label" xml:space="preserve">
     <value>Author</value>
@@ -481,7 +481,7 @@
     <value>Add parag spacing</value>
   </data>
   <data name="en_settings3_3_linespacing_label" xml:space="preserve">
-    <value>Line spacing                                 %</value>
+    <value>Line spacing</value>
   </data>
   <data name="en_settings3_tabItem3" xml:space="preserve">
     <value>Body Content Settings</value>
@@ -829,16 +829,16 @@
     <value>页面颜色：</value>
   </data>
   <data name="zh_settings2_2_pmD_label" xml:space="preserve">
-    <value>下边距：                                        %</value>
+    <value>下边距：</value>
   </data>
   <data name="zh_settings2_2_pmL_label" xml:space="preserve">
-    <value>左边距：                                        %</value>
+    <value>左边距：</value>
   </data>
   <data name="zh_settings2_2_pmR_label" xml:space="preserve">
-    <value>右边距：                                        %</value>
+    <value>右边距：</value>
   </data>
   <data name="zh_settings2_2_pmU_label" xml:space="preserve">
-    <value>上边距：                                        %</value>
+    <value>上边距：</value>
   </data>
   <data name="zh_settings2_3_authornamefont_label" xml:space="preserve">
     <value>作者字体：</value>
@@ -859,7 +859,7 @@
     <value>标题字体：</value>
   </data>
   <data name="zh_settings3_1_tsize_label" xml:space="preserve">
-    <value>标题字号：                                     号</value>
+    <value>标题字号：</value>
   </data>
   <data name="zh_settings3_2_bcolor_label" xml:space="preserve">
     <value>正文颜色：</value>
@@ -868,13 +868,13 @@
     <value>正文字体：</value>
   </data>
   <data name="zh_settings3_2_bsize_label" xml:space="preserve">
-    <value>正文字号：                                     号</value>
+    <value>正文字号：</value>
   </data>
   <data name="zh_settings3_3_addparagraphspacing_label" xml:space="preserve">
     <value>增加段落前后的间距</value>
   </data>
   <data name="zh_settings3_3_linespacing_label" xml:space="preserve">
-    <value>行距：                                            %</value>
+    <value>行距：</value>
   </data>
   <data name="zh_settings3_tabItem3" xml:space="preserve">
     <value>正文设置</value>
@@ -1130,5 +1130,17 @@
   </data>
   <data name="zh_contextual_menu_2" xml:space="preserve">
     <value>退出</value>
+  </data>
+  <data name="en_settings_label_hao" xml:space="preserve">
+    <value />
+  </data>
+  <data name="en_settings_label_percentage" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="zh_settings_label_hao" xml:space="preserve">
+    <value>号</value>
+  </data>
+  <data name="zh_settings_label_percentage" xml:space="preserve">
+    <value>%</value>
   </data>
 </root>

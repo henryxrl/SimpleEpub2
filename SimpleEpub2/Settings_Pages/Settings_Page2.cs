@@ -31,8 +31,15 @@ namespace SimpleEpub2
             settings2_2_pmD_label.Text = LANG.getString("settings2_2_pmD_label");
             settings2_2_pmL_label.Text = LANG.getString("settings2_2_pmL_label");
             settings2_2_pmR_label.Text = LANG.getString("settings2_2_pmR_label");
+            label1.Text = LANG.getString("settings_label_percentage");
+            label2.Text = LANG.getString("settings_label_percentage");
+            label3.Text = LANG.getString("settings_label_percentage");
+            label4.Text = LANG.getString("settings_label_percentage");
 
-		}
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		private void settings2_3_booknamefont_MeasureItem(object sender, MeasureItemEventArgs e)
 		{
