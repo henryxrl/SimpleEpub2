@@ -192,8 +192,7 @@
             // 
             // AutoUpdateAcceptForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(394, 391);
             this.Controls.Add(this.lblAppName);
             this.Controls.Add(this.lblUpdateAvail);

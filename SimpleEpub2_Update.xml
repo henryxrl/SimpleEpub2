@@ -1,15 +1,19 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.16.3.2</version>
+    <version>2.16.3.3</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>623D1B25330D8351EE2B44983622C264</md5>
+    <md5>A4D6B4DFF7BF08C321103535618DED6E</md5>
     <launchArgs>
     </launchArgs>
     <description>12/8/2015 Update:
     1. NEW: Full high DPI support
+    2. FIXED: Some percentage signs  disalignment
+    3. FIXED: Update form disalignment
 
 12/8/2015 更新：
-    1. 新增：完美支持高DPI</description>
+    1. 新增：完美支持高DPI
+    2. 修复：一些百分比号不对齐
+    3. 修复：更新界面不对齐</description>
   </update>
 </sharpUpdate>

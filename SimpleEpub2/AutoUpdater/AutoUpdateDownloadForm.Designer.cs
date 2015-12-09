@@ -76,8 +76,7 @@
             // 
             // AutoUpdateDownloadForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(444, 176);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.lblPercentage);
