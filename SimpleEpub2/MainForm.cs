@@ -372,7 +372,7 @@ namespace SimpleEpub2
 		private void setPage1()
 		{
 			SuspendLayout();
-			pg1 = new Page1(themeColor, LANG);
+			pg1 = new Page1(themeColor, LANG, DPI);
 			pg1.IsOpen = true;
 			pg1.SetBounds(4, 8, pg1.Width, pg1.Height);
 			pg1.Parent = this;
@@ -388,7 +388,7 @@ namespace SimpleEpub2
 		private void setPage2()
 		{
 			SuspendLayout();
-			pg2 = new Page2(themeColor, LANG);
+			pg2 = new Page2(themeColor, LANG, DPI);
 			pg2.IsOpen = true;
 			pg2.SetBounds(4, 8, pg2.Width, pg2.Height);
 			pg2.Parent = this;
@@ -409,7 +409,7 @@ namespace SimpleEpub2
 		private void setPage3()
 		{
 			SuspendLayout();
-			pg3 = new Page3(themeColor, LANG);
+			pg3 = new Page3(themeColor, LANG, DPI);
 			pg3.IsOpen = true;
 			pg3.SetBounds(4, 3, pg3.Width, pg3.Height);
 			pg3.Parent = this;
@@ -2777,9 +2777,10 @@ namespace SimpleEpub2
 			bookDrawFormat.LineAlignment = StringAlignment.Center;
 			bookname = ToSBC(bookname);
 			Tuple<String, Int32> settings = setTitleFontSize(bookname.Length, bookNameRec.Width, bookname, vertical);
-			//Font bookFont = new Font(privateFontFamilies[1], settings.Item2, FontStyle.Bold);
-			Font bookFont = new Font(bookfont, settings.Item2 * DPI.Item2 / 96f, FontStyle.Bold, GraphicsUnit.Pixel);
-			drawing.DrawString(settings.Item1, bookFont, blackBrush, bookNameRec, bookDrawFormat);
+            //Font bookFont = new Font(privateFontFamilies[1], settings.Item2, FontStyle.Bold);
+            //Font bookFont = new Font(bookfont, settings.Item2 * DPI.Item2 / 96f, FontStyle.Bold, GraphicsUnit.Pixel);
+            Font bookFont = new Font(bookfont, settings.Item2 * 96f / DPI.Item2, FontStyle.Bold);
+            drawing.DrawString(settings.Item1, bookFont, blackBrush, bookNameRec, bookDrawFormat);
 
 			StringFormat authorDrawFormat = new StringFormat();
 			authorDrawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
@@ -2787,11 +2788,12 @@ namespace SimpleEpub2
 			authorDrawFormat.Alignment = StringAlignment.Far;
 			authorDrawFormat.LineAlignment = StringAlignment.Center;
 			author = ToSBC(author);
-			//Font authorFont = new Font(privateFontFamilies[0], authorRec1.Width / 2, FontStyle.Bold);
-			Font authorFont = new Font(authorfont, authorRec1.Width / 2 * DPI.Item2 / 96, FontStyle.Bold, GraphicsUnit.Pixel);
-			drawing.DrawString(author + " ◆ 著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
-			drawing.DrawString(" ◆ 著", authorFont, yellowBrush, authorRec1, authorDrawFormat);
-			drawing.DrawString("著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
+            //Font authorFont = new Font(privateFontFamilies[0], authorRec1.Width / 2, FontStyle.Bold);
+            //Font authorFont = new Font(authorfont, authorRec1.Width / 2 * DPI.Item2 / 96f, FontStyle.Bold, GraphicsUnit.Pixel);
+            Font authorFont = new Font(authorfont, authorRec1.Width / 2 * 96f / DPI.Item2, FontStyle.Bold);
+            drawing.DrawString(author + " ◆ 著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
+            drawing.DrawString(" ◆ 著", authorFont, yellowBrush, authorRec1, authorDrawFormat);
+            drawing.DrawString("著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
 
             whiteBrush.Dispose();
 			orangeBrush.Dispose();

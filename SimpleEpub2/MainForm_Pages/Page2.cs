@@ -7,15 +7,17 @@ namespace SimpleEpub2
 {
 	public partial class Page2 : DevComponents.DotNetBar.Controls.SlidePanel
 	{
-		Color themeColor;
-        Language LANG;
+		private Color themeColor;
+        private Language LANG;
+        private Tuple<Single, Single> DPI;
 
-		public Page2(Color c, Language lang)
+        public Page2(Color c, Language lang, Tuple<Single, Single> dpi)
 		{
 			InitializeComponent();
 
 			themeColor = c;
             LANG = lang;
+            DPI = dpi;
 
 			SlideOutButtonVisible = false;
 
@@ -337,7 +339,7 @@ namespace SimpleEpub2
                     Font f = new Font("Microsoft YaHei UI", 35, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = cover_picturebox.Width / 2 - size.Width / 2;
-					Single py = cover_picturebox.Height / 2 - size.Height / 2 - 27;
+					Single py = cover_picturebox.Height / 2 - size.Height / 2 - 27 * DPI.Item2 / 96f;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 				}

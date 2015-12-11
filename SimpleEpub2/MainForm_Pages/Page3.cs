@@ -7,15 +7,17 @@ namespace SimpleEpub2
 {
 	public partial class Page3 : DevComponents.DotNetBar.Controls.SlidePanel
 	{
-		Color themeColor;
-        Language LANG;
+		private Color themeColor;
+        private Language LANG;
+        private Tuple<Single, Single> DPI;
 
-		public Page3(Color c, Language lang)
+		public Page3(Color c, Language lang, Tuple<Single, Single> dpi)
 		{
 			InitializeComponent();
 			
 			themeColor = c;
             LANG = lang;
+            DPI = dpi;
 
 			SlideOutButtonVisible = false;
 
@@ -87,7 +89,11 @@ namespace SimpleEpub2
 			bookintro_label.Visible = false;
 			bookintro.Visible = false;
 			bookintro_tile.Visible = false;
-		}
+
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		public void ProcessedMode()
 		{
@@ -164,7 +170,11 @@ namespace SimpleEpub2
 			bookintro_label.BackColor = themeColor;
 			bookintro.BackColor = themeColor;
 			bookintro_tile.BackColor = themeColor;
-		}
+
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		public void ProcessFAILEDMode()
 		{
@@ -198,7 +208,11 @@ namespace SimpleEpub2
 			bookintro_label.Visible = false;
 			bookintro.Visible = false;
 			bookintro_tile.Visible = false;
-		}
+
+            // DPI settings
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+        }
 
 		private Image drawBackGroundImage()
 		{
@@ -223,7 +237,7 @@ namespace SimpleEpub2
                     Font f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = cover.Width / 2 - size.Width / 2;
-					Single py = cover.Height / 2 - size.Height / 2 - 20;
+					Single py = cover.Height / 2 - size.Height / 2 - 20 * DPI.Item2 / 96f;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 				}

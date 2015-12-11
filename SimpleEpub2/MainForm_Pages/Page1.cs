@@ -9,13 +9,15 @@ namespace SimpleEpub2
 	{
         private Color themeColor;
         private Language LANG;
+        private Tuple<Single, Single> DPI;
 
-        public Page1(Color c, Language lang)
+        public Page1(Color c, Language lang, Tuple<Single, Single> dpi)
 		{
 			InitializeComponent();
 
 			themeColor = c;
             LANG = lang;
+            DPI = dpi;
 
 			SlideOutButtonVisible = false;
 
@@ -199,7 +201,7 @@ namespace SimpleEpub2
 					Font f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = txt_picturebox.Width / 2 - size.Width / 2;
-					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 50;
+					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 50 * DPI.Item2 / 96f;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 
@@ -207,7 +209,7 @@ namespace SimpleEpub2
 					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
-					py = txt_picturebox.Height / 2 - size.Height / 2 + 10;
+					py = txt_picturebox.Height / 2 - size.Height / 2 + 10 * DPI.Item2 / 96f;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 				}
@@ -239,7 +241,7 @@ namespace SimpleEpub2
 					Font f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = txt_picturebox.Width / 2 - size.Width / 2;
-					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 180;
+					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 180 * DPI.Item2 / 96f;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 
@@ -247,7 +249,7 @@ namespace SimpleEpub2
 					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
-					py = txt_picturebox.Height / 2 - size.Height / 2 - 110;
+					py = txt_picturebox.Height / 2 - size.Height / 2 - 110 * DPI.Item2 / 96f;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 				}
@@ -279,7 +281,7 @@ namespace SimpleEpub2
 					Font f = new Font("Microsoft YaHei UI", 50, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = txt_picturebox.Width / 2 - size.Width / 2;
-					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 180;
+					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 180 * DPI.Item2 / 96f;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 
@@ -287,7 +289,7 @@ namespace SimpleEpub2
 					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
-					py = txt_picturebox.Height / 2 - size.Height / 2 - 110;
+					py = txt_picturebox.Height / 2 - size.Height / 2 - 110 * DPI.Item2 / 96f;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 
@@ -295,7 +297,7 @@ namespace SimpleEpub2
 					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
-					py = txt_picturebox.Height / 2 - size.Height / 2 - 10;
+					py = txt_picturebox.Height / 2 - size.Height / 2 - 10 * DPI.Item2 / 96f;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 
@@ -303,7 +305,7 @@ namespace SimpleEpub2
 					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
-					py = txt_picturebox.Height / 2 - size.Height / 2 + 50;
+					py = txt_picturebox.Height / 2 - size.Height / 2 + 50 * DPI.Item2 / 96f;
 					g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					g.DrawString(s, f, b, px, py);
 				}
