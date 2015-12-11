@@ -60,6 +60,13 @@ namespace SimpleEpub2.AutoUpdater
 
 			// Fill in update info
 			this.txtDescription.Text = updateInfo.Description;
+            //this.txtDescription.ScrollBarAppearance = DevComponents.DotNetBar.eScrollBarAppearance.ApplicationScroll;
+            //Size txtDescription_size = this.txtDescription.Size;
+            //this.txtDescription.Size = new Size(txtDescription_size.Width /3, txtDescription_size.Height /3);
+            
+            // DotNetBar richTextBoxEx doesn't appear correctly under high DPI
+            // Use normal richTextBox instead!
+            this.richTextBox1.Text = updateInfo.Description;
 
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
