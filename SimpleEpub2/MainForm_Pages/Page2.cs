@@ -11,7 +11,7 @@ namespace SimpleEpub2
         private Language LANG;
         private Tuple<Single, Single> DPI;
 
-        public Page2(Color c, Language lang, Tuple<Single, Single> dpi)
+		public Page2(Color c, Language lang, Tuple<Single, Single> dpi)
 		{
 			InitializeComponent();
 

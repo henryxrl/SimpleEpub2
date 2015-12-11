@@ -1,19 +1,25 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.16.3.3</version>
+    <version>2.16.3.6</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>A4D6B4DFF7BF08C321103535618DED6E</md5>
+    <md5>3309504919E96F116CC4CBA642214830</md5>
     <launchArgs>
     </launchArgs>
-    <description>12/8/2015 Update:
-    1. NEW: Full high DPI support
-    2. FIXED: Some percentage signs  disalignment
-    3. FIXED: Update form disalignment
+    <description>12/10/2015 Update:
+    1. FIXED: Buttons in the title bar too small
+    2. FIXED: Book cover drawing out of scale
+    3. FIXED: UI text drawing out of scale
+    4. FIXED: Settings dropdown menu size too small
+    5. FIXED: "Settings Saved" notification out of place
+    6. FIXED: Settings superTabStrip width doesn't scale properly
 
-12/8/2015 更新：
-    1. 新增：完美支持高DPI
-    2. 修复：一些百分比号不对齐
-    3. 修复：更新界面不对齐</description>
+12/10/2015 更新：
+    1. 修复：标题栏中按键太小
+    2. 修复：封面绘制时字体大小错误
+    3. 修复：一些UI界面元素字体错误
+    4. 修复：设置中下拉选择菜单太小
+    5. 修复：“设置成功”提示信息错位
+    6. 修复：设置中左侧的superTabStrip宽度错误</description>
   </update>
 </sharpUpdate>

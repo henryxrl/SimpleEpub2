@@ -19,8 +19,9 @@ namespace SimpleEpub2
 
 			settings2_3_booknamefont.DrawItem += settings2_3_booknamefont_DrawItem;
 			settings2_3_booknamefont.MeasureItem += settings2_3_booknamefont_MeasureItem;
-			settings2_3_authornamefont.DrawItem += settings2_3_authornamefont_DrawItem;
+            settings2_3_authornamefont.DrawItem += settings2_3_authornamefont_DrawItem;
 			settings2_3_authornamefont.MeasureItem += settings2_3_authornamefont_MeasureItem;
+            settings2_3_authornamefont.DrawMode = DrawMode.OwnerDrawFixed;
 
             tabItem1.Text = LANG.getString("settings2_tabItem1");
             tabItem2.Text = LANG.getString("settings2_tabItem2");

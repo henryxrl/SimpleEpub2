@@ -98,8 +98,7 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.ClientSize = new System.Drawing.Size(484, 461);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

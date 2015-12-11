@@ -18,15 +18,17 @@ namespace SimpleEpub2
 		//private DevComponents.DotNetBar.Controls.SlidePanel[] cq = null;
 		private Int32 cqIDX = 0;
 
-		Color themeColor;
-        Language LANG;
+        protected internal Color themeColor;
+        protected internal Language LANG;
+        protected internal Tuple<Single, Single> DPI;
 
-		public Settings(Color c, Language lang)
+        public Settings(Color c, Language lang, Tuple<Single, Single> dpi)
 		{
 			InitializeComponent();
 
 			themeColor = c;
             LANG = lang;
+            DPI = dpi;
 
 			SlideOutButtonVisible = false;
 
@@ -47,8 +49,12 @@ namespace SimpleEpub2
             superTabItem3.Text = LANG.getString("settings_item3");
             superTabItem4.Text = LANG.getString("settings_item4");
 
+            // DPI settings
+            Size superTabStrip1_size = superTabStrip1.FixedTabSize;
+            superTabStrip1.FixedTabSize = new Size(superTabStrip1_size.Width * (int)DPI.Item2 / 96, superTabStrip1_size.Height * (int)DPI.Item2 / 96);
 
-			SuspendLayout();
+
+            SuspendLayout();
 
 			Size = new Size(950, 650);
 			pageSlider1.SelectedPageIndex = 0;
@@ -155,7 +161,7 @@ namespace SimpleEpub2
 			ToastNotification.CustomGlowColor = themeColor;
 			ToastNotification.ToastBackColor = themeColor;
             ToastNotification.Show(this.Parent, LANG.getString("settings_settings_success"),
-                null, 3000, eToastGlowColor.Custom, 428, 615);
+                null, 3000, eToastGlowColor.Custom, 428 * (int)DPI.Item2 / 96, 615 * (int)DPI.Item2 / 96);
 		}
 	}
 }

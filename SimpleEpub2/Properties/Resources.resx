@@ -397,7 +397,7 @@
     <value>sec</value>
   </data>
   <data name="en_mainpage_about" xml:space="preserve">
-    <value>&lt;b&gt;ABOUT&lt;/b&gt;</value>
+    <value>&lt;font size="10"&gt;&lt;b&gt;    ABOUT    &lt;/b&gt;&lt;/font&gt;</value>
   </data>
   <data name="en_mainpage_rm_item1" xml:space="preserve">
     <value>Enable AOT</value>
@@ -409,7 +409,7 @@
     <value>Close</value>
   </data>
   <data name="en_mainpage_settings" xml:space="preserve">
-    <value>&lt;b&gt;SETTINGS&lt;/b&gt;</value>
+    <value>&lt;font size="10"&gt;&lt;b&gt;    SETTINGS    &lt;/b&gt;&lt;/font&gt;</value>
   </data>
   <data name="en_settings1_3_coverfirstpage_label" xml:space="preserve">
     <value>Cover be the first page</value>
@@ -790,7 +790,7 @@
     <value>秒</value>
   </data>
   <data name="zh_mainpage_about" xml:space="preserve">
-    <value>&lt;b&gt;关于&lt;/b&gt;</value>
+    <value>&lt;font size="10"&gt;&lt;b&gt;    关于    &lt;/b&gt;&lt;/font&gt;</value>
   </data>
   <data name="zh_mainpage_rm_item1" xml:space="preserve">
     <value>窗口置顶</value>
@@ -802,7 +802,7 @@
     <value>关闭</value>
   </data>
   <data name="zh_mainpage_settings" xml:space="preserve">
-    <value>&lt;b&gt;设置&lt;/b&gt;</value>
+    <value>&lt;font size="10"&gt;&lt;b&gt;    设置    &lt;/b&gt;&lt;/font&gt;</value>
   </data>
   <data name="zh_settings1_3_coverfirstpage_label" xml:space="preserve">
     <value>封面作为电子书的第一页</value>

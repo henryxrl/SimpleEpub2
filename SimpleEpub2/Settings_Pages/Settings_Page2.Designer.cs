@@ -263,7 +263,6 @@
             // settings2_3_authornamefont
             // 
             this.settings2_3_authornamefont.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.settings2_3_authornamefont.DropDownHeight = 150;
             this.settings2_3_authornamefont.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.settings2_3_authornamefont.FormattingEnabled = true;
             this.settings2_3_authornamefont.IntegralHeight = false;
@@ -275,7 +274,6 @@
             // settings2_3_booknamefont
             // 
             this.settings2_3_booknamefont.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.settings2_3_booknamefont.DropDownHeight = 150;
             this.settings2_3_booknamefont.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.settings2_3_booknamefont.FormattingEnabled = true;
             this.settings2_3_booknamefont.IntegralHeight = false;

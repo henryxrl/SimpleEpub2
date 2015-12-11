@@ -101,7 +101,6 @@
             this.superTabStrip1.TabVerticalSpacing = 40;
             this.superTabStrip1.Text = "superTabStrip1";
             this.superTabStrip1.TextAlignment = DevComponents.DotNetBar.eItemAlignment.Center;
-            this.superTabStrip1.Visible = true;
             // 
             // superTabItem1
             // 
@@ -133,7 +132,6 @@
             // 
             // pageSlider1
             // 
-            this.pageSlider1.AnimationTime = 250;
             this.pageSlider1.Controls.Add(this.pageSliderPage1);
             this.pageSlider1.Controls.Add(this.pageSliderPage2);
             this.pageSlider1.Controls.Add(this.pageSliderPage3);

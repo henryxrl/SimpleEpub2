@@ -367,7 +367,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;ABOUT&lt;/b&gt;.
+        ///   Looks up a localized string similar to &lt;font size=&quot;10&quot;&gt;&lt;b&gt;    ABOUT    &lt;/b&gt;&lt;/font&gt;.
         /// </summary>
         internal static string en_mainpage_about {
             get {
@@ -403,7 +403,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;SETTINGS&lt;/b&gt;.
+        ///   Looks up a localized string similar to &lt;font size=&quot;10&quot;&gt;&lt;b&gt;    SETTINGS    &lt;/b&gt;&lt;/font&gt;.
         /// </summary>
         internal static string en_mainpage_settings {
             get {
@@ -1906,7 +1906,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;关于&lt;/b&gt;.
+        ///   Looks up a localized string similar to &lt;font size=&quot;10&quot;&gt;&lt;b&gt;    关于    &lt;/b&gt;&lt;/font&gt;.
         /// </summary>
         internal static string zh_mainpage_about {
             get {
@@ -1942,7 +1942,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;设置&lt;/b&gt;.
+        ///   Looks up a localized string similar to &lt;font size=&quot;10&quot;&gt;&lt;b&gt;    设置    &lt;/b&gt;&lt;/font&gt;.
         /// </summary>
         internal static string zh_mainpage_settings {
             get {

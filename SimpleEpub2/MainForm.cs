@@ -440,7 +440,7 @@ namespace SimpleEpub2
 		private void setSettings(Boolean show)
 		{
 			SuspendLayout();
-			sts = new Settings(themeColor, LANG);
+			sts = new Settings(themeColor, LANG, DPI);
 			sts.IsOpen = true;
 			sts.SetBounds(8, 8, sts.Width, sts.Height);
 			if (!show)
@@ -2789,11 +2789,11 @@ namespace SimpleEpub2
 			authorDrawFormat.LineAlignment = StringAlignment.Center;
 			author = ToSBC(author);
             //Font authorFont = new Font(privateFontFamilies[0], authorRec1.Width / 2, FontStyle.Bold);
-            //Font authorFont = new Font(authorfont, authorRec1.Width / 2 * DPI.Item2 / 96f, FontStyle.Bold, GraphicsUnit.Pixel);
+            //Font authorFont = new Font(authorfont, authorRec1.Width / 2 * DPI.Item2 / 96, FontStyle.Bold, GraphicsUnit.Pixel);
             Font authorFont = new Font(authorfont, authorRec1.Width / 2 * 96f / DPI.Item2, FontStyle.Bold);
             drawing.DrawString(author + " ◆ 著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
-            drawing.DrawString(" ◆ 著", authorFont, yellowBrush, authorRec1, authorDrawFormat);
-            drawing.DrawString("著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
+			drawing.DrawString(" ◆ 著", authorFont, yellowBrush, authorRec1, authorDrawFormat);
+			drawing.DrawString("著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
 
             whiteBrush.Dispose();
 			orangeBrush.Dispose();
@@ -3654,7 +3654,11 @@ namespace SimpleEpub2
 					pg3.bookauthor.MinimumSize = new Size(412, 71);
 					pg3.bookauthor.MaximumSize = new Size(412, 71);
 					pg3.bookauthor.Size = new Size(412, 71);
-				}
+
+                    // DPI settings
+                    pg3.AutoScaleMode = AutoScaleMode.Dpi;
+                    pg3.AutoScaleDimensions = new SizeF(96F, 96F);
+                }
 
 				notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
                 showBalloonTip(LANG.getString("balloontip_title"), DocName + ".epub\n" + LANG.getString("balloontip_success"));
