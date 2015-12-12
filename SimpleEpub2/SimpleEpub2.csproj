@@ -237,7 +237,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\About.png" />
     <None Include="Resources\DevComponents.DotNetBar2.dll" />
-    <EmbeddedResource Include="Resources\help.pdf" />
+    <EmbeddedResource Include="Resources\SimpleEpub2 Manual.pdf" />
     <None Include="Resources\SimpleEpub2.ico" />
     <None Include="Resources\Ionic.Zip.dll" />
   </ItemGroup>

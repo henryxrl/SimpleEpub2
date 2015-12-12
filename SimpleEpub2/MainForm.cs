@@ -502,10 +502,19 @@ namespace SimpleEpub2
 
 		private void FormHelpButtonClicked(object sender, EventArgs e)
 		{
-			Extract(resourcesPath, "Resources", "help.pdf");
+            try
+            {
+                Extract(resourcesPath, "Resources", "SimpleEpub2 Manual.pdf");
+            }
+            catch
+            {
+                //notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                //showBalloonTip(LANG.getString("balloontip_title"), "帮助文件可能已经被打开了！");
+            }
+
 			try
 			{
-				System.Diagnostics.Process.Start(resourcesPath + "\\help.pdf");
+                Process.Start(resourcesPath + "\\SimpleEpub2 Manual.pdf");
 			}
 			catch
 			{
@@ -2007,8 +2016,8 @@ namespace SimpleEpub2
 					}
 					catch
 					{
-						MessageBoxEx.Show("coverpath: " + CoverPath);
-					}
+                        MessageBoxEx.Show("coverpath: " + CoverPath);
+                    }
 				}
 
 				pg3.cover.SizeMode = PictureBoxSizeMode.Zoom;
