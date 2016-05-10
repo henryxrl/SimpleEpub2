@@ -409,7 +409,7 @@ namespace SimpleEpub2
 		private void setPage3()
 		{
 			SuspendLayout();
-			pg3 = new Page3(themeColor, LANG, DPI);
+			pg3 = new Page3(themeColor, LANG, DPI, stsObj.generateMOBI);
 			pg3.IsOpen = true;
 			pg3.SetBounds(4, 3, pg3.Width, pg3.Height);
 			pg3.Parent = this;
@@ -502,10 +502,19 @@ namespace SimpleEpub2
 
 		private void FormHelpButtonClicked(object sender, EventArgs e)
 		{
-			Extract(resourcesPath, "Resources", "help.pdf");
+            try
+            {
+                Extract(resourcesPath, "Resources", "SimpleEpub2 Manual.pdf");
+            }
+            catch
+            {
+                //notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                //showBalloonTip(LANG.getString("balloontip_title"), "帮助文件可能已经被打开了！");
+            }
+
 			try
 			{
-				System.Diagnostics.Process.Start(resourcesPath + "\\help.pdf");
+                Process.Start(resourcesPath + "\\SimpleEpub2 Manual.pdf");
 			}
 			catch
 			{
@@ -1502,8 +1511,8 @@ namespace SimpleEpub2
 			/*** Generate NCX ***/
 			generateNCX(stsObj.coverFirstPage, stsObj.coverNoTOC, translation, stsObj.replaceNumByHan);
 
-			/*** Generate other files ***/
-			mimetype = "application/epub+zip";
+            /*** Generate other files ***/
+            mimetype = "application/epub+zip";
 			container = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<container version=\"1.0\" xmlns=\"urn:oasis:names:tc:opendocument:xmlns:container\">\n\t<rootfiles>\n\t\t<rootfile full-path=\"OEBPS/content.opf\" media-type=\"application/oebps-package+xml\" />\n\t</rootfiles>\n</container>";
             display_options = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<display_options>\n\t<platform name=\"*\">\n\t\t<option name=\"specified-fonts\">true</option>\n\t</platform>\n</display_options>";
             epubWorker.ReportProgress(80);
@@ -1565,7 +1574,7 @@ namespace SimpleEpub2
 					}
 				}
 				zip.Save(zipPath);
-			}
+            }
 
 			processedIntro = Intro;
 			if (processedIntro != "")
@@ -1579,7 +1588,14 @@ namespace SimpleEpub2
 
 			epubWorker.ReportProgress(100);
 
-		}
+            /*** Generate MOBI from EPUB ***/
+            if (stsObj.generateMOBI)
+            {
+                generateMobi();
+                epubWorker.ReportProgress(110);
+            }
+
+        }
 
 		private Boolean generateHTML(Boolean coverFirstPage, Int32 translation, Boolean vertical, Boolean replace, Boolean embedFontSubset, Boolean dropCap, Boolean stickupCap)
 		{
@@ -2007,8 +2023,8 @@ namespace SimpleEpub2
 					}
 					catch
 					{
-						MessageBoxEx.Show("coverpath: " + CoverPath);
-					}
+                        MessageBoxEx.Show("coverpath: " + CoverPath);
+                    }
 				}
 
 				pg3.cover.SizeMode = PictureBoxSizeMode.Zoom;
@@ -2376,16 +2392,52 @@ namespace SimpleEpub2
 			ncx.Append("</ncx>");
 		}
 
-		#endregion
+        private void generateMobi()
+        {
+            try
+            {
+                Extract(resourcesPath, "Resources", "kindlegen.exe");
+            }
+            catch
+            {
+                //notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                //showBalloonTip(LANG.getString("balloontip_title"), "帮助文件可能已经被打开了！");
+            }
 
-		#endregion
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = resourcesPath + "\\kindlegen.exe";
+            startInfo.Arguments = zipPath;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.UseShellExecute = false;
+            startInfo.CreateNoWindow = true;
+
+            Process processTemp = new Process();
+            processTemp.StartInfo = startInfo;
+            try
+            {
+                processTemp.Start();
+                processTemp.StandardOutput.ReadToEnd();
+                processTemp.StandardError.ReadToEnd();
+                processTemp.WaitForExit();
+            }
+            catch
+            {
+                notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
+                showBalloonTip(LANG.getString("balloontip_NoKindleGen"), LANG.getString("balloontip_NoKindleGen_detail"));
+            }
+        }
+
+        #endregion
+
+        #endregion
 
 
-		#region Helper Functions
+        #region Helper Functions
 
-		#region Page1 Helper Functions
+        #region Page1 Helper Functions
 
-		private void clearTOC()
+        private void clearTOC()
 		{
 			if (pg2 == null)
 			{
@@ -3601,23 +3653,50 @@ namespace SimpleEpub2
 
 		private void epubWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
 		{
-			if (e.ProgressPercentage == 20)
-			{
-				pg3.stepItem1.Value = 100;
-			}
-			else if (e.ProgressPercentage == 60)
-			{
-				pg3.stepItem2.Value = 100;
-				pg3.stepItem3.Value = 100;
-			}
-			else if (e.ProgressPercentage == 80)
-			{
-				pg3.stepItem4.Value = 100;
-			}
-			else if (e.ProgressPercentage == 100)
-			{
-				pg3.stepItem5.Value = 100;
-			}
+            if (!stsObj.generateMOBI)
+            {
+                if (e.ProgressPercentage == 20)
+                {
+                    pg3.stepItem1.Value = 100;
+                }
+                else if (e.ProgressPercentage == 60)
+                {
+                    pg3.stepItem2.Value = 100;
+                    pg3.stepItem3.Value = 100;
+                }
+                else if (e.ProgressPercentage == 80)
+                {
+                    pg3.stepItem4.Value = 100;
+                }
+                else if (e.ProgressPercentage == 100)
+                {
+                    pg3.stepItem5.Value = 100;
+                }
+            }
+            else
+            {
+                if (e.ProgressPercentage == 20)
+                {
+                    pg3.stepItem1.Value = 100;
+                }
+                else if (e.ProgressPercentage == 60)
+                {
+                    pg3.stepItem2.Value = 100;
+                    pg3.stepItem3.Value = 100;
+                }
+                else if (e.ProgressPercentage == 80)
+                {
+                    pg3.stepItem4.Value = 100;
+                }
+                else if (e.ProgressPercentage == 100)
+                {
+                    pg3.stepItem5.Value = 100;
+                }
+                else if (e.ProgressPercentage == 110)
+                {
+                    pg3.stepItem6.Value = 100;
+                }
+            }
 		}
 
 		private void epubWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -3661,7 +3740,10 @@ namespace SimpleEpub2
                 }
 
 				notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                showBalloonTip(LANG.getString("balloontip_title"), DocName + ".epub\n" + LANG.getString("balloontip_success"));
+                if (stsObj.generateMOBI)
+                    showBalloonTip(LANG.getString("balloontip_title"), DocName + ".epub\n" + DocName + ".mobi\n" + LANG.getString("balloontip_success"));
+                else
+                    showBalloonTip(LANG.getString("balloontip_title"), DocName + ".epub\n" + LANG.getString("balloontip_success"));
 			}
 			else
 			{

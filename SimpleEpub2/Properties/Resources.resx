@@ -364,31 +364,31 @@
     <value>Apply Settings</value>
   </data>
   <data name="en_mainpage3_stepItem1_string2" xml:space="preserve">
-    <value>Applying font &amp; para-&lt;br/&gt;graph style settings</value>
+    <value>Apply font and&lt;br/&gt;paragraph settings</value>
   </data>
   <data name="en_mainpage3_stepItem2_string1" xml:space="preserve">
-    <value>Create HTML</value>
+    <value>HTML</value>
   </data>
   <data name="en_mainpage3_stepItem2_string2" xml:space="preserve">
-    <value>Extract chapter title&lt;br/&gt;Create chapter HTML</value>
+    <value>Extract chapters&lt;br/&gt;Create HTMLs</value>
   </data>
   <data name="en_mainpage3_stepItem3_string1" xml:space="preserve">
-    <value>Create Font</value>
+    <value>Font</value>
   </data>
   <data name="en_mainpage3_stepItem3_string2" xml:space="preserve">
-    <value>Extract all words to&lt;br/&gt;create font subset</value>
+    <value>Extract words&lt;br/&gt;Create fonts</value>
   </data>
   <data name="en_mainpage3_stepItem4_string1" xml:space="preserve">
-    <value>Create Misc Files</value>
+    <value>Misc Files</value>
   </data>
   <data name="en_mainpage3_stepItem4_string2" xml:space="preserve">
-    <value>Create Images, CSS, OPF,&lt;br/&gt;NCX, MIMETYPE etc.</value>
+    <value>Create CSS, OPF,&lt;br/&gt;NCX, MIMETYPE etc.</value>
   </data>
   <data name="en_mainpage3_stepItem5_string1" xml:space="preserve">
-    <value>Create EPUB</value>
+    <value>EPUB</value>
   </data>
   <data name="en_mainpage3_stepItem5_string2" xml:space="preserve">
-    <value>Pack files together,&lt;br/&gt;following EPUB rules</value>
+    <value>Pack all files&lt;br/&gt;with EPUB rules</value>
   </data>
   <data name="en_mainpage3_time_label1" xml:space="preserve">
     <value>&lt;b&gt;Time used: &lt;/b&gt;</value>
@@ -757,31 +757,31 @@
     <value>加载设置</value>
   </data>
   <data name="zh_mainpage3_stepItem1_string2" xml:space="preserve">
-    <value>加载字体样式、&lt;br/&gt;段落样式等设置</value>
+    <value>加载字体、&lt;br/&gt;段落等设置</value>
   </data>
   <data name="zh_mainpage3_stepItem2_string1" xml:space="preserve">
-    <value>生成HTML文件</value>
+    <value>生成HTML</value>
   </data>
   <data name="zh_mainpage3_stepItem2_string2" xml:space="preserve">
-    <value>用正则表达式提取章节&lt;br/&gt;并按章节生成HTML文件</value>
+    <value>提取章节&lt;br/&gt;并生成HTML</value>
   </data>
   <data name="zh_mainpage3_stepItem3_string1" xml:space="preserve">
-    <value>生成内嵌字体文件</value>
+    <value>生成内嵌字体</value>
   </data>
   <data name="zh_mainpage3_stepItem3_string2" xml:space="preserve">
-    <value>提取TXT文件的所有字符&lt;br/&gt;生成字体文件的子集</value>
+    <value>提取所有字符&lt;br/&gt;生成字体文件</value>
   </data>
   <data name="zh_mainpage3_stepItem4_string1" xml:space="preserve">
     <value>生成其它文件</value>
   </data>
   <data name="zh_mainpage3_stepItem4_string2" xml:space="preserve">
-    <value>生成图片、CSS、OPF、&lt;br/&gt;NCX、MIMETYPE等文件</value>
+    <value>生成图片、CSS、OPF、&lt;br/&gt;NCX、MIMETYPE等</value>
   </data>
   <data name="zh_mainpage3_stepItem5_string1" xml:space="preserve">
-    <value>生成EPUB文件</value>
+    <value>生成EPUB</value>
   </data>
   <data name="zh_mainpage3_stepItem5_string2" xml:space="preserve">
-    <value>打包所有文件，&lt;br/&gt;严格按照EPUB规则生成电子书</value>
+    <value>打包所有文件，&lt;br/&gt;按照规则生成EPUB</value>
   </data>
   <data name="zh_mainpage3_time_label1" xml:space="preserve">
     <value>&lt;b&gt;耗时：&lt;/b&gt;</value>
@@ -1142,5 +1142,35 @@
   </data>
   <data name="zh_settings_label_percentage" xml:space="preserve">
     <value>%</value>
+  </data>
+  <data name="en_balloontip_NoKindleGen" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="en_balloontip_NoKindleGen_detail" xml:space="preserve">
+    <value>No KindleGen.exe found!</value>
+  </data>
+  <data name="zh_balloontip_NoKindleGen" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="zh_balloontip_NoKindleGen_detail" xml:space="preserve">
+    <value>KindleGen.exe不存在！</value>
+  </data>
+  <data name="en_settings1_3_generateMOBI_label" xml:space="preserve">
+    <value>Generate corresponding MOBI file</value>
+  </data>
+  <data name="zh_settings1_3_generateMOBI_label" xml:space="preserve">
+    <value>同时生成MOBI文件</value>
+  </data>
+  <data name="en_mainpage3_stepItem6_string1" xml:space="preserve">
+    <value>MOBI</value>
+  </data>
+  <data name="en_mainpage3_stepItem6_string2" xml:space="preserve">
+    <value>Create MOBI&lt;br/&gt;based on EPUB</value>
+  </data>
+  <data name="zh_mainpage3_stepItem6_string1" xml:space="preserve">
+    <value>生成MOBI</value>
+  </data>
+  <data name="zh_mainpage3_stepItem6_string2" xml:space="preserve">
+    <value>基于EPUB&lt;br/&gt;按照规则生成MOBI</value>
   </data>
 </root>

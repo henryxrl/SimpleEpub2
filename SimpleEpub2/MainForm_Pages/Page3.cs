@@ -10,14 +10,16 @@ namespace SimpleEpub2
 		private Color themeColor;
         private Language LANG;
         private Tuple<Single, Single> DPI;
+        private Boolean generateMOBI;
 
-		public Page3(Color c, Language lang, Tuple<Single, Single> dpi)
+		public Page3(Color c, Language lang, Tuple<Single, Single> dpi, Boolean generateMobi)
 		{
 			InitializeComponent();
 			
 			themeColor = c;
             LANG = lang;
             DPI = dpi;
+            generateMOBI = generateMobi;
 
 			SlideOutButtonVisible = false;
 
@@ -32,6 +34,7 @@ namespace SimpleEpub2
 			stepItem3.ProgressColors = new Color[] { Color.FromArgb(150, themeColor) };
 			stepItem4.ProgressColors = new Color[] { Color.FromArgb(150, themeColor) };
 			stepItem5.ProgressColors = new Color[] { Color.FromArgb(150, themeColor) };
+            stepItem6.ProgressColors = new Color[] { Color.FromArgb(150, themeColor) };
 
             newbook_button.Text = LANG.getString("mainpage3_newbook_button");
 			newbook_button.FlatStyle = FlatStyle.Flat;
@@ -71,8 +74,15 @@ namespace SimpleEpub2
                 LANG.getString("mainpage3_stepItem4_string2"));
             stepItem5.Text = processStepItemDetailText(LANG.getString("mainpage3_stepItem5_string1"),
                 LANG.getString("mainpage3_stepItem5_string2"));
+            if (generateMOBI)
+            {
+                stepItem6.Visible = true;
+                stepItem6.Text = processStepItemDetailText(LANG.getString("mainpage3_stepItem6_string1"),
+                    LANG.getString("mainpage3_stepItem6_string2"));
+            }
+            else stepItem6.Visible = false;
 
-			circularProgress.Visible = true;
+            circularProgress.Visible = true;
 			circularProgress.IsRunning = true;
 
 			cover.Visible = false;
@@ -122,8 +132,14 @@ namespace SimpleEpub2
             stepItem3.Text = processStepItemBriefText(LANG.getString("mainpage3_stepItem3_string1"));
             stepItem4.Text = processStepItemBriefText(LANG.getString("mainpage3_stepItem4_string1"));
             stepItem5.Text = processStepItemBriefText(LANG.getString("mainpage3_stepItem5_string1"));
+            if (generateMOBI)
+            {
+                stepItem6.Visible = true;
+                stepItem6.Text = processStepItemBriefText(LANG.getString("mainpage3_stepItem6_string1"));
+            }
+            else stepItem6.Visible = false;
 
-			circularProgress.Visible = false;
+            circularProgress.Visible = false;
 			circularProgress.IsRunning = false;
 
 			cover.BackgroundImage = null;

@@ -259,6 +259,24 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string en_balloontip_NoKindleGen {
+            get {
+                return ResourceManager.GetString("en_balloontip_NoKindleGen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No KindleGen.exe found!.
+        /// </summary>
+        internal static string en_balloontip_NoKindleGen_detail {
+            get {
+                return ResourceManager.GetString("en_balloontip_NoKindleGen_detail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No title or author info found in the file name!.
         /// </summary>
         internal static string en_balloontip_NoZhTitleAuthor {
@@ -997,7 +1015,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Applying font &amp; para-&lt;br/&gt;graph style settings.
+        ///   Looks up a localized string similar to Apply font and&lt;br/&gt;paragraph settings.
         /// </summary>
         internal static string en_mainpage3_stepItem1_string2 {
             get {
@@ -1006,7 +1024,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create HTML.
+        ///   Looks up a localized string similar to HTML.
         /// </summary>
         internal static string en_mainpage3_stepItem2_string1 {
             get {
@@ -1015,7 +1033,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extract chapter title&lt;br/&gt;Create chapter HTML.
+        ///   Looks up a localized string similar to Extract chapters&lt;br/&gt;Create HTMLs.
         /// </summary>
         internal static string en_mainpage3_stepItem2_string2 {
             get {
@@ -1024,7 +1042,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create Font.
+        ///   Looks up a localized string similar to Font.
         /// </summary>
         internal static string en_mainpage3_stepItem3_string1 {
             get {
@@ -1033,7 +1051,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extract all words to&lt;br/&gt;create font subset.
+        ///   Looks up a localized string similar to Extract words&lt;br/&gt;Create fonts.
         /// </summary>
         internal static string en_mainpage3_stepItem3_string2 {
             get {
@@ -1042,7 +1060,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create Misc Files.
+        ///   Looks up a localized string similar to Misc Files.
         /// </summary>
         internal static string en_mainpage3_stepItem4_string1 {
             get {
@@ -1051,7 +1069,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create Images, CSS, OPF,&lt;br/&gt;NCX, MIMETYPE etc..
+        ///   Looks up a localized string similar to Create CSS, OPF,&lt;br/&gt;NCX, MIMETYPE etc..
         /// </summary>
         internal static string en_mainpage3_stepItem4_string2 {
             get {
@@ -1060,7 +1078,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create EPUB.
+        ///   Looks up a localized string similar to EPUB.
         /// </summary>
         internal static string en_mainpage3_stepItem5_string1 {
             get {
@@ -1069,11 +1087,29 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pack files together,&lt;br/&gt;following EPUB rules.
+        ///   Looks up a localized string similar to Pack all files&lt;br/&gt;with EPUB rules.
         /// </summary>
         internal static string en_mainpage3_stepItem5_string2 {
             get {
                 return ResourceManager.GetString("en_mainpage3_stepItem5_string2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MOBI.
+        /// </summary>
+        internal static string en_mainpage3_stepItem6_string1 {
+            get {
+                return ResourceManager.GetString("en_mainpage3_stepItem6_string1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create MOBI&lt;br/&gt;based on EPUB.
+        /// </summary>
+        internal static string en_mainpage3_stepItem6_string2 {
+            get {
+                return ResourceManager.GetString("en_mainpage3_stepItem6_string2", resourceCulture);
             }
         }
         
@@ -1191,6 +1227,15 @@ namespace SimpleEpub2.Properties {
         internal static string en_settings1_3_embedFontSubset_label {
             get {
                 return ResourceManager.GetString("en_settings1_3_embedFontSubset_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate corresponding MOBI file.
+        /// </summary>
+        internal static string en_settings1_3_generateMOBI_label {
+            get {
+                return ResourceManager.GetString("en_settings1_3_generateMOBI_label", resourceCulture);
             }
         }
         
@@ -1794,6 +1839,24 @@ namespace SimpleEpub2.Properties {
         internal static string zh_balloontip_NoHelpFile_detail {
             get {
                 return ResourceManager.GetString("zh_balloontip_NoHelpFile_detail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 错误.
+        /// </summary>
+        internal static string zh_balloontip_NoKindleGen {
+            get {
+                return ResourceManager.GetString("zh_balloontip_NoKindleGen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KindleGen.exe不存在！.
+        /// </summary>
+        internal static string zh_balloontip_NoKindleGen_detail {
+            get {
+                return ResourceManager.GetString("zh_balloontip_NoKindleGen_detail", resourceCulture);
             }
         }
         
@@ -2536,7 +2599,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 加载字体样式、&lt;br/&gt;段落样式等设置.
+        ///   Looks up a localized string similar to 加载字体、&lt;br/&gt;段落等设置.
         /// </summary>
         internal static string zh_mainpage3_stepItem1_string2 {
             get {
@@ -2545,7 +2608,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 生成HTML文件.
+        ///   Looks up a localized string similar to 生成HTML.
         /// </summary>
         internal static string zh_mainpage3_stepItem2_string1 {
             get {
@@ -2554,7 +2617,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 用正则表达式提取章节&lt;br/&gt;并按章节生成HTML文件.
+        ///   Looks up a localized string similar to 提取章节&lt;br/&gt;并生成HTML.
         /// </summary>
         internal static string zh_mainpage3_stepItem2_string2 {
             get {
@@ -2563,7 +2626,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 生成内嵌字体文件.
+        ///   Looks up a localized string similar to 生成内嵌字体.
         /// </summary>
         internal static string zh_mainpage3_stepItem3_string1 {
             get {
@@ -2572,7 +2635,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 提取TXT文件的所有字符&lt;br/&gt;生成字体文件的子集.
+        ///   Looks up a localized string similar to 提取所有字符&lt;br/&gt;生成字体文件.
         /// </summary>
         internal static string zh_mainpage3_stepItem3_string2 {
             get {
@@ -2590,7 +2653,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 生成图片、CSS、OPF、&lt;br/&gt;NCX、MIMETYPE等文件.
+        ///   Looks up a localized string similar to 生成图片、CSS、OPF、&lt;br/&gt;NCX、MIMETYPE等.
         /// </summary>
         internal static string zh_mainpage3_stepItem4_string2 {
             get {
@@ -2599,7 +2662,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 生成EPUB文件.
+        ///   Looks up a localized string similar to 生成EPUB.
         /// </summary>
         internal static string zh_mainpage3_stepItem5_string1 {
             get {
@@ -2608,11 +2671,29 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 打包所有文件，&lt;br/&gt;严格按照EPUB规则生成电子书.
+        ///   Looks up a localized string similar to 打包所有文件，&lt;br/&gt;按照规则生成EPUB.
         /// </summary>
         internal static string zh_mainpage3_stepItem5_string2 {
             get {
                 return ResourceManager.GetString("zh_mainpage3_stepItem5_string2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 生成MOBI.
+        /// </summary>
+        internal static string zh_mainpage3_stepItem6_string1 {
+            get {
+                return ResourceManager.GetString("zh_mainpage3_stepItem6_string1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 基于EPUB&lt;br/&gt;按照规则生成MOBI.
+        /// </summary>
+        internal static string zh_mainpage3_stepItem6_string2 {
+            get {
+                return ResourceManager.GetString("zh_mainpage3_stepItem6_string2", resourceCulture);
             }
         }
         
@@ -2730,6 +2811,15 @@ namespace SimpleEpub2.Properties {
         internal static string zh_settings1_3_embedFontSubset_label {
             get {
                 return ResourceManager.GetString("zh_settings1_3_embedFontSubset_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 同时生成MOBI文件.
+        /// </summary>
+        internal static string zh_settings1_3_generateMOBI_label {
+            get {
+                return ResourceManager.GetString("zh_settings1_3_generateMOBI_label", resourceCulture);
             }
         }
         

@@ -54,6 +54,7 @@
             this.FAILED = new System.Windows.Forms.Label();
             this.time_label = new DevComponents.DotNetBar.LabelX();
             this.newbook_button = new System.Windows.Forms.Button();
+            this.stepItem6 = new DevComponents.DotNetBar.StepItem();
             ((System.ComponentModel.ISupportInitialize)(this.cover)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookinfo_tile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookwordcount_tile)).BeginInit();
@@ -75,7 +76,8 @@
             this.stepItem2,
             this.stepItem3,
             this.stepItem4,
-            this.stepItem5});
+            this.stepItem5,
+            this.stepItem6});
             this.progressSteps.Location = new System.Drawing.Point(69, 94);
             this.progressSteps.Name = "progressSteps";
             this.progressSteps.Size = new System.Drawing.Size(762, 47);
@@ -424,6 +426,17 @@
             this.newbook_button.Text = "OK";
             this.newbook_button.UseVisualStyleBackColor = true;
             // 
+            // stepItem6
+            // 
+            this.stepItem6.HotTracking = false;
+            this.stepItem6.Name = "stepItem6";
+            this.stepItem6.ProgressColors = new System.Drawing.Color[] {
+        System.Drawing.Color.BlueViolet};
+            this.stepItem6.Symbol = "";
+            this.stepItem6.SymbolSize = 13F;
+            this.stepItem6.Text = "<font size=\"+2\"><b>Confirm</b></font><br/><font size=\"-1\">Review your<br/>order</" +
+    "font>";
+            // 
             // Page3
             // 
             this.AllowDrop = true;
@@ -492,7 +505,6 @@
 		private System.Windows.Forms.Label FAILED;
         protected internal DevComponents.DotNetBar.LabelX time_label;
         protected internal System.Windows.Forms.Button newbook_button;
-
-
-	}
+        protected internal DevComponents.DotNetBar.StepItem stepItem6;
+    }
 }
