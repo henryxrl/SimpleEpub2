@@ -259,6 +259,24 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string en_balloontip_NoKindleGen {
+            get {
+                return ResourceManager.GetString("en_balloontip_NoKindleGen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No KindleGen.exe found!.
+        /// </summary>
+        internal static string en_balloontip_NoKindleGen_detail {
+            get {
+                return ResourceManager.GetString("en_balloontip_NoKindleGen_detail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No title or author info found in the file name!.
         /// </summary>
         internal static string en_balloontip_NoZhTitleAuthor {
@@ -1195,6 +1213,15 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generate corresponding MOBI file.
+        /// </summary>
+        internal static string en_settings1_3_generateMOBI_label {
+            get {
+                return ResourceManager.GetString("en_settings1_3_generateMOBI_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chapter numbers to Chinese.
         /// </summary>
         internal static string en_settings1_3_replace_label {
@@ -1794,6 +1821,24 @@ namespace SimpleEpub2.Properties {
         internal static string zh_balloontip_NoHelpFile_detail {
             get {
                 return ResourceManager.GetString("zh_balloontip_NoHelpFile_detail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 错误.
+        /// </summary>
+        internal static string zh_balloontip_NoKindleGen {
+            get {
+                return ResourceManager.GetString("zh_balloontip_NoKindleGen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KindleGen.exe不存在！.
+        /// </summary>
+        internal static string zh_balloontip_NoKindleGen_detail {
+            get {
+                return ResourceManager.GetString("zh_balloontip_NoKindleGen_detail", resourceCulture);
             }
         }
         
@@ -2730,6 +2775,15 @@ namespace SimpleEpub2.Properties {
         internal static string zh_settings1_3_embedFontSubset_label {
             get {
                 return ResourceManager.GetString("zh_settings1_3_embedFontSubset_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 同时生成MOBI文件.
+        /// </summary>
+        internal static string zh_settings1_3_generateMOBI_label {
+            get {
+                return ResourceManager.GetString("zh_settings1_3_generateMOBI_label", resourceCulture);
             }
         }
         

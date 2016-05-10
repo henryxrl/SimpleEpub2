@@ -1143,4 +1143,22 @@
   <data name="zh_settings_label_percentage" xml:space="preserve">
     <value>%</value>
   </data>
+  <data name="en_balloontip_NoKindleGen" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="en_balloontip_NoKindleGen_detail" xml:space="preserve">
+    <value>No KindleGen.exe found!</value>
+  </data>
+  <data name="zh_balloontip_NoKindleGen" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="zh_balloontip_NoKindleGen_detail" xml:space="preserve">
+    <value>KindleGen.exe不存在！</value>
+  </data>
+  <data name="en_settings1_3_generateMOBI_label" xml:space="preserve">
+    <value>Generate corresponding MOBI file</value>
+  </data>
+  <data name="zh_settings1_3_generateMOBI_label" xml:space="preserve">
+    <value>同时生成MOBI文件</value>
+  </data>
 </root>

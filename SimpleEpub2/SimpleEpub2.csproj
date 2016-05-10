@@ -237,7 +237,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\About.png" />
     <None Include="Resources\DevComponents.DotNetBar2.dll" />
-    <EmbeddedResource Include="Resources\help.pdf" />
+    <EmbeddedResource Include="Resources\SimpleEpub2 Manual.pdf" />
     <None Include="Resources\SimpleEpub2.ico" />
     <None Include="Resources\Ionic.Zip.dll" />
   </ItemGroup>
@@ -260,6 +260,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
+    <EmbeddedResource Include="Resources\kindlegen.exe" />
     <Content Include="SimpleEpub2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

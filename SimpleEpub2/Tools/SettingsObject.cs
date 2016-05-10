@@ -20,6 +20,7 @@ namespace SimpleEpub2
 		protected internal Boolean StT;
 		protected internal Boolean TtS;
 		protected internal Boolean embedFontSubset;
+        protected internal Boolean generateMOBI;
 		protected internal String bookNameFont;
 		protected internal String authorNameFont;
 		protected internal Color pageColor;
@@ -57,6 +58,7 @@ namespace SimpleEpub2
 			StT = false;
 			TtS = false;
 			embedFontSubset = false;
+            generateMOBI = false;
 			bookNameFont = "微软雅黑";
 			authorNameFont = "微软雅黑";
 			pageColor = Color.Empty;
@@ -89,7 +91,8 @@ namespace SimpleEpub2
 			StT = sts.pg1.settings1_3_StT.Value;
 			TtS = sts.pg1.settings1_3_TtS.Value;
 			embedFontSubset = sts.pg1.settings1_3_embedFontSubset.Value;
-			bookNameFont = sts.pg2.settings2_3_booknamefont.Text;
+            generateMOBI = sts.pg1.settings1_3_generateMOBI.Value;
+            bookNameFont = sts.pg2.settings2_3_booknamefont.Text;
 			authorNameFont = sts.pg2.settings2_3_authornamefont.Text;
 			pageColor = sts.pg2.settings2_1_pc.SelectedColor;
 			marginT = Int32.Parse(sts.pg2.settings2_2_pmT.Text);
@@ -137,6 +140,7 @@ namespace SimpleEpub2
 				sts.pg1.settings1_3_StT.Enabled = false;
 			}
 			sts.pg1.settings1_3_embedFontSubset.Value = embedFontSubset;
+            sts.pg1.settings1_3_generateMOBI.Value = generateMOBI;
 			sts.pg2.settings2_3_booknamefont.Text = bookNameFont;
 			sts.pg2.settings2_3_authornamefont.Text = authorNameFont;
 			sts.pg2.settings2_1_pc.SelectedColor = pageColor;
@@ -180,7 +184,8 @@ namespace SimpleEpub2
 			StT = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_1", "StT")));
 			TtS = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_1", "TtS")));
 			embedFontSubset = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_1", "Embed_Font_Subset")));
-			bookNameFont = ini.INIReadValue("Tab_2", "Cover_BookName_Font");
+            generateMOBI = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_1", "Generate_MOBI")));
+            bookNameFont = ini.INIReadValue("Tab_2", "Cover_BookName_Font");
 			authorNameFont = ini.INIReadValue("Tab_2", "Cover_AuthorName_Font");
 			pageColor = ColorTranslator.FromHtml(ini.INIReadValue("Tab_2", "Page_Color"));
 			marginT = Int32.Parse(ini.INIReadValue("Tab_2", "Page_Margin_Top"));
@@ -212,7 +217,8 @@ namespace SimpleEpub2
 			ini.INIWriteValue("Tab_1", "StT", (Convert.ToInt32(StT)).ToString());
 			ini.INIWriteValue("Tab_1", "TtS", (Convert.ToInt32(TtS)).ToString());
 			ini.INIWriteValue("Tab_1", "Embed_Font_Subset", (Convert.ToInt32(embedFontSubset)).ToString());
-			ini.INIWriteValue("Tab_2", "Cover_BookName_Font", bookNameFont);
+            ini.INIWriteValue("Tab_1", "Generate_MOBI", (Convert.ToInt32(generateMOBI)).ToString());
+            ini.INIWriteValue("Tab_2", "Cover_BookName_Font", bookNameFont);
 			ini.INIWriteValue("Tab_2", "Cover_AuthorName_Font", authorNameFont);
 			ini.INIWriteValue("Tab_2", "Page_Color", ColorTranslator.ToHtml(pageColor));
 			ini.INIWriteValue("Tab_2", "Page_Margin_Top", marginT.ToString());
