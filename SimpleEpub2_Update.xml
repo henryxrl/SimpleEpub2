@@ -1,19 +1,23 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.16.3.18</version>
+    <version>2.16.3.19</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>72E3EF7CB567731BD75F7A8813C5D945</md5>
+    <md5>E9AD4F5D2EF5B06C863B00834D883CC5</md5>
     <launchArgs>
     </launchArgs>
     <description>5/11/2016 Update:
     1. NEW: Different cover image for English books
     2. NEW: Cover page title in Table of Contents automatically adapts to the language of the book (Simplified Chinese, Traditional Chinese and English)
     3. NEW: Add chapter title for contents before the first existing chapter title
+    4. NEW: Support keyboard shortcut Ctrl+A in textboxes
+    5. NEW: Better regex for chapter extraction
 
 5/11/2016 更新：
     1. 新增：英文书封面
     2. 新增：封面在目录中与书的语言一致（简体中文，繁体中文，英文）
-    3. 新增：为第一个章节标题之前的内容自动添加标题</description>
+    3. 新增：为第一个章节标题之前的内容自动添加标题
+    4. 新增：在Textbox里支持Ctrl+A快捷键
+    5. 新增：完善章节提取正则</description>
   </update>
 </sharpUpdate>
