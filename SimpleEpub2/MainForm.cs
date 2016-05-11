@@ -138,8 +138,10 @@ namespace SimpleEpub2
         private static String regex_titles = "内容简介|內容簡介|内容介绍|內容介紹|内容梗概|内容大意|小说简介|小說簡介|小说介绍|小說介紹|小说大意|小說大意|书籍简介|書籍簡介|书籍介绍|書籍介紹|书籍大意|書籍大意|作品简介|作品簡介|作品介绍|作品介紹|作品大意|作者简介|作者簡介|作者介绍|作者介紹|序|序言|序章|前言|楔子|引言|引子|终章|終章|尾声|尾聲|后记|後記|完本感言|出版后记|出版後記|谢辞|謝辭";
         private static String regex_3 = "^(\\s*(" + regex_titles + ")\\s*$)";
         private static String regex_4 = "^(\\s*(" + regex_titles + ")\\s+.{0,50}?$)";
-        private static String regex_5 = "^(\\s*((?i)chapter)\\s*.{0,40}?$)|^(\\s*((?i)appendix)\\s*.{0,50}?$)";
-        private static String regex = regex_1 + "|" + regex_2 + "|" + regex_3 + "|" + regex_4 + "|" + regex_5;
+        private static String regex_titles_english = "chapter|appendix|appendices|preface|Foreword|Introduction|Prologue|Epigraph|Table of contents|Epilogue|Afterword|Conclusion|Glossary|Acknowledgments|Bibliography|Index|Errata|Colophon|Copyright";
+        private static String regex_5 = "^(\\s*((?i)" + regex_titles_english + ")\\s*$)";
+        private static String regex_6 = "^(\\s*((?i)" + regex_titles_english + ")\\s+.{0,50}?$)";
+        private static String regex = regex_1 + "|" + regex_2 + "|" + regex_3 + "|" + regex_4 + "|" + regex_5 + "|" + regex_6;
 		private static String emptyLineRegex = "^\\s*$";
 
 		private List<String> bookAndAuthor = new List<String>();
