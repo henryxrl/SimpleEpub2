@@ -1,19 +1,19 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.16.3.15</version>
+    <version>2.16.3.18</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>A5BF9F8A8D5465DB85C4D8C2B6C28E40</md5>
+    <md5>72E3EF7CB567731BD75F7A8813C5D945</md5>
     <launchArgs>
     </launchArgs>
-    <description>5/10/2016 Update:
-    1. NEW: Generate corrsponding MOBI file
-    2. NEW: Process bar for MOBI
-    3. FIXED: Wait till MOBI generated
+    <description>5/11/2016 Update:
+    1. NEW: Different cover image for English books
+    2. NEW: Cover page title in Table of Contents automatically adapts to the language of the book (Simplified Chinese, Traditional Chinese and English)
+    3. NEW: Add chapter title for contents before the first existing chapter title
 
-5/10/2016 更新：
-    1. 新增：添加“同时生成MOBI”功能
-    2. 新增：MOBI进度条
-    3. 修复：等待MOBI生成完毕</description>
+5/11/2016 更新：
+    1. 新增：英文书封面
+    2. 新增：封面在目录中与书的语言一致（简体中文，繁体中文，英文）
+    3. 新增：为第一个章节标题之前的内容自动添加标题</description>
   </update>
 </sharpUpdate>

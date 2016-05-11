@@ -1621,10 +1621,10 @@ namespace SimpleEpub2
 				// 制作第一页封面
 				if (coverFirstPage)
 				{
-					String title = "封面";
-					title = translate(title, translation);		// 简繁转换
+					String title = bookAndAuthor_isChinese ? "封面" : "Cover";
+                    title = translate(title, translation);		// 简繁转换
 
-					coverHtml.Append(HTMLHead(title, "", 0));
+                    coverHtml.Append(HTMLHead(title, "", 0));
 					coverHtml.Append("\n<img src=\"../Images/cover.jpg\" alt=\"Cover\" />\n</body>\n</html>");
 
 					//chapterNumber++;
@@ -1712,23 +1712,26 @@ namespace SimpleEpub2
 
                                 if (firstTime)
                                 {
-                                    html.Append(HTMLHead(nextLine, "", 1) + "\n");
+                                    // html.Append(HTMLHead(nextLine, "", 1) + "\n");
+                                    // 为没有标题的内容添加“内容简介”标题
+                                    String auto_title = bookAndAuthor_isChinese ? "内容简介" : "Introduction";
+                                    auto_title = translate(auto_title, translation);		// 简繁转换
+                                    html.Append(HTMLHead(auto_title, "", 1) + "\n");
                                     firstTime = false;
                                     firstLine = true;
                                 }
-                                else
+
+                                if (firstLine && (dropCap || stickupCap))
                                 {
-                                    if (firstLine && (dropCap || stickupCap))
-                                    {
-                                        String span = dropCap ? "dropCap" : (stickupCap ? "stickupCap" : "");
-                                        Tuple<String, String> tokens = processFirstLine(nextLine);
-                                        String newNextLine = "<p class=\"first\"><span class=\"" + span + "\">" + tokens.Item1 + "</span>" + tokens.Item2 + "</p>\n";
-                                        html.Append(newNextLine);
-                                        firstLine = false;
-                                    }
-                                    else
-                                        html.Append("<p>" + nextLine + "</p>\n");
+                                    String span = dropCap ? "dropCap" : (stickupCap ? "stickupCap" : "");
+                                    Tuple<String, String> tokens = processFirstLine(nextLine);
+                                    String newNextLine = "<p class=\"first\"><span class=\"" + span + "\">" + tokens.Item1 + "</span>" + tokens.Item2 + "</p>\n";
+                                    html.Append(newNextLine);
+                                    firstLine = false;
                                 }
+                                else
+                                    html.Append("<p>" + nextLine + "</p>\n");
+
 							}
 
 						}
@@ -2262,10 +2265,10 @@ namespace SimpleEpub2
 
 			if (coverFirstPage && addFirstChapter)
 			{
-				String title = "封面";
-				title = translate(title, translation);		// 简繁转换
+                String title = bookAndAuthor_isChinese ? "封面" : "Cover";
+                title = translate(title, translation);      // 简繁转换
 
-				if (!coverNoTOC)
+                if (!coverNoTOC)
 				{
 					TOCTree.Add(new Tuple<Int32, NavPoint>(0, new NavPoint("coverpage", 1, title, "Text/coverpage.html", null, null)));
 				}
@@ -2791,71 +2794,99 @@ namespace SimpleEpub2
 			Rectangle authorRec1;
 			Rectangle authorRec2;
 
-			if (!vertical)		// 横排书封面
-			{
-				drawing.DrawLine(whitePen, new Point(width / 15, 0), new Point(width / 15, height));
-				drawing.DrawLine(whitePen, new Point(0, height / 10), new Point(width / 15, height / 10));
-				drawing.DrawLine(whitePen, new Point(0, height / 10 + height / 3), new Point(width / 15, height / 10 + height / 3));
-				drawing.DrawLine(whitePen, new Point(0, height - height / 10 - height / 3), new Point(width / 15, height - height / 10 - height / 3));
-				drawing.DrawLine(whitePen, new Point(0, height - height / 10), new Point(width / 15, height - height / 10));
+            if (bookAndAuthor_isChinese)
+            {
+                if (!vertical)      // 横排书封面
+                {
+                    drawing.DrawLine(whitePen, new Point(width / 15, 0), new Point(width / 15, height));
+                    drawing.DrawLine(whitePen, new Point(0, height / 10), new Point(width / 15, height / 10));
+                    drawing.DrawLine(whitePen, new Point(0, height / 10 + height / 3), new Point(width / 15, height / 10 + height / 3));
+                    drawing.DrawLine(whitePen, new Point(0, height - height / 10 - height / 3), new Point(width / 15, height - height / 10 - height / 3));
+                    drawing.DrawLine(whitePen, new Point(0, height - height / 10), new Point(width / 15, height - height / 10));
 
-				bookNameRec = Rectangle.FromLTRB(width / 2 + width / 10, height / 10, width - width / 10, height / 2 + height / 10);
-				drawing.FillRectangle(whiteBrush, bookNameRec);
-				authorRec1 = Rectangle.FromLTRB(width / 2 + width / 10 - width / 20, height / 10, width / 2 + width / 10, height / 2 + height / 10 - height / 40);
-				drawing.FillRectangle(orangeBrush, authorRec1);
-				authorRec2 = Rectangle.FromLTRB(width / 2 + width / 10 - width / 20, height / 10 + authorRec1.Height, width / 2 + width / 10, height / 2 + height / 10);
-				drawing.FillRectangle(orangeBrush, authorRec2);
-			}
-			else		// 竖排书封面
-			{
-				drawing.DrawLine(whitePen, new Point(width - width / 15, 0), new Point(width - width / 15, height));
-				drawing.DrawLine(whitePen, new Point(width - width / 15, height / 10), new Point(width, height / 10));
-				drawing.DrawLine(whitePen, new Point(width - width / 15, height / 10 + height / 3), new Point(width, height / 10 + height / 3));
-				drawing.DrawLine(whitePen, new Point(width - width / 15, height - height / 10 - height / 3), new Point(width, height - height / 10 - height / 3));
-				drawing.DrawLine(whitePen, new Point(width - width / 15, height - height / 10), new Point(width, height - height / 10));
+                    bookNameRec = Rectangle.FromLTRB(width / 2 + width / 10, height / 10, width - width / 10, height / 2 + height / 10);
+                    drawing.FillRectangle(whiteBrush, bookNameRec);
+                    authorRec1 = Rectangle.FromLTRB(width / 2 + width / 10 - width / 20, height / 10, width / 2 + width / 10, height / 2 + height / 10 - height / 40);
+                    drawing.FillRectangle(orangeBrush, authorRec1);
+                    authorRec2 = Rectangle.FromLTRB(width / 2 + width / 10 - width / 20, height / 10 + authorRec1.Height, width / 2 + width / 10, height / 2 + height / 10);
+                    drawing.FillRectangle(orangeBrush, authorRec2);
+                }
+                else        // 竖排书封面
+                {
+                    drawing.DrawLine(whitePen, new Point(width - width / 15, 0), new Point(width - width / 15, height));
+                    drawing.DrawLine(whitePen, new Point(width - width / 15, height / 10), new Point(width, height / 10));
+                    drawing.DrawLine(whitePen, new Point(width - width / 15, height / 10 + height / 3), new Point(width, height / 10 + height / 3));
+                    drawing.DrawLine(whitePen, new Point(width - width / 15, height - height / 10 - height / 3), new Point(width, height - height / 10 - height / 3));
+                    drawing.DrawLine(whitePen, new Point(width - width / 15, height - height / 10), new Point(width, height - height / 10));
 
-				bookNameRec = Rectangle.FromLTRB(width / 10, height / 10, width / 2 - width / 10, height / 2 + height / 10);
-				drawing.FillRectangle(whiteBrush, bookNameRec);
-				authorRec1 = Rectangle.FromLTRB(width / 2 - width / 10, height / 10, width / 2 - width / 10 + width / 20, height / 2 + height / 10 - height / 40);
-				drawing.FillRectangle(orangeBrush, authorRec1);
-				authorRec2 = Rectangle.FromLTRB(width / 2 - width / 10, height / 10 + authorRec1.Height, width / 2 - width / 10 + width / 20, height / 2 + height / 10);
-				drawing.FillRectangle(orangeBrush, authorRec2);
-			}
+                    bookNameRec = Rectangle.FromLTRB(width / 10, height / 10, width / 2 - width / 10, height / 2 + height / 10);
+                    drawing.FillRectangle(whiteBrush, bookNameRec);
+                    authorRec1 = Rectangle.FromLTRB(width / 2 - width / 10, height / 10, width / 2 - width / 10 + width / 20, height / 2 + height / 10 - height / 40);
+                    drawing.FillRectangle(orangeBrush, authorRec1);
+                    authorRec2 = Rectangle.FromLTRB(width / 2 - width / 10, height / 10 + authorRec1.Height, width / 2 - width / 10 + width / 20, height / 2 + height / 10);
+                    drawing.FillRectangle(orangeBrush, authorRec2);
+                }
 
-			StringFormat bookDrawFormat = new StringFormat();
-			bookDrawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-			//bookDrawFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
-			bookDrawFormat.Alignment = StringAlignment.Center;
-			bookDrawFormat.LineAlignment = StringAlignment.Center;
-			bookname = ToSBC(bookname);
-			Tuple<String, Int32> settings = setTitleFontSize(bookname.Length, bookNameRec.Width, bookname, vertical);
-            //Font bookFont = new Font(privateFontFamilies[1], settings.Item2, FontStyle.Bold);
-            //Font bookFont = new Font(bookfont, settings.Item2 * DPI.Item2 / 96f, FontStyle.Bold, GraphicsUnit.Pixel);
-            Font bookFont = new Font(bookfont, settings.Item2 * 96f / DPI.Item2, FontStyle.Bold);
-            drawing.DrawString(settings.Item1, bookFont, blackBrush, bookNameRec, bookDrawFormat);
+                StringFormat bookDrawFormat = new StringFormat();
+                bookDrawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+                //bookDrawFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
+                bookDrawFormat.Alignment = StringAlignment.Center;
+                bookDrawFormat.LineAlignment = StringAlignment.Center;
+                bookname = ToSBC(bookname);
+                Tuple<String, Int32> settings = setTitleFontSize(bookname.Length, bookNameRec.Width, bookname, vertical);
+                //Font bookFont = new Font(privateFontFamilies[1], settings.Item2, FontStyle.Bold);
+                //Font bookFont = new Font(bookfont, settings.Item2 * DPI.Item2 / 96f, FontStyle.Bold, GraphicsUnit.Pixel);
+                Font bookFont = new Font(bookfont, settings.Item2 * 96f / DPI.Item2, FontStyle.Bold);
+                drawing.DrawString(settings.Item1, bookFont, blackBrush, bookNameRec, bookDrawFormat);
 
-			StringFormat authorDrawFormat = new StringFormat();
-			authorDrawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-			//authorDrawFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
-			authorDrawFormat.Alignment = StringAlignment.Far;
-			authorDrawFormat.LineAlignment = StringAlignment.Center;
-			author = ToSBC(author);
-            //Font authorFont = new Font(privateFontFamilies[0], authorRec1.Width / 2, FontStyle.Bold);
-            //Font authorFont = new Font(authorfont, authorRec1.Width / 2 * DPI.Item2 / 96, FontStyle.Bold, GraphicsUnit.Pixel);
-            Font authorFont = new Font(authorfont, authorRec1.Width / 2 * 96f / DPI.Item2, FontStyle.Bold);
-            drawing.DrawString(author + " ◆ 著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
-			drawing.DrawString(" ◆ 著", authorFont, yellowBrush, authorRec1, authorDrawFormat);
-			drawing.DrawString("著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
+                StringFormat authorDrawFormat = new StringFormat();
+                authorDrawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+                //authorDrawFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
+                authorDrawFormat.Alignment = StringAlignment.Far;
+                authorDrawFormat.LineAlignment = StringAlignment.Center;
+                author = ToSBC(author);
+                //Font authorFont = new Font(privateFontFamilies[0], authorRec1.Width / 2, FontStyle.Bold);
+                //Font authorFont = new Font(authorfont, authorRec1.Width / 2 * DPI.Item2 / 96, FontStyle.Bold, GraphicsUnit.Pixel);
+                Font authorFont = new Font(authorfont, authorRec1.Width / 2 * 96f / DPI.Item2, FontStyle.Bold);
+                drawing.DrawString(author + " ◆ 著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
+                drawing.DrawString(" ◆ 著", authorFont, yellowBrush, authorRec1, authorDrawFormat);
+                drawing.DrawString("著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
+
+                bookFont.Dispose();
+                authorFont.Dispose();
+                bookDrawFormat.Dispose();
+                authorDrawFormat.Dispose();
+            }
+            else
+            {
+                bookNameRec = Rectangle.FromLTRB(width / 15, height / 15, width - width / 15, height - height / 3);
+                //drawing.FillRectangle(blackBrush, bookNameRec);
+                authorRec1 = Rectangle.FromLTRB(width / 15, height - height / 3, width - width / 15, height - height / 15);
+                //drawing.FillRectangle(yellowBrush, authorRec1);
+
+                StringFormat bookDrawFormat = new StringFormat();
+                bookDrawFormat.Alignment = StringAlignment.Center;
+                bookDrawFormat.LineAlignment = StringAlignment.Center;
+                Font bookFont = new Font(bookfont, width / 10 * 96f / DPI.Item2, FontStyle.Bold);
+                drawing.DrawString(bookname, bookFont, whiteBrush, bookNameRec, bookDrawFormat);
+
+                StringFormat authorDrawFormat = new StringFormat();
+                authorDrawFormat.Alignment = StringAlignment.Center;
+                authorDrawFormat.LineAlignment = StringAlignment.Center;
+                Font authorFont = new Font(authorfont, width / 20 * 96f / DPI.Item2, FontStyle.Bold);
+                drawing.DrawString(author, authorFont, whiteBrush, authorRec1, authorDrawFormat);
+
+                bookFont.Dispose();
+                authorFont.Dispose();
+                bookDrawFormat.Dispose();
+                authorDrawFormat.Dispose();
+            }
 
             whiteBrush.Dispose();
 			orangeBrush.Dispose();
 			yellowBrush.Dispose();
 			blackBrush.Dispose();
 			whitePen.Dispose();
-			bookFont.Dispose();
-			authorFont.Dispose();
-			bookDrawFormat.Dispose();
-			authorDrawFormat.Dispose();
 
 			drawing.Save();
 			drawing.Dispose();

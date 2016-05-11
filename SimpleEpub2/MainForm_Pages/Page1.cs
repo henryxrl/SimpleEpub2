@@ -54,8 +54,11 @@ namespace SimpleEpub2
 			cover_bookname_textbox.Location = new Point(626, 32);
 			cover_bookname_textbox.Size = new Size(287, 107);
 			cover_bookname_textbox.MouseLeave += cover_bookname_textbox_MouseLeave;
+            cover_bookname_textbox.ShortcutsEnabled = true;
+            cover_bookname_textbox.KeyDown += textbox_KeyDown;
 
-			cover_author_tile.BackColor = themeColor;
+
+            cover_author_tile.BackColor = themeColor;
 			cover_author_label.Parent = cover_author_tile;
             cover_author_label.Text = LANG.getString("mainpage1_cover_author_label");
 			cover_author_label.ForeColor = Color.White;
@@ -70,8 +73,11 @@ namespace SimpleEpub2
 			cover_author_textbox.Location = new Point(626, 183);
 			cover_author_textbox.Size = new Size(287, 107);
 			cover_author_textbox.MouseLeave += cover_author_textbox_MouseLeave;
+            cover_author_textbox.ShortcutsEnabled = true;
+            cover_author_textbox.KeyDown += textbox_KeyDown;
 
-			cover_intro_tile.BackColor = themeColor;
+
+            cover_intro_tile.BackColor = themeColor;
 			cover_intro_label.Parent = cover_intro_tile;
             cover_intro_label.Text = LANG.getString("mainpage1_cover_intro_label");
 			cover_intro_label.ForeColor = Color.White;
@@ -86,8 +92,11 @@ namespace SimpleEpub2
 			cover_intro_textbox.Location = new Point(626, 334);
 			cover_intro_textbox.Size = new Size(287, 261);
 			cover_intro_textbox.MouseLeave += cover_intro_textbox_MouseLeave;
+            cover_intro_textbox.ShortcutsEnabled = true;
+            cover_intro_textbox.KeyDown += textbox_KeyDown;
 
-			circularProgress.ProgressColor = themeColor;
+
+            circularProgress.ProgressColor = themeColor;
 
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -338,5 +347,14 @@ namespace SimpleEpub2
 			circularProgress.IsRunning = false;
 		}
 
-	}
+        private void textbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                if (sender != null)
+                    ((TextBox)sender).SelectAll();
+            }
+        }
+
+    }
 }
