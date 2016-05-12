@@ -148,8 +148,6 @@ namespace SimpleEpub2
 		private List<String> bookAndAuthor = new List<String>();
         private Boolean bookAndAuthor_isChinese;
 		private List<Tuple<Int32, String>> TOC = new List<Tuple<Int32, String>>();
-		private Int32 FSLinesScanned = 0;
-        private Int32 TOCGridViewOffset = 0;
 		private Boolean extraLinesInBeginning = false;
 		private Boolean extraLinesNotEmpty = false;
 		private List<Int32> titleLineNumbers = new List<Int32>();
@@ -1427,7 +1425,6 @@ namespace SimpleEpub2
 			css.Clear();
 			opf.Clear();
 			ncx.Clear();
-            TOCGridViewOffset = 0;
 
             if (TXTPath == null)
 			{
@@ -1654,26 +1651,13 @@ namespace SimpleEpub2
 				}
 
 
-                if (FSLinesScanned != 0)
-                {
-                    TXTlineNumber += FSLinesScanned;
-                    while (titleLineNumbers[TLN_idx] < TXTlineNumber)
-                    {
-                        TLN_idx++;
-                        //titleLineNumbers.RemoveAt(0);
-                        TOCGridViewOffset++;
-                    }
-                    //TLN_size = titleLineNumbers.Count;
-                }
-
-
                 Boolean titleHasFootNote = false;
 				Queue<Tuple<String, Int32>> footNoteQueuePre = new Queue<Tuple<String, Int32>>();
 				Queue<Tuple<Int32, String>> footNoteQueuePost = new Queue<Tuple<Int32, String>>();
 				Int32 chapterFootNoteCount = 0;
 
-				// Read from the first line to the first chapter title defined!
-				if (TLN_size != 0 && titleLineNumbers[TLN_idx] > TXTlineNumber)
+                // Read from the first line to the first chapter title defined!
+                if (TLN_size != 0 && titleLineNumbers[TLN_idx] > TXTlineNumber)
 				{
 					extraLinesInBeginning = true;
 					StringBuilder html = new StringBuilder();
@@ -1682,12 +1666,6 @@ namespace SimpleEpub2
 
 					while (titleLineNumbers[TLN_idx] > TXTlineNumber && (nextLine = SecurityElement.Escape(sr.ReadLine())) != null)
 					{
-                        if (FSLinesScanned != 0)
-                        {
-                            FSLinesScanned--;
-                            continue;
-                        }
-
                         // Remove empty lines
                         if (!Regex.IsMatch(nextLine, emptyLineRegex))
 						{
@@ -1786,12 +1764,6 @@ namespace SimpleEpub2
 					}
 					while ((nextLine = SecurityElement.Escape(sr.ReadLine())) != null)
 					{
-                        if (FSLinesScanned != 0)
-                        {
-                            FSLinesScanned--;
-                            continue;
-                        }
-
                         // Remove empty lines
                         if (!Regex.IsMatch(nextLine, emptyLineRegex))
 						{
@@ -2329,7 +2301,7 @@ namespace SimpleEpub2
 				{
 					// 删除" *** "标识
 					//MessageBoxEx.Show("i: " + i + "\nj: " + j + "\n(i-j): " + (i - j));
-					String tempTitle = pg2.TOC_list.Rows[i - 1 + TOCGridViewOffset].Cells[0].Value.ToString();
+					String tempTitle = pg2.TOC_list.Rows[i - 1].Cells[0].Value.ToString();
 
 					String tempTitleProcessed = "";
 					if (tempTitle.Contains(" *** "))
@@ -2498,38 +2470,20 @@ namespace SimpleEpub2
 
 					result.Add(bookname);
 					result.Add(author);
-
 					return result;
 				}
 				else
 				{
-					FSLinesScanned = 2;
-
 					// No complete book name and author info
 					notifyIcon1.BalloonTipIcon = ToolTipIcon.Warning;
                     showBalloonTip(LANG.getString("balloontip_NoEnTitleAuthor"),
                         String.Format(LANG.getString("balloontip_NoEnTitleAuthor_detail"), Environment.NewLine));
 
-					// Treat first line as book name and second line as author
-					using (StreamReader sr = new StreamReader(path, Encoding.Default))
-					{
-						String bookname = sr.ReadLine();
-						if (bookname == null || bookname.Trim() == "") bookname = filename;
-						else
-						{
-							bookname = bookname.Trim();
-						}
-
-						String author = sr.ReadLine();
-						if (author == null || author.Trim() == "") author = NAMESPACE;
-						else
-						{
-							author = author.Trim();
-						}
-
-						result.Add(bookname);
-						result.Add(author);
-					}
+                    // Treat file name as book name and application name as author
+                    String bookname = filename;
+                    String author = NAMESPACE;
+                    result.Add(bookname);
+                    result.Add(author);
 					return result;
 				}
 			}
@@ -2553,43 +2507,21 @@ namespace SimpleEpub2
 
 					result.Add(bookname);
 					result.Add(author);
-
 					return result;
 				}
 				else
 				{
-					FSLinesScanned = 2;
-
 					// No complete book name and author info
 					notifyIcon1.BalloonTipIcon = ToolTipIcon.Warning;
                     showBalloonTip(LANG.getString("balloontip_NoZhTitleAuthor"),
                         String.Format(LANG.getString("balloontip_NoZhTitleAuthor_detail"), Environment.NewLine));
 
-					// Treat first line as book name and second line as author
-					using (StreamReader sr = new StreamReader(path, Encoding.Default))
-					{
-						String bookname = sr.ReadLine();
-						if (bookname == null || bookname.Trim() == "") bookname = filename;
-						else
-						{
-							char[] charsToTrim = { '《', '》' };
-							bookname = bookname.Trim(charsToTrim);
-							bookname = bookname.Replace("书名：", "").Replace("书名:", "");
-							bookname = bookname.Trim();
-						}
-
-						String author = sr.ReadLine();
-						if (author == null || author.Trim() == "") author = NAMESPACE;
-						else
-						{
-							author = author.Replace("作者：", "").Replace("作者:", "");
-							author = author.Trim();
-						}
-
-						result.Add(bookname);
-						result.Add(author);
-					}
-					return result;
+                    // Treat first line as book name and second line as author
+                    String bookname = filename;
+                    String author = NAMESPACE;
+                    result.Add(bookname);
+                    result.Add(author);
+                    return result;
 				}
 			}
 		}
@@ -3577,8 +3509,7 @@ namespace SimpleEpub2
 			cqIDX = 0;
 			bookAndAuthor.Clear();
 			TOC.Clear();
-			FSLinesScanned = 0;
-			extraLinesInBeginning = false;
+            extraLinesInBeginning = false;
 			extraLinesNotEmpty = false;
 			titleLineNumbers.Clear();
 			pictureHTMLs.Clear();

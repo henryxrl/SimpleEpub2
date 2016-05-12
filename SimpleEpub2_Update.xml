@@ -1,9 +1,9 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.16.3.25</version>
+    <version>2.16.3.27</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>9617E27CDA180DBB1398E3DA434F0BC0</md5>
+    <md5>D8568CF2ED8BA095E3AF8B3BB80127B4</md5>
     <launchArgs>
     </launchArgs>
     <description>5/12/2016 Update:
@@ -12,8 +12,9 @@
     3. NEW: Add chapter title for contents before the first existing chapter title
     4. NEW: Support keyboard shortcut Ctrl+A in textboxes
     5. NEW: Better regex for chapter extraction
-    6. FIXED: Bug when the text file's name is ill-formatted
-    7. FIXED: Bug when HTML special characters are not properly escaped
+    6. FIXED: Logic when the text file's name is ill-formatted
+    7. FIXED: Bug when the text file's name is ill-formatted
+    8. FIXED: Bug when HTML special characters are not properly escaped
 
 5/12/2016 更新：
     1. 新增：英文书封面
@@ -21,7 +22,8 @@
     3. 新增：为第一个章节标题之前的内容自动添加标题
     4. 新增：在Textbox里支持Ctrl+A快捷键
     5. 新增：完善章节提取正则
-    6. 修复：当TXT文件名不规范时，生成EPUB失败的问题
-    7. 修复：文本中的特殊字符没有替换成HTML格式</description>
+    6. 修复：TXT文件名不规范处理逻辑
+    7. 修复：当TXT文件名不规范时，生成EPUB失败的问题
+    8. 修复：文本中的特殊字符没有替换成HTML格式</description>
   </update>
 </sharpUpdate>
