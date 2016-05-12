@@ -40,6 +40,14 @@ namespace SimpleEpub2
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+
+            // Set UI Font according to language
+            LANG.setFont(this.Controls);
+            Font = new Font(LANG.getFont(), Font.Size, Font.Style);
+            tabControl1.Font = new Font(LANG.getFont(), tabControl1.Font.Size, tabControl1.Font.Style);
+            tabControl1.SelectedTabFont = new Font(LANG.getFont(), tabControl1.SelectedTabFont.Size, tabControl1.SelectedTabFont.Style);
+            tabControl5.Font = new Font(LANG.getFont(), tabControl5.Font.Size, tabControl5.Font.Style);
+            tabControl5.SelectedTabFont = new Font(LANG.getFont(), tabControl5.SelectedTabFont.Size, tabControl5.SelectedTabFont.Style);
         }
 
 		private void settings2_3_booknamefont_MeasureItem(object sender, MeasureItemEventArgs e)

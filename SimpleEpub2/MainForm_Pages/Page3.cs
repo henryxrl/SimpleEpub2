@@ -36,7 +36,7 @@ namespace SimpleEpub2
 			stepItem5.ProgressColors = new Color[] { Color.FromArgb(150, themeColor) };
             stepItem6.ProgressColors = new Color[] { Color.FromArgb(150, themeColor) };
 
-            newbook_button.Text = LANG.getString("mainpage3_newbook_button");
+            newbook_button.Text = ToSBC(LANG.getString("mainpage3_newbook_button"));
 			newbook_button.FlatStyle = FlatStyle.Flat;
 			newbook_button.FlatAppearance.BorderSize = 0;
 			newbook_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(255, 250, 242, 255);
@@ -49,6 +49,10 @@ namespace SimpleEpub2
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+
+            // Set UI Font according to language
+            LANG.setFont(this.Controls);
+            Font = new Font(LANG.getFont(), Font.Size, Font.Style);
         }
 
 		public void ProcessingMode()
@@ -250,7 +254,7 @@ namespace SimpleEpub2
 				using (SolidBrush b = new SolidBrush(themeColor))
 				{
                     String s = LANG.getString("mainpage2_img_string");
-                    Font f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
+                    Font f = new Font(LANG.getFont(), 25, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = cover.Width / 2 - size.Width / 2;
 					Single py = cover.Height / 2 - size.Height / 2 - 20 * DPI.Item2 / 96f;
@@ -270,6 +274,23 @@ namespace SimpleEpub2
         private String processStepItemBriefText(String s)
         {
             return "<font size=\"+2\"><b>" + s + "</b></font>";
+        }
+
+        private static String ToSBC(String input)
+        {
+            // 半角转全角：
+            char[] c = input.ToCharArray();
+            for (Int32 i = 0; i < c.Length; i++)
+            {
+                if (c[i] == 32)
+                {
+                    c[i] = (char)12288;
+                    continue;
+                }
+                if (c[i] < 127)
+                    c[i] = (char)(c[i] + 65248);
+            }
+            return new String(c);
         }
     }
 }

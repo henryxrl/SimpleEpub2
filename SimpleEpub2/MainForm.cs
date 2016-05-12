@@ -293,10 +293,10 @@ namespace SimpleEpub2
             #region Set Subpages
             Extract(resourcesPath, "Resources", "About.png");
 			setSubPages(true);
-			#endregion
+            #endregion
 
-			#region Settings Preparation
-			stsObj = new SettingsObject(settingsPath);
+            #region Settings Preparation
+            stsObj = new SettingsObject(settingsPath);
 
 			// Create SettingsObject and load settings to form
 			if (!File.Exists(stsObj.iniPath))
@@ -323,7 +323,12 @@ namespace SimpleEpub2
 			if (sts.pg4.settings4_4_chkupd.Value)
 				updater.DoUpdate(true);
 
-			#endregion
+            #endregion
+
+            // Set UI Font according to language
+            LANG.setFont(this.Controls);
+            CaptionFont = new Font(LANG.getFont(), CaptionFont.Size, CaptionFont.Style);
+            Font = new Font(LANG.getFont(), Font.Size, Font.Style);
         }
 
         private void setLANG()

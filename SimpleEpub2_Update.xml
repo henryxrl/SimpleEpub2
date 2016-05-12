@@ -1,9 +1,9 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.16.3.27</version>
+    <version>2.16.3.30</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>D8568CF2ED8BA095E3AF8B3BB80127B4</md5>
+    <md5>87F534126EC9168D9880D8927735FF53</md5>
     <launchArgs>
     </launchArgs>
     <description>5/12/2016 Update:
@@ -15,6 +15,7 @@
     6. FIXED: Logic when the text file's name is ill-formatted
     7. FIXED: Bug when the text file's name is ill-formatted
     8. FIXED: Bug when HTML special characters are not properly escaped
+    9. NEW: UI Font depend on UI language
 
 5/12/2016 更新：
     1. 新增：英文书封面
@@ -24,6 +25,7 @@
     5. 新增：完善章节提取正则
     6. 修复：TXT文件名不规范处理逻辑
     7. 修复：当TXT文件名不规范时，生成EPUB失败的问题
-    8. 修复：文本中的特殊字符没有替换成HTML格式</description>
+    8. 修复：文本中的特殊字符没有替换成HTML格式
+    9. 新增：界面字体根据界面语言而定</description>
   </update>
 </sharpUpdate>

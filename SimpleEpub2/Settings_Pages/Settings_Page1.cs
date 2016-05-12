@@ -34,6 +34,10 @@ namespace SimpleEpub2
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+
+            // Set UI Font according to language
+            LANG.setFont(this.Controls);
+            Font = new Font(LANG.getFont(), Font.Size, Font.Style);
         }
 
 		private void settings1_3_coverfirstpage_ValueChanged(object sender, EventArgs e)

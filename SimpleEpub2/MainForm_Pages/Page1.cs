@@ -13,9 +13,9 @@ namespace SimpleEpub2
 
         public Page1(Color c, Language lang, Tuple<Single, Single> dpi)
 		{
-			InitializeComponent();
+            InitializeComponent();
 
-			themeColor = c;
+            themeColor = c;
             LANG = lang;
             DPI = dpi;
 
@@ -50,7 +50,7 @@ namespace SimpleEpub2
 			cover_bookname_textbox.BorderStyle = BorderStyle.None;
 			cover_bookname_textbox.BackColor = themeColor;
 			cover_bookname_textbox.ForeColor = Color.White;
-			cover_bookname_textbox.Font = new Font("Microsoft YaHei UI", 18, FontStyle.Bold);
+			cover_bookname_textbox.Font = new Font(LANG.getFont(), 18, FontStyle.Bold);
 			cover_bookname_textbox.Location = new Point(626, 32);
 			cover_bookname_textbox.Size = new Size(287, 107);
 			cover_bookname_textbox.MouseLeave += cover_bookname_textbox_MouseLeave;
@@ -64,12 +64,12 @@ namespace SimpleEpub2
 			cover_author_label.ForeColor = Color.White;
 			cover_author_label.Location = new Point(5, 2);
 			cover_author_label.Size = new Size(100, 30);
-			//cover_author_textbox.Parent = cover_author_tile;
-			cover_author_textbox.Multiline = true;
+            //cover_author_textbox.Parent = cover_author_tile;
+            cover_author_textbox.Multiline = true;
 			cover_author_textbox.BorderStyle = BorderStyle.None;
 			cover_author_textbox.BackColor = themeColor;
 			cover_author_textbox.ForeColor = Color.White;
-			cover_author_textbox.Font = new Font("Microsoft YaHei UI", 18, FontStyle.Bold);
+			cover_author_textbox.Font = new Font(LANG.getFont(), 18, FontStyle.Bold);
 			cover_author_textbox.Location = new Point(626, 183);
 			cover_author_textbox.Size = new Size(287, 107);
 			cover_author_textbox.MouseLeave += cover_author_textbox_MouseLeave;
@@ -83,12 +83,12 @@ namespace SimpleEpub2
 			cover_intro_label.ForeColor = Color.White;
 			cover_intro_label.Location = new Point(5, 2);
 			cover_intro_label.Size = new Size(100, 30);
-			//cover_intro_textbox.Parent = cover_intro_tile;
-			cover_intro_textbox.Multiline = true;
+            //cover_intro_textbox.Parent = cover_intro_tile;
+            cover_intro_textbox.Multiline = true;
 			cover_intro_textbox.BorderStyle = BorderStyle.None;
 			cover_intro_textbox.BackColor = themeColor;
 			cover_intro_textbox.ForeColor = Color.White;
-			cover_intro_textbox.Font = new Font("Microsoft YaHei UI", 10, FontStyle.Bold);
+			cover_intro_textbox.Font = new Font(LANG.getFont(), 10, FontStyle.Bold);
 			cover_intro_textbox.Location = new Point(626, 334);
 			cover_intro_textbox.Size = new Size(287, 261);
 			cover_intro_textbox.MouseLeave += cover_intro_textbox_MouseLeave;
@@ -101,6 +101,10 @@ namespace SimpleEpub2
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+
+            // Set UI Font according to language
+            LANG.setFont(this.Controls);
+            Font = new Font(LANG.getFont(), Font.Size, Font.Style);
         }
 
         private void cover_picturebox_DragEnter(object sender, DragEventArgs e)
@@ -207,7 +211,7 @@ namespace SimpleEpub2
 				using (SolidBrush b = new SolidBrush(themeColor))
 				{
                     String s = LANG.getString("mainpage1_img1_string1");
-					Font f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
+					Font f = new Font(LANG.getFont(), 25, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = txt_picturebox.Width / 2 - size.Width / 2;
 					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 50 * DPI.Item2 / 96f;
@@ -215,7 +219,7 @@ namespace SimpleEpub2
 					g.DrawString(s, f, b, px, py);
 
                     s = LANG.getString("mainpage1_img1_string2");
-					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
+					f = new Font(LANG.getFont(), 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
 					py = txt_picturebox.Height / 2 - size.Height / 2 + 10 * DPI.Item2 / 96f;
@@ -247,7 +251,7 @@ namespace SimpleEpub2
 				using (SolidBrush b = new SolidBrush(themeColor))
 				{
                     String s = LANG.getString("mainpage1_img2_string1");
-					Font f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
+					Font f = new Font(LANG.getFont(), 25, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = txt_picturebox.Width / 2 - size.Width / 2;
 					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 180 * DPI.Item2 / 96f;
@@ -255,7 +259,7 @@ namespace SimpleEpub2
 					g.DrawString(s, f, b, px, py);
 
                     s = LANG.getString("mainpage1_img2_string2");
-					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
+					f = new Font(LANG.getFont(), 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
 					py = txt_picturebox.Height / 2 - size.Height / 2 - 110 * DPI.Item2 / 96f;
@@ -287,7 +291,7 @@ namespace SimpleEpub2
 				using (SolidBrush b = new SolidBrush(themeColor))
 				{
 					String s = "✔";
-					Font f = new Font("Microsoft YaHei UI", 50, FontStyle.Bold);
+					Font f = new Font(LANG.getFont(), 50, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = txt_picturebox.Width / 2 - size.Width / 2;
 					Single py = txt_picturebox.Height / 2 - size.Height / 2 - 180 * DPI.Item2 / 96f;
@@ -295,7 +299,7 @@ namespace SimpleEpub2
 					g.DrawString(s, f, b, px, py);
 
                     s = LANG.getString("mainpage1_img3_string1");
-					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
+					f = new Font(LANG.getFont(), 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
 					py = txt_picturebox.Height / 2 - size.Height / 2 - 110 * DPI.Item2 / 96f;
@@ -303,7 +307,7 @@ namespace SimpleEpub2
 					g.DrawString(s, f, b, px, py);
 
                     s = LANG.getString("mainpage1_img1_string1");
-					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
+					f = new Font(LANG.getFont(), 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
 					py = txt_picturebox.Height / 2 - size.Height / 2 - 10 * DPI.Item2 / 96f;
@@ -311,7 +315,7 @@ namespace SimpleEpub2
 					g.DrawString(s, f, b, px, py);
 
                     s = LANG.getString("mainpage1_img1_string2");
-					f = new Font("Microsoft YaHei UI", 25, FontStyle.Bold);
+					f = new Font(LANG.getFont(), 25, FontStyle.Bold);
 					size = g.MeasureString(s, f);
 					px = txt_picturebox.Width / 2 - size.Width / 2;
 					py = txt_picturebox.Height / 2 - size.Height / 2 + 50 * DPI.Item2 / 96f;

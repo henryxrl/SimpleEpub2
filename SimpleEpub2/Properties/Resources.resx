@@ -136,7 +136,7 @@
     <value>No title or author info found in the file name!</value>
   </data>
   <data name="en_balloontip_NoEnTitleAuthor_detail" xml:space="preserve">
-    <value>File name example: "BookName By Author"{0}(The word "by" must present, not case-sensitive){0}{0}Detecting the first two lines of the file...{0}The first line will become the book title.{0}The second line will become the author.</value>
+    <value>File name example: "BookName By Author"{0}(The word "by" must present, case-insensitive){0}{0}Will use file name as book name, "SimpleEpub2" as author name.</value>
   </data>
   <data name="en_balloontip_NoHelpFile" xml:space="preserve">
     <value>Error</value>
@@ -148,7 +148,7 @@
     <value>No title or author info found in the file name!</value>
   </data>
   <data name="en_balloontip_NoZhTitleAuthor_detail" xml:space="preserve">
-    <value>File name example: "《书名》作者：作者名"{0}(The word "作者" must present; 《》can be omitted.){0}{0}Detecting the first two lines of the file...{0}The first line will become the book title.{0}The second line will become the author.</value>
+    <value>File name example: "《书名》作者：作者名"{0}(The word "作者" must present; 《》can be omitted.){0}{0}Will use file name as book name, "SimpleEpub2" as author name.</value>
   </data>
   <data name="en_balloontip_success" xml:space="preserve">
     <value>Created!</value>
@@ -349,7 +349,7 @@
     <value>&lt;b&gt;Location: &lt;/b&gt;</value>
   </data>
   <data name="en_mainpage3_newbook_button" xml:space="preserve">
-    <value>➢         Next      Book         ➣</value>
+    <value>➢  Next Book  ➣</value>
   </data>
   <data name="en_mainpage3_processing_label1" xml:space="preserve">
     <value>Creating EPUB...</value>
@@ -529,7 +529,7 @@
     <value>文件名中无完整英文书名和作者信息！</value>
   </data>
   <data name="zh_balloontip_NoEnTitleAuthor_detail" xml:space="preserve">
-    <value>完整信息范例：“BookName By Author”{0}（文件名中一定要有“By”这个词，大小写不限）{0}{0}开始检测文件第一、二行……{0}其中第一行为书名，第二行为作者名！</value>
+    <value>完整信息范例：“BookName By Author”{0}（一定要有“By”这个词，大小写不限）{0}将以文件名为书名，SimpleEpub2为作者名</value>
   </data>
   <data name="zh_balloontip_NoHelpFile" xml:space="preserve">
     <value>错误</value>
@@ -541,7 +541,7 @@
     <value>文件名中无完整书名和作者信息！</value>
   </data>
   <data name="zh_balloontip_NoZhTitleAuthor_detail" xml:space="preserve">
-    <value>完整信息范例：“《书名》作者：作者名”{0}（文件名中一定要有“作者”二字，书名号可以省略）{0}{0}开始检测文件第一、二行……{0}其中第一行为书名，第二行为作者名！</value>
+    <value>完整信息范例：“《书名》作者：作者名”{0}（一定要有“作者”二字，书名号可以省略）{0}将以文件名为书名，SimpleEpub2为作者名</value>
   </data>
   <data name="zh_balloontip_success" xml:space="preserve">
     <value>生成完毕！</value>
@@ -742,7 +742,7 @@
     <value>&lt;b&gt;位置：&lt;/b&gt;</value>
   </data>
   <data name="zh_mainpage3_newbook_button" xml:space="preserve">
-    <value>➢          下    本    书          ➣</value>
+    <value>➢   下 本 书   ➣</value>
   </data>
   <data name="zh_mainpage3_processing_label1" xml:space="preserve">
     <value>正在生成……</value>

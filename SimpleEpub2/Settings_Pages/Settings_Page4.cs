@@ -36,6 +36,10 @@ namespace SimpleEpub2
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+
+            // Set UI Font according to language
+            LANG.setFont(this.Controls);
+            Font = new Font(LANG.getFont(), Font.Size, Font.Style);
         }
 
 		private void settings4_1_filelocation_button_Click(object sender, EventArgs e)

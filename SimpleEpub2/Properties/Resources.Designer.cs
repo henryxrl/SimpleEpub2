@@ -232,7 +232,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File name example: &quot;BookName By Author&quot;{0}(The word &quot;by&quot; must present, not case-sensitive){0}{0}Detecting the first two lines of the file...{0}The first line will become the book title.{0}The second line will become the author..
+        ///   Looks up a localized string similar to File name example: &quot;BookName By Author&quot;{0}(The word &quot;by&quot; must present, case-insensitive){0}{0}Will use file name as book name, &quot;SimpleEpub2&quot; as author name..
         /// </summary>
         internal static string en_balloontip_NoEnTitleAuthor_detail {
             get {
@@ -286,7 +286,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File name example: &quot;《书名》作者：作者名&quot;{0}(The word &quot;作者&quot; must present; 《》can be omitted.){0}{0}Detecting the first two lines of the file...{0}The first line will become the book title.{0}The second line will become the author..
+        ///   Looks up a localized string similar to File name example: &quot;《书名》作者：作者名&quot;{0}(The word &quot;作者&quot; must present; 《》can be omitted.){0}{0}Will use file name as book name, &quot;SimpleEpub2&quot; as author name..
         /// </summary>
         internal static string en_balloontip_NoZhTitleAuthor_detail {
             get {
@@ -970,7 +970,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ➢         Next      Book         ➣.
+        ///   Looks up a localized string similar to ➢  Next Book  ➣.
         /// </summary>
         internal static string en_mainpage3_newbook_button {
             get {
@@ -1816,7 +1816,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 完整信息范例：“BookName By Author”{0}（文件名中一定要有“By”这个词，大小写不限）{0}{0}开始检测文件第一、二行……{0}其中第一行为书名，第二行为作者名！.
+        ///   Looks up a localized string similar to 完整信息范例：“BookName By Author”{0}（一定要有“By”这个词，大小写不限）{0}将以文件名为书名，SimpleEpub2为作者名.
         /// </summary>
         internal static string zh_balloontip_NoEnTitleAuthor_detail {
             get {
@@ -1870,7 +1870,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 完整信息范例：“《书名》作者：作者名”{0}（文件名中一定要有“作者”二字，书名号可以省略）{0}{0}开始检测文件第一、二行……{0}其中第一行为书名，第二行为作者名！.
+        ///   Looks up a localized string similar to 完整信息范例：“《书名》作者：作者名”{0}（一定要有“作者”二字，书名号可以省略）{0}将以文件名为书名，SimpleEpub2为作者名.
         /// </summary>
         internal static string zh_balloontip_NoZhTitleAuthor_detail {
             get {
@@ -2554,7 +2554,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ➢          下    本    书          ➣.
+        ///   Looks up a localized string similar to ➢   下 本 书   ➣.
         /// </summary>
         internal static string zh_mainpage3_newbook_button {
             get {
