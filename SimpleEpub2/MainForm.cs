@@ -16,6 +16,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Security;
 using System.Windows.Forms;
 using System.Windows.Media;
 using VB = Microsoft.VisualBasic;
@@ -135,7 +136,7 @@ namespace SimpleEpub2
         private static String regex_number = "——-——一二两三四五六七八九十○零百千壹贰叁肆伍陆柒捌玖拾佰仟0-9０-９";
         private static String regex_1 = "^(\\s*([【])?(正文\\s*)?[第序终終【]\\s*([" + regex_number + "\\s/\\、、]*)\\s*[章节節回集卷部】]\\s*$)";
         private static String regex_2 = "^(\\s*([【])?(正文\\s*)?[第序终終【]\\s*([" + regex_number + "\\s/\\、、]*)\\s*[章节節回集卷部】]\\s+.{1,50}$)";
-        private static String regex_titles = "内容简介|內容簡介|内容介绍|內容介紹|内容梗概|内容大意|小说简介|小說簡介|小说介绍|小說介紹|小说大意|小說大意|书籍简介|書籍簡介|书籍介绍|書籍介紹|书籍大意|書籍大意|作品简介|作品簡介|作品介绍|作品介紹|作品大意|作者简介|作者簡介|作者介绍|作者介紹|序|序言|序章|前言|楔子|引言|引子|终章|終章|尾声|尾聲|后记|後記|完本感言|出版后记|出版後記|谢辞|謝辭";
+        private static String regex_titles = "内容简介|內容簡介|内容介绍|內容介紹|内容梗概|内容大意|小说简介|小說簡介|小说介绍|小說介紹|小说大意|小說大意|书籍简介|書籍簡介|书籍介绍|書籍介紹|书籍大意|書籍大意|作品简介|作品簡介|作品介绍|作品介紹|作品大意|作者简介|作者簡介|作者介绍|作者介紹|简介|簡介|介绍|介紹|大意|梗概|序|序言|序章|前言|楔子|引言|引子|终章|終章|尾声|尾聲|后记|後記|完本感言|出版后记|出版後記|谢辞|謝辭";
         private static String regex_3 = "^(\\s*(" + regex_titles + ")\\s*$)";
         private static String regex_4 = "^(\\s*(" + regex_titles + ")\\s+.{0,50}?$)";
         private static String regex_titles_english = "chapter|appendix|appendices|preface|Foreword|Introduction|Prologue|Epigraph|Table of contents|Epilogue|Afterword|Conclusion|Glossary|Acknowledgments|Bibliography|Index|Errata|Colophon|Copyright";
@@ -148,6 +149,7 @@ namespace SimpleEpub2
         private Boolean bookAndAuthor_isChinese;
 		private List<Tuple<Int32, String>> TOC = new List<Tuple<Int32, String>>();
 		private Int32 FSLinesScanned = 0;
+        private Int32 TOCGridViewOffset = 0;
 		private Boolean extraLinesInBeginning = false;
 		private Boolean extraLinesNotEmpty = false;
 		private List<Int32> titleLineNumbers = new List<Int32>();
@@ -1425,8 +1427,9 @@ namespace SimpleEpub2
 			css.Clear();
 			opf.Clear();
 			ncx.Clear();
+            TOCGridViewOffset = 0;
 
-			if (TXTPath == null)
+            if (TXTPath == null)
 			{
                 MessageBoxEx.Show(LANG.getString("mainpage3_generateEpub_no_file"));
 				return;
@@ -1651,36 +1654,42 @@ namespace SimpleEpub2
 				}
 
 
-				if (FSLinesScanned != 0)
-				{
-					//FSLinesScanned = 0;
-					TXTlineNumber += 2;
-				}
+                if (FSLinesScanned != 0)
+                {
+                    TXTlineNumber += FSLinesScanned;
+                    while (titleLineNumbers[TLN_idx] < TXTlineNumber)
+                    {
+                        TLN_idx++;
+                        //titleLineNumbers.RemoveAt(0);
+                        TOCGridViewOffset++;
+                    }
+                    //TLN_size = titleLineNumbers.Count;
+                }
 
 
-				Boolean titleHasFootNote = false;
+                Boolean titleHasFootNote = false;
 				Queue<Tuple<String, Int32>> footNoteQueuePre = new Queue<Tuple<String, Int32>>();
 				Queue<Tuple<Int32, String>> footNoteQueuePost = new Queue<Tuple<Int32, String>>();
 				Int32 chapterFootNoteCount = 0;
 
 				// Read from the first line to the first chapter title defined!
-				if (TLN_size != 0 && titleLineNumbers[0] > TXTlineNumber)
+				if (TLN_size != 0 && titleLineNumbers[TLN_idx] > TXTlineNumber)
 				{
 					extraLinesInBeginning = true;
 					StringBuilder html = new StringBuilder();
 					Boolean firstTime = true;
                     Boolean firstLine = false;
 
-					while (titleLineNumbers[0] > TXTlineNumber && (nextLine = sr.ReadLine()) != null)
+					while (titleLineNumbers[TLN_idx] > TXTlineNumber && (nextLine = SecurityElement.Escape(sr.ReadLine())) != null)
 					{
-						if (FSLinesScanned != 0)
-						{
-							FSLinesScanned--;
-							continue;
-						}
+                        if (FSLinesScanned != 0)
+                        {
+                            FSLinesScanned--;
+                            continue;
+                        }
 
-						// Remove empty lines
-						if (!Regex.IsMatch(nextLine, emptyLineRegex))
+                        // Remove empty lines
+                        if (!Regex.IsMatch(nextLine, emptyLineRegex))
 						{
 							extraLinesNotEmpty = true;
 
@@ -1775,10 +1784,16 @@ namespace SimpleEpub2
 					{
 						html.Append(HTMLHead(bookAndAuthor[0], "", 1) + "\n");
 					}
-					while ((nextLine = sr.ReadLine()) != null)
+					while ((nextLine = SecurityElement.Escape(sr.ReadLine())) != null)
 					{
-						// Remove empty lines
-						if (!Regex.IsMatch(nextLine, emptyLineRegex))
+                        if (FSLinesScanned != 0)
+                        {
+                            FSLinesScanned--;
+                            continue;
+                        }
+
+                        // Remove empty lines
+                        if (!Regex.IsMatch(nextLine, emptyLineRegex))
 						{
 							nextLine = nextLine.Trim();
 							nextLine = translate(nextLine, translation);		// 简繁转换
@@ -1796,9 +1811,9 @@ namespace SimpleEpub2
 								//nextLine = nextLine.Replace("—", "<span lang=EN-US style='font-family:\"Times New Roman\"'>—</span>");
 							}
 
-							if (TLN_idx < TLN_size && TXTlineNumber == titleLineNumbers[TLN_idx])		// Chapter titles!
+                            if (TLN_idx < TLN_size && TXTlineNumber == titleLineNumbers[TLN_idx])		// Chapter titles!
 							{
-								if (replace)		// 替换标题中的数字为汉字
+                                if (replace)		// 替换标题中的数字为汉字
 								{
 									nextLine = numberToHan(nextLine);
 								}
@@ -2310,11 +2325,11 @@ namespace SimpleEpub2
 			}
 			else
 			{
-				for (Int32 i = 1; i <= iVal; i++)
+                for (Int32 i = 1; i <= iVal; i++)
 				{
 					// 删除" *** "标识
 					//MessageBoxEx.Show("i: " + i + "\nj: " + j + "\n(i-j): " + (i - j));
-					String tempTitle = pg2.TOC_list.Rows[i - 1].Cells[0].Value.ToString();
+					String tempTitle = pg2.TOC_list.Rows[i - 1 + TOCGridViewOffset].Cells[0].Value.ToString();
 
 					String tempTitleProcessed = "";
 					if (tempTitle.Contains(" *** "))
@@ -2624,7 +2639,7 @@ namespace SimpleEpub2
 				}
 			}
 
-			return result.ToString().Trim();
+			return SecurityElement.Escape(result.ToString().Trim());
 		}
 
 		private static String ToSBC(String input)
