@@ -557,7 +557,6 @@ namespace SimpleEpub2
 					pg3.ProcessingMode();
 					if (!stsObj.embedFontSubset)
 					{
-						pg3.stepItem3.Enabled = false;
 						pg3.stepItem3.Visible = false;
 					}
 				}
