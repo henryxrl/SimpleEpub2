@@ -1,15 +1,15 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.16.3.31</version>
+    <version>2.16.3.33</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>379705F2353CE07ED11332C70F96ADD9</md5>
+    <md5>B79FC29A1378994A825513C38DEE6D70</md5>
     <launchArgs>
     </launchArgs>
-    <description>5/13/2016 Update:
-    1. FIXED: Progress bar not 100% when done if embed font subset option is turned off
+    <description>10/7/2016 Update:
+    1. FIXED: GUI pageSlider permits mouse drag
 
-5/13/2016 更新：
-    1. 修复：当嵌入字体子集选项开启后，进度条无法达到100%</description>
+10/7/2016 更新：
+    1. 修复：主界面pageSlider允许鼠标随意拖动的问题</description>
   </update>
 </sharpUpdate>

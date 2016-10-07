@@ -367,8 +367,10 @@ namespace SimpleEpub2
 			//Size = new Size(946, 650 + navigationBar1.Height);
 
 			pageSlider1.SelectedPageIndex = 0;
+            pageSlider1.MouseDragEnabled = false;
+            pageSlider1.PageMouseDragEnabled = false;
 
-			setPage1();
+            setPage1();
 			if (firstTime)
 				setSettings(false);
 
