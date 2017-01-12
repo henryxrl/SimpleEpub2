@@ -28,22 +28,26 @@ namespace SimpleEpub2
             tabItem3.Text = LANG.getString("settings3_tabItem3");
             tabItem4.Text = LANG.getString("settings3_tabItem4");
             settings3_1_tfont_label.Text = LANG.getString("settings3_1_tfont_label");
-            settings3_1_tsize_label.Text = LANG.getString("settings3_1_tsize_label");
             settings3_1_tcolor_label.Text = LANG.getString("settings3_1_tcolor_label");
             settings3_2_bfont_label.Text = LANG.getString("settings3_2_bfont_label");
-            settings3_2_bsize_label.Text = LANG.getString("settings3_2_bsize_label");
             settings3_2_bcolor_label.Text = LANG.getString("settings3_2_bcolor_label");
             settings3_3_linespacing_label.Text = LANG.getString("settings3_3_linespacing_label");
             settings3_3_addparagraphspacing_label.Text = LANG.getString("settings3_3_addparagraphspacing_label");
             settings3_3_dropCap_label.Text = LANG.getString("settings3_3_dropCap_label");
             settings3_3_stickupCap_label.Text = LANG.getString("settings3_3_stickupCap_label");
-            label1.Text = LANG.getString("settings_label_hao");
-            label2.Text = LANG.getString("settings_label_hao");
-            label3.Text = LANG.getString("settings_label_percentage");
+            label1.Text = LANG.getString("settings_label_percentage");
 
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+
+            // Set UI Font according to language
+            LANG.setFont(this.Controls);
+            Font = new Font(LANG.getFont(), Font.Size, Font.Style);
+            tabControl7.Font = new Font(LANG.getFont(), tabControl7.Font.Size, tabControl7.Font.Style);
+            tabControl7.SelectedTabFont = new Font(LANG.getFont(), tabControl7.SelectedTabFont.Size, tabControl7.SelectedTabFont.Style);
+            tabControl8.Font = new Font(LANG.getFont(), tabControl8.Font.Size, tabControl8.Font.Style);
+            tabControl8.SelectedTabFont = new Font(LANG.getFont(), tabControl8.SelectedTabFont.Size, tabControl8.SelectedTabFont.Style);
         }
 
 		private void settings3_1_tfont_MeasureItem(object sender, MeasureItemEventArgs e)

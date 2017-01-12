@@ -128,6 +128,12 @@ namespace SimpleEpub2
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+
+            // Set UI Font according to language
+            LANG.setFont(this.Controls);
+            Font = new Font(LANG.getFont(), Font.Size, Font.Style);
+            superTabStrip1.SelectedTabFont = new Font(LANG.getFont(), superTabStrip1.SelectedTabFont.Size, superTabStrip1.SelectedTabFont.Style);
+            superTabStrip1.TabFont = new Font(LANG.getFont(), superTabStrip1.TabFont.Size, superTabStrip1.TabFont.Style);
         }
 
 		private void superTabItem1_Click(object sender, EventArgs e)

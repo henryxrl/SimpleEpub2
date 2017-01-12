@@ -29,10 +29,15 @@ namespace SimpleEpub2
             settings1_3_StT_label.Text = LANG.getString("settings1_3_StT_label");       // 简体转繁体
             settings1_3_TtS_label.Text = LANG.getString("settings1_3_TtS_label");       // 繁体转简体
             settings1_3_embedFontSubset_label.Text = LANG.getString("settings1_3_embedFontSubset_label");       // 嵌入字体（子集）
+            settings1_3_generateMOBI_label.Text = LANG.getString("settings1_3_generateMOBI_label");     // 同时生成MOBI
 
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+
+            // Set UI Font according to language
+            LANG.setFont(this.Controls);
+            Font = new Font(LANG.getFont(), Font.Size, Font.Style);
         }
 
 		private void settings1_3_coverfirstpage_ValueChanged(object sender, EventArgs e)

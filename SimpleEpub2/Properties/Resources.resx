@@ -136,7 +136,7 @@
     <value>No title or author info found in the file name!</value>
   </data>
   <data name="en_balloontip_NoEnTitleAuthor_detail" xml:space="preserve">
-    <value>File name example: "BookName By Author"{0}(The word "by" must present, not case-sensitive){0}{0}Detecting the first two lines of the file...{0}The first line will become the book title.{0}The second line will become the author.</value>
+    <value>File name example: "BookName By Author"{0}(The word "by" must present, case-insensitive){0}{0}Will use file name as book name, "SimpleEpub2" as author name.</value>
   </data>
   <data name="en_balloontip_NoHelpFile" xml:space="preserve">
     <value>Error</value>
@@ -148,7 +148,7 @@
     <value>No title or author info found in the file name!</value>
   </data>
   <data name="en_balloontip_NoZhTitleAuthor_detail" xml:space="preserve">
-    <value>File name example: "《书名》作者：作者名"{0}(The word "作者" must present; 《》can be omitted.){0}{0}Detecting the first two lines of the file...{0}The first line will become the book title.{0}The second line will become the author.</value>
+    <value>File name example: "《书名》作者：作者名"{0}(The word "作者" must present; 《》can be omitted.){0}{0}Will use file name as book name, "SimpleEpub2" as author name.</value>
   </data>
   <data name="en_balloontip_success" xml:space="preserve">
     <value>Created!</value>
@@ -349,7 +349,7 @@
     <value>&lt;b&gt;Location: &lt;/b&gt;</value>
   </data>
   <data name="en_mainpage3_newbook_button" xml:space="preserve">
-    <value>➢         Next      Book         ➣</value>
+    <value>➢  Next Book  ➣</value>
   </data>
   <data name="en_mainpage3_processing_label1" xml:space="preserve">
     <value>Creating EPUB...</value>
@@ -364,31 +364,31 @@
     <value>Apply Settings</value>
   </data>
   <data name="en_mainpage3_stepItem1_string2" xml:space="preserve">
-    <value>Applying font &amp; para-&lt;br/&gt;graph style settings</value>
+    <value>Apply font and&lt;br/&gt;paragraph settings</value>
   </data>
   <data name="en_mainpage3_stepItem2_string1" xml:space="preserve">
-    <value>Create HTML</value>
+    <value>HTML</value>
   </data>
   <data name="en_mainpage3_stepItem2_string2" xml:space="preserve">
-    <value>Extract chapter title&lt;br/&gt;Create chapter HTML</value>
+    <value>Extract chapters&lt;br/&gt;Create HTMLs</value>
   </data>
   <data name="en_mainpage3_stepItem3_string1" xml:space="preserve">
-    <value>Create Font</value>
+    <value>Font</value>
   </data>
   <data name="en_mainpage3_stepItem3_string2" xml:space="preserve">
-    <value>Extract all words to&lt;br/&gt;create font subset</value>
+    <value>Extract words&lt;br/&gt;Create fonts</value>
   </data>
   <data name="en_mainpage3_stepItem4_string1" xml:space="preserve">
-    <value>Create Misc Files</value>
+    <value>Misc Files</value>
   </data>
   <data name="en_mainpage3_stepItem4_string2" xml:space="preserve">
-    <value>Create Images, CSS, OPF,&lt;br/&gt;NCX, MIMETYPE etc.</value>
+    <value>Create CSS, OPF,&lt;br/&gt;NCX, MIMETYPE etc.</value>
   </data>
   <data name="en_mainpage3_stepItem5_string1" xml:space="preserve">
-    <value>Create EPUB</value>
+    <value>EPUB</value>
   </data>
   <data name="en_mainpage3_stepItem5_string2" xml:space="preserve">
-    <value>Pack files together,&lt;br/&gt;following EPUB rules</value>
+    <value>Pack all files&lt;br/&gt;with EPUB rules</value>
   </data>
   <data name="en_mainpage3_time_label1" xml:space="preserve">
     <value>&lt;b&gt;Time used: &lt;/b&gt;</value>
@@ -465,17 +465,11 @@
   <data name="en_settings3_1_tfont_label" xml:space="preserve">
     <value>Font</value>
   </data>
-  <data name="en_settings3_1_tsize_label" xml:space="preserve">
-    <value>Size</value>
-  </data>
   <data name="en_settings3_2_bcolor_label" xml:space="preserve">
     <value>Color</value>
   </data>
   <data name="en_settings3_2_bfont_label" xml:space="preserve">
     <value>Font</value>
-  </data>
-  <data name="en_settings3_2_bsize_label" xml:space="preserve">
-    <value>Size</value>
   </data>
   <data name="en_settings3_3_addparagraphspacing_label" xml:space="preserve">
     <value>Add parag spacing</value>
@@ -529,7 +523,7 @@
     <value>文件名中无完整英文书名和作者信息！</value>
   </data>
   <data name="zh_balloontip_NoEnTitleAuthor_detail" xml:space="preserve">
-    <value>完整信息范例：“BookName By Author”{0}（文件名中一定要有“By”这个词，大小写不限）{0}{0}开始检测文件第一、二行……{0}其中第一行为书名，第二行为作者名！</value>
+    <value>完整信息范例：“BookName By Author”{0}（一定要有“By”这个词，大小写不限）{0}将以文件名为书名，SimpleEpub2为作者名</value>
   </data>
   <data name="zh_balloontip_NoHelpFile" xml:space="preserve">
     <value>错误</value>
@@ -541,7 +535,7 @@
     <value>文件名中无完整书名和作者信息！</value>
   </data>
   <data name="zh_balloontip_NoZhTitleAuthor_detail" xml:space="preserve">
-    <value>完整信息范例：“《书名》作者：作者名”{0}（文件名中一定要有“作者”二字，书名号可以省略）{0}{0}开始检测文件第一、二行……{0}其中第一行为书名，第二行为作者名！</value>
+    <value>完整信息范例：“《书名》作者：作者名”{0}（一定要有“作者”二字，书名号可以省略）{0}将以文件名为书名，SimpleEpub2为作者名</value>
   </data>
   <data name="zh_balloontip_success" xml:space="preserve">
     <value>生成完毕！</value>
@@ -742,7 +736,7 @@
     <value>&lt;b&gt;位置：&lt;/b&gt;</value>
   </data>
   <data name="zh_mainpage3_newbook_button" xml:space="preserve">
-    <value>➢          下    本    书          ➣</value>
+    <value>➢   下 本 书   ➣</value>
   </data>
   <data name="zh_mainpage3_processing_label1" xml:space="preserve">
     <value>正在生成……</value>
@@ -757,31 +751,31 @@
     <value>加载设置</value>
   </data>
   <data name="zh_mainpage3_stepItem1_string2" xml:space="preserve">
-    <value>加载字体样式、&lt;br/&gt;段落样式等设置</value>
+    <value>加载字体、&lt;br/&gt;段落等设置</value>
   </data>
   <data name="zh_mainpage3_stepItem2_string1" xml:space="preserve">
-    <value>生成HTML文件</value>
+    <value>生成HTML</value>
   </data>
   <data name="zh_mainpage3_stepItem2_string2" xml:space="preserve">
-    <value>用正则表达式提取章节&lt;br/&gt;并按章节生成HTML文件</value>
+    <value>提取章节&lt;br/&gt;并生成HTML</value>
   </data>
   <data name="zh_mainpage3_stepItem3_string1" xml:space="preserve">
-    <value>生成内嵌字体文件</value>
+    <value>生成内嵌字体</value>
   </data>
   <data name="zh_mainpage3_stepItem3_string2" xml:space="preserve">
-    <value>提取TXT文件的所有字符&lt;br/&gt;生成字体文件的子集</value>
+    <value>提取所有字符&lt;br/&gt;生成字体文件</value>
   </data>
   <data name="zh_mainpage3_stepItem4_string1" xml:space="preserve">
     <value>生成其它文件</value>
   </data>
   <data name="zh_mainpage3_stepItem4_string2" xml:space="preserve">
-    <value>生成图片、CSS、OPF、&lt;br/&gt;NCX、MIMETYPE等文件</value>
+    <value>生成图片、CSS、OPF、&lt;br/&gt;NCX、MIMETYPE等</value>
   </data>
   <data name="zh_mainpage3_stepItem5_string1" xml:space="preserve">
-    <value>生成EPUB文件</value>
+    <value>生成EPUB</value>
   </data>
   <data name="zh_mainpage3_stepItem5_string2" xml:space="preserve">
-    <value>打包所有文件，&lt;br/&gt;严格按照EPUB规则生成电子书</value>
+    <value>打包所有文件，&lt;br/&gt;按照规则生成EPUB</value>
   </data>
   <data name="zh_mainpage3_time_label1" xml:space="preserve">
     <value>&lt;b&gt;耗时：&lt;/b&gt;</value>
@@ -858,17 +852,11 @@
   <data name="zh_settings3_1_tfont_label" xml:space="preserve">
     <value>标题字体：</value>
   </data>
-  <data name="zh_settings3_1_tsize_label" xml:space="preserve">
-    <value>标题字号：</value>
-  </data>
   <data name="zh_settings3_2_bcolor_label" xml:space="preserve">
     <value>正文颜色：</value>
   </data>
   <data name="zh_settings3_2_bfont_label" xml:space="preserve">
     <value>正文字体：</value>
-  </data>
-  <data name="zh_settings3_2_bsize_label" xml:space="preserve">
-    <value>正文字号：</value>
   </data>
   <data name="zh_settings3_3_addparagraphspacing_label" xml:space="preserve">
     <value>增加段落前后的间距</value>
@@ -1131,16 +1119,40 @@
   <data name="zh_contextual_menu_2" xml:space="preserve">
     <value>退出</value>
   </data>
-  <data name="en_settings_label_hao" xml:space="preserve">
-    <value />
-  </data>
   <data name="en_settings_label_percentage" xml:space="preserve">
     <value>%</value>
   </data>
-  <data name="zh_settings_label_hao" xml:space="preserve">
-    <value>号</value>
-  </data>
   <data name="zh_settings_label_percentage" xml:space="preserve">
     <value>%</value>
+  </data>
+  <data name="en_balloontip_NoKindleGen" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="en_balloontip_NoKindleGen_detail" xml:space="preserve">
+    <value>No KindleGen.exe found!</value>
+  </data>
+  <data name="zh_balloontip_NoKindleGen" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="zh_balloontip_NoKindleGen_detail" xml:space="preserve">
+    <value>KindleGen.exe不存在！</value>
+  </data>
+  <data name="en_settings1_3_generateMOBI_label" xml:space="preserve">
+    <value>Generate corresponding MOBI file</value>
+  </data>
+  <data name="zh_settings1_3_generateMOBI_label" xml:space="preserve">
+    <value>同时生成MOBI文件</value>
+  </data>
+  <data name="en_mainpage3_stepItem6_string1" xml:space="preserve">
+    <value>MOBI</value>
+  </data>
+  <data name="en_mainpage3_stepItem6_string2" xml:space="preserve">
+    <value>Create MOBI&lt;br/&gt;based on EPUB</value>
+  </data>
+  <data name="zh_mainpage3_stepItem6_string1" xml:space="preserve">
+    <value>生成MOBI</value>
+  </data>
+  <data name="zh_mainpage3_stepItem6_string2" xml:space="preserve">
+    <value>基于EPUB&lt;br/&gt;按照规则生成MOBI</value>
   </data>
 </root>

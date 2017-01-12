@@ -71,6 +71,10 @@ namespace SimpleEpub2.AutoUpdater
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+
+            // Set UI Font according to language
+            lang.setFont(this.Controls);
+            Font = new Font(lang.getFont(), Font.Size, Font.Style);
         }
 
 		private void btnYes_Click(object sender, EventArgs e)

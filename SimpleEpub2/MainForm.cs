@@ -16,6 +16,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Security;
 using System.Windows.Forms;
 using System.Windows.Media;
 using VB = Microsoft.VisualBasic;
@@ -135,17 +136,18 @@ namespace SimpleEpub2
         private static String regex_number = "——-——一二两三四五六七八九十○零百千壹贰叁肆伍陆柒捌玖拾佰仟0-9０-９";
         private static String regex_1 = "^(\\s*([【])?(正文\\s*)?[第序终終【]\\s*([" + regex_number + "\\s/\\、、]*)\\s*[章节節回集卷部】]\\s*$)";
         private static String regex_2 = "^(\\s*([【])?(正文\\s*)?[第序终終【]\\s*([" + regex_number + "\\s/\\、、]*)\\s*[章节節回集卷部】]\\s+.{1,50}$)";
-        private static String regex_titles = "内容简介|內容簡介|内容介绍|內容介紹|内容梗概|内容大意|小说简介|小說簡介|小说介绍|小說介紹|小说大意|小說大意|书籍简介|書籍簡介|书籍介绍|書籍介紹|书籍大意|書籍大意|作品简介|作品簡介|作品介绍|作品介紹|作品大意|作者简介|作者簡介|作者介绍|作者介紹|序|序言|序章|前言|楔子|终章|終章|尾声|尾聲|后记|後記|完本感言|出版后记|出版後記|谢辞|謝辭";
+        private static String regex_titles = "内容简介|內容簡介|内容介绍|內容介紹|内容梗概|内容大意|小说简介|小說簡介|小说介绍|小說介紹|小说大意|小說大意|书籍简介|書籍簡介|书籍介绍|書籍介紹|书籍大意|書籍大意|作品简介|作品簡介|作品介绍|作品介紹|作品大意|作者简介|作者簡介|作者介绍|作者介紹|简介|簡介|介绍|介紹|大意|梗概|序|序言|序章|前言|楔子|引言|引子|终章|終章|尾声|尾聲|后记|後記|完本感言|出版后记|出版後記|谢辞|謝辭|番外|番外篇";
         private static String regex_3 = "^(\\s*(" + regex_titles + ")\\s*$)";
         private static String regex_4 = "^(\\s*(" + regex_titles + ")\\s+.{0,50}?$)";
-        private static String regex_5 = "^(\\s*((?i)chapter)\\s*.{0,40}?$)|^(\\s*((?i)appendix)\\s*.{0,50}?$)";
-        private static String regex = regex_1 + "|" + regex_2 + "|" + regex_3 + "|" + regex_4 + "|" + regex_5;
+        private static String regex_titles_english = "chapter|appendix|appendices|preface|Foreword|Introduction|Prologue|Epigraph|Table of contents|Epilogue|Afterword|Conclusion|Glossary|Acknowledgments|Bibliography|Index|Errata|Colophon|Copyright";
+        private static String regex_5 = "^(\\s*((?i)" + regex_titles_english + ")\\s*$)";
+        private static String regex_6 = "^(\\s*((?i)" + regex_titles_english + ")\\s+.{0,50}?$)";
+        private static String regex = regex_1 + "|" + regex_2 + "|" + regex_3 + "|" + regex_4 + "|" + regex_5 + "|" + regex_6;
 		private static String emptyLineRegex = "^\\s*$";
 
 		private List<String> bookAndAuthor = new List<String>();
         private Boolean bookAndAuthor_isChinese;
 		private List<Tuple<Int32, String>> TOC = new List<Tuple<Int32, String>>();
-		private Int32 FSLinesScanned = 0;
 		private Boolean extraLinesInBeginning = false;
 		private Boolean extraLinesNotEmpty = false;
 		private List<Int32> titleLineNumbers = new List<Int32>();
@@ -291,10 +293,10 @@ namespace SimpleEpub2
             #region Set Subpages
             Extract(resourcesPath, "Resources", "About.png");
 			setSubPages(true);
-			#endregion
+            #endregion
 
-			#region Settings Preparation
-			stsObj = new SettingsObject(settingsPath);
+            #region Settings Preparation
+            stsObj = new SettingsObject(settingsPath);
 
 			// Create SettingsObject and load settings to form
 			if (!File.Exists(stsObj.iniPath))
@@ -321,7 +323,12 @@ namespace SimpleEpub2
 			if (sts.pg4.settings4_4_chkupd.Value)
 				updater.DoUpdate(true);
 
-			#endregion
+            #endregion
+
+            // Set UI Font according to language
+            LANG.setFont(this.Controls);
+            CaptionFont = new Font(LANG.getFont(), CaptionFont.Size, CaptionFont.Style);
+            Font = new Font(LANG.getFont(), Font.Size, Font.Style);
         }
 
         private void setLANG()
@@ -360,8 +367,10 @@ namespace SimpleEpub2
 			//Size = new Size(946, 650 + navigationBar1.Height);
 
 			pageSlider1.SelectedPageIndex = 0;
+            pageSlider1.MouseDragEnabled = false;
+            pageSlider1.PageMouseDragEnabled = false;
 
-			setPage1();
+            setPage1();
 			if (firstTime)
 				setSettings(false);
 
@@ -409,7 +418,7 @@ namespace SimpleEpub2
 		private void setPage3()
 		{
 			SuspendLayout();
-			pg3 = new Page3(themeColor, LANG, DPI);
+			pg3 = new Page3(themeColor, LANG, DPI, stsObj.generateMOBI);
 			pg3.IsOpen = true;
 			pg3.SetBounds(4, 3, pg3.Width, pg3.Height);
 			pg3.Parent = this;
@@ -502,10 +511,19 @@ namespace SimpleEpub2
 
 		private void FormHelpButtonClicked(object sender, EventArgs e)
 		{
-			Extract(resourcesPath, "Resources", "help.pdf");
+            try
+            {
+                Extract(resourcesPath, "Resources", "SimpleEpub2 Manual.pdf");
+            }
+            catch
+            {
+                //notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                //showBalloonTip(LANG.getString("balloontip_title"), "帮助文件可能已经被打开了！");
+            }
+
 			try
 			{
-				System.Diagnostics.Process.Start(resourcesPath + "\\help.pdf");
+                Process.Start(resourcesPath + "\\SimpleEpub2 Manual.pdf");
 			}
 			catch
 			{
@@ -541,7 +559,6 @@ namespace SimpleEpub2
 					pg3.ProcessingMode();
 					if (!stsObj.embedFontSubset)
 					{
-						pg3.stepItem3.Enabled = false;
 						pg3.stepItem3.Visible = false;
 					}
 				}
@@ -1415,7 +1432,7 @@ namespace SimpleEpub2
 			opf.Clear();
 			ncx.Clear();
 
-			if (TXTPath == null)
+            if (TXTPath == null)
 			{
                 MessageBoxEx.Show(LANG.getString("mainpage3_generateEpub_no_file"));
 				return;
@@ -1487,7 +1504,7 @@ namespace SimpleEpub2
 			epubWorker.ReportProgress(60);
 
 			/*** Generate CSS ***/
-            generateCSS(stsObj.verticalText, stsObj.marginL, stsObj.marginR, stsObj.marginT, stsObj.marginB, stsObj.lineSpacing, stsObj.addParagraphSpacing, stsObj.titleFont, stsObj.titleSize, stsObj.titleColor, stsObj.bodyFont, stsObj.bodySize, stsObj.bodyColor, stsObj.pageColor, stsObj.embedFontSubset);
+            generateCSS(stsObj.verticalText, stsObj.marginL, stsObj.marginR, stsObj.marginT, stsObj.marginB, stsObj.lineSpacing, stsObj.addParagraphSpacing, stsObj.titleFont, stsObj.titleColor, stsObj.bodyFont, stsObj.bodyColor, stsObj.pageColor, stsObj.embedFontSubset);
 
 			/*** Image File ***/
 			Boolean IMG = copyImageFile(stsObj.verticalText, stsObj.bookNameFont, stsObj.authorNameFont);
@@ -1502,8 +1519,8 @@ namespace SimpleEpub2
 			/*** Generate NCX ***/
 			generateNCX(stsObj.coverFirstPage, stsObj.coverNoTOC, translation, stsObj.replaceNumByHan);
 
-			/*** Generate other files ***/
-			mimetype = "application/epub+zip";
+            /*** Generate other files ***/
+            mimetype = "application/epub+zip";
 			container = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<container version=\"1.0\" xmlns=\"urn:oasis:names:tc:opendocument:xmlns:container\">\n\t<rootfiles>\n\t\t<rootfile full-path=\"OEBPS/content.opf\" media-type=\"application/oebps-package+xml\" />\n\t</rootfiles>\n</container>";
             display_options = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<display_options>\n\t<platform name=\"*\">\n\t\t<option name=\"specified-fonts\">true</option>\n\t</platform>\n</display_options>";
             epubWorker.ReportProgress(80);
@@ -1565,7 +1582,7 @@ namespace SimpleEpub2
 					}
 				}
 				zip.Save(zipPath);
-			}
+            }
 
 			processedIntro = Intro;
 			if (processedIntro != "")
@@ -1579,7 +1596,14 @@ namespace SimpleEpub2
 
 			epubWorker.ReportProgress(100);
 
-		}
+            /*** Generate MOBI from EPUB ***/
+            if (stsObj.generateMOBI)
+            {
+                generateMobi();
+                epubWorker.ReportProgress(110);
+            }
+
+        }
 
 		private Boolean generateHTML(Boolean coverFirstPage, Int32 translation, Boolean vertical, Boolean replace, Boolean embedFontSubset, Boolean dropCap, Boolean stickupCap)
 		{
@@ -1605,10 +1629,10 @@ namespace SimpleEpub2
 				// 制作第一页封面
 				if (coverFirstPage)
 				{
-					String title = "封面";
-					title = translate(title, translation);		// 简繁转换
+					String title = bookAndAuthor_isChinese ? "封面" : "Cover";
+                    title = translate(title, translation);		// 简繁转换
 
-					coverHtml.Append(HTMLHead(title, "", 0));
+                    coverHtml.Append(HTMLHead(title, "", 0));
 					coverHtml.Append("\n<img src=\"../Images/cover.jpg\" alt=\"Cover\" />\n</body>\n</html>");
 
 					//chapterNumber++;
@@ -1633,36 +1657,23 @@ namespace SimpleEpub2
 				}
 
 
-				if (FSLinesScanned != 0)
-				{
-					//FSLinesScanned = 0;
-					TXTlineNumber += 2;
-				}
-
-
-				Boolean titleHasFootNote = false;
+                Boolean titleHasFootNote = false;
 				Queue<Tuple<String, Int32>> footNoteQueuePre = new Queue<Tuple<String, Int32>>();
 				Queue<Tuple<Int32, String>> footNoteQueuePost = new Queue<Tuple<Int32, String>>();
 				Int32 chapterFootNoteCount = 0;
 
-				// Read from the first line to the first chapter title defined!
-				if (TLN_size != 0 && titleLineNumbers[0] > TXTlineNumber)
+                // Read from the first line to the first chapter title defined!
+                if (TLN_size != 0 && titleLineNumbers[TLN_idx] > TXTlineNumber)
 				{
 					extraLinesInBeginning = true;
 					StringBuilder html = new StringBuilder();
 					Boolean firstTime = true;
                     Boolean firstLine = false;
 
-					while (titleLineNumbers[0] > TXTlineNumber && (nextLine = sr.ReadLine()) != null)
+					while (titleLineNumbers[TLN_idx] > TXTlineNumber && (nextLine = SecurityElement.Escape(sr.ReadLine())) != null)
 					{
-						if (FSLinesScanned != 0)
-						{
-							FSLinesScanned--;
-							continue;
-						}
-
-						// Remove empty lines
-						if (!Regex.IsMatch(nextLine, emptyLineRegex))
+                        // Remove empty lines
+                        if (!Regex.IsMatch(nextLine, emptyLineRegex))
 						{
 							extraLinesNotEmpty = true;
 
@@ -1696,23 +1707,26 @@ namespace SimpleEpub2
 
                                 if (firstTime)
                                 {
-                                    html.Append(HTMLHead(nextLine, "", 1) + "\n");
+                                    // html.Append(HTMLHead(nextLine, "", 1) + "\n");
+                                    // 为没有标题的内容添加“内容简介”标题
+                                    String auto_title = bookAndAuthor_isChinese ? "内容简介" : "Introduction";
+                                    auto_title = translate(auto_title, translation);		// 简繁转换
+                                    html.Append(HTMLHead(auto_title, "", 1) + "\n");
                                     firstTime = false;
                                     firstLine = true;
                                 }
-                                else
+
+                                if (firstLine && (dropCap || stickupCap))
                                 {
-                                    if (firstLine && (dropCap || stickupCap))
-                                    {
-                                        String span = dropCap ? "dropCap" : (stickupCap ? "stickupCap" : "");
-                                        Tuple<String, String> tokens = processFirstLine(nextLine);
-                                        String newNextLine = "<p class=\"first\"><span class=\"" + span + "\">" + tokens.Item1 + "</span>" + tokens.Item2 + "</p>\n";
-                                        html.Append(newNextLine);
-                                        firstLine = false;
-                                    }
-                                    else
-                                        html.Append("<p>" + nextLine + "</p>\n");
+                                    String span = dropCap ? "dropCap" : (stickupCap ? "stickupCap" : "");
+                                    Tuple<String, String> tokens = processFirstLine(nextLine);
+                                    String newNextLine = "<p class=\"first\"><span class=\"" + span + "\">" + tokens.Item1 + "</span>" + tokens.Item2 + "</p>\n";
+                                    html.Append(newNextLine);
+                                    firstLine = false;
                                 }
+                                else
+                                    html.Append("<p>" + nextLine + "</p>\n");
+
 							}
 
 						}
@@ -1754,10 +1768,10 @@ namespace SimpleEpub2
 					{
 						html.Append(HTMLHead(bookAndAuthor[0], "", 1) + "\n");
 					}
-					while ((nextLine = sr.ReadLine()) != null)
+					while ((nextLine = SecurityElement.Escape(sr.ReadLine())) != null)
 					{
-						// Remove empty lines
-						if (!Regex.IsMatch(nextLine, emptyLineRegex))
+                        // Remove empty lines
+                        if (!Regex.IsMatch(nextLine, emptyLineRegex))
 						{
 							nextLine = nextLine.Trim();
 							nextLine = translate(nextLine, translation);		// 简繁转换
@@ -1775,9 +1789,9 @@ namespace SimpleEpub2
 								//nextLine = nextLine.Replace("—", "<span lang=EN-US style='font-family:\"Times New Roman\"'>—</span>");
 							}
 
-							if (TLN_idx < TLN_size && TXTlineNumber == titleLineNumbers[TLN_idx])		// Chapter titles!
+                            if (TLN_idx < TLN_size && TXTlineNumber == titleLineNumbers[TLN_idx])		// Chapter titles!
 							{
-								if (replace)		// 替换标题中的数字为汉字
+                                if (replace)		// 替换标题中的数字为汉字
 								{
 									nextLine = numberToHan(nextLine);
 								}
@@ -1924,7 +1938,7 @@ namespace SimpleEpub2
 			}
 		}
 
-		private void generateCSS(Boolean vertical, Single marginL, Single marginR, Single marginT, Single marginB, Single lineHeight, Boolean addParagraphSpacing, String titleFont, Single titleSize, System.Drawing.Color titleColorC, String bodyFont, Single bodySize, System.Drawing.Color bodyColorC, System.Drawing.Color pageColor, Boolean embedFontSubset)
+		private void generateCSS(Boolean vertical, Single marginL, Single marginR, Single marginT, Single marginB, Single lineHeight, Boolean addParagraphSpacing, String titleFont, System.Drawing.Color titleColorC, String bodyFont, System.Drawing.Color bodyColorC, System.Drawing.Color pageColor, Boolean embedFontSubset)
 		{
 			String bodyColor = (bodyColorC == System.Drawing.Color.Transparent || bodyColorC == System.Drawing.Color.Empty) ? "" : ColorTranslator.ToHtml(bodyColorC);
 			String titleColor = (titleColorC == System.Drawing.Color.Transparent || titleColorC == System.Drawing.Color.Empty) ? "" : ColorTranslator.ToHtml(titleColorC);
@@ -1972,11 +1986,11 @@ namespace SimpleEpub2
 
 			Int32 pMargin = addParagraphSpacing ? 6 : 0;
             Tuple<String, String> marginPosition = vertical ? new Tuple<String, String>("left", "right") : new Tuple<String, String>("top", "bottom");
-            String p = "p {\n\tfont-family:" + bodyFont + ";\n\tfont-size:" + bodySize + "pt;\n\tcolor:" + bodyColor + ";\n\ttext-align:justify;\n\ttext-indent:2em;\n\tline-height:" + LH + "em;\n\tmargin-" + marginPosition.Item1 + ":" + pMargin + "pt;\n\tmargin-" + marginPosition.Item2 + ":" + pMargin + "pt;\n}\np.first {\n\ttext-indent:0em!important;\n}\n";
+            String p = "p {\n\tfont-family:" + bodyFont + ";\n\tfont-size:1em;\n\tcolor:" + bodyColor + ";\n\ttext-align:justify;\n\ttext-indent:2em;\n\tline-height:" + LH + "em;\n\tmargin-" + marginPosition.Item1 + ":" + pMargin + "pt;\n\tmargin-" + marginPosition.Item2 + ":" + pMargin + "pt;\n}\np.first {\n\ttext-indent:0em!important;\n}\n";
 
             String others = ".cover {\n\twidth:100%;\n}\n.center {\n\ttext-align:center;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.left {\n\ttext-align:left;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.right {\n\ttext-align:right;\n\tmargin-left:0%;\n\tmargin-right:0%;\n}\n.quote {\n\tmargin-top:0%;\n\tmargin-bottom:0%;\n\tmargin-left:1em;\n\tmargin-right:1em;\n\ttext-align:justify;\n\tfont-family:" + bodyFont + ";\n\tcolor:" + bodyColor + ";\n}\n.stickupCap {\n\tfont-size:2em;\n\tfont-weight:bold;\n}\n.dropCap {\n\tfont-size:2em;\n\tfont-weight:bold;\n\tfloat:left;\n\tmargin:5px;\n\tpadding:3px;\n}\n";
 
-            String headers = "h1 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + titleSize + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh2 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 2) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh3 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 4) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh4 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 6) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh5 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 8) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh6 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:" + (titleSize - 10) + "pt;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\n";
+            String headers = "h1 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:xx-large;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh2 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:x-large;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh3 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:large;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh4 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:medium;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh5 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:small;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\nh6 {\n\tline-height:" + LH + "em;\n\ttext-align:center;\n\tfont-weight:bold;\n\tfont-size:x-small;\n\tfont-family:" + titleFont + ";\n\tcolor:" + titleColor + ";\n}\n";
 
             css.Append("@charset \"UTF-8\";\n");
 			css.Append(font1);
@@ -2007,8 +2021,8 @@ namespace SimpleEpub2
 					}
 					catch
 					{
-						MessageBoxEx.Show("coverpath: " + CoverPath);
-					}
+                        MessageBoxEx.Show("coverpath: " + CoverPath);
+                    }
 				}
 
 				pg3.cover.SizeMode = PictureBoxSizeMode.Zoom;
@@ -2246,10 +2260,10 @@ namespace SimpleEpub2
 
 			if (coverFirstPage && addFirstChapter)
 			{
-				String title = "封面";
-				title = translate(title, translation);		// 简繁转换
+                String title = bookAndAuthor_isChinese ? "封面" : "Cover";
+                title = translate(title, translation);      // 简繁转换
 
-				if (!coverNoTOC)
+                if (!coverNoTOC)
 				{
 					TOCTree.Add(new Tuple<Int32, NavPoint>(0, new NavPoint("coverpage", 1, title, "Text/coverpage.html", null, null)));
 				}
@@ -2289,7 +2303,7 @@ namespace SimpleEpub2
 			}
 			else
 			{
-				for (Int32 i = 1; i <= iVal; i++)
+                for (Int32 i = 1; i <= iVal; i++)
 				{
 					// 删除" *** "标识
 					//MessageBoxEx.Show("i: " + i + "\nj: " + j + "\n(i-j): " + (i - j));
@@ -2376,16 +2390,52 @@ namespace SimpleEpub2
 			ncx.Append("</ncx>");
 		}
 
-		#endregion
+        private void generateMobi()
+        {
+            try
+            {
+                Extract(resourcesPath, "Resources", "kindlegen.exe");
+            }
+            catch
+            {
+                //notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                //showBalloonTip(LANG.getString("balloontip_title"), "帮助文件可能已经被打开了！");
+            }
 
-		#endregion
+			ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = resourcesPath + "\\kindlegen.exe";
+			startInfo.Arguments = zipPath;
+			startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.UseShellExecute = false;
+            startInfo.CreateNoWindow = true;
+
+            Process processTemp = new Process();
+            processTemp.StartInfo = startInfo;
+            try
+            {
+                processTemp.Start();
+                processTemp.StandardOutput.ReadToEnd();
+                processTemp.StandardError.ReadToEnd();
+                processTemp.WaitForExit();
+            }
+            catch
+            {
+                notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
+                showBalloonTip(LANG.getString("balloontip_NoKindleGen"), LANG.getString("balloontip_NoKindleGen_detail"));
+            }
+        }
+
+        #endregion
+
+        #endregion
 
 
-		#region Helper Functions
+        #region Helper Functions
 
-		#region Page1 Helper Functions
+        #region Page1 Helper Functions
 
-		private void clearTOC()
+        private void clearTOC()
 		{
 			if (pg2 == null)
 			{
@@ -2426,38 +2476,20 @@ namespace SimpleEpub2
 
 					result.Add(bookname);
 					result.Add(author);
-
 					return result;
 				}
 				else
 				{
-					FSLinesScanned = 2;
-
 					// No complete book name and author info
 					notifyIcon1.BalloonTipIcon = ToolTipIcon.Warning;
                     showBalloonTip(LANG.getString("balloontip_NoEnTitleAuthor"),
                         String.Format(LANG.getString("balloontip_NoEnTitleAuthor_detail"), Environment.NewLine));
 
-					// Treat first line as book name and second line as author
-					using (StreamReader sr = new StreamReader(path, Encoding.Default))
-					{
-						String bookname = sr.ReadLine();
-						if (bookname == null || bookname.Trim() == "") bookname = filename;
-						else
-						{
-							bookname = bookname.Trim();
-						}
-
-						String author = sr.ReadLine();
-						if (author == null || author.Trim() == "") author = NAMESPACE;
-						else
-						{
-							author = author.Trim();
-						}
-
-						result.Add(bookname);
-						result.Add(author);
-					}
+                    // Treat file name as book name and application name as author
+                    String bookname = filename;
+                    String author = NAMESPACE;
+                    result.Add(bookname);
+                    result.Add(author);
 					return result;
 				}
 			}
@@ -2481,43 +2513,21 @@ namespace SimpleEpub2
 
 					result.Add(bookname);
 					result.Add(author);
-
 					return result;
 				}
 				else
 				{
-					FSLinesScanned = 2;
-
 					// No complete book name and author info
 					notifyIcon1.BalloonTipIcon = ToolTipIcon.Warning;
                     showBalloonTip(LANG.getString("balloontip_NoZhTitleAuthor"),
                         String.Format(LANG.getString("balloontip_NoZhTitleAuthor_detail"), Environment.NewLine));
 
-					// Treat first line as book name and second line as author
-					using (StreamReader sr = new StreamReader(path, Encoding.Default))
-					{
-						String bookname = sr.ReadLine();
-						if (bookname == null || bookname.Trim() == "") bookname = filename;
-						else
-						{
-							char[] charsToTrim = { '《', '》' };
-							bookname = bookname.Trim(charsToTrim);
-							bookname = bookname.Replace("书名：", "").Replace("书名:", "");
-							bookname = bookname.Trim();
-						}
-
-						String author = sr.ReadLine();
-						if (author == null || author.Trim() == "") author = NAMESPACE;
-						else
-						{
-							author = author.Replace("作者：", "").Replace("作者:", "");
-							author = author.Trim();
-						}
-
-						result.Add(bookname);
-						result.Add(author);
-					}
-					return result;
+                    // Treat first line as book name and second line as author
+                    String bookname = filename;
+                    String author = NAMESPACE;
+                    result.Add(bookname);
+                    result.Add(author);
+                    return result;
 				}
 			}
 		}
@@ -2567,7 +2577,7 @@ namespace SimpleEpub2
 				}
 			}
 
-			return result.ToString().Trim();
+			return SecurityElement.Escape(result.ToString().Trim());
 		}
 
 		private static String ToSBC(String input)
@@ -2739,71 +2749,99 @@ namespace SimpleEpub2
 			Rectangle authorRec1;
 			Rectangle authorRec2;
 
-			if (!vertical)		// 横排书封面
-			{
-				drawing.DrawLine(whitePen, new Point(width / 15, 0), new Point(width / 15, height));
-				drawing.DrawLine(whitePen, new Point(0, height / 10), new Point(width / 15, height / 10));
-				drawing.DrawLine(whitePen, new Point(0, height / 10 + height / 3), new Point(width / 15, height / 10 + height / 3));
-				drawing.DrawLine(whitePen, new Point(0, height - height / 10 - height / 3), new Point(width / 15, height - height / 10 - height / 3));
-				drawing.DrawLine(whitePen, new Point(0, height - height / 10), new Point(width / 15, height - height / 10));
+            if (bookAndAuthor_isChinese)
+            {
+                if (!vertical)      // 横排书封面
+                {
+                    drawing.DrawLine(whitePen, new Point(width / 15, 0), new Point(width / 15, height));
+                    drawing.DrawLine(whitePen, new Point(0, height / 10), new Point(width / 15, height / 10));
+                    drawing.DrawLine(whitePen, new Point(0, height / 10 + height / 3), new Point(width / 15, height / 10 + height / 3));
+                    drawing.DrawLine(whitePen, new Point(0, height - height / 10 - height / 3), new Point(width / 15, height - height / 10 - height / 3));
+                    drawing.DrawLine(whitePen, new Point(0, height - height / 10), new Point(width / 15, height - height / 10));
 
-				bookNameRec = Rectangle.FromLTRB(width / 2 + width / 10, height / 10, width - width / 10, height / 2 + height / 10);
-				drawing.FillRectangle(whiteBrush, bookNameRec);
-				authorRec1 = Rectangle.FromLTRB(width / 2 + width / 10 - width / 20, height / 10, width / 2 + width / 10, height / 2 + height / 10 - height / 40);
-				drawing.FillRectangle(orangeBrush, authorRec1);
-				authorRec2 = Rectangle.FromLTRB(width / 2 + width / 10 - width / 20, height / 10 + authorRec1.Height, width / 2 + width / 10, height / 2 + height / 10);
-				drawing.FillRectangle(orangeBrush, authorRec2);
-			}
-			else		// 竖排书封面
-			{
-				drawing.DrawLine(whitePen, new Point(width - width / 15, 0), new Point(width - width / 15, height));
-				drawing.DrawLine(whitePen, new Point(width - width / 15, height / 10), new Point(width, height / 10));
-				drawing.DrawLine(whitePen, new Point(width - width / 15, height / 10 + height / 3), new Point(width, height / 10 + height / 3));
-				drawing.DrawLine(whitePen, new Point(width - width / 15, height - height / 10 - height / 3), new Point(width, height - height / 10 - height / 3));
-				drawing.DrawLine(whitePen, new Point(width - width / 15, height - height / 10), new Point(width, height - height / 10));
+                    bookNameRec = Rectangle.FromLTRB(width / 2 + width / 10, height / 10, width - width / 10, height / 2 + height / 10);
+                    drawing.FillRectangle(whiteBrush, bookNameRec);
+                    authorRec1 = Rectangle.FromLTRB(width / 2 + width / 10 - width / 20, height / 10, width / 2 + width / 10, height / 2 + height / 10 - height / 40);
+                    drawing.FillRectangle(orangeBrush, authorRec1);
+                    authorRec2 = Rectangle.FromLTRB(width / 2 + width / 10 - width / 20, height / 10 + authorRec1.Height, width / 2 + width / 10, height / 2 + height / 10);
+                    drawing.FillRectangle(orangeBrush, authorRec2);
+                }
+                else        // 竖排书封面
+                {
+                    drawing.DrawLine(whitePen, new Point(width - width / 15, 0), new Point(width - width / 15, height));
+                    drawing.DrawLine(whitePen, new Point(width - width / 15, height / 10), new Point(width, height / 10));
+                    drawing.DrawLine(whitePen, new Point(width - width / 15, height / 10 + height / 3), new Point(width, height / 10 + height / 3));
+                    drawing.DrawLine(whitePen, new Point(width - width / 15, height - height / 10 - height / 3), new Point(width, height - height / 10 - height / 3));
+                    drawing.DrawLine(whitePen, new Point(width - width / 15, height - height / 10), new Point(width, height - height / 10));
 
-				bookNameRec = Rectangle.FromLTRB(width / 10, height / 10, width / 2 - width / 10, height / 2 + height / 10);
-				drawing.FillRectangle(whiteBrush, bookNameRec);
-				authorRec1 = Rectangle.FromLTRB(width / 2 - width / 10, height / 10, width / 2 - width / 10 + width / 20, height / 2 + height / 10 - height / 40);
-				drawing.FillRectangle(orangeBrush, authorRec1);
-				authorRec2 = Rectangle.FromLTRB(width / 2 - width / 10, height / 10 + authorRec1.Height, width / 2 - width / 10 + width / 20, height / 2 + height / 10);
-				drawing.FillRectangle(orangeBrush, authorRec2);
-			}
+                    bookNameRec = Rectangle.FromLTRB(width / 10, height / 10, width / 2 - width / 10, height / 2 + height / 10);
+                    drawing.FillRectangle(whiteBrush, bookNameRec);
+                    authorRec1 = Rectangle.FromLTRB(width / 2 - width / 10, height / 10, width / 2 - width / 10 + width / 20, height / 2 + height / 10 - height / 40);
+                    drawing.FillRectangle(orangeBrush, authorRec1);
+                    authorRec2 = Rectangle.FromLTRB(width / 2 - width / 10, height / 10 + authorRec1.Height, width / 2 - width / 10 + width / 20, height / 2 + height / 10);
+                    drawing.FillRectangle(orangeBrush, authorRec2);
+                }
 
-			StringFormat bookDrawFormat = new StringFormat();
-			bookDrawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-			//bookDrawFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
-			bookDrawFormat.Alignment = StringAlignment.Center;
-			bookDrawFormat.LineAlignment = StringAlignment.Center;
-			bookname = ToSBC(bookname);
-			Tuple<String, Int32> settings = setTitleFontSize(bookname.Length, bookNameRec.Width, bookname, vertical);
-            //Font bookFont = new Font(privateFontFamilies[1], settings.Item2, FontStyle.Bold);
-            //Font bookFont = new Font(bookfont, settings.Item2 * DPI.Item2 / 96f, FontStyle.Bold, GraphicsUnit.Pixel);
-            Font bookFont = new Font(bookfont, settings.Item2 * 96f / DPI.Item2, FontStyle.Bold);
-            drawing.DrawString(settings.Item1, bookFont, blackBrush, bookNameRec, bookDrawFormat);
+                StringFormat bookDrawFormat = new StringFormat();
+                bookDrawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+                //bookDrawFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
+                bookDrawFormat.Alignment = StringAlignment.Center;
+                bookDrawFormat.LineAlignment = StringAlignment.Center;
+                bookname = ToSBC(bookname);
+                Tuple<String, Int32> settings = setTitleFontSize(bookname.Length, bookNameRec.Width, bookname, vertical);
+                //Font bookFont = new Font(privateFontFamilies[1], settings.Item2, FontStyle.Bold);
+                //Font bookFont = new Font(bookfont, settings.Item2 * DPI.Item2 / 96f, FontStyle.Bold, GraphicsUnit.Pixel);
+                Font bookFont = new Font(bookfont, settings.Item2 * 96f / DPI.Item2, FontStyle.Bold);
+                drawing.DrawString(settings.Item1, bookFont, blackBrush, bookNameRec, bookDrawFormat);
 
-			StringFormat authorDrawFormat = new StringFormat();
-			authorDrawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-			//authorDrawFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
-			authorDrawFormat.Alignment = StringAlignment.Far;
-			authorDrawFormat.LineAlignment = StringAlignment.Center;
-			author = ToSBC(author);
-            //Font authorFont = new Font(privateFontFamilies[0], authorRec1.Width / 2, FontStyle.Bold);
-            //Font authorFont = new Font(authorfont, authorRec1.Width / 2 * DPI.Item2 / 96, FontStyle.Bold, GraphicsUnit.Pixel);
-            Font authorFont = new Font(authorfont, authorRec1.Width / 2 * 96f / DPI.Item2, FontStyle.Bold);
-            drawing.DrawString(author + " ◆ 著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
-			drawing.DrawString(" ◆ 著", authorFont, yellowBrush, authorRec1, authorDrawFormat);
-			drawing.DrawString("著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
+                StringFormat authorDrawFormat = new StringFormat();
+                authorDrawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+                //authorDrawFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
+                authorDrawFormat.Alignment = StringAlignment.Far;
+                authorDrawFormat.LineAlignment = StringAlignment.Center;
+                author = ToSBC(author);
+                //Font authorFont = new Font(privateFontFamilies[0], authorRec1.Width / 2, FontStyle.Bold);
+                //Font authorFont = new Font(authorfont, authorRec1.Width / 2 * DPI.Item2 / 96, FontStyle.Bold, GraphicsUnit.Pixel);
+                Font authorFont = new Font(authorfont, authorRec1.Width / 2 * 96f / DPI.Item2, FontStyle.Bold);
+                drawing.DrawString(author + " ◆ 著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
+                drawing.DrawString(" ◆ 著", authorFont, yellowBrush, authorRec1, authorDrawFormat);
+                drawing.DrawString("著", authorFont, whiteBrush, authorRec1, authorDrawFormat);
+
+                bookFont.Dispose();
+                authorFont.Dispose();
+                bookDrawFormat.Dispose();
+                authorDrawFormat.Dispose();
+            }
+            else
+            {
+                bookNameRec = Rectangle.FromLTRB(width / 15, height / 15, width - width / 15, height - height / 3);
+                //drawing.FillRectangle(blackBrush, bookNameRec);
+                authorRec1 = Rectangle.FromLTRB(width / 15, height - height / 3, width - width / 15, height - height / 15);
+                //drawing.FillRectangle(yellowBrush, authorRec1);
+
+                StringFormat bookDrawFormat = new StringFormat();
+                bookDrawFormat.Alignment = StringAlignment.Center;
+                bookDrawFormat.LineAlignment = StringAlignment.Center;
+                Font bookFont = new Font(bookfont, width / 10 * 96f / DPI.Item2, FontStyle.Bold);
+                drawing.DrawString(bookname, bookFont, whiteBrush, bookNameRec, bookDrawFormat);
+
+                StringFormat authorDrawFormat = new StringFormat();
+                authorDrawFormat.Alignment = StringAlignment.Center;
+                authorDrawFormat.LineAlignment = StringAlignment.Center;
+                Font authorFont = new Font(authorfont, width / 20 * 96f / DPI.Item2, FontStyle.Bold);
+                drawing.DrawString(author, authorFont, whiteBrush, authorRec1, authorDrawFormat);
+
+                bookFont.Dispose();
+                authorFont.Dispose();
+                bookDrawFormat.Dispose();
+                authorDrawFormat.Dispose();
+            }
 
             whiteBrush.Dispose();
 			orangeBrush.Dispose();
 			yellowBrush.Dispose();
 			blackBrush.Dispose();
 			whitePen.Dispose();
-			bookFont.Dispose();
-			authorFont.Dispose();
-			bookDrawFormat.Dispose();
-			authorDrawFormat.Dispose();
 
 			drawing.Save();
 			drawing.Dispose();
@@ -3477,8 +3515,7 @@ namespace SimpleEpub2
 			cqIDX = 0;
 			bookAndAuthor.Clear();
 			TOC.Clear();
-			FSLinesScanned = 0;
-			extraLinesInBeginning = false;
+            extraLinesInBeginning = false;
 			extraLinesNotEmpty = false;
 			titleLineNumbers.Clear();
 			pictureHTMLs.Clear();
@@ -3601,23 +3638,50 @@ namespace SimpleEpub2
 
 		private void epubWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
 		{
-			if (e.ProgressPercentage == 20)
-			{
-				pg3.stepItem1.Value = 100;
-			}
-			else if (e.ProgressPercentage == 60)
-			{
-				pg3.stepItem2.Value = 100;
-				pg3.stepItem3.Value = 100;
-			}
-			else if (e.ProgressPercentage == 80)
-			{
-				pg3.stepItem4.Value = 100;
-			}
-			else if (e.ProgressPercentage == 100)
-			{
-				pg3.stepItem5.Value = 100;
-			}
+            if (!stsObj.generateMOBI)
+            {
+                if (e.ProgressPercentage == 20)
+                {
+                    pg3.stepItem1.Value = 100;
+                }
+                else if (e.ProgressPercentage == 60)
+                {
+                    pg3.stepItem2.Value = 100;
+                    pg3.stepItem3.Value = 100;
+                }
+                else if (e.ProgressPercentage == 80)
+                {
+                    pg3.stepItem4.Value = 100;
+                }
+                else if (e.ProgressPercentage == 100)
+                {
+                    pg3.stepItem5.Value = 100;
+                }
+            }
+            else
+            {
+                if (e.ProgressPercentage == 20)
+                {
+                    pg3.stepItem1.Value = 100;
+                }
+                else if (e.ProgressPercentage == 60)
+                {
+                    pg3.stepItem2.Value = 100;
+                    pg3.stepItem3.Value = 100;
+                }
+                else if (e.ProgressPercentage == 80)
+                {
+                    pg3.stepItem4.Value = 100;
+                }
+                else if (e.ProgressPercentage == 100)
+                {
+                    pg3.stepItem5.Value = 100;
+                }
+                else if (e.ProgressPercentage == 110)
+                {
+                    pg3.stepItem6.Value = 100;
+                }
+            }
 		}
 
 		private void epubWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -3661,7 +3725,10 @@ namespace SimpleEpub2
                 }
 
 				notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                showBalloonTip(LANG.getString("balloontip_title"), DocName + ".epub\n" + LANG.getString("balloontip_success"));
+                if (stsObj.generateMOBI)
+                    showBalloonTip(LANG.getString("balloontip_title"), DocName + ".epub\n" + DocName + ".mobi\n" + LANG.getString("balloontip_success"));
+                else
+                    showBalloonTip(LANG.getString("balloontip_title"), DocName + ".epub\n" + LANG.getString("balloontip_success"));
 			}
 			else
 			{

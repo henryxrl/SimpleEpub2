@@ -20,6 +20,7 @@ namespace SimpleEpub2
 		protected internal Boolean StT;
 		protected internal Boolean TtS;
 		protected internal Boolean embedFontSubset;
+        protected internal Boolean generateMOBI;
 		protected internal String bookNameFont;
 		protected internal String authorNameFont;
 		protected internal Color pageColor;
@@ -28,10 +29,8 @@ namespace SimpleEpub2
 		protected internal Single marginL;
 		protected internal Single marginR;
 		protected internal String titleFont;
-		protected internal Single titleSize;
 		protected internal Color titleColor;
 		protected internal String bodyFont;
-		protected internal Single bodySize;
 		protected internal Color bodyColor;
 		protected internal Single lineSpacing;
 		protected internal Boolean addParagraphSpacing;
@@ -57,6 +56,7 @@ namespace SimpleEpub2
 			StT = false;
 			TtS = false;
 			embedFontSubset = false;
+            generateMOBI = false;
 			bookNameFont = "微软雅黑";
 			authorNameFont = "微软雅黑";
 			pageColor = Color.Empty;
@@ -65,10 +65,8 @@ namespace SimpleEpub2
 			marginL = 0;
 			marginR = 0;
 			titleFont = "微软雅黑";
-			titleSize = 20;
 			titleColor = Color.SteelBlue;
 			bodyFont = "微软雅黑";
-			bodySize = 12;
 			bodyColor = Color.Black;
 			lineSpacing = 130;
 			addParagraphSpacing = true;
@@ -89,7 +87,8 @@ namespace SimpleEpub2
 			StT = sts.pg1.settings1_3_StT.Value;
 			TtS = sts.pg1.settings1_3_TtS.Value;
 			embedFontSubset = sts.pg1.settings1_3_embedFontSubset.Value;
-			bookNameFont = sts.pg2.settings2_3_booknamefont.Text;
+            generateMOBI = sts.pg1.settings1_3_generateMOBI.Value;
+            bookNameFont = sts.pg2.settings2_3_booknamefont.Text;
 			authorNameFont = sts.pg2.settings2_3_authornamefont.Text;
 			pageColor = sts.pg2.settings2_1_pc.SelectedColor;
 			marginT = Int32.Parse(sts.pg2.settings2_2_pmT.Text);
@@ -97,10 +96,8 @@ namespace SimpleEpub2
 			marginL = Int32.Parse(sts.pg2.settings2_2_pmL.Text);
 			marginR = Int32.Parse(sts.pg2.settings2_2_pmR.Text);
 			titleFont = sts.pg3.settings3_1_tfont.Text;
-			titleSize = Int32.Parse(sts.pg3.settings3_1_tsize.Text);
 			titleColor = sts.pg3.settings3_1_tcolor.SelectedColor;
 			bodyFont = sts.pg3.settings3_2_bfont.Text;
-			bodySize = Int32.Parse(sts.pg3.settings3_2_bsize.Text);
 			bodyColor = sts.pg3.settings3_2_bcolor.SelectedColor;
 			lineSpacing = Int32.Parse(sts.pg3.settings3_3_linespacing.Text);
 			addParagraphSpacing = sts.pg3.settings3_3_addparagraphspacing.Value;
@@ -137,6 +134,7 @@ namespace SimpleEpub2
 				sts.pg1.settings1_3_StT.Enabled = false;
 			}
 			sts.pg1.settings1_3_embedFontSubset.Value = embedFontSubset;
+            sts.pg1.settings1_3_generateMOBI.Value = generateMOBI;
 			sts.pg2.settings2_3_booknamefont.Text = bookNameFont;
 			sts.pg2.settings2_3_authornamefont.Text = authorNameFont;
 			sts.pg2.settings2_1_pc.SelectedColor = pageColor;
@@ -145,10 +143,8 @@ namespace SimpleEpub2
 			sts.pg2.settings2_2_pmL.Text = marginL.ToString();
 			sts.pg2.settings2_2_pmR.Text = marginR.ToString();
 			sts.pg3.settings3_1_tfont.Text = titleFont;
-			sts.pg3.settings3_1_tsize.Text = titleSize.ToString();
 			sts.pg3.settings3_1_tcolor.SelectedColor = titleColor;
 			sts.pg3.settings3_2_bfont.Text = bodyFont;
-			sts.pg3.settings3_2_bsize.Text = bodySize.ToString();
 			sts.pg3.settings3_2_bcolor.SelectedColor = bodyColor;
 			sts.pg3.settings3_3_linespacing.Text = lineSpacing.ToString();
 			sts.pg3.settings3_3_addparagraphspacing.Value = addParagraphSpacing;
@@ -180,7 +176,8 @@ namespace SimpleEpub2
 			StT = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_1", "StT")));
 			TtS = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_1", "TtS")));
 			embedFontSubset = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_1", "Embed_Font_Subset")));
-			bookNameFont = ini.INIReadValue("Tab_2", "Cover_BookName_Font");
+            generateMOBI = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_1", "Generate_MOBI")));
+            bookNameFont = ini.INIReadValue("Tab_2", "Cover_BookName_Font");
 			authorNameFont = ini.INIReadValue("Tab_2", "Cover_AuthorName_Font");
 			pageColor = ColorTranslator.FromHtml(ini.INIReadValue("Tab_2", "Page_Color"));
 			marginT = Int32.Parse(ini.INIReadValue("Tab_2", "Page_Margin_Top"));
@@ -188,10 +185,8 @@ namespace SimpleEpub2
 			marginL = Int32.Parse(ini.INIReadValue("Tab_2", "Page_Margin_Left"));
 			marginR = Int32.Parse(ini.INIReadValue("Tab_2", "Page_Margin_Right"));
 			titleFont = ini.INIReadValue("Tab_3", "Title_Font");
-			titleSize = Int32.Parse(ini.INIReadValue("Tab_3", "Title_Size"));
 			titleColor = ColorTranslator.FromHtml(ini.INIReadValue("Tab_3", "Title_Color"));
 			bodyFont = ini.INIReadValue("Tab_3", "Body_Font");
-			bodySize = Int32.Parse(ini.INIReadValue("Tab_3", "Body_Size"));
 			bodyColor = ColorTranslator.FromHtml(ini.INIReadValue("Tab_3", "Body_Color"));
 			lineSpacing = Int32.Parse(ini.INIReadValue("Tab_3", "Line_Spacing"));
 			addParagraphSpacing = Convert.ToBoolean(Convert.ToInt32(ini.INIReadValue("Tab_3", "Add_Paragraph_Spacing")));
@@ -212,7 +207,8 @@ namespace SimpleEpub2
 			ini.INIWriteValue("Tab_1", "StT", (Convert.ToInt32(StT)).ToString());
 			ini.INIWriteValue("Tab_1", "TtS", (Convert.ToInt32(TtS)).ToString());
 			ini.INIWriteValue("Tab_1", "Embed_Font_Subset", (Convert.ToInt32(embedFontSubset)).ToString());
-			ini.INIWriteValue("Tab_2", "Cover_BookName_Font", bookNameFont);
+            ini.INIWriteValue("Tab_1", "Generate_MOBI", (Convert.ToInt32(generateMOBI)).ToString());
+            ini.INIWriteValue("Tab_2", "Cover_BookName_Font", bookNameFont);
 			ini.INIWriteValue("Tab_2", "Cover_AuthorName_Font", authorNameFont);
 			ini.INIWriteValue("Tab_2", "Page_Color", ColorTranslator.ToHtml(pageColor));
 			ini.INIWriteValue("Tab_2", "Page_Margin_Top", marginT.ToString());
@@ -220,10 +216,8 @@ namespace SimpleEpub2
 			ini.INIWriteValue("Tab_2", "Page_Margin_Left", marginL.ToString());
 			ini.INIWriteValue("Tab_2", "Page_Margin_Right", marginR.ToString());
 			ini.INIWriteValue("Tab_3", "Title_Font", titleFont);
-			ini.INIWriteValue("Tab_3", "Title_Size", titleSize.ToString());
 			ini.INIWriteValue("Tab_3", "Title_Color", ColorTranslator.ToHtml(titleColor));
 			ini.INIWriteValue("Tab_3", "Body_Font", bodyFont);
-			ini.INIWriteValue("Tab_3", "Body_Size", bodySize.ToString());
 			ini.INIWriteValue("Tab_3", "Body_Color", ColorTranslator.ToHtml(bodyColor));
 			ini.INIWriteValue("Tab_3", "Line_Spacing", lineSpacing.ToString());
 			ini.INIWriteValue("Tab_3", "Add_Paragraph_Spacing", (Convert.ToInt32(addParagraphSpacing)).ToString());

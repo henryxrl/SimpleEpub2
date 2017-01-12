@@ -107,6 +107,10 @@ namespace SimpleEpub2
             // DPI settings
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+
+            // Set UI Font according to language
+            LANG.setFont(this.Controls);
+            Font = new Font(LANG.getFont(), Font.Size, Font.Style);
         }
 
 		private void cover_picturebox_DragEnter(object sender, DragEventArgs e)
@@ -336,7 +340,7 @@ namespace SimpleEpub2
 				using (SolidBrush b = new SolidBrush(themeColor))
 				{
                     String s = LANG.getString("mainpage2_img_string");
-                    Font f = new Font("Microsoft YaHei UI", 35, FontStyle.Bold);
+                    Font f = new Font(LANG.getFont(), 35, FontStyle.Bold);
 					SizeF size = g.MeasureString(s, f);
 					Single px = cover_picturebox.Width / 2 - size.Width / 2;
 					Single py = cover_picturebox.Height / 2 - size.Height / 2 - 27 * DPI.Item2 / 96f;
