@@ -2404,7 +2404,7 @@ namespace SimpleEpub2
 
 			ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = resourcesPath + "\\kindlegen.exe";
-			startInfo.Arguments = zipPath;
+			startInfo.Arguments = "-dont_append_source " + String.Format("\"{0}\"", zipPath);
 			startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardError = true;
             startInfo.UseShellExecute = false;
