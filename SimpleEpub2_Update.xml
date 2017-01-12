@@ -1,6 +1,5 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-<<<<<<< HEAD
     <version>2.18.0.0</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
@@ -16,18 +15,5 @@
     1. 新增：添加新的正则表达式
     2. 修复：Kindle上字体非常小
     3. 修复：移除了标题和文本字号设定</description>
-=======
-    <version>2.16.3.33</version>
-    <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
-    <fileName>SimpleEpub2.exe</fileName>
-    <md5>B79FC29A1378994A825513C38DEE6D70</md5>
-    <launchArgs>
-    </launchArgs>
-    <description>10/7/2016 Update:
-    1. FIXED: GUI pageSlider permits mouse drag
-
-10/7/2016 更新：
-    1. 修复：主界面pageSlider允许鼠标随意拖动的问题</description>
->>>>>>> origin/master
   </update>
 </sharpUpdate>
