@@ -346,7 +346,7 @@
     <value>Invalid TOC! Line number can only be numbers{0}Cannot continue creating EPUB!</value>
   </data>
   <data name="en_mainpage3_location_label" xml:space="preserve">
-    <value>&lt;b&gt;Location: &lt;/b&gt;</value>
+    <value>&lt;b&gt;File: &lt;/b&gt;</value>
   </data>
   <data name="en_mainpage3_newbook_button" xml:space="preserve">
     <value>➢  Next Book  ➣</value>
@@ -391,7 +391,7 @@
     <value>Pack all files&lt;br/&gt;with EPUB rules</value>
   </data>
   <data name="en_mainpage3_time_label1" xml:space="preserve">
-    <value>&lt;b&gt;Time used: &lt;/b&gt;</value>
+    <value>&lt;b&gt;Time: &lt;/b&gt;</value>
   </data>
   <data name="en_mainpage3_time_label2" xml:space="preserve">
     <value>sec</value>
@@ -733,7 +733,7 @@
     <value>无效的目录！行号只能是数字！{0}无法继续生成Epub！</value>
   </data>
   <data name="zh_mainpage3_location_label" xml:space="preserve">
-    <value>&lt;b&gt;位置：&lt;/b&gt;</value>
+    <value>&lt;b&gt;文件：&lt;/b&gt;</value>
   </data>
   <data name="zh_mainpage3_newbook_button" xml:space="preserve">
     <value>➢   下 本 书   ➣</value>

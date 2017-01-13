@@ -961,7 +961,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Location: &lt;/b&gt;.
+        ///   Looks up a localized string similar to &lt;b&gt;File: &lt;/b&gt;.
         /// </summary>
         internal static string en_mainpage3_location_label {
             get {
@@ -1114,7 +1114,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Time used: &lt;/b&gt;.
+        ///   Looks up a localized string similar to &lt;b&gt;Time: &lt;/b&gt;.
         /// </summary>
         internal static string en_mainpage3_time_label1 {
             get {
@@ -2518,7 +2518,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;位置：&lt;/b&gt;.
+        ///   Looks up a localized string similar to &lt;b&gt;文件：&lt;/b&gt;.
         /// </summary>
         internal static string zh_mainpage3_location_label {
             get {

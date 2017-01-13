@@ -1,17 +1,17 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.18.0.1</version>
+    <version>2.18.0.3</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>99B2BC1630CD30DED92C4130E29AC3E9</md5>
+    <md5>C961931FBA7CE8BC6761B76977662781</md5>
     <launchArgs>
     </launchArgs>
     <description>1/12/2017 Update:
-    1. NEW: Add "-dont_append_source" argument for mobi generation, dramatically decreasing the size of the final mobi ebook
-    2. FIXED: Bug triggered when mobi file path contains spaces
+    1. NEW: Hyperlink to open file location
+    2. NEW: Ability to see time used to generate both epub and mobi
 
 1/12/2017 更新：
-    1. 新增：添加"-dont_append_source"使得生成的mobi电子书大小大幅度减小
-    2. 修复：当mobi路径含有空格时无法生成mobi的Bug</description>
+    1. 新增：打开文件位置的超链接
+    2. 新增：分别显示epub和mobi的生成时间</description>
   </update>
 </sharpUpdate>

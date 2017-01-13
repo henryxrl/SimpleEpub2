@@ -199,6 +199,8 @@ namespace SimpleEpub2
 		private Boolean broken = false;
 		private Boolean DONE = false;
 
+		private Double epubTime;
+
 		#endregion
 
 		
@@ -3293,6 +3295,12 @@ namespace SimpleEpub2
 			return (duration / 1000d);
 		}
 
+		private Double getProcessTimeSoFar()
+		{
+			Int64 duration = stopWatch.ElapsedMilliseconds;
+			return (duration / 1000d);
+		}
+
 		private static Int32 CountStringOccurrences(String text, String pattern)
 		{
 			Int32 count = 0;
@@ -3568,14 +3576,24 @@ namespace SimpleEpub2
             return new Tuple<Single, Single>(Xdpi, Ydpi);
         }
 
-        #endregion
+		private void ClickToSelect(object sender, EventArgs e)
+		{
+			Process.Start("explorer.exe", "/select, \"" + zipPath + "\"");
+		}
 
-        #endregion
+		private String HexConverter(System.Drawing.Color c)
+		{
+			return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+		}
+
+		#endregion
+
+		#endregion
 
 
-        #region Multithreading
+		#region Multithreading
 
-        private void processTXTWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+		private void processTXTWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			processTXT(e.Argument.ToString());
 		}
@@ -3676,6 +3694,7 @@ namespace SimpleEpub2
                 else if (e.ProgressPercentage == 100)
                 {
                     pg3.stepItem5.Value = 100;
+					epubTime = getProcessTimeSoFar();
                 }
                 else if (e.ProgressPercentage == 110)
                 {
@@ -3693,9 +3712,13 @@ namespace SimpleEpub2
 				pg3.bookintro.Text = processedIntro;
 				pg3.bookwordcount.Text = wordcount.ToString();
 				pg3.bookwordcountnr.Text = wordcountnr.ToString();
-                pg3.location_label.Text = LANG.getString("mainpage3_location_label") + zipPath;
-                pg3.time_label.Text = LANG.getString("mainpage3_time_label1")
-                    + getProcessTime().ToString() + " " + LANG.getString("mainpage3_time_label2");
+				pg3.location_label.Click += new EventHandler(ClickToSelect);
+				pg3.location_label.Text = LANG.getString("mainpage3_location_label") + "<font color='" + HexConverter(themeColor) + "'><u>" + Path.GetFileNameWithoutExtension(zipPath) + "</u></font> (EPUB)";
+				if (stsObj.generateMOBI)
+				{
+					pg3.location_label.Text += " | (MOBI)";
+				}
+				pg3.time_label.Text = String.Format(LANG.getString("mainpage3_time_label1") + "{0}", (stsObj.generateMOBI ? (epubTime.ToString() + " " + LANG.getString("mainpage3_time_label2") + " (EPUB) | " + (getProcessTime() - epubTime).ToString() + " " + LANG.getString("mainpage3_time_label2") + " (MOBI)") : (getProcessTime().ToString() + " " + LANG.getString("mainpage3_time_label2"))));
 				pg3.ProcessedMode();
 				if (!stsObj.embedFontSubset || URIT == null || URIB == null || noNeedEmbed)
 				{
