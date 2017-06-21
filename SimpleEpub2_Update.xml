@@ -1,17 +1,25 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.18.0.3</version>
+    <version>2.20.0.0</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>C961931FBA7CE8BC6761B76977662781</md5>
+    <md5>8485868592F445D9600AF00C6C158FF7</md5>
     <launchArgs>
     </launchArgs>
-    <description>1/12/2017 Update:
-    1. NEW: Hyperlink to open file location
-    2. NEW: Ability to see time used to generate both epub and mobi
+    <description>6/20/2017 Update:
+    1. NEW: SimpleEpub2 has a Chinese name - "易笺"
+    2. NEW: Able to break Chinese chapter titles into two separate lines for better visual purposes
+    3. NEW: Able to create a flyleaf page with SimpleEpub2 designed ancient Chinese "Zhuan" style stamp
+    4. NEW: Able to choose different alignment properties for title
+    5. UPDATE: UI refinements
+    6. UPDATE: Cleaned up code logic
 
-1/12/2017 更新：
-    1. 新增：打开文件位置的超链接
-    2. 新增：分别显示epub和mobi的生成时间</description>
+6/20/2017 更新：
+    1. 新增：SimpleEpub2有中文名啦！请叫他“易笺”
+    2. 新增：中文章节标题只能断行
+    3. 新增：制作扉页 - 易笺特制藏书章
+    4. 新增：可调整章节标题对齐样式
+    5. 更新：更新界面元素
+    6. 更新：清理大量代码</description>
   </update>
 </sharpUpdate>

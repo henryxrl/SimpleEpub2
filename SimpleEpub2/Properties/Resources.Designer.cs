@@ -124,6 +124,15 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SimpleEpub2.
+        /// </summary>
+        internal static string en_app_name {
+            get {
+                return ResourceManager.GetString("en_app_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update failed!&lt;br/&gt;Please try again later!.
         /// </summary>
         internal static string en_autoUpdater_msg_failed {
@@ -340,7 +349,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show/Hide.
+        ///   Looks up a localized string similar to Show/Hide .
         /// </summary>
         internal static string en_contextual_menu_1 {
             get {
@@ -1195,7 +1204,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cover be the first page.
+        ///   Looks up a localized string similar to Cover becomes the first page.
         /// </summary>
         internal static string en_settings1_3_coverfirstpage_label {
             get {
@@ -1204,7 +1213,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cover NOT in TOC.
+        ///   Looks up a localized string similar to Cover does NOT show up in TOC.
         /// </summary>
         internal static string en_settings1_3_covernoTOC_label {
             get {
@@ -1218,6 +1227,15 @@ namespace SimpleEpub2.Properties {
         internal static string en_settings1_3_embedFontSubset_label {
             get {
                 return ResourceManager.GetString("en_settings1_3_embedFontSubset_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Flyleaf.
+        /// </summary>
+        internal static string en_settings1_3_flyleaf_label {
+            get {
+                return ResourceManager.GetString("en_settings1_3_flyleaf_label", resourceCulture);
             }
         }
         
@@ -1344,6 +1362,42 @@ namespace SimpleEpub2.Properties {
         internal static string en_settings2_tabItem2 {
             get {
                 return ResourceManager.GetString("en_settings2_tabItem2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Center.
+        /// </summary>
+        internal static string en_settings3_1_talign_center {
+            get {
+                return ResourceManager.GetString("en_settings3_1_talign_center", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alignment: .
+        /// </summary>
+        internal static string en_settings3_1_talign_label {
+            get {
+                return ResourceManager.GetString("en_settings3_1_talign_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Left.
+        /// </summary>
+        internal static string en_settings3_1_talign_left {
+            get {
+                return ResourceManager.GetString("en_settings3_1_talign_left", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right.
+        /// </summary>
+        internal static string en_settings3_1_talign_right {
+            get {
+                return ResourceManager.GetString("en_settings3_1_talign_right", resourceCulture);
             }
         }
         
@@ -1636,7 +1690,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SimpleEpub2是一款把TXT转换为EPUB的小工具。{0}如果有任何建议或者意见请发Email联系。{0}谢谢支持！.
+        ///   Looks up a localized string similar to 易笺（SimpleEpub2）是一款把TXT转换为EPUB的小工具。{0}如果有任何建议或者意见请发Email联系。{0}谢谢支持！.
         /// </summary>
         internal static string zh_about_intro {
             get {
@@ -1677,6 +1731,15 @@ namespace SimpleEpub2.Properties {
         internal static string zh_AOT_cancel {
             get {
                 return ResourceManager.GetString("zh_AOT_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 易笺.
+        /// </summary>
+        internal static string zh_app_name {
+            get {
+                return ResourceManager.GetString("zh_app_name", resourceCulture);
             }
         }
         
@@ -1897,7 +1960,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 显示/隐藏.
+        ///   Looks up a localized string similar to 显示/隐藏 .
         /// </summary>
         internal static string zh_contextual_menu_1 {
             get {
@@ -2014,7 +2077,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 拖拽TXT文件到框内.
+        ///   Looks up a localized string similar to 拖拽文本文件到框内.
         /// </summary>
         internal static string zh_mainpage1_img1_string1 {
             get {
@@ -2068,7 +2131,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 请选择TXT文件.
+        ///   Looks up a localized string similar to 请选择文本文件.
         /// </summary>
         internal static string zh_mainpage1_txt_click_title {
             get {
@@ -2086,7 +2149,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 只能拖入TXT文件！.
+        ///   Looks up a localized string similar to 只能拖入文本文件！.
         /// </summary>
         internal static string zh_mainpage1_txt_dragdrop_txtonly {
             get {
@@ -2293,7 +2356,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 只能拖入TXT文件！.
+        ///   Looks up a localized string similar to 只能拖入文本文件！.
         /// </summary>
         internal static string zh_mainpage2_TOC_dragdrop_txtonly {
             get {
@@ -2464,7 +2527,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 没有源文件！请拖入TXT文件后重试！.
+        ///   Looks up a localized string similar to 没有源文件！请拖入文本文件后重试！.
         /// </summary>
         internal static string zh_mainpage3_generateEpub_no_file {
             get {
@@ -2761,7 +2824,7 @@ namespace SimpleEpub2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 第一页的封面不出现在目录里.
+        ///   Looks up a localized string similar to 封面不出现在目录里.
         /// </summary>
         internal static string zh_settings1_3_covernoTOC_label {
             get {
@@ -2775,6 +2838,15 @@ namespace SimpleEpub2.Properties {
         internal static string zh_settings1_3_embedFontSubset_label {
             get {
                 return ResourceManager.GetString("zh_settings1_3_embedFontSubset_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 制作扉页.
+        /// </summary>
+        internal static string zh_settings1_3_flyleaf_label {
+            get {
+                return ResourceManager.GetString("zh_settings1_3_flyleaf_label", resourceCulture);
             }
         }
         
@@ -2901,6 +2973,42 @@ namespace SimpleEpub2.Properties {
         internal static string zh_settings2_tabItem2 {
             get {
                 return ResourceManager.GetString("zh_settings2_tabItem2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 居中.
+        /// </summary>
+        internal static string zh_settings3_1_talign_center {
+            get {
+                return ResourceManager.GetString("zh_settings3_1_talign_center", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 对齐方式：.
+        /// </summary>
+        internal static string zh_settings3_1_talign_label {
+            get {
+                return ResourceManager.GetString("zh_settings3_1_talign_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 居左.
+        /// </summary>
+        internal static string zh_settings3_1_talign_left {
+            get {
+                return ResourceManager.GetString("zh_settings3_1_talign_left", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 居右.
+        /// </summary>
+        internal static string zh_settings3_1_talign_right {
+            get {
+                return ResourceManager.GetString("zh_settings3_1_talign_right", resourceCulture);
             }
         }
         

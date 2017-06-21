@@ -412,10 +412,10 @@
     <value>&lt;font size="10"&gt;&lt;b&gt;    SETTINGS    &lt;/b&gt;&lt;/font&gt;</value>
   </data>
   <data name="en_settings1_3_coverfirstpage_label" xml:space="preserve">
-    <value>Cover be the first page</value>
+    <value>Cover becomes the first page</value>
   </data>
   <data name="en_settings1_3_covernoTOC_label" xml:space="preserve">
-    <value>Cover NOT in TOC</value>
+    <value>Cover does NOT show up in TOC</value>
   </data>
   <data name="en_settings1_3_embedFontSubset_label" xml:space="preserve">
     <value>Embed font subset</value>
@@ -565,7 +565,7 @@
     <value>&lt;b&gt;简介&lt;/b&gt;</value>
   </data>
   <data name="zh_mainpage1_img1_string1" xml:space="preserve">
-    <value>拖拽TXT文件到框内</value>
+    <value>拖拽文本文件到框内</value>
   </data>
   <data name="zh_mainpage1_img1_string2" xml:space="preserve">
     <value>或者双击框内</value>
@@ -583,13 +583,13 @@
     <value>文本文件</value>
   </data>
   <data name="zh_mainpage1_txt_click_title" xml:space="preserve">
-    <value>请选择TXT文件</value>
+    <value>请选择文本文件</value>
   </data>
   <data name="zh_mainpage1_txt_dragdrop_singlefile" xml:space="preserve">
     <value>只能拖入一个文件！</value>
   </data>
   <data name="zh_mainpage1_txt_dragdrop_txtonly" xml:space="preserve">
-    <value>只能拖入TXT文件！</value>
+    <value>只能拖入文本文件！</value>
   </data>
   <data name="zh_mainpage2_cover_dragdrop_imgonly" xml:space="preserve">
     <value>只能拖入图片文件！</value>
@@ -658,7 +658,7 @@
     <value>只能拖入一个文件！</value>
   </data>
   <data name="zh_mainpage2_TOC_dragdrop_txtonly" xml:space="preserve">
-    <value>只能拖入TXT文件！</value>
+    <value>只能拖入文本文件！</value>
   </data>
   <data name="zh_mainpage2_TOC_export" xml:space="preserve">
     <value>导出目录</value>
@@ -715,7 +715,7 @@
     <value>指定的正文字体不是TTF字体，无法嵌入！</value>
   </data>
   <data name="zh_mainpage3_generateEpub_no_file" xml:space="preserve">
-    <value>没有源文件！请拖入TXT文件后重试！</value>
+    <value>没有源文件！请拖入文本文件后重试！</value>
   </data>
   <data name="zh_mainpage3_generateEpub_title_not_ttf" xml:space="preserve">
     <value>指定的标题字体不是TTF字体，无法嵌入！</value>
@@ -802,7 +802,7 @@
     <value>封面作为电子书的第一页</value>
   </data>
   <data name="zh_settings1_3_covernoTOC_label" xml:space="preserve">
-    <value>第一页的封面不出现在目录里</value>
+    <value>封面不出现在目录里</value>
   </data>
   <data name="zh_settings1_3_embedFontSubset_label" xml:space="preserve">
     <value>嵌入字体（子集）</value>
@@ -940,7 +940,7 @@
     <value>邮箱：</value>
   </data>
   <data name="zh_about_intro" xml:space="preserve">
-    <value>SimpleEpub2是一款把TXT转换为EPUB的小工具。{0}如果有任何建议或者意见请发Email联系。{0}谢谢支持！</value>
+    <value>易笺（SimpleEpub2）是一款把TXT转换为EPUB的小工具。{0}如果有任何建议或者意见请发Email联系。{0}谢谢支持！</value>
   </data>
   <data name="zh_about_intro_label" xml:space="preserve">
     <value>简介：</value>
@@ -1108,13 +1108,13 @@
     <value>验证更新……</value>
   </data>
   <data name="en_contextual_menu_1" xml:space="preserve">
-    <value>Show/Hide</value>
+    <value>Show/Hide </value>
   </data>
   <data name="en_contextual_menu_2" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="zh_contextual_menu_1" xml:space="preserve">
-    <value>显示/隐藏</value>
+    <value>显示/隐藏 </value>
   </data>
   <data name="zh_contextual_menu_2" xml:space="preserve">
     <value>退出</value>
@@ -1154,5 +1154,41 @@
   </data>
   <data name="zh_mainpage3_stepItem6_string2" xml:space="preserve">
     <value>基于EPUB&lt;br/&gt;按照规则生成MOBI</value>
+  </data>
+  <data name="en_app_name" xml:space="preserve">
+    <value>SimpleEpub2</value>
+  </data>
+  <data name="zh_app_name" xml:space="preserve">
+    <value>易笺</value>
+  </data>
+  <data name="en_settings1_3_flyleaf_label" xml:space="preserve">
+    <value>Create Flyleaf</value>
+  </data>
+  <data name="zh_settings1_3_flyleaf_label" xml:space="preserve">
+    <value>制作扉页</value>
+  </data>
+  <data name="en_settings3_1_talign_center" xml:space="preserve">
+    <value>Center</value>
+  </data>
+  <data name="en_settings3_1_talign_label" xml:space="preserve">
+    <value>Alignment: </value>
+  </data>
+  <data name="en_settings3_1_talign_left" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="en_settings3_1_talign_right" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="zh_settings3_1_talign_center" xml:space="preserve">
+    <value>居中</value>
+  </data>
+  <data name="zh_settings3_1_talign_label" xml:space="preserve">
+    <value>对齐方式：</value>
+  </data>
+  <data name="zh_settings3_1_talign_left" xml:space="preserve">
+    <value>居左</value>
+  </data>
+  <data name="zh_settings3_1_talign_right" xml:space="preserve">
+    <value>居右</value>
   </data>
 </root>

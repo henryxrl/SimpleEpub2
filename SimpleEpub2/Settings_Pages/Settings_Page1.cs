@@ -30,9 +30,11 @@ namespace SimpleEpub2
             settings1_3_TtS_label.Text = LANG.getString("settings1_3_TtS_label");       // 繁体转简体
             settings1_3_embedFontSubset_label.Text = LANG.getString("settings1_3_embedFontSubset_label");       // 嵌入字体（子集）
             settings1_3_generateMOBI_label.Text = LANG.getString("settings1_3_generateMOBI_label");     // 同时生成MOBI
+			settings1_3_flyleaf_label.Text = LANG.getString("settings1_3_flyleaf_label");   // 制作扉页
+			if (LANG.isLangChinese()) settings1_3_flyleaf_label.Text += "（"  + LANG.getString("app_name") + "专用篆刻收藏章）";
 
-            // DPI settings
-            AutoScaleDimensions = new SizeF(96F, 96F);
+			// DPI settings
+			AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
 
             // Set UI Font according to language
@@ -85,6 +87,5 @@ namespace SimpleEpub2
 				this.settings1_3_StT.Enabled = true;
 			}
 		}
-
 	}
 }

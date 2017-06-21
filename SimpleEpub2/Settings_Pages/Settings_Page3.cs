@@ -20,6 +20,7 @@ namespace SimpleEpub2
 
 			settings3_1_tfont.DrawItem += settings3_1_tfont_DrawItem;
 			settings3_1_tfont.MeasureItem += settings3_1_tfont_MeasureItem;
+			settings3_1_talign.Items.AddRange(new String[] { LANG.getString("settings3_1_talign_left"), LANG.getString("settings3_1_talign_center"), LANG.getString("settings3_1_talign_right") });
 			settings3_2_bfont.DrawItem += settings3_2_bfont_DrawItem;
 			settings3_2_bfont.MeasureItem += settings3_2_bfont_MeasureItem;
             settings3_3_dropCap.ValueChanged += settings3_3_dropCap_ValueChanged;
@@ -29,6 +30,7 @@ namespace SimpleEpub2
             tabItem4.Text = LANG.getString("settings3_tabItem4");
             settings3_1_tfont_label.Text = LANG.getString("settings3_1_tfont_label");
             settings3_1_tcolor_label.Text = LANG.getString("settings3_1_tcolor_label");
+			settings3_1_talign_label.Text = lang.getString("settings3_1_talign_label");
             settings3_2_bfont_label.Text = LANG.getString("settings3_2_bfont_label");
             settings3_2_bcolor_label.Text = LANG.getString("settings3_2_bcolor_label");
             settings3_3_linespacing_label.Text = LANG.getString("settings3_3_linespacing_label");
@@ -109,6 +111,5 @@ namespace SimpleEpub2
                 this.settings3_3_dropCap.Enabled = true;
             }
         }
-
 	}
 }

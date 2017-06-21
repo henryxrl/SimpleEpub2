@@ -48,6 +48,8 @@
 			this.tabItem3 = new DevComponents.DotNetBar.TabItem(this.components);
 			this.tabControl8 = new DevComponents.DotNetBar.TabControl();
 			this.tabControlPanel8 = new DevComponents.DotNetBar.TabControlPanel();
+			this.settings3_1_talign = new System.Windows.Forms.ComboBox();
+			this.settings3_1_talign_label = new System.Windows.Forms.Label();
 			this.settings3_1_tfont = new System.Windows.Forms.ComboBox();
 			this.settings3_1_tcolor = new DevComponents.DotNetBar.ColorPickerButton();
 			this.settings3_1_tfont_label = new System.Windows.Forms.Label();
@@ -287,6 +289,8 @@
 			// 
 			// tabControlPanel8
 			// 
+			this.tabControlPanel8.Controls.Add(this.settings3_1_talign);
+			this.tabControlPanel8.Controls.Add(this.settings3_1_talign_label);
 			this.tabControlPanel8.Controls.Add(this.settings3_1_tfont);
 			this.tabControlPanel8.Controls.Add(this.settings3_1_tcolor);
 			this.tabControlPanel8.Controls.Add(this.settings3_1_tfont_label);
@@ -306,6 +310,27 @@
 			this.tabControlPanel8.Style.GradientAngle = 90;
 			this.tabControlPanel8.TabIndex = 1;
 			this.tabControlPanel8.TabItem = this.tabItem4;
+			// 
+			// settings3_1_talign
+			// 
+			this.settings3_1_talign.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.settings3_1_talign.FormattingEnabled = true;
+			this.settings3_1_talign.Location = new System.Drawing.Point(447, 105);
+			this.settings3_1_talign.Name = "settings3_1_talign";
+			this.settings3_1_talign.Size = new System.Drawing.Size(140, 27);
+			this.settings3_1_talign.TabIndex = 54;
+			// 
+			// settings3_1_talign_label
+			// 
+			this.settings3_1_talign_label.AutoSize = true;
+			this.settings3_1_talign_label.BackColor = System.Drawing.Color.White;
+			this.settings3_1_talign_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.settings3_1_talign_label.ForeColor = System.Drawing.Color.Black;
+			this.settings3_1_talign_label.Location = new System.Drawing.Point(347, 110);
+			this.settings3_1_talign_label.Name = "settings3_1_talign_label";
+			this.settings3_1_talign_label.Size = new System.Drawing.Size(84, 19);
+			this.settings3_1_talign_label.TabIndex = 53;
+			this.settings3_1_talign_label.Text = "对齐方式：";
 			// 
 			// settings3_1_tfont
 			// 
@@ -408,5 +433,7 @@
         private System.Windows.Forms.Label settings3_3_stickupCap_label;
         protected internal DevComponents.DotNetBar.Controls.SwitchButton settings3_3_stickupCap;
         private System.Windows.Forms.Label label1;
-    }
+		protected internal System.Windows.Forms.ComboBox settings3_1_talign;
+		private System.Windows.Forms.Label settings3_1_talign_label;
+	}
 }

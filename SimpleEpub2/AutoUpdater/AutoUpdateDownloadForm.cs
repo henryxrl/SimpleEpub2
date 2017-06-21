@@ -63,7 +63,7 @@ namespace SimpleEpub2.AutoUpdater
 			if (programIcon != null)
 				this.Icon = programIcon;
 
-            this.Text = applicationInfo.ApplicationName + " - " + lang.getString("update_download");
+            this.Text = lang.getString("app_name") + " - " + lang.getString("update_download");
 
             this.lblDownloading.Text = lang.getString("update_downloading");
 

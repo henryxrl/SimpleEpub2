@@ -39,7 +39,7 @@ namespace SimpleEpub2.AutoUpdater
 
 			this.Text = lang.getString("update_found_title");
 
-            this.lblAppName.Text = this.applicationInfo.ApplicationName;
+            this.lblAppName.Text = lang.getString("app_name");
             this.lblUpdateAvail.Text = lang.getString("update_found");
             this.lblNewVersion_label.Text = lang.getString("update_new");
             this.lblCurVersion_label.Text = lang.getString("update_cur");

@@ -20,6 +20,7 @@ namespace SimpleEpub2
 			ok.Click += ok_Click;
 			ok.Text = LANG.getString("button_ok");
 
+			name.Text = LANG.getString("app_name");
 			//pictureBox.Image = Image.FromFile(@"D:\Users\Henry\Documents\Visual Studio 2012\Projects\SimpleEpub2\SimpleEpub2\Resources\About.png");
 			version.Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 			author.Text = "Henry Xu";
@@ -49,6 +50,5 @@ namespace SimpleEpub2
 		{
 			this.IsOpen = false;
 		}
-		
 	}
 }
