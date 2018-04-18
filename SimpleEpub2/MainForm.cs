@@ -1487,6 +1487,7 @@ namespace SimpleEpub2
 
 			if (stsObj.embedFontSubset)
 			{
+                //Console.WriteLine("error font: " + stsObj.titleFont);
 				titleFontPath = FontNameFile.getFontFileName(stsObj.titleFont);
 				if (titleFontPath.CompareTo("") == 0)
                     MessageBoxEx.Show(LANG.getString("mainpage3_generateEpub_title_not_ttf"));
@@ -2746,7 +2747,7 @@ namespace SimpleEpub2
 			pg2.cover_picturebox.Image = toBeShown;*/
 			pg2.cover_picturebox.Image = covers[0];
 		}
-		
+
 		private Image DrawText(Int32 width, Int32 height, Boolean vertical, String bookfont, String authorfont)
 		{
 			//String bookname = VB.Strings.StrConv(bookAndAuthor[0], VB.VbStrConv.SimplifiedChinese, 0);
@@ -2876,7 +2877,7 @@ namespace SimpleEpub2
 
 			return img;
 		}
-
+		
 		private Image DrawNotePic(Int32 width, Int32 height, String word, String bodyfont)
 		{
 			Bitmap img = new Bitmap(width, height);
@@ -3775,7 +3776,7 @@ namespace SimpleEpub2
 				pg3.bookwordcount.Text = wordcount.ToString();
 				pg3.bookwordcountnr.Text = wordcountnr.ToString();
 				pg3.location_label.Click += new EventHandler(ClickToSelect);
-				pg3.location_label.Text = LANG.getString("mainpage3_location_label") + "<font color='" + HexConverter(themeColor) + "'><u>" + Path.GetFileNameWithoutExtension(zipPath) + "</u></font> (EPUB)";
+                pg3.location_label.Text = LANG.getString("mainpage3_location_label") + "<font color='" + HexConverter(themeColor) + "'><u>" + Path.GetFileNameWithoutExtension(zipPath) + "</u></font> (EPUB)";
 				if (stsObj.generateMOBI)
 				{
 					pg3.location_label.Text += " | (MOBI)";
