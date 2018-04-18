@@ -12,6 +12,7 @@ namespace SimpleEpub2
 	{
 		public static String getFontFileName(String fontname)
 		{
+            Console.WriteLine("fontname: " + fontname);
 			String folderFullName = Environment.GetFolderPath(Environment.SpecialFolder.Fonts);
 			DirectoryInfo TheFolder = new DirectoryInfo(folderFullName);
 			foreach (FileInfo NextFile in TheFolder.GetFiles())
@@ -19,8 +20,13 @@ namespace SimpleEpub2
 				if (NextFile.Exists)
 				{
 					String result = getFontName(NextFile.FullName);
-					//Console.WriteLine(fontname + "\n" + NextFile.FullName + "\n" + result);
-					if (fontname == result) return NextFile.FullName;
+                    //Console.WriteLine(fontname + "\n" + NextFile.FullName + "\n" + result);
+                    //Console.WriteLine("result: " + result);
+                    if (fontname == result)
+                    {
+                        //Console.WriteLine("MATCHED");
+                        return NextFile.FullName;
+                    }
 				}
 			}
 			return "";
@@ -44,7 +50,7 @@ namespace SimpleEpub2
 
                 try
                 {
-                    return (pfc.Families[0].Name);
+                    return (pfc.Families[0].GetName(0));
                 }
                 catch
                 {

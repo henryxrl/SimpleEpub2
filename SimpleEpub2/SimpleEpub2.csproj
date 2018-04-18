@@ -265,7 +265,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FodyWeavers.xml" />
+    <Content Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <EmbeddedResource Include="Resources\kindlegen.exe" />
     <EmbeddedResource Include="Resources\Stamp.png" />
     <Content Include="SimpleEpub2.ico" />

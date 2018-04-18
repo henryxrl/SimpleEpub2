@@ -9,9 +9,11 @@
     <description>4/17/2018 Update:
     1. FIXED: Invalid font embedding issue
     2. FIXED: UI tweaks
+    3. FIXED: DLL embedding issue
 
 4/17/2018 更新：
     1. 修复：无效字体嵌入问题
-    2. 修复：UI调整</description>
+    2. 修复：UI调整
+    3. 修复：DLL嵌入问题</description>
   </update>
 </sharpUpdate>
