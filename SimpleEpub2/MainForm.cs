@@ -139,7 +139,7 @@ namespace SimpleEpub2
 		private static String regex_titles_chinese = "[第序终終卷【]\\s*([" + regex_number + "\\s/\\、、]*)\\s*[章节節回集卷部】]";
 		private static String regex_1 = "^(\\s*([【])?(正文\\s*)?" + regex_titles_chinese + "\\s*$)";
         private static String regex_2 = "^(\\s*([【])?(正文\\s*)?" + regex_titles_chinese + "\\s+.{1,50}$)";
-        private static String regex_other_titles = "内容简介|內容簡介|内容介绍|內容介紹|内容梗概|内容大意|小说简介|小說簡介|小说介绍|小說介紹|小说大意|小說大意|书籍简介|書籍簡介|书籍介绍|書籍介紹|书籍大意|書籍大意|作品简介|作品簡介|作品介绍|作品介紹|作品大意|作者简介|作者簡介|作者介绍|作者介紹|简介|簡介|介绍|介紹|大意|梗概|序|序言|序章|前言|楔子|引言|引子|终章|終章|大结局|结局|结尾|尾声|尾聲|后记|後記|完本|完本感言|完结|完结感言|出版后记|出版後記|谢辞|謝辭|番外|番外篇";
+        private static String regex_other_titles = "内容简介|內容簡介|内容介绍|內容介紹|内容梗概|内容大意|小说简介|小說簡介|小说介绍|小說介紹|小说大意|小說大意|书籍简介|書籍簡介|书籍介绍|書籍介紹|书籍大意|書籍大意|作品简介|作品簡介|作品介绍|作品介紹|作品大意|作者简介|作者簡介|作者介绍|作者介紹|简介|簡介|介绍|介紹|大意|梗概|序|序言|序章|序幕|前言|楔子|引言|引子|终章|終章|大结局|结局|结尾|尾声|尾聲|后记|後記|完本|完本感言|完结|完结感言|出版后记|出版後記|谢辞|謝辭|番外|番外篇";
         private static String regex_3 = "^(\\s*(" + regex_other_titles + ")\\s*$)";
         private static String regex_4 = "^(\\s*(" + regex_other_titles + ")\\s+.{0,50}?$)";
         private static String regex_titles_english = "chapter|appendix|appendices|preface|Foreword|Introduction|Prologue|Epigraph|Table of contents|Epilogue|Afterword|Conclusion|Glossary|Acknowledgments|Bibliography|Index|Errata|Colophon|Copyright";

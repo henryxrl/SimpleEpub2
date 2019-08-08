@@ -1,17 +1,15 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.20.0.3</version>
+    <version>2.20.0.4</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>9ACDFC8A18AC2C10831EF52B8B461B7C</md5>
+    <md5>1AFEF4C6EDAB1065DDF04EAEAB4DD301</md5>
     <launchArgs>
     </launchArgs>
-    <description>8/7/2019 Update:
-    8/7/2019 Update:
-        1. FIXED: Updated Regex for extracting chapter titles
+    <description>8/8/2019 Update:
+    1. FIXED: Updated Regex for extracting chapter titles
 
-8/7/2019 更新：
-    8/7/2019 更新：
-        1. 修复：更新提取标题的正则表达式</description>
+8/8/2019 更新：
+    1. 修复：更新提取标题的正则表达式</description>
   </update>
 </sharpUpdate>
