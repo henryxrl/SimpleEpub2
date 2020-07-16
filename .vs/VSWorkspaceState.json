@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\GenereateUpdateXML"
+    "\\SimpleEpub2",
+    "\\SimpleEpub2\\Properties"
   ],
-  "SelectedNode": "\\GenereateUpdateXML\\GenereateUpdateXML.csproj",
+  "SelectedNode": "\\SimpleEpub2.sln",
   "PreviewInSolutionExplorer": false
 }

@@ -1,15 +1,15 @@
 <sharpUpdate>
   <update appID="SimpleEpub2">
-    <version>2.20.0.5</version>
+    <version>2.20.0.6</version>
     <url>https://raw.githubusercontent.com/henryxrl/SimpleEpub2/master/SimpleEpub2/bin/Release/SimpleEpub2.exe</url>
     <fileName>SimpleEpub2.exe</fileName>
-    <md5>033FF0ACC7357761687C2FBE9E2CBBCF</md5>
+    <md5>0D43DAA3C0CD16281D58B7F1974F9A32</md5>
     <launchArgs>
     </launchArgs>
-    <description>2020/7/12 Update:
-    1. FIXED: Issue of not loading custom installed fonts
+    <description>2020/7/16 Update:
+    1. UPDATE: Update chapter title regex
 
-2020/7/12 更新：
-    1. 修复：无法加载用户字体的问题</description>
+2020/7/16 更新：
+    1. 更新：更新了标题正则表达式</description>
   </update>
 </sharpUpdate>
